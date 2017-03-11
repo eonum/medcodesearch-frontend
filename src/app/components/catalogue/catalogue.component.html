@@ -1,3 +1,12 @@
+<nav>
+  <a *ngFor="let catalogue of catalogues"
+     routerLink="../{{catalogue}}"
+     routerLinkActive="active"> {{catalogue}} </a>
+</nav>
 <p>
   catalogue works!
+  {{selectedCalatogue}}
 </p>
+
+<router-outlet></router-outlet>
+

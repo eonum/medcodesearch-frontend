@@ -7,7 +7,8 @@ import {LanguageComponent} from "./components/language/language.component";
 const routes: Routes = [
   { path: ':lang', component: LanguageComponent ,
     children: [
-      { path: '', component: CatalogueComponent },
+      { path: ':catalogue', component: CatalogueComponent },
+      { path: '', redirectTo: 'drgs', pathMatch: 'full' }
     ]
   },
   { path: '**', redirectTo: '/de', pathMatch: 'full' }
