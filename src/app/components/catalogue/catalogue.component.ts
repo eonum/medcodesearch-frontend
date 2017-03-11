@@ -6,6 +6,8 @@ import {ActivatedRoute, Router, Params} from "@angular/router";
   templateUrl: './catalogue.component.html',
   styleUrls: ['./catalogue.component.css']
 })
+
+
 export class CatalogueComponent implements OnInit {
 
   public catalogues: string[] = ["drgs", "icds", "chops"]

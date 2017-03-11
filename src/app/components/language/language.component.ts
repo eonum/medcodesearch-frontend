@@ -40,7 +40,6 @@ export class LanguageComponent implements OnInit {
         } else {
           // Redirect to german
           this.router.navigate(['', 'de']);
-
         }
       }
     );
