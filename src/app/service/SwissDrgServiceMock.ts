@@ -28,6 +28,8 @@ export class SwissDrgServiceMock implements ISwissDrgService {
         if (code == "P234"){
             return Promise.resolve(this.CONTENTS[0]);
         }
-        else throw new Error("Not found");
+        else {
+            throw new Error("Not found");
+        }
     }
 }

@@ -2,15 +2,31 @@ import { ISwissDrgService } from "./ISwissDrgService";
 import { SwissDrgElement } from "../catalog/SwissDrgElement";
 import { Http, Response } from "@angular/http";
 import 'rxjs/add/operator/toPromise';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class SwissDrgService implements ISwissDrgService {
 
-    private baseUrl: string = "http://search.eonum.ch/"
+    private baseUrl: string = "https://search.eonum.ch/"
 
     public constructor(private http: Http) { }
 
-    search(version: string, search: string): Promise<SwissDrgElement[]> {
-        throw new Error('Method not implemented.');
+    public async search(version: string, search: string): Promise<SwissDrgElement[]> {
+        let types : string[] = [ "drgs", "adrgs" ];
+        let results: SwissDrgElement[] = [];
+
+        for (let i = 0; i < types.length; i++){
+            let type: string = types[i];
+            try {
+                let webResults = await this.getSearch(type, version, search);
+                results = results.concat(webResults)
+            }
+            catch(e){
+                let error = e;
+            }
+        };
+        
+        return Promise.resolve(results);
     }
 
     getVersions(): Promise<string[]> {
@@ -19,13 +35,12 @@ export class SwissDrgService implements ISwissDrgService {
         return this.http.get(url)
                         .toPromise()
                         .then(response => response.json().data as string[])
-                        .catch();
+                        .catch(error => {});
     }
 
     public async getByCode(version: string, code: string): Promise<SwissDrgElement> {
         let types : string[] = [ "drgs", "adrgs", "mdcs", "partitions" ];
         let result: SwissDrgElement[];
-        let promises: Promise<SwissDrgElement>[];
 
         for (let i = 0; i < types.length; i++){
             let type: string = types[i];
@@ -34,7 +49,7 @@ export class SwissDrgService implements ISwissDrgService {
                 result.push(webResult);
             }
             catch(e){
-                //TODO: error handling
+                let error = e;
             }
         };
 
@@ -50,6 +65,18 @@ export class SwissDrgService implements ISwissDrgService {
         return this.http.get(url).toPromise()
                     .then(result => result.json().data as SwissDrgElement)
                     .catch(reason => {throw new Error(reason)});
+    }
+
+    private async getSearch(type: string, version: string, query: string) : Promise<SwissDrgElement[]>{
+        let url : string = this.baseUrl + this.getLocale() + "/" + type + "/" + version + "/search?highlight=1&search=" + query;
+        return this.http.get(url).toPromise()
+                    .then(result => { 
+                        let data = result.json();
+                        return data as SwissDrgElement[]
+                    })
+                    .catch(reason => {
+                        throw new Error(reason)
+                    });
     }
 
     private getLocale(): string {
