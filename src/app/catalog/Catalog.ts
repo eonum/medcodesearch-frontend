@@ -6,19 +6,19 @@ export abstract class Catalog {
     protected name: string;
     protected codeRegex: string;
 
-    public abstract getVersions() : string[];
+    public abstract async getVersions() : Promise<string[]>;
 
-    public search(version: string, query: string): CatalogElement[] {
+    public async search(version: string, query: string): Promise<CatalogElement[]> {
         if (this.isCode(query)){
-            let result : CatalogElement[] = new Array[0];
-            let singleResult : CatalogElement = this.getByCode(version, query);
+            let singleResult = await this.getByCode(version, query);
+            let result : CatalogElement[] = [];
             if (singleResult != null){
-                result.push();
+                result.push(singleResult);
             }
-            return result;
+            return Promise.resolve(result);
         }
         else {
-            return this.getBySearch(version, query);
+            return await this.getBySearch(version, query);
         }
     }
 
@@ -27,6 +27,6 @@ export abstract class Catalog {
         return regex.test(query);
     }
     
-    protected abstract getByCode(version: string, code: string): CatalogElement;
-    protected abstract getBySearch(version: string, query: string): CatalogElement[];
+    protected abstract async getByCode(version: string, code: string): Promise<CatalogElement>;
+    protected abstract async getBySearch(version: string, query: string): Promise<CatalogElement[]>;
 }

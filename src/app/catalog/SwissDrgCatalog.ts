@@ -12,15 +12,15 @@ export class SwissDrgCatalog extends Catalog {
         this.codeRegex = "^[A-Z]{1}[0-9]{2,4}$";
     }
 
-    protected getBySearch(version: string, query: string): CatalogElement[] {
+    protected async getBySearch(version: string, query: string): Promise<CatalogElement[]> {
         return this.service.search(version, query);
     }
 
-    getByCode(code: string): CatalogElement {
-        return this.service.getByCode(code);
+    protected async getByCode(version: string, code: string): Promise<CatalogElement> {
+        return this.service.getByCode(version, code);
     }
 
-    getVersions(): string[] {
+    public async getVersions(): Promise<string[]> {
         return this.service.getVersions();
     }
 }

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { SwissDrgElement } from "../catalog/SwissDrgElement";
 
 import { OpaqueToken } from '@angular/core';
+import { Observable } from "rxjs/Observable";
 
 export let SERVICE_MOCK = new OpaqueToken('SwissDrgServiceMock');
 
@@ -17,13 +18,16 @@ export class SwissDrgServiceMock implements ISwissDrgService {
         { code: "Content 7", text: "Description content 7", url: "/url/to/content7" }
     ];
 
-    search(version: string, search: string): SwissDrgElement[] {
-        return this.CONTENTS;
+    search(version: string, search: string): Promise<SwissDrgElement[]> {
+        return Promise.resolve(this.CONTENTS);
     }
-    getVersions(): string[] {
-        return [ "V1.0","V2.0","V3.0","V4.0" ];
+    getVersions(): Promise<string[]> {
+        return Promise.resolve([ "V1.0","V2.0","V3.0","V4.0" ]);
     }
-    getByCode(code: string): SwissDrgElement {
-        throw new Error('Method not implemented.');
+    getByCode(version: string, code: string): Promise<SwissDrgElement> {
+        if (code == "P234"){
+            return Promise.resolve(this.CONTENTS[0]);
+        }
+        else throw new Error("Not found");
     }
 }
