@@ -1,5 +1,5 @@
 import { Catalog } from './Catalog'
-import { CatalogElement } from './CatalogElement'
+import { CatalogElement } from "../model/CatalogElement";
 import { ISwissDrgService } from '../service/ISwissDrgService'
 import { Inject, Injectable } from "@angular/core";
 

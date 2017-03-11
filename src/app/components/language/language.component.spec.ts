@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 import { LanguageComponent } from './language.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {HttpLoaderFactory} from "../../app.module";
+import {Http, HttpModule} from "@angular/http";
+
 
 describe('LanguageComponent', () => {
   let component: LanguageComponent;
@@ -8,7 +14,16 @@ describe('LanguageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LanguageComponent ]
+      imports: [ RouterTestingModule,
+        HttpModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [Http]
+          }
+        })],
+      declarations: [ LanguageComponent]
     })
     .compileComponents();
   }));

@@ -1,4 +1,4 @@
-import { SwissDrgElement } from "../catalog/SwissDrgElement";
+import { SwissDrgElement } from "../model/SwissDrgElement";
 
 export interface ISwissDrgService {
     search(version: string, search: string) : Promise<SwissDrgElement[]>;
