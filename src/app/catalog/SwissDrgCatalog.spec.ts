@@ -1,6 +1,6 @@
 import { async } from "@angular/core/testing";
-import { SwissDrgCatalog } from "../../catalog/SwissDrgCatalog";
-import { SwissDrgServiceMock } from "../../service/SwissDrgServiceMock";
+import { SwissDrgCatalog } from "../catalog/SwissDrgCatalog";
+import { SwissDrgServiceMock } from "../service/SwissDrgServiceMock";
 
 
 describe("SwissDrgCatalog", () => {

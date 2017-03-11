@@ -25,7 +25,7 @@ export class LanguageComponent implements OnInit {
               private route: ActivatedRoute,
               private translate: TranslateService) {
 
-    translate.setDefaultLang('en');
+    translate.setDefaultLang('de');
   }
 
   /**
@@ -43,6 +43,5 @@ export class LanguageComponent implements OnInit {
         }
       }
     );
-
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SwissDrgCatalog } from "../../catalog/SwissDrgCatalog";
-import { CatalogElement } from "../../catalog/CatalogElement";
+import { CatalogElement } from "../../model/CatalogElement";
 import { SwissDrgService } from "../../service/SwissDrgService";
 
 @Component({

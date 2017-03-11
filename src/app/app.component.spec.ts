@@ -2,16 +2,30 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
+import { SearchComponent } from "./components/search/search.component";
+import { HttpModule, Http } from "@angular/http";
+import { TranslateService, TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { HttpLoaderFactory } from "./app.module";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [Http]
+          }
+        })
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        SearchComponent
       ],
+      providers: [  ]
     }).compileComponents();
   }));
 

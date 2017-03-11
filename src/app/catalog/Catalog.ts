@@ -1,5 +1,5 @@
-import { CatalogElement } from './CatalogElement'
 import { Injectable } from "@angular/core";
+import { CatalogElement } from "../model/CatalogElement";
 
 @Injectable()
 export abstract class Catalog {

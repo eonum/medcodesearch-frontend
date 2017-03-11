@@ -1,15 +1,16 @@
 import { ISwissDrgService } from "./ISwissDrgService";
-import { SwissDrgElement } from "../catalog/SwissDrgElement";
 import { Http, Response } from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import { Injectable } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { SwissDrgElement } from "../model/SwissDrgElement";
 
 @Injectable()
 export class SwissDrgService implements ISwissDrgService {
 
     private baseUrl: string = "https://search.eonum.ch/"
 
-    public constructor(private http: Http) { }
+    public constructor(private http: Http, private translate: TranslateService) { }
 
     public async search(version: string, search: string): Promise<SwissDrgElement[]> {
         let types : string[] = [ "drgs", "adrgs" ];
@@ -80,6 +81,6 @@ export class SwissDrgService implements ISwissDrgService {
     }
 
     private getLocale(): string {
-        return "de";
+        return this.translate.currentLang;
     }
 }
