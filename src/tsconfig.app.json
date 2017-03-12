@@ -6,11 +6,12 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
-      "es2016",
+      "es5",
+      "es2015.promise",
       "dom"
     ],
     "outDir": "../out-tsc/app",
-    "target": "es6",
+    "target": "es5",
     "module": "es2015",
     "baseUrl": "",
     "types": []
