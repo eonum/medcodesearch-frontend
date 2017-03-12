@@ -1,13 +1,7 @@
-<nav>
-  <a *ngFor="let catalogue of catalogues"
-     routerLink="../{{catalogue}}"
-     routerLinkActive="active"> {{catalogue}} </a>
-</nav>
 
 <p>
   selected catalog:
-  {{selectedCalatogue}}
+  {{catalog.name}} - {{version}}
 </p>
 
-<router-outlet></router-outlet>
-
+<search-component></search-component>

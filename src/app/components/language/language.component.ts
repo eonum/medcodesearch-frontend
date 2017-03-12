@@ -35,7 +35,8 @@ export class LanguageComponent implements OnInit {
 
     this.route.params.subscribe((params: Params) => {
         let lang = params['lang'];
-        if (this.languages.indexOf(lang) > -1) {
+
+      if (this.languages.indexOf(lang) > -1) {
           this.translate.use(lang)
         } else {
           // Redirect to german

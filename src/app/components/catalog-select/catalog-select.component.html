@@ -1,0 +1,11 @@
+
+<select #selection (change)="gotoCatalog('drgs', selection.value)">
+  <option *ngFor="let version of drgVersions" [selected]="selectedVersion==version" [value]="version">{{version}}</option>
+</select>
+
+<!-- Or use links, e.g.
+<a routerLink="drgs/V1.0"
+   routerLinkActive="active"> DRGS V1.0</a>
+-->
+
+<router-outlet></router-outlet>
