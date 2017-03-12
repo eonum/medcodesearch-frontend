@@ -18,6 +18,7 @@
 nbproject/
 
 # IDE - VSCode
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -40,4 +41,7 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
-/nbproject/private/
+
+#Compiled typescript
+/src/app/**/*.js.map
+/src/app/**/*.js

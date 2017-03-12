@@ -1,15 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SampleComponent} from "./sample/sample.component";
+import {CatalogComponent} from "./components/catalog/catalog.component";
+import {LanguageComponent} from "./components/language/language.component";
+import {CatalogSelectComponent} from "./components/catalog-select/catalog-select.component";
+
 
 const routes: Routes = [
-  {
-    path: '',
-    children: []
+  { path: ':lang', component: LanguageComponent ,
+    children: [
+      { path: '', component: CatalogSelectComponent,
+        children: [
+          { path: ':catalogue/:version', component: CatalogComponent },
+        ]},
+    ]
   },
-  { path: 'sample', component: SampleComponent },
-
+  { path: '', redirectTo: '/de', pathMatch: 'full' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
