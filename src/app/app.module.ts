@@ -7,7 +7,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { CatalogueComponent } from './components/catalogue/catalogue.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
 import { LanguageComponent } from './components/language/language.component';
 import { SearchComponent } from './components/search/search.component';
 import {AppComponent} from "./app.component";
@@ -22,7 +22,7 @@ export function HttpLoaderFactory(http: Http) {
 @NgModule({
   declarations: [
     AppComponent,
-    CatalogueComponent,
+    CatalogComponent,
     LanguageComponent,
     SearchComponent,
     CatalogSelectComponent

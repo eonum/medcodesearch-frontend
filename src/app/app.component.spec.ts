@@ -6,7 +6,7 @@ import { TranslateService, TranslateModule, TranslateLoader } from "@ngx-transla
 import { HttpLoaderFactory } from "./app.module";
 import {SearchComponent} from "./components/search/search.component";
 import {LanguageComponent} from "./components/language/language.component";
-import {CatalogueComponent} from "./components/catalogue/catalogue.component";
+import {CatalogComponent} from "./components/catalogue/catalog.component";
 import { HttpModule, Http } from "@angular/http";
 
 describe('AppComponent', () => {
@@ -26,7 +26,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         SearchComponent,
-        CatalogueComponent,
+        CatalogComponent,
         LanguageComponent,
         SearchComponent
       ],

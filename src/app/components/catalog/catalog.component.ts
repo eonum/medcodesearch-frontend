@@ -6,19 +6,21 @@ import {SwissDrgService} from "../../service/SwissDrgService";
 
 @Component({
   selector: 'app-catalogue',
-  templateUrl: './catalogue.component.html',
-  styleUrls: ['./catalogue.component.css'],
+  templateUrl: 'catalog.component.html',
+  styleUrls: ['catalog.component.css'],
   providers: [ SwissDrgCatalog, {provide: "SwissDrgService", useClass: SwissDrgService } ]
 })
 
-
-export class CatalogueComponent implements OnInit {
+/**
+ * Wrapper for text search, result display, navigation in a
+ * given catalog (and version).
+ */
+export class CatalogComponent implements OnInit {
 
   public catalog: Catalog;
   public version: string;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private swissDrgCatalog: SwissDrgCatalog) { }
 
   /**
@@ -28,13 +30,13 @@ export class CatalogueComponent implements OnInit {
   ngOnInit() {
 
     this.route.params.subscribe((params: Params) => {
-        let catalogue = params['catalogue'];
+        let catalog = params['catalogue'];
 
-      if(catalogue=="drgs") {
+      if(catalog=="drgs") {
           this.catalog = this.swissDrgCatalog;
           this.version = params['version'];
         } else {
-        console.log('Catalog not yet implemented: ' + catalogue)
+        console.log('Catalog not yet implemented: ' + catalog)
         }
       }
     );

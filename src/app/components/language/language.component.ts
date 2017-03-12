@@ -4,13 +4,11 @@ import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-language',
-  templateUrl: 'language.component.html',
-  styleUrls: ['language.component.css']
+  template: `<router-outlet></router-outlet>`,
 })
 
 /**
- * Wrapper for the CatalogueComponent.
- * Allows the user to select a language and updates the translation accordingly.
+ * Applies the translation to all routes.
  */
 export class LanguageComponent implements OnInit {
 
