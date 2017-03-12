@@ -1,9 +1,9 @@
 import { ISwissDrgService } from "./ISwissDrgService";
 import { Injectable } from "@angular/core";
-import { SwissDrgElement } from "../catalog/SwissDrgElement";
 
 import { OpaqueToken } from '@angular/core';
 import { Observable } from "rxjs/Observable";
+import { SwissDrgElement } from "../model/swissdrg.element";
 
 export let SERVICE_MOCK = new OpaqueToken('SwissDrgServiceMock');
 

@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {SwissDrgService} from "../../service/SwissDrgService";
-import {SwissDrgCatalog} from "../../catalog/SwissDrgCatalog";
-import {Router, ActivatedRoute} from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
+import { SwissDrgCatalog } from "../../catalog/swissdrg.catalog";
+import { SwissDrgService } from "../../service/swissdrg.service";
 
 @Component({
   selector: 'catalog-select',
