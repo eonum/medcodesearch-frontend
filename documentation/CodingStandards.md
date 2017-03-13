@@ -39,12 +39,12 @@
 ## Component Classes
 
 - All components reside within their own subdirectory within the directory `/src/app/components`.
-- The name of a component class is alway suffixed with 'Component'. Example: `SearchComponent`, `AppComponent`.
+- The name of a component class is alway suffixed with 'Component'. Example: `search.component`, `app.component`.
 - Four files belong to each component:
-	- `ExampleComponent.ts`: Contains the source code of the component.
-	- `ExampleComponent.css`: Contains component specific styling.
-	- `ExampleComponent.html`: Contains the html template of the component.
-	- `ExampleComponent.spec.ts`: Contains unit test for the component.
+	- `example.component.ts`: Contains the source code of the component.
+	- `example.component.css`: Contains component specific styling.
+	- `example.component.html`: Contains the html template of the component.
+	- `example.component.spec.ts`: Contains unit test for the component.
 - Components can be created by running the command `ng g component NameOfComponent` from within the `components` directory.
 
 ## Service Classes
@@ -52,7 +52,7 @@
 - All services reside within the directory `/src/app/service`.
 - Their name is suffixed with 'Service'. Example: `SwissDrgService`.
 - All services are decorated with the `@Inject()` directive to allow them being injected into other classes.
-- Their filename matches their classname.
+- Their filename matches their classname but adhere to the name scheme for files.
 
 ## Catalog Classes
 
@@ -61,7 +61,7 @@
 - All catalogs are decorated with the `@Inject()` directive to allow them being injected into components.
 - Their filename matches their classname.
 - Each public method of a catalog is tested using Karma unit tests.
-- Tests go into a `CatalogName.spec.ts` file in the same directory
+- Tests go into a `catalog.name.spec.ts` file in the same directory
 
 ## Model Classes
 
