@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
+import { CatalogService } from "../service/catalog.service";
 
 /**
  * Class representing a catalog containing medical
@@ -10,12 +11,11 @@ import { CatalogElement } from "../model/catalog.element";
 export abstract class Catalog {
     protected name: string;
     protected codeRegex: string;
+    protected service: CatalogService;
 
-    /**
-     * Get a list of all supported versions of
-     * the catalog.
-     */
-    public abstract async getVersions() : Promise<string[]>;
+    public constructor(service: CatalogService){
+        this.service = service;
+    }
 
     /**
      * Searches elements within the catalog.
@@ -39,8 +39,17 @@ export abstract class Catalog {
     private isCode(query: string): boolean {
         let regex = new RegExp(this.codeRegex);
         return regex.test(query);
+    }    
+
+    protected async getBySearch(version: string, query: string): Promise<CatalogElement[]> {
+        return this.service.search(version, query);
     }
-    
-    protected abstract async getByCode(version: string, code: string): Promise<CatalogElement>;
-    protected abstract async getBySearch(version: string, query: string): Promise<CatalogElement[]>;
+
+    protected async getByCode(version: string, code: string): Promise<CatalogElement> {
+        return this.service.getByCode(version, code);
+    }
+
+    public async getVersions(): Promise<string[]> {
+        return this.service.getVersions();
+    }
 }

@@ -1,13 +1,13 @@
-import { ISwissDrgService } from "./ISwissDrgService";
 import { Injectable } from "@angular/core";
 
 import { OpaqueToken } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 import { SwissDrgElement } from "../model/swissdrg.element";
+import { CatalogService } from "./catalog.service";
 
 export let SERVICE_MOCK = new OpaqueToken('SwissDrgServiceMock');
 
-export class SwissDrgServiceMock implements ISwissDrgService {
+export class CatalogServiceMock extends CatalogService {
     private CONTENTS: SwissDrgElement[] = [
         { code: "Content 1", text: "Description content 1", url: "/url/to/content1" },
         { code: "Content 2", text: "Description content 2", url: "/url/to/content2" },

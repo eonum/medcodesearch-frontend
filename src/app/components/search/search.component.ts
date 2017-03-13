@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { SwissDrgCatalog } from "../../catalog/swissdrg.catalog";
-import { SwissDrgService } from "../../service/swissdrg.service";
 import { CatalogElement } from "../../model/catalog.element";
+import { CatalogService } from "../../service/catalog.service";
 
 @Component({
     selector: 'search-component',
     templateUrl: 'search.component.html',
-    providers: [ SwissDrgCatalog, {provide: "SwissDrgService", useClass: SwissDrgService } ]
+    providers: [ SwissDrgCatalog, CatalogService ]
 })
 export class SearchComponent implements OnInit {
     public ngOnInit(): void {

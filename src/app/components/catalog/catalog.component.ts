@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, Params} from "@angular/router";
 import { Catalog } from "../../catalog/Catalog";
-import { SwissDrgService } from "../../service/swissdrg.service";
 import { SwissDrgCatalog } from "../../catalog/swissdrg.catalog";
 
 @Component({
   selector: 'app-catalogue',
   templateUrl: 'catalog.component.html',
   styleUrls: ['catalog.component.css'],
-  providers: [ SwissDrgCatalog, {provide: "SwissDrgService", useClass: SwissDrgService } ]
+  providers: [ SwissDrgCatalog ]
 })
 
 /**
