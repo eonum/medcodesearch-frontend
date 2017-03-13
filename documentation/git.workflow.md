@@ -9,7 +9,7 @@ There will be three levels of branches:
 * master branch
 
 ###Feature branches
-Individual features are assigned to their own branches. In other words, always checkout and switch to a new branch with a clear name before working on a new feature. This is to make sure that features currently in development do not negatively affect the system at large.
+Individual features are assigned to their own branches. In other words, always checkout and switch to a new branch with a clear name before working on a new feature. This is to make sure that features currently in development do not negatively affect the system at large. Prefix with `feat-` to differentiate them from other branches.
 
 ###Develop
 Finished features are merged with this branch upon completion. Thus, this branch will always contain the most up-to-date, working state of the entire system. This also means that bugs will inevitably be introduced.
