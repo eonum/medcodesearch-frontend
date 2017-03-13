@@ -12,6 +12,7 @@ import { LanguageComponent } from './components/language/language.component';
 import { SearchComponent } from './components/search/search.component';
 import {AppComponent} from "./app.component";
 import { CatalogSelectComponent } from './components/catalog-select/catalog-select.component';
+import {CatalogService} from "./service/catalog.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -40,7 +41,7 @@ export function HttpLoaderFactory(http: Http) {
       }
     })
   ],
-  providers: [],
+  providers: [CatalogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
