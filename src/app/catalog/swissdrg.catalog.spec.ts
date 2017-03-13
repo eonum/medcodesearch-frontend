@@ -1,6 +1,6 @@
 import { async } from "@angular/core/testing";
 import { SwissDrgCatalog } from "./swissdrg.catalog";
-import { CatalogServiceMock } from "../service/swissdrg.service.mock";
+import { CatalogServiceMock } from "../service/catalog.service.mock";
 
 describe("SwissDrgCatalog", () => {
     it('Should get a list of versions', async(() => {
