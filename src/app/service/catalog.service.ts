@@ -2,10 +2,11 @@ import { Http } from "@angular/http";
 import { TranslateService } from "@ngx-translate/core";
 import { Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
+import { ICatalogService } from "./i.catalog.service";
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class CatalogService {
+export class CatalogService implements ICatalogService {
 
     private baseUrl: string = "https://search.eonum.ch/";
 

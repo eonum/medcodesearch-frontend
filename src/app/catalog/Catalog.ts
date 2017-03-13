@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
-import { CatalogService } from "../service/catalog.service";
+import { ICatalogService } from "../service/i.catalog.service";
 
 /**
  * Class representing a catalog containing medical
@@ -11,9 +11,9 @@ import { CatalogService } from "../service/catalog.service";
 export abstract class Catalog {
     protected name: string;
     protected codeRegex: string;
-    protected service: CatalogService;
+    protected service: ICatalogService;
 
-    public constructor(service: CatalogService){
+    public constructor(service: ICatalogService){
         this.service = service;
     }
 

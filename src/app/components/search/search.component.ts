@@ -6,7 +6,7 @@ import { CatalogService } from "../../service/catalog.service";
 @Component({
     selector: 'search-component',
     templateUrl: 'search.component.html',
-    providers: [ SwissDrgCatalog, CatalogService ]
+    providers: [ SwissDrgCatalog, { provide: "ICatalogService", useClass: CatalogService} ]
 })
 export class SearchComponent implements OnInit {
     public ngOnInit(): void {
