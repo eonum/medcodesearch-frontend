@@ -11,4 +11,6 @@ export abstract class CatalogElement {
     highlight?: Highlight;
     version?: string;
     url: string;
+    parent?: CatalogElement;
+    childrent?: CatalogElement[];
 }
