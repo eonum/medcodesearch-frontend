@@ -1,30 +1,33 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import { SwissDrgCatalog } from "../../catalog/swissdrg.catalog";
 import { CatalogElement } from "../../model/catalog.element";
 import { CatalogService } from "../../service/catalog.service";
+import {Catalog} from "../../catalog/Catalog";
 
 @Component({
     selector: 'search-component',
     templateUrl: 'search.component.html',
     providers: [ SwissDrgCatalog, CatalogService ]
 })
+
 export class SearchComponent implements OnInit {
+
+    @Input() catalog: Catalog;
+
     public ngOnInit(): void {
         this.getSearchResults("");
     }
 
     private searchResults: CatalogElement[];
 
-    public constructor(private swissDrgCatalog: SwissDrgCatalog){
-
-    }
+    public constructor(){}
 
     public search(query: string): void {
         this.getSearchResults(query);
     }
 
     private getSearchResults(query: string): void {
-        this.swissDrgCatalog.search("V1.0", query)
+        this.catalog.search("V1.0", query)
             .then(results => {
                 this.searchResults = results;
             })

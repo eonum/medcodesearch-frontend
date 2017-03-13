@@ -8,7 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 })
 
 /**
- * Applies the translation to all routes.
+ * This component applies the translation for every url that begins with a Language tag.
  */
 export class LanguageComponent implements OnInit {
 
@@ -27,18 +27,18 @@ export class LanguageComponent implements OnInit {
   }
 
   /**
-   * Subscribe to route parameters.
+   * Subscribe to route parameter :language/ and apply translation on change.
    */
   ngOnInit() {
 
     this.route.params.subscribe((params: Params) => {
-        let lang = params['lang'];
+        let lang = params['language'];
 
-      if (this.languages.indexOf(lang) > -1) {
+        if (this.languages.indexOf(lang) > -1) {
           this.translate.use(lang)
         } else {
-          // Redirect to german
-          this.router.navigate(['', 'de']);
+          // Redirect to index
+          this.router.navigate(['']);
         }
       }
     );

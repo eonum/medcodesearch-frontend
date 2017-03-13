@@ -6,15 +6,13 @@ import {CatalogSelectComponent} from "./components/catalog-select/catalog-select
 
 
 const routes: Routes = [
-  { path: ':lang', component: LanguageComponent ,
+  { path: ':language', component: LanguageComponent ,
     children: [
-      { path: '', component: CatalogSelectComponent,
-        children: [
-          { path: ':catalogue/:version', component: CatalogComponent },
-        ]},
+      { path: ':catalogue/:version', component: CatalogComponent },
+      { path: '', redirectTo: 'drgs/V6.0', pathMatch: 'full' }
     ]
   },
-  { path: '', redirectTo: '/de', pathMatch: 'full' }
+  { path: '', redirectTo: '/de/drgs/V6.0', pathMatch: 'full' }
 ];
 
 
