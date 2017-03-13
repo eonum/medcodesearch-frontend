@@ -6,8 +6,8 @@ import { TranslateService, TranslateModule, TranslateLoader } from "@ngx-transla
 import { HttpLoaderFactory } from "./app.module";
 import {SearchComponent} from "./components/search/search.component";
 import {LanguageComponent} from "./components/language/language.component";
-import {CatalogComponent} from "./components/catalogue/catalog.component";
 import { HttpModule, Http } from "@angular/http";
+import { CatalogComponent } from "./components/catalog/catalog.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

@@ -1,8 +1,11 @@
 import { Catalog } from './Catalog'
-import { CatalogElement } from "../model/CatalogElement";
 import { ISwissDrgService } from '../service/ISwissDrgService'
 import { Inject, Injectable } from "@angular/core";
+import { CatalogElement } from "../model/catalog.element";
 
+/**
+ * Concrete implementation of catalog class for the SwissDRG catalog.
+ */
 @Injectable()
 export class SwissDrgCatalog extends Catalog {
     

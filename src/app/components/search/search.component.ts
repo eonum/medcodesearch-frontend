@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { SwissDrgCatalog } from "../../catalog/SwissDrgCatalog";
-import { CatalogElement } from "../../model/CatalogElement";
-import { SwissDrgService } from "../../service/SwissDrgService";
+import { SwissDrgCatalog } from "../../catalog/swissdrg.catalog";
+import { SwissDrgService } from "../../service/swissdrg.service";
+import { CatalogElement } from "../../model/catalog.element";
 
 @Component({
     selector: 'search-component',
