@@ -1,8 +1,14 @@
 <div *ngIf="catalog">
+
   <p>
-  selected catalog:
-  {{catalog.name}} - {{version}}
+  selected catalog: {{catalog.name}} - {{version}}
   </p>
 
+<catalog-select></catalog-select>
+
+  <br/>
+  <br>
+  <!-- Pass selected catalog as input to the search component -->
 <search-component [catalog]="catalog"></search-component>
+
 </div>
