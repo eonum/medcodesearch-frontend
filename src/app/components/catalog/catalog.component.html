@@ -1,7 +1,8 @@
-
-<p>
+<div *ngIf="catalog">
+  <p>
   selected catalog:
   {{catalog.name}} - {{version}}
-</p>
+  </p>
 
-<search-component></search-component>
+<search-component [catalog]="catalog"></search-component>
+</div>
