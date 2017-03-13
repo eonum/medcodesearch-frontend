@@ -59,7 +59,7 @@
 - All catalogs reside within the directory `/src/app/catalog`.
 - Their name is suffixed with 'Catalog'. Example: `SwissDrgCatalog`.
 - All catalogs are decorated with the `@Inject()` directive to allow them being injected into components.
-- Their filename matches their classname.
+- Their filename matches their classname but adhere to the name scheme for files.
 - Each public method of a catalog is tested using Karma unit tests.
 - Tests go into a `catalog.name.spec.ts` file in the same directory
 
@@ -67,5 +67,5 @@
 
 - All model classes reside within the directory `/src/app/model`.
 - Their name is not suffixed.
-- Their filename matches their classname.
+- Their filename matches their classname but adhere to the name scheme for files.
 - They should not contain any business logic.
