@@ -11,7 +11,7 @@ import { SwissDrgCatalog } from "../../catalog/swissdrg.catalog";
 })
 
 /**
- * Wrapper for text search, result display, navigation in a
+ * Wrapper for text search, result display, and later the navigation in a
  * given catalog (and version).
  */
 export class CatalogComponent implements OnInit {
