@@ -16,6 +16,20 @@ export class CatalogService implements ICatalogService {
 
     public constructor(private http: Http, private translate: TranslateService) {  }
 
+    /**
+     * Initializes the service with catalog specific parameters.
+     * Must be called before the first call to the service.
+     * 
+     * @param searchableCodes
+     *              the identifier for element types which
+     *              can be searched within the catalog
+     * @param retrievableCodes
+     *              the identifier for element types which
+     *              can be retrieved directly from the catalog
+     * @param versionParam
+     *              the catalog-specific url part for accessing
+     *              the versions of the catalog
+     */
     public init(searchableCodes: string[], retrievableCodes: string[], versionParam: string): void{
         this.searchableCodes = searchableCodes;
         this.retrievableCodes = retrievableCodes;
@@ -54,7 +68,9 @@ export class CatalogService implements ICatalogService {
         return Promise.resolve(results);
     }
 
-
+    /**
+     * Get all versions supported by the catalog
+     */
     public getVersions(): Promise<string[]> {
         let url: string = `${this.baseUrl}${this.getLocale()}/${this.versionParam}/versions`;
 
