@@ -8,6 +8,7 @@ import {SearchComponent} from "./components/search/search.component";
 import {LanguageComponent} from "./components/language/language.component";
 import { HttpModule, Http } from "@angular/http";
 import { CatalogComponent } from "./components/catalog/catalog.component";
+import { CatalogSelectComponent } from "./components/catalog-select/catalog-select.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -28,7 +29,8 @@ describe('AppComponent', () => {
         SearchComponent,
         CatalogComponent,
         LanguageComponent,
-        SearchComponent
+        SearchComponent,
+        CatalogSelectComponent
       ],
       providers: [  ]
     }).compileComponents();
