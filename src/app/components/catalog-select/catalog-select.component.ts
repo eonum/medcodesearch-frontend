@@ -9,7 +9,7 @@ import {TranslateService} from "@ngx-translate/core";
   selector: 'catalog-select',
   templateUrl: 'catalog-select.component.html',
   styleUrls: ['catalog-select.component.css'],
-  providers: [ SwissDrgCatalog, CatalogService ]
+  providers: [ SwissDrgCatalog, { provide: "ICatalogService", useClass: CatalogService} ]
 })
 
 /**

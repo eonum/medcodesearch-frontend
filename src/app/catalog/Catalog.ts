@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
-import { CatalogService } from "../service/catalog.service";
+import { ICatalogService } from "../service/i.catalog.service";
 
 /**
  * Class representing a catalog containing medical
@@ -9,11 +9,29 @@ import { CatalogService } from "../service/catalog.service";
  */
 @Injectable()
 export abstract class Catalog {
+    
+    /**
+     * The name of the catalog.
+     */
     protected name: string;
-    protected codeRegex: string;
-    protected service: CatalogService;
 
-    public constructor(service: CatalogService){
+    /**
+     * The regex which is used to identify element
+     * codes within this catalog.
+     */
+    protected codeRegex: string;
+
+    /**
+     * The service to access the data source
+     * (in production this would be the eonum API)
+     */
+    protected service: ICatalogService;
+
+    /**
+     * Constructor for class Catalog
+     * @param service the service to access the catalog data
+     */
+    public constructor(service: ICatalogService){
         this.service = service;
     }
 
@@ -36,6 +54,12 @@ export abstract class Catalog {
         }
     }
 
+    /**
+     * Check whether the query is a code or a normal
+     * search string.
+     * 
+     * @param query the query to search for within the catalog
+     */
     private isCode(query: string): boolean {
         let regex = new RegExp(this.codeRegex);
         return regex.test(query);
@@ -49,6 +73,9 @@ export abstract class Catalog {
         return this.service.getByCode(version, code);
     }
 
+    /**
+     * Get all versions supported by the catalog.
+     */
     public async getVersions(): Promise<string[]> {
         return this.service.getVersions();
     }

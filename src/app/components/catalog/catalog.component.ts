@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, Params} from "@angular/router";
-import { Catalog } from "../../catalog/Catalog";
+import { Catalog } from "../../catalog/catalog";
 import { SwissDrgCatalog } from "../../catalog/swissdrg.catalog";
 
 @Component({

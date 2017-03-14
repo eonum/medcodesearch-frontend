@@ -1,13 +1,14 @@
-import { Injectable } from "@angular/core";
-
-import { OpaqueToken } from '@angular/core';
-import { Observable } from "rxjs/Observable";
 import { CatalogElement } from "../model/catalog.element";
-import { CatalogService } from "./catalog.service";
+import { ICatalogService } from "./i.catalog.service";
+import { Http } from "@angular/http";
+import { TranslateService } from "@ngx-translate/core";
 
-export let SERVICE_MOCK = new OpaqueToken('SwissDrgServiceMock');
+export class CatalogServiceMock implements ICatalogService {
+    
+    init(searchableCodes: string[], retrievableCodes: string[], versionParam: string): void {
+        
+    }
 
-export class CatalogServiceMock extends CatalogService {
     private CONTENTS: CatalogElement[] = [
         { code: "Content 1", text: "Description content 1", url: "/url/to/content1" },
         { code: "Content 2", text: "Description content 2", url: "/url/to/content2" },

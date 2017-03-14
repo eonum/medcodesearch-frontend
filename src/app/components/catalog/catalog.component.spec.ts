@@ -1,7 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CatalogComponent } from './catalog.component';
-import {RouterTestingModule} from "@angular/router/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { CatalogSelectComponent } from "../catalog-select/catalog-select.component";
+import { SearchComponent } from "../search/search.component";
+import { CatalogServiceMock } from "../../service/catalog.service.mock";
 
 describe('CatalogComponent', () => {
   let component: CatalogComponent;
@@ -10,7 +13,8 @@ describe('CatalogComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule],
-      declarations: [ CatalogComponent ]
+      declarations: [ CatalogComponent, CatalogSelectComponent, SearchComponent ],
+      providers: [ {provide: "ICatalogService", useClass: CatalogServiceMock} ]
     })
     .compileComponents();
   }));

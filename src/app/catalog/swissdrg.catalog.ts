@@ -1,7 +1,7 @@
-import { Catalog } from './Catalog'
+import { Catalog } from './catalog'
 import { Inject, Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
-import { CatalogService } from "../service/catalog.service";
+import { ICatalogService } from "../service/i.catalog.service";
 
 /**
  * Concrete implementation of catalog class for the SwissDRG catalog.
@@ -9,7 +9,7 @@ import { CatalogService } from "../service/catalog.service";
 @Injectable()
 export class SwissDrgCatalog extends Catalog {
     
-    constructor(service: CatalogService) {
+    constructor(@Inject("ICatalogService") service: ICatalogService) {
         super(service);
         this.name = "SwissDRG";
         this.codeRegex = "^[A-Z]{1}[0-9]{2,4}$";
