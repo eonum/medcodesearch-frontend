@@ -41,7 +41,7 @@ export function HttpLoaderFactory(http: Http) {
       }
     })
   ],
-  providers: [CatalogService],
+  providers: [ {provide: "ICatalogService", useClass: CatalogService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
