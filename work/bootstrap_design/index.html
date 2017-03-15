@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>medcs</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/medcode.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top"> <!-- navbar-static-top for navbar that disappears-->
+        <div class="container">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://www.test.com">medCodeSearch</a>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class=""><a href="#" >de</a></li>  <!-- class="active" für default auswahl-->
+                    <li class=""><a href="#" >fr</a></li>
+                    <li class=""><a href="#" >it</a></li>
+                    <li class=""><a href="#" >en</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row search">
+            <div class="col-lg-5 cold-md-5 col-sm-6 col-xs-11">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Insert text or code...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button><br>
+                    </span>
+                </div><!-- /input-group -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 cold-md-12 col-sm-12 col-xs-12">
+                <div class="button active">
+                    <span class="catalog">SwissDRG</span>
+                    <span class="version"><span>V6.0</span>
+                        <ul>
+                            <li>V6.0</li>
+                            <li>V5.0</li>
+                            <li>V4.0</li>
+                            <li>V3.0</li>
+                            <li>V2.0</li>
+                            <li>V1.0</li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="button">
+                    <span class="catalog">CHOP</span>
+                    <span class="version"><span>2017</span>
+                        <ul>
+                            <li>2017</li>
+                            <li>2016</li>
+                            <li>2015</li>
+                            <li>2014</li>
+                            <li>2013</li>
+                            <li>2012</li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="button">
+                    <span class="catalog">ICD</span>
+                    <span class="version"><span>GM-2016</span>
+                        <ul>
+                            <li>GM-2016</li>
+                            <li>GM-2016</li>
+                            <li>GM-2016</li>
+                            <li>GM-2016</li>
+                            <li>GM-2016</li>
+                            <li>GM-2016</li>
+                        </ul>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Footer-->
+    <div class="navbar navbar-default navbar-fixed-bottom"> 
+        <div class="container">
+            <div class="navbar-text pull-left">
+                <p> copyright by medCodeSearch</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/medcode.js"></script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+.search {
+    margin-bottom: 15px;
+}
+
+/* Button */
+.button {
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+  padding: 6px 0;
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  background-color: white;
+  font-family: Tahoma;
+  color: #5e5e5e;
+}
+.button > span {
+  padding: 0 10px;
+  margin: 0;
+}
+.button .catalog {
+  border-right: 1px solid rgb(204, 204, 204);
+}
+.button .version {
+  cursor: pointer;
+}
+.button ul {
+  position: absolute;
+  display: none;
+  margin: 0;
+  padding: 5px;
+  top: 32px;
+  right: 4px;
+  list-style: none;
+  border: 1px solid rgb(204, 204, 204);
+  border-top: none;
+  background-color: white;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.button li {
+  cursor: pointer;
+}
+.button li:hover {
+  color: lightblue;
+}
+.button.active .catalog {
+	font-weight: bold;
+}
