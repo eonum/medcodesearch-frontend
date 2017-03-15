@@ -34,7 +34,7 @@ export class CatalogComponent implements OnInit {
   ngOnInit() {
 
     this.route.params.subscribe((params: Params) => {
-        let catalog = params['catalogue'];
+        let catalog = params['catalog'];
         this.version = params['version'];
         
         this.catalogSelect(catalog);

@@ -13,6 +13,6 @@ export class CHOPCatalog extends Catalog {
         super(service);
         this.name = "CHOP";
         this.codeRegex = "^[\\d\\.]$";
-        this.service.init(['chops'], ['chops'], 'chops');
+        this.elements = [['chops'], ['chops'], 'chops'];
     }
 }

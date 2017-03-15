@@ -1,0 +1,14 @@
+<input type="text" #searchBox value="{{query}}"> <button (click)="search(searchBox.value);">Search</button>
+
+<div>
+    <div id="button" *ngFor="let catalog of catalogs">
+        <span id="catalog" (click)="updateCatalog(catalog.path, catalog.currentVersion)">{{catalog.name}}</span>
+        <span id="version">{{catalog.currentVersion}}
+            <ul>
+                <li *ngFor="let version of catalog.versions" (click)="updateCatalog(catalog.path, version)">{{version}}</li>
+            </ul>
+        </span>
+    </div>
+</div>
+
+<results>Bitte etwas in das Suchfeld eingeben!</results>

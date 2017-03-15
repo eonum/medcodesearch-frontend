@@ -20,6 +20,12 @@ export abstract class Catalog {
      * codes within this catalog.
      */
     protected codeRegex: string;
+    
+    /**
+     * Elements within a catalog.
+     * TODO: Name properly.
+     */
+    protected elements: any[];
 
     /**
      * The service to access the data source
@@ -66,10 +72,12 @@ export abstract class Catalog {
     }    
 
     protected async getBySearch(version: string, query: string): Promise<CatalogElement[]> {
+        this.initService();
         return this.service.search(version, query);
     }
 
     protected async getByCode(version: string, code: string): Promise<CatalogElement> {
+        this.initService();
         return this.service.getByCode(version, code);
     }
 
@@ -77,6 +85,11 @@ export abstract class Catalog {
      * Get all versions supported by the catalog.
      */
     public async getVersions(): Promise<string[]> {
+        this.initService();
         return this.service.getVersions();
+    }
+    
+    private initService() {
+        this.service.init(this.elements[0], this.elements[1], this.elements[2]);
     }
 }

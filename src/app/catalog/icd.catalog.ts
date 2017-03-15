@@ -13,6 +13,6 @@ export class ICDCatalog extends Catalog {
         super(service);
         this.name = "ICD";
         this.codeRegex = "^\\w[\\d\\.]$";
-        this.service.init(['icds'], ['icds', 'icd_groups', 'icd_chapters'], 'icds');
+        this.elements = [['icds'], ['icds', 'icd_groups', 'icd_chapters'], 'icds'];
     } 
 }

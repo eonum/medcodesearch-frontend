@@ -13,6 +13,6 @@ export class SwissDrgCatalog extends Catalog {
         super(service);
         this.name = "SwissDRG";
         this.codeRegex = "^[A-Z]{1}[0-9]{2,4}$";
-        this.service.init([ "drgs", "adrgs"], [ "drgs", "adrgs", "partition", "mdc" ], "drgs");
+        this.elements = [[ "drgs", "adrgs"], [ "drgs", "adrgs", "partition", "mdc" ], "drgs"];
     }
 }

@@ -34,6 +34,7 @@ export class CatalogService implements ICatalogService {
         this.searchableCodes = searchableCodes;
         this.retrievableCodes = retrievableCodes;
         this.versionParam = versionParam;
+        
     }
 
     private getLocale(): string {
@@ -73,11 +74,11 @@ export class CatalogService implements ICatalogService {
      */
     public getVersions(): Promise<string[]> {
         let url: string = `${this.baseUrl}${this.getLocale()}/${this.versionParam}/versions`;
-
+        
         return this.http.get(url)
                         .toPromise()
-                        .then(response => response.json().data as string[])
-                        .catch(error => {});
+                        .then( response => response.json() as string[] )
+                        .catch(reason => {throw new Error(reason)});
     }
 
     /**
