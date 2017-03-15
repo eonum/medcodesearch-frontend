@@ -9,10 +9,10 @@ const routes: Routes = [
   { path: ':language', component: LanguageComponent ,
     children: [
       { path: ':catalogue/:version', component: CatalogComponent },
-      { path: '', redirectTo: 'drgs/V6.0', pathMatch: 'full' }
+      { path: '', redirectTo: 'swissdrg/V6.0', pathMatch: 'full' }
     ]
   },
-  { path: '', redirectTo: '/de/drgs/V6.0', pathMatch: 'full' }
+  { path: '', redirectTo: '/de/swissdrg/V6.0', pathMatch: 'full' }
 ];
 
 
