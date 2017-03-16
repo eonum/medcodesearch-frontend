@@ -71,8 +71,9 @@ export class SearchFormComponent implements OnInit {
                 }
             }
 
-            this.resultsComponent.updateResults(this.catalog, this.version, this.query);
-
+            if (this.query) {
+              this.resultsComponent.updateResults(this.catalog, this.version, this.query);
+            }
         });
 
     }

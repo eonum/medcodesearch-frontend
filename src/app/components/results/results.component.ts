@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-
+import { environment } from '../../../environments/environment';
 import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {CHOPCatalog} from '../../catalog/chop.catalog';
 import {ICDCatalog} from '../../catalog/icd.catalog';
@@ -27,18 +27,21 @@ export class ResultsComponent {
         this.catalogs['icd'] = icdCatalog;
     }
 
-    updateResults(catalog: string, version: string, query: string) {
+    public updateResults(catalog: string, version: string, query: string) {
 
         this.catalogs[catalog].search(version, query)
             .then(results => {
                 this.searchResults = results;
             })
             .catch(error => {
-                this.handleError();
+                this.handleError(error);
             });
     }
 
-    private handleError(): void {
+    private handleError(error): void {
+      if (environment.dev) {
+        console.log(error);
+      }
     }
 
 }
