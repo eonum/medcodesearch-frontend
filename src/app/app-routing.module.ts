@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {CatalogComponent} from "./components/catalog/catalog.component";
-import {LanguageComponent} from "./components/language/language.component";
-import {CatalogSelectComponent} from "./components/catalog-select/catalog-select.component";
+import {LanguageComponent} from './components/language/language.component';
 import {SearchFormComponent} from './components/search-form/search-form.component';
-import {ResultsComponent} from './components/results/results.component';
-
 
 const routes: Routes = [
   { path: ':language', component: LanguageComponent ,
@@ -18,10 +14,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/de/swissdrg/V6.0', pathMatch: 'full' }
 ];
 
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers: []
 })
+
 export class AppRoutingModule { }
