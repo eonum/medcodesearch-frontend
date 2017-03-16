@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { TranslateService, TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpLoaderFactory } from "./app.module";
 import {SearchComponent} from "./components/search/search.component";
-import {LanguageComponent} from "./components/language/language.component";
 import { HttpModule, Http } from "@angular/http";
 import { CatalogComponent } from "./components/catalog/catalog.component";
 import { CatalogSelectComponent } from "./components/catalog-select/catalog-select.component";
@@ -28,7 +27,6 @@ describe('AppComponent', () => {
         AppComponent,
         SearchComponent,
         CatalogComponent,
-        LanguageComponent,
         SearchComponent,
         CatalogSelectComponent
       ],
@@ -42,16 +40,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app works!'`, async(() => {
+  it(`should have as title 'medCodeSearch'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('medcodelogic');
+    expect(app.title).toEqual('medCodeSearch');
   }));
 
-  it('should render title in a h1 tag', async(() => {
+  it('should render title as a link', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('medcodelogic');
+    expect(compiled.querySelector('a').textContent).toContain('medCodeSearch');
   }));
 });
