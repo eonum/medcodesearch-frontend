@@ -19,12 +19,12 @@ describe("SwissDrgCatalog", () => {
 
     it('Should return a single result by code', async(() => {
         let catalog : SwissDrgCatalog = new SwissDrgCatalog(new CatalogServiceMock());
-        catalog.search("V1.0", "P234").then(results => {
+        catalog.search("V1.0", "P20A").then(results => {
             expect(results.length).toBe(1);
         })
     }));
     it('Should throw an error because no code found', async(() => {
         let catalog : SwissDrgCatalog = new SwissDrgCatalog(new CatalogServiceMock());
-        catalog.search("V1.0", "P2345").then(result => { fail("Got unexpected result") }).catch(reason => {})
+        catalog.search("V1.0", "P23").then(result => { fail("Got unexpected result") }).catch(reason => {})
     }));
 });
