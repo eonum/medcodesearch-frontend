@@ -1,0 +1,11 @@
+<dl>
+    <template ngFor let-result [ngForOf]="searchResults">
+        <dt>{{result.code}}</dt>
+        <template [ngIf]="result.highlight.text != undefined">
+            <dd [innerHtml]="result.highlight.text[0]"></dd>
+        </template>
+        <template [ngIf]="result.highlight.text == undefined">
+            <dd [innerHtml]="result.text"></dd>
+        </template>        
+    </template>
+</dl>

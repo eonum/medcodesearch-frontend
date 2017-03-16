@@ -13,6 +13,8 @@ import { SearchComponent } from './components/search/search.component';
 import {AppComponent} from "./app.component";
 import { CatalogSelectComponent } from './components/catalog-select/catalog-select.component';
 import {CatalogService} from "./service/catalog.service";
+import { SearchFormComponent } from './components/search-form/search-form.component';
+import { ResultsComponent } from './components/results/results.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -26,7 +28,9 @@ export function HttpLoaderFactory(http: Http) {
     CatalogComponent,
     LanguageComponent,
     SearchComponent,
-    CatalogSelectComponent
+    CatalogSelectComponent,
+    SearchFormComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
 import {Component, OnInit, Input} from "@angular/core";
 import { SwissDrgCatalog } from "../../catalog/swissdrg.catalog";
+import { CHOPCatalog } from "../../catalog/chop.catalog";
+import { ICDCatalog } from "../../catalog/icd.catalog";
 import { CatalogElement } from "../../model/catalog.element";
 import { CatalogService } from "../../service/catalog.service";
 import {Catalog} from "../../catalog/catalog";
@@ -7,7 +9,7 @@ import {Catalog} from "../../catalog/catalog";
 @Component({
     selector: 'search-component',
     templateUrl: 'search.component.html',
-    providers: [ SwissDrgCatalog, { provide: "ICatalogService", useClass: CatalogService} ]
+    providers: [ SwissDrgCatalog, CHOPCatalog, ICDCatalog, { provide: "ICatalogService", useClass: CatalogService} ]
 })
 
 export class SearchComponent implements OnInit {
@@ -15,7 +17,7 @@ export class SearchComponent implements OnInit {
     @Input() catalog: Catalog;
 
     public ngOnInit(): void {
-        this.getSearchResults("");
+//        this.getSearchResults("");
     }
 
     private searchResults: CatalogElement[];
