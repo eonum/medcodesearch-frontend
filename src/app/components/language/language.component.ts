@@ -3,8 +3,9 @@ import {Params, ActivatedRoute, Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-language',
-  template: `<router-outlet></router-outlet>`,
+    selector: 'language-list',
+    //template: `<router-outlet></router-outlet>`,
+    templateUrl: './language.component.html',
 })
 
 /**
@@ -12,35 +13,35 @@ import {TranslateService} from "@ngx-translate/core";
  */
 export class LanguageComponent implements OnInit {
 
-  languages = ['de', 'fr', 'it', 'en'];
+    languages = ['de', 'fr', 'it', 'en'];
 
-  /**
-   * @param {Router} router - to change language
-   * @param {ActivateRoute} route - to observe lang param from route
-   * @param {TranslateService} translate - to set translation
-   */
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private translate: TranslateService) {
+    /**
+     * @param {Router} router - to change language
+     * @param {ActivateRoute} route - to observe lang param from route
+     * @param {TranslateService} translate - to set translation
+     */
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private translate: TranslateService) {
 
-    translate.setDefaultLang('de');
-  }
+        translate.setDefaultLang('de');
+    }
 
-  /**
-   * Subscribe to route parameter :language/ and apply translation on change.
-   */
-  ngOnInit() {
+    /**
+     * Subscribe to route parameter :language/ and apply translation on change.
+     */
+    ngOnInit() {
 
-    this.route.params.subscribe((params: Params) => {
-        let lang = params['language'];
+        this.route.params.subscribe((params: Params) => {
+                let lang = params['language'];
 
-        if (this.languages.indexOf(lang) > -1) {
-          this.translate.use(lang)
-        } else {
-          // Redirect to index
-          this.router.navigate(['']);
-        }
-      }
-    );
-  }
+                if (this.languages.indexOf(lang) > -1) {
+                    this.translate.use(lang)
+                } else {
+                    // Redirect to index
+                    this.router.navigate(['']);
+                }
+            }
+        );
+    }
 }

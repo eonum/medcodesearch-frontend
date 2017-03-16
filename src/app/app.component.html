@@ -1,11 +1,24 @@
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <a class="navbar-brand" href="http://www.test.com">medCodeSearch</a>
+        <ul class="language-select">
+            <li class=""><a routerLink="de" routerLinkActive="active">de </a></li>
+            <li class=""><a routerLink="en" routerLinkActive="active">en </a></li>
+            <li class=""><a routerLink="fr" routerLinkActive="active">fr </a></li>
+            <li class=""><a routerLink="it" routerLinkActive="active">it</a></li>
+        </ul>
+    </div>
+</nav>
 
-<a routerLink="de" routerLinkActive="active">de </a> |
-<a routerLink="en" routerLinkActive="active">en </a> |
-<a routerLink="fr" routerLinkActive="active">fr </a> |
-<a routerLink="it" routerLinkActive="active">it</a>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
 
-<h1>{{title}}</h1>
-
-<!-- LanguageComponent is placed in this router outlet, and in there directly the CatalogComponent. -->
-<router-outlet></router-outlet>
-
+<!-- Footer-->
+<div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-text pull-left">
+            <p>copyright by eonum</p>
+        </div>
+    </div>
+</div>

@@ -1,14 +1,31 @@
-<input type="text" #searchBox value="{{query}}"> <button (click)="search(searchBox.value);">Search</button>
-
-<div>
-    <div id="button" *ngFor="let catalog of catalogs">
-        <span id="catalog" (click)="updateCatalog(catalog.path, catalog.currentVersion)">{{catalog.name}}</span>
-        <span id="version">{{catalog.currentVersion}}
-            <ul>
-                <li *ngFor="let version of catalog.versions" (click)="updateCatalog(catalog.path, version)">{{version}}</li>
-            </ul>
-        </span>
+<div class="row search">
+    <div class="col-xs-12">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Insert text or code..." #searchBox value="{{query}}" (keyup.enter)="search(searchBox.value)">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="search(searchBox.value);">Go!</button>
+            </span>
+        </div><!-- /input-group -->
     </div>
 </div>
 
+<div class="row">
+    <div class="col-xs-12">
+
+        <div class="btn-group" dropdown *ngFor="let cat of catalogs">
+            <button type="button" class="catalog btn btn-default" [ngClass]="{'active': cat.path === catalog}" (click)="updateCatalog(cat.path, cat.currentVersion)">{{cat.name}}</button>
+            <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
+                <span>{{cat.currentVersion}}</span>
+                <span class="caret"></span>
+                <span class="sr-only">{{catalog.currentVersion}}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" dropdownMenu role="menu" aria-labelledby="split-button">
+                <li [ngClass]="{'active': cat.currentVersion === version}" role="menuitem" *ngFor="let version of cat.versions" (click)="updateCatalog(cat.path, version)"><a class="dropdown-item" href="javascript:void(0)">{{version}}</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<hr />
 <results>Bitte etwas in das Suchfeld eingeben!</results>
