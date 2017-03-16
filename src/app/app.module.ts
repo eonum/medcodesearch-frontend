@@ -8,7 +8,6 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {AppRoutingModule} from './app-routing.module';
 
 import {CatalogComponent} from './components/catalog/catalog.component';
-import {LanguageComponent} from './components/language/language.component';
 import {SearchComponent} from './components/search/search.component';
 import {AppComponent} from './app.component';
 import {CatalogSelectComponent} from './components/catalog-select/catalog-select.component';
@@ -26,7 +25,6 @@ export function HttpLoaderFactory(http: Http) {
     declarations: [
         AppComponent,
         CatalogComponent,
-        LanguageComponent,
         SearchComponent,
         CatalogSelectComponent,
         SearchFormComponent,
