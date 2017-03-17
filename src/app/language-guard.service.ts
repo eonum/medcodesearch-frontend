@@ -3,12 +3,12 @@ import {Router, ActivatedRouteSnapshot, CanActivate} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 
 /**
- * This Service uses the authentication guard functionality
- * to apply the translation to all routes that start with a
- * language tag.
+ * This is an authentication guard that grants always access,
+ * but sets the translation according to the `language` parameter in the path.
  *
- * @see app.routing.module.ts
+ *  For usage, see {@link AppRoutingModule}.
  */
+
 @Injectable()
 export class LanguageGuard implements CanActivate {
 
@@ -22,9 +22,9 @@ export class LanguageGuard implements CanActivate {
   /**
    * This function is a hook for the authentication,
    * i.e. it is called always before the Route gets activated.
-   * In this case it applies the translation and says yes.
+   * In this case it applies the translation and grants access.
    *
-   * @param route
+   * @param {ActivatedRouteSnapshot} route - contains route params up to the point where this guard gets activated.
    * @returns {boolean} - always True
    */
   canActivate(route: ActivatedRouteSnapshot) {
@@ -34,7 +34,9 @@ export class LanguageGuard implements CanActivate {
   }
 
   /**
-   * Apply translation or navigate to DEFAULT_LANGUAGE.
+   * Apply translation or navigate to DEFAULT_LANGUAGE if the language
+   * does not exist.
+   *
    * @param language
    */
   private setLanguage(language: string): void {
