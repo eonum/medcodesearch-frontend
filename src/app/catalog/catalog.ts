@@ -78,8 +78,7 @@ export abstract class Catalog {
 
     this.initService();
     let versions = this.service.getVersions();
-    versions.then(
-      data => {
+    versions.then( data => {
         this.versions      = data.reverse();
         this.activeVersion = data[0];
       },

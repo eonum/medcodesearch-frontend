@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Input, OnChanges} from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {ICDCatalog} from '../../catalog/icd.catalog';
@@ -8,16 +8,17 @@ import {ResultsComponent} from '../results/results.component';
 import {Catalog} from '../../catalog/catalog';
 
 @Component({
-  selector: 'app-search-form',
+  selector: 'search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.css'],
   providers: []
 })
 
-export class SearchFormComponent implements OnInit {
+export class SearchFormComponent implements OnChanges {
+
+  @Input() catalog: Catalog;
 
   catalogs: Catalog[];
-  catalog: Catalog;
   query: string;
 
   @ViewChild(ResultsComponent)
@@ -36,11 +37,7 @@ export class SearchFormComponent implements OnInit {
   /**
    * Preselect the proper catalog version if given through url
    */
-  ngOnInit() {
-    this.route.data.subscribe(( data:{catalog:Catalog}) => {
-        this.catalog = data.catalog;
-      }
-    )
+  ngOnChanges() {
 
     this.route.params.subscribe((params: Params) => {
 
@@ -60,10 +57,8 @@ export class SearchFormComponent implements OnInit {
     version = version || catalog.getActiveVersion();
 
     let params = [ this.translate.currentLang,  catalog.getDomain(), version];
+    if (this.query) { params.push(this.query); }
 
-    if (this.query) {
-      params.push(this.query)
-    }
     this.router.navigate(params).catch(error => console.log(error) );
   }
 

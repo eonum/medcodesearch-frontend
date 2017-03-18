@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {SearchFormComponent} from './components/search-form/search-form.component';
 import {LanguageGuard} from './service/routing/language-guard.service';
 import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import {SearchMainComponent} from './components/search-main/search-main.component';
 
 const routes: Routes = [
   {
@@ -11,14 +11,14 @@ const routes: Routes = [
     children: [
       {
         path: ':catalog/:version',
-        component: SearchFormComponent,
+        component: SearchMainComponent,
         resolve: {
           catalog: CatalogResolver
         }
       },
       {
         path: ':catalog/:version/:query',
-        component: SearchFormComponent,
+        component: SearchMainComponent,
         resolve: {
           catalog: CatalogResolver
         }

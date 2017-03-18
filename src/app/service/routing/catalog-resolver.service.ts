@@ -43,9 +43,9 @@ export class CatalogResolver implements Resolve<Catalog> {
   }
 
   /**
-   * Try to resolve `catalog` and `version` parameters from the route to
-   * a catalog. If successful, update the `activeCatalog` for global usage and return the
-   * catalog for the target component. Else, redirect to start.
+   * Try to resolve `catalog` and `version` parameters from the route to a catalog.
+   * On success, update the `activeCatalog` for global usage and return the
+   * catalog for the search-main component. Else, redirect to start.
    *
    * @param route
    * @param state
@@ -58,29 +58,28 @@ export class CatalogResolver implements Resolve<Catalog> {
 
     // Activate catalog and return it, or redirect to start
     if (catalog) {
-      return catalog.activateVersion(version).then((success: boolean) => {
+      return catalog.activateVersion(version).then(
+        (success: boolean) => {
           if (success) { //valid version
             this.activeCatalog = catalog;
             return catalog;
-          }
-          else this.redirectToStart(route);
+          } else this.redirectToStart(route);
         }
       )
     } else this.redirectToStart(route);
   }
 
   private redirectToStart(route: ActivatedRouteSnapshot) {
-    return this.router.navigate( [route.params['language']] ).catch(e => console.log(e));
+    return this.router.navigate([route.params['language']]).catch(e => console.log(e));
   }
 
   /**
-   * Return the active route parameters `[catalog, version]` if a catalog
-   * is active.
+   * Return the active route parameters `[catalog, version]`.
    * @returns {string[]}
    */
   getActiveRouteParams(): string[] {
-    if(!this.activeCatalog ){
-      if(environment.dev) console.log('No active catalog!');
+    if (!this.activeCatalog) {
+      if (environment.dev) console.log('No active catalog!');
       return [];
     }
     return [
