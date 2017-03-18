@@ -17,8 +17,7 @@ import {Catalog} from '../../catalog/catalog';
 export class SearchFormComponent implements OnInit {
 
   catalogs: Catalog[];
-  catalog: string;
-  version: string;
+  catalog: Catalog;
   query: string;
 
   @ViewChild(ResultsComponent)
@@ -38,19 +37,17 @@ export class SearchFormComponent implements OnInit {
    * Preselect the proper catalog version if given through url
    */
   ngOnInit() {
-    this.route.data.subscribe(
-      ( data:{catalog:Catalog}) => {
-        console.log('Catalog: ')
-        console.log(data.catalog)
+    this.route.data.subscribe(( data:{catalog:Catalog}) => {
+        this.catalog = data.catalog;
       }
     )
+
     this.route.params.subscribe((params: Params) => {
-      this.catalog = params['catalog'];
-      this.version = params['version'];
+
       this.query   = params['query'] ? params['query'] : '';
 
       if (this.query) {
-        this.resultsComponent.updateResults(this.catalog, this.version, this.query);
+        this.resultsComponent.updateResults(this.catalog, this.query);
       }
     });
 
@@ -60,14 +57,9 @@ export class SearchFormComponent implements OnInit {
    * Update based on catalog selection.
    */
   public updateCatalog(catalog:Catalog, version?: string): void {
-    if(version){
-      catalog.activateVersion(version);
-      this.version = version;
-    }
+    version = version || catalog.getActiveVersion();
 
-    this.catalog = catalog.getDomain();
-
-    let params = [this.translate.currentLang, this.catalog, catalog.getActiveVersion()];
+    let params = [ this.translate.currentLang,  catalog.getDomain(), version];
 
     if (this.query) {
       params.push(this.query)
@@ -80,7 +72,14 @@ export class SearchFormComponent implements OnInit {
    */
   public search(query: string): void {
     this.query = query;
-    this.router.navigate([this.translate.currentLang, this.catalog, this.version, query]);
+
+    let params = [
+      this.translate.currentLang,
+      this.catalog.getDomain(),
+      this.catalog.getActiveVersion(),
+      query
+    ]
+    this.router.navigate(params).catch(error => console.log(error) );
   }
 
 }

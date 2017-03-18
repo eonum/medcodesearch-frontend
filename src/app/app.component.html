@@ -1,11 +1,12 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <a id="title"class="navbar-brand" href="http://www.test.com">{{title}}</a>
-        <ul class="language-select">
-            <li class=""><a routerLink="de" routerLinkActive="active">de </a></li>
-            <li class=""><a routerLink="en" routerLinkActive="active">en </a></li>
-            <li class=""><a routerLink="fr" routerLinkActive="active">fr </a></li>
-            <li class=""><a routerLink="it" routerLinkActive="active">it</a></li>
+        <ul href="#" class="language-select">
+          <li *ngFor="let language of languages">
+            <a href="javascript:void(0)"
+                 [class.active]="translate.currentLang===language"
+                 (click)="setLanguage(language)">{{language}}</a>
+          </li>
         </ul>
     </div>
 </nav>

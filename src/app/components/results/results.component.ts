@@ -5,6 +5,7 @@ import {CHOPCatalog} from '../../catalog/chop.catalog';
 import {ICDCatalog} from '../../catalog/icd.catalog';
 import {CatalogService} from '../../service/catalog.service';
 import {CatalogElement} from '../../model/catalog.element';
+import {Catalog} from '../../catalog/catalog';
 
 @Component({
     selector: 'results',
@@ -15,20 +16,9 @@ import {CatalogElement} from '../../model/catalog.element';
 export class ResultsComponent {
 
     private searchResults: CatalogElement[];
-    private catalogs: any;
 
-    constructor(private swissDrgCatalog: SwissDrgCatalog,
-                private chopCatalog: CHOPCatalog,
-                private icdCatalog: ICDCatalog) {
-
-      this.catalogs = {};
-      this.catalogs['swissdrg'] = swissDrgCatalog;
-      this.catalogs['chop'] = chopCatalog;
-      this.catalogs['icd'] = icdCatalog;
-    }
-
-    public updateResults(catalog: string, version: string, query: string) {
-        this.catalogs[catalog].search(version, query)
+    public updateResults(catalog: Catalog, query: string) {
+        catalog.search(catalog.getActiveVersion(), query)
             .then(results => {
                 this.searchResults = results;
             })

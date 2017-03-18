@@ -46,5 +46,4 @@ export class LanguageGuard implements CanActivate {
       this.router.navigate([this.DEFAULT_LANGUAGE]);
     }
   }
-
 }
