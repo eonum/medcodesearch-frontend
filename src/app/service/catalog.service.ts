@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
 import { ICatalogService } from "./i.catalog.service";
 import 'rxjs/add/operator/toPromise';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class CatalogService implements ICatalogService {
@@ -19,7 +20,7 @@ export class CatalogService implements ICatalogService {
     /**
      * Initializes the service with catalog specific parameters.
      * Must be called before the first call to the service.
-     * 
+     *
      * @param searchableCodes
      *              the identifier for element types which
      *              can be searched within the catalog
@@ -34,7 +35,7 @@ export class CatalogService implements ICatalogService {
         this.searchableCodes = searchableCodes;
         this.retrievableCodes = retrievableCodes;
         this.versionParam = versionParam;
-        
+
     }
 
     private getLocale(): string {
@@ -44,10 +45,10 @@ export class CatalogService implements ICatalogService {
     /**
      * Searches in a specific version of the catalog for the specified
      * query.
-     * 
+     *
      * Returns an array of search results or an empty array if no results
      * matching the query are found.
-     * 
+     *
      * @param version the version of the catalog to use
      * @param query the query to search for
      */
@@ -65,28 +66,26 @@ export class CatalogService implements ICatalogService {
                 let error = e;
             }
         };
-        
+
         return Promise.resolve(results);
     }
 
     /**
      * Get all versions supported by the catalog
      */
-    public getVersions(): Promise<string[]> {
+    public getVersions(): Observable<string[]> {
         let url: string = `${this.baseUrl}${this.getLocale()}/${this.versionParam}/versions`;
-        
+
         return this.http.get(url)
-                        .toPromise()
-                        .then( response => response.json() as string[] )
-                        .catch(reason => {throw new Error(reason)});
+                        .map( response => response.json().reverse() as string[] );
     }
 
     /**
      * Find an element in the SwissDRG catalog by its code.
-     * 
+     *
      * Returns the element with the specified code or
      * throws an error if the element doesn't exist.
-     * 
+     *
      * @param version the version of the catalog to use
      * @param code the code to search for
      */
@@ -108,7 +107,7 @@ export class CatalogService implements ICatalogService {
         if (result.length > 0){
             return Promise.resolve(result[0]);
         }
-        
+
         throw new Error("Not found");
     }
 
@@ -123,7 +122,7 @@ export class CatalogService implements ICatalogService {
     private async getSearchForType(elementType: string, version: string, query: string) : Promise<CatalogElement[]>{
         let url : string = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
         return this.http.get(url).toPromise()
-                    .then(result => { 
+                    .then(result => {
                         let data = result.json();
                         return data as CatalogElement[]
                     })

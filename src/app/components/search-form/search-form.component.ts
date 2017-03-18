@@ -30,7 +30,7 @@ export class SearchFormComponent implements OnInit {
                 private icdCatalog: ICDCatalog,
                 private translate: TranslateService) {
 
-        this.catalogs = [
+      this.catalogs = [
             {
                 name: 'SwissDRG',
                 path: 'swissdrg',
@@ -48,9 +48,7 @@ export class SearchFormComponent implements OnInit {
             }
         ];
 
-        for (const n in this.catalogs) {
-            this.getVersions(this.catalogs[n]);
-        }
+
     }
 
     /**
@@ -63,14 +61,6 @@ export class SearchFormComponent implements OnInit {
             this.version = params['version'];
             this.query = params['query'] ? params['query'] : '';
 
-            if (this.catalog && this.version) {
-                for (let n in this.catalogs) {
-                    if (this.catalogs[n].path === this.catalog) {
-                        this.catalogs[n].currentVersion = this.version;
-                    }
-                }
-            }
-
             if (this.query) {
               this.resultsComponent.updateResults(this.catalog, this.version, this.query);
             }
@@ -78,25 +68,18 @@ export class SearchFormComponent implements OnInit {
 
     }
 
-    /**
-     * Get versions for catalog
-     */
-    private async getVersions(catalog: any) {
-        const versions = await catalog.catalog.getVersions();
-        catalog.versions = versions.reverse();
-        if (!catalog.currentVersion) {
-            catalog.currentVersion = versions[0];
-        }
-    }
+
 
     /**
      * Update based on catalog selections
      */
-    public updateCatalog(catalog: string, version: string): void {
+    public updateCatalog(catalog, version: string): void {
+      catalog.activeVersion = version;
+      this.catalog = catalog.name.toLowerCase();
         if (this.query) {
-            this.router.navigate([this.translate.currentLang, catalog, version, this.query]);
+            this.router.navigate([this.translate.currentLang, this.catalog, version, this.query]);
         } else {
-            this.router.navigate([this.translate.currentLang, catalog, version]);
+            this.router.navigate([this.translate.currentLang, this.catalog, version]);
         }
     }
 

@@ -1,11 +1,12 @@
 import { async } from "@angular/core/testing";
 import { SwissDrgCatalog } from "./swissdrg.catalog";
 import { CatalogServiceMock } from "../service/catalog.service.mock";
+import {Catalog} from './catalog';
 
 describe("SwissDrgCatalog", () => {
     it('Should get a list of versions', async(() => {
-        let catalog : SwissDrgCatalog = new SwissDrgCatalog(new CatalogServiceMock());
-        catalog.getVersions().then(versions => {
+        let catalog : Catalog = new SwissDrgCatalog(new CatalogServiceMock());
+        catalog.loadVersions().subscribe(versions => {
             expect(versions.length).toBe(4);
         });
     }));

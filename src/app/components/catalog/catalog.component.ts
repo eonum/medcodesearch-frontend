@@ -20,12 +20,13 @@ export class CatalogComponent implements OnInit {
 
   public catalog: Catalog;
   public version: string;
-  
+
 
   constructor(private route: ActivatedRoute,
               private swissDrgCatalog: SwissDrgCatalog,
               private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog) { }
+              private icdCatalog: ICDCatalog) {
+  }
 
   /**
    * Subscribe to route parameters to update
@@ -36,13 +37,13 @@ export class CatalogComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
         let catalog = params['catalog'];
         this.version = params['version'];
-        
+
         this.catalogSelect(catalog);
 
     });
 
   }
-  
+
   catalogSelect(catalog: String) {
       switch (catalog) {
           case 'swissdrg':
@@ -56,7 +57,7 @@ export class CatalogComponent implements OnInit {
               break;
           default:
               console.log('Catalog not yet implemented: ' + catalog)
-      }   
+      }
   }
 
 }

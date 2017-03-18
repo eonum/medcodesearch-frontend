@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
 import { ICatalogService } from "../service/i.catalog.service";
+import {Observable} from 'rxjs';
 
 /**
  * Class representing a catalog containing medical
@@ -10,35 +11,25 @@ import { ICatalogService } from "../service/i.catalog.service";
 @Injectable()
 export abstract class Catalog {
 
-    /**
-     * The name of the catalog.
-     */
-    protected name: string;
+    /**Cache for the versions*/
+    protected versions: string[];
 
-    /**
-     * The regex which is used to identify element
-     * codes within this catalog.
-     */
-    protected codeRegex: string;
+    /**To know the active version after language redirects*/
+    protected activeVersion:string;
 
-    /**
-     * Elements within a catalog.
-     * TODO: Name properly.
-     */
-    protected elements: any[];
-
-    /**
-     * The service to access the data source
-     * (in production this would be the eonum API)
-     */
-    protected service: ICatalogService;
-
-    /**
-     * Constructor for class Catalog
-     * @param service the service to access the catalog data
-     */
-    public constructor(service: ICatalogService) {
-        this.service = service;
+  /**
+   * Constructor for class Catalog. Initializes the versions.
+   *
+   * @param service the service to access the catalog data (interface to search.eonum api)
+   * @param name - The name of the catalog.
+   * @param codeRegex - The regex which is used to identify element codes within this catalog.
+   * @param elements - elements within a catalog
+   */
+    public constructor(private service: ICatalogService,
+                       protected name: string,
+                       protected codeRegex: string,
+                       protected elements: any[], ) { // TODO name properly
+      this.loadVersions();
     }
 
     /**
@@ -81,12 +72,21 @@ export abstract class Catalog {
     }
 
     /**
-     * Get all versions supported by the catalog.
+     * Get and save the versions this catalog can have.
      */
-    public async getVersions(): Promise<string[]> {
+    public loadVersions(): Observable<string[]> {
         this.initService();
-        return this.service.getVersions();
-    }
+        let versions = this.service.getVersions();
+        versions.subscribe(
+          data => {
+            this.versions = data;
+            this.activeVersion = data[0];
+          },
+          error => console.log(error)
+        );
+        return versions;
+      }
+
 
     private initService() {
         this.service.init(this.elements[0], this.elements[1], this.elements[2]);

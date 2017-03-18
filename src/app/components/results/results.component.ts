@@ -28,7 +28,6 @@ export class ResultsComponent {
     }
 
     public updateResults(catalog: string, version: string, query: string) {
-
         this.catalogs[catalog].search(version, query)
             .then(results => {
                 this.searchResults = results;

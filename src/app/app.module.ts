@@ -24,9 +24,6 @@ export function HttpLoaderFactory(http: Http) {
 @NgModule({
     declarations: [
         AppComponent,
-        CatalogComponent,
-        SearchComponent,
-        CatalogSelectComponent,
         SearchFormComponent,
         ResultsComponent
     ],
