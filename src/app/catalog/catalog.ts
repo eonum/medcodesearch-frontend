@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
-import { CatalogElement } from "../model/catalog.element";
-import { ICatalogService } from "../service/i.catalog.service";
-import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {CatalogElement} from '../model/catalog.element';
+import {ICatalogService} from '../service/i.catalog.service';
 
 /**
  * Class representing a catalog containing medical
@@ -11,11 +10,11 @@ import {Observable} from 'rxjs';
 @Injectable()
 export abstract class Catalog {
 
-    /**Cache for the versions*/
-    protected versions: string[];
+  /**Cache for the versions*/
+  protected versions: string[];
 
-    /**To know the active version after language redirects*/
-    protected activeVersion:string;
+  /**To access the selected catalog globally*/
+  protected activeVersion: string;
 
   /**
    * Constructor for class Catalog. Initializes the versions.
@@ -25,87 +24,112 @@ export abstract class Catalog {
    * @param codeRegex - The regex which is used to identify element codes within this catalog.
    * @param elements - elements within a catalog
    */
-    public constructor(private service: ICatalogService,
-                       protected name: string,
-                       protected codeRegex: string,
-                       protected elements: any[], ) { // TODO name properly
-      this.loadVersions();
-    }
+  public constructor(private service: ICatalogService,
+                     protected name: string,
+                     protected codeRegex: string,
+                     protected elements: any[],) { // TODO name properly
+    this.loadVersions();
+  }
 
-    /**
-     * Searches elements within the catalog.
-     * @param version the version of the catalog to use
-     * @param query the query to search for
-     */
-    public async search(version: string, query: string): Promise<CatalogElement[]> {
-        if (this.isCode(query)) {
-            const singleResult = await this.getByCode(version, query);
-            const result: CatalogElement[] = [];
-            if (singleResult != null) {
-                result.push(singleResult);
-            }
-            return Promise.resolve(result);
-        } else {
-            return await this.getBySearch(version, query);
-        }
-    }
-
-    /**
-     * Check whether the query is a code or a normal
-     * search string.
-     *
-     * @param query the query to search for within the catalog
-     */
-    private isCode(query: string): boolean {
-        const regex = new RegExp(this.codeRegex);
-        return regex.test(query);
-    }
-
-    protected async getBySearch(version: string, query: string): Promise<CatalogElement[]> {
-        this.initService();
-        return this.service.search(version, query);
-    }
-
-    protected async getByCode(version: string, code: string): Promise<CatalogElement> {
-        this.initService();
-        return this.service.getByCode(version, code);
-    }
-
-    /**
-     * Get and save the versions this catalog can have.
-     */
-    public loadVersions(): Observable<string[]> {
-        this.initService();
-        let versions = this.service.getVersions();
-        versions.subscribe(
-          data => {
-            this.versions = data;
-            this.activeVersion = data[0];
-          },
-          error => console.log(error)
-        );
-        return versions;
+  /**
+   * Searches elements within the catalog.
+   * @param version the version of the catalog to use
+   * @param query the query to search for
+   */
+  public async search(version: string, query: string): Promise<CatalogElement[]> {
+    if (this.isCode(query)) {
+      const singleResult             = await this.getByCode(version, query);
+      const result: CatalogElement[] = [];
+      if (singleResult != null) {
+        result.push(singleResult);
       }
+      return Promise.resolve(result);
+    } else {
+      return await this.getBySearch(version, query);
+    }
+  }
+
+  /**
+   * Check whether the query is a code or a normal
+   * search string.
+   *
+   * @param query the query to search for within the catalog
+   */
+  private isCode(query: string): boolean {
+    const regex = new RegExp(this.codeRegex);
+    return regex.test(query);
+  }
+
+  protected async getBySearch(version: string, query: string): Promise<CatalogElement[]> {
+    this.initService();
+    return this.service.search(version, query);
+  }
+
+  protected async getByCode(version: string, code: string): Promise<CatalogElement> {
+    this.initService();
+    return this.service.getByCode(version, code);
+  }
+
+  /**
+   * Get and save the versions this catalog can have.
+   */
+  public async loadVersions(): Promise<string[]> {
+    if (this.versions) return Promise.resolve(this.versions);
+
+    this.initService();
+    let versions = this.service.getVersions();
+    versions.then(
+      data => {
+        this.versions      = data.reverse();
+        this.activeVersion = data[0];
+      },
+      error => console.log(error)
+    );
+    return Promise.resolve(versions);
+  }
 
 
+  private initService() {
+    this.service.init(this.elements[0], this.elements[1], this.elements[2]);
+  }
 
-    private initService() {
-        this.service.init(this.elements[0], this.elements[1], this.elements[2]);
+  public getName(): string {
+    return this.name;
+  }
+
+  public getDomain(): string {
+    return this.name.toLowerCase();
+  }
+
+  /**
+   * Update the active version if it is a valid option.
+   * If the versions are not yet loaded, load them first.
+   *
+   * @param version
+   * @returns {boolean} True if the active version was updated.
+   */
+  public async activateVersion(version: string): Promise<boolean> {
+
+    if (!this.versions) {
+      // load versions and then run again
+      return this.loadVersions().then(() => this.activateVersion(version))
     }
 
-    public getName():string {
-      return this.name;
-    }
-
-    public getDomain(): string {
-      return this.name.toLowerCase();
-    }
-
-    public activateVersion(version:string):void {
+    if (this.versions.indexOf(version) > -1) {
+      // valid version
       this.activeVersion = version;
+      return Promise.resolve(true);
+    } else {
+      console.log('Version does not exists: ' + version)
+      return Promise.resolve(false);
     }
+  }
 
-    getActiveVersion() {
-      return this.activeVersion;
-    }
+  getActiveVersion(): string {
+    return this.activeVersion;
+  }
+
+  getVersions(): string[] {
+    return this.versions;
+  }
 }

@@ -1,7 +1,5 @@
 import { CatalogElement } from "../model/catalog.element";
 import { ICatalogService } from "./i.catalog.service";
-import { Http } from "@angular/http";
-import { TranslateService } from "@ngx-translate/core";
 import {Observable} from 'rxjs';
 
 export class CatalogServiceMock implements ICatalogService {
@@ -23,8 +21,8 @@ export class CatalogServiceMock implements ICatalogService {
     search(version: string, search: string): Promise<CatalogElement[]> {
         return Promise.resolve(this.CONTENTS);
     }
-    getVersions(): Observable<string[]> {
-        return Observable.of([ "V1.0","V2.0","V3.0","V4.0" ]);
+    getVersions(): Promise<string[]> {
+        return Promise.resolve([ "V1.0","V2.0","V3.0","V4.0" ]);
     }
     getByCode(version: string, code: string): Promise<CatalogElement> {
         if (code == "P20A"){

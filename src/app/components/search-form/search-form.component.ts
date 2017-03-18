@@ -11,7 +11,7 @@ import {Catalog} from '../../catalog/catalog';
   selector: 'app-search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.css'],
-  providers: [SwissDrgCatalog, CHOPCatalog, ICDCatalog]
+  providers: []
 })
 
 export class SearchFormComponent implements OnInit {
@@ -38,7 +38,12 @@ export class SearchFormComponent implements OnInit {
    * Preselect the proper catalog version if given through url
    */
   ngOnInit() {
-
+    this.route.data.subscribe(
+      ( data:{catalog:Catalog}) => {
+        console.log('Catalog: ')
+        console.log(data.catalog)
+      }
+    )
     this.route.params.subscribe((params: Params) => {
       this.catalog = params['catalog'];
       this.version = params['version'];
@@ -62,7 +67,7 @@ export class SearchFormComponent implements OnInit {
 
     this.catalog = catalog.getDomain();
 
-    let params = [this.translate.currentLang, this.catalog, this.version];
+    let params = [this.translate.currentLang, this.catalog, catalog.getActiveVersion()];
 
     if (this.query) {
       params.push(this.query)

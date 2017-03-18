@@ -15,6 +15,10 @@ import {CatalogService} from './service/catalog.service';
 import {SearchFormComponent} from './components/search-form/search-form.component';
 import {ResultsComponent} from './components/results/results.component';
 import {DropdownModule, CollapseModule} from 'ng2-bootstrap';
+import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
+import {CHOPCatalog} from './catalog/chop.catalog';
+import {ICDCatalog} from './catalog/icd.catalog';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -42,7 +46,10 @@ export function HttpLoaderFactory(http: Http) {
         DropdownModule.forRoot(),
         CollapseModule.forRoot()
     ],
-    providers: [{provide: 'ICatalogService', useClass: CatalogService}],
+    providers: [
+      {provide: 'ICatalogService', useClass: CatalogService},
+      SwissDrgCatalog, CHOPCatalog, ICDCatalog, CatalogResolver
+      ],
     bootstrap: [AppComponent]
 })
 

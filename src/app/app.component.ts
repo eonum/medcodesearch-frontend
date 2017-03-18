@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
+import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import {TranslateService} from '@ngx-translate/core';
+import {LanguageGuard} from './service/routing/language-guard.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,8 @@ import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 })
 export class AppComponent {
   title = 'medCodeSearch';
+
+  constructor( translate: TranslateService, private router: CatalogResolver) {
+  }
+
 }
