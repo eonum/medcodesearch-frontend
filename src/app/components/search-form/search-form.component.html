@@ -13,16 +13,19 @@
     <div class="col-xs-12">
 
         <div class="btn-group" dropdown *ngFor="let cat of catalogs">
-            <button type="button" class="catalog btn btn-default" [ngClass]="{'active': cat.catalog.name.toLowerCase() === catalog}" (click)="updateCatalog(cat.catalog, cat.catalog.activeVersion)">{{cat.name}}</button>
+            <button type="button" class="catalog btn btn-default"
+                    [ngClass]="{'active': cat.name.toLowerCase() === catalog}"
+                    (click)="updateCatalog(cat)">{{cat.name}}</button>
+
             <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
-                <span>{{cat.catalog.activeVersion }}</span>
+                <span>{{cat.activeVersion }}</span>
                 <span class="caret"></span>
-                <span class="sr-only">{{catalog.currentVersion}}</span>
+                <span class="sr-only">{{cat.activeVersion}}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right" dropdownMenu role="menu" aria-labelledby="split-button">
-                <li *ngFor="let version of cat.catalog.versions "
-                    [ngClass]="{'active': cat.catalog.activeVersion === version}" role="menuitem"
-                    (click)="updateCatalog(cat.catalog, version)">
+                <li *ngFor="let version of cat.versions "
+                    [ngClass]="{'active': cat.activeVersion === version}" role="menuitem"
+                    (click)="updateCatalog(cat, version)">
                   <a class="dropdown-item" href="javascript:void(0)">{{version}}</a>
                 </li>
             </ul>
@@ -33,4 +36,4 @@
 </div>
 
 <hr />
-<results>Bitte etwas in das Suchfeld eingeben!</results>
+<results></results>

@@ -88,7 +88,24 @@ export abstract class Catalog {
       }
 
 
+
     private initService() {
         this.service.init(this.elements[0], this.elements[1], this.elements[2]);
+    }
+
+    public getName():string {
+      return this.name;
+    }
+
+    public getDomain(): string {
+      return this.name.toLowerCase();
+    }
+
+    public activateVersion(version:string):void {
+      this.activeVersion = version;
+    }
+
+    getActiveVersion() {
+      return this.activeVersion;
     }
 }

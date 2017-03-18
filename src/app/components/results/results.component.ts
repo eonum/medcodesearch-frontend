@@ -21,10 +21,10 @@ export class ResultsComponent {
                 private chopCatalog: CHOPCatalog,
                 private icdCatalog: ICDCatalog) {
 
-        this.catalogs = {};
-        this.catalogs['swissdrg'] = swissDrgCatalog;
-        this.catalogs['chop'] = chopCatalog;
-        this.catalogs['icd'] = icdCatalog;
+      this.catalogs = {};
+      this.catalogs['swissdrg'] = swissDrgCatalog;
+      this.catalogs['chop'] = chopCatalog;
+      this.catalogs['icd'] = icdCatalog;
     }
 
     public updateResults(catalog: string, version: string, query: string) {
