@@ -41,7 +41,7 @@ describe('SearchMainComponent', () => {
 
     catalogService = fixture.debugElement.injector.get('ICatalogService');
 
-    catalog = new SwissDrgCatalog(catalogService)
+    catalog = new SwissDrgCatalog(catalogService);
     component.catalog = catalog;
     component.query = 'Search query';
 

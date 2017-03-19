@@ -42,7 +42,7 @@ describe('SearchFormComponent', () => {
     catalogService = fixture.debugElement.injector.get('ICatalogService');
     buttons = fixture.debugElement.queryAll(By.css('button'));
 
-    catalog = new SwissDrgCatalog(catalogService)
+    catalog = new SwissDrgCatalog(catalogService);
     component.catalog = catalog;
     component.query = 'Search query';
     fixture.detectChanges();

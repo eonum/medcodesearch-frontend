@@ -113,7 +113,7 @@ export abstract class Catalog {
       this.activeVersion = version;
       return Promise.resolve(true);
     } else {
-      console.log('Version does not exists: ' + version)
+      console.log('Version does not exists: ' + version);
       return Promise.resolve(false);
     }
   }

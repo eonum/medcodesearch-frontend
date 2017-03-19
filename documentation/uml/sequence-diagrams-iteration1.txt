@@ -1,0 +1,265 @@
+
+@startuml
+actor User
+control Router <<Angular>> #orange
+
+entity LanguageGuard #lightgreen
+entity TranslateService <<Plugin>> #orange
+entity CatalogResolver #lightgreen
+entity SwissDrgCatalog <<Placeholder for any Catalog>> #lightgreen
+entity CatalogService #lightgreen
+database search.eonum <<api>> #orange
+participant AppComponent #lightblue
+participant SearchMainComponent #lightblue
+participant SearchFormComponent #lightblue
+participant SearchResultsComponent #lightblue
+
+== Load Page ==
+
+User -> Router: /de/swissdrgs/V6.0;query=...
+activate Router #orange
+
+create AppComponent
+Router ->> AppComponent: init
+
+Router -> LanguageGuard: canActivate(de)?
+
+activate LanguageGuard #lightgreen
+LanguageGuard -> TranslateService: setLanguage(de)
+LanguageGuard --> Router: grant access
+deactivate LanguageGuard
+
+Router ->> CatalogResolver: resolve(swissdrg, V6.0)
+
+activate CatalogResolver #lightgreen
+CatalogResolver -> CatalogResolver: resolve(swissdrg)
+
+CatalogResolver ->> SwissDrgCatalog: activateVersion(V6.0)
+
+activate SwissDrgCatalog #lightgreen
+
+note over CatalogResolver #lightgrey
+    If catalog or version does not match,
+    redirect to index.
+end note
+
+SwissDrgCatalog ->> CatalogService: getVersions(swissdrg)
+
+activate CatalogService #lightgreen
+CatalogService ->> search.eonum : /de/drgs/versions/
+
+activate search.eonum #orange
+search.eonum --> CatalogService: versions (json)
+deactivate search.eonum
+
+CatalogService --> SwissDrgCatalog: versions: string[]
+deactivate CatalogService
+SwissDrgCatalog -> SwissDrgCatalog: save versions
+
+alt version exists
+    SwissDrgCatalog -> CatalogResolver: fail
+    CatalogResolver -> Router: redirect to index
+else version not found
+    SwissDrgCatalog -> SwissDrgCatalog: set active versions
+    SwissDrgCatalog --> CatalogResolver: success
+end
+
+deactivate SwissDrgCatalog
+
+CatalogResolver --> Router: SwissDrgCatalog: Catalog
+deactivate CatalogResolver
+
+create SearchMainComponent
+Router ->> SearchMainComponent: data:{SwissDrgCatalog}, params:{query?}
+activate SearchMainComponent #lightblue
+
+group search query in route params
+    SearchMainComponent ->> SwissDrgCatalog: search(query)
+    activate SwissDrgCatalog #lightgreen
+    SwissDrgCatalog ->> CatalogService: search(query, swissdrgs)
+
+    activate CatalogService #lightgreen
+    CatalogService ->> search.eonum : /de/drgs/V6.0/search?search=query
+
+    activate search.eonum #orange
+    search.eonum --> CatalogService: results: json
+    deactivate search.eonum
+
+    CatalogService --> SwissDrgCatalog: searchResults: CatalogElement[]
+    deactivate CatalogService
+
+    SwissDrgCatalog --> SearchMainComponent: searchResults: CatalogElement[]
+    deactivate SwissDrgCatalog
+
+    create SearchResultsComponent
+    SearchMainComponent -> SearchResultsComponent: searchResults (bind)
+    activate SearchResultsComponent #lightblue
+    SearchResultsComponent -> SearchResultsComponent: display results or message
+    SearchResultsComponent --> SearchMainComponent
+    deactivate SearchResultsComponent
+
+end
+
+
+create SearchFormComponent
+SearchMainComponent -> SearchFormComponent: SwissDrgCatalog (bind)
+activate SearchFormComponent #lightblue
+SearchFormComponent -> SearchFormComponent: mark swissdrg & display query
+SearchFormComponent --> SearchMainComponent
+deactivate SearchFormComponent
+
+SearchMainComponent --> Router
+deactivate SearchMainComponent
+
+Router --> User: display
+deactivate Router
+
+newpage 
+== Change Catalog and/or Version, or submit a search query ==
+
+User -> SearchFormComponent: submit catalog or version selection or enter search query, e.g ICD10-GM-2016
+
+activate SearchFormComponent #lightblue
+SearchFormComponent --> Router: navigate to 'icds/ICD10-GM-2016;query=query'
+deactivate SearchFormComponent
+
+activate Router #orange
+
+Router ->> CatalogResolver: resolve(icds, ICD10-GM-2016)
+activate CatalogResolver #lightgreen
+
+CatalogResolver -> CatalogResolver: resolve(icds)
+
+CatalogResolver ->> SwissDrgCatalog: activateVersion(ICD10-GM-2016)
+
+activate SwissDrgCatalog #lightgreen
+
+note left of CatalogResolver #lightgrey
+    Catalog and Version match
+    (navigated with button)
+end note
+
+note over SwissDrgCatalog #lightgrey
+    versions are saved
+end note
+
+SwissDrgCatalog --> CatalogResolver: success
+
+deactivate SwissDrgCatalog
+
+CatalogResolver --> Router: ICDCatalog: Catalog
+
+deactivate CatalogResolver #lightgreen
+
+Router ->> SearchMainComponent: data:{ICDCatalog}, params:{query?}
+activate SearchMainComponent #lightblue
+
+group search query in route params
+    SearchMainComponent ->> SwissDrgCatalog: search(query)
+    activate SwissDrgCatalog #lightgreen
+    SwissDrgCatalog ->> CatalogService: search(query, icds)
+
+    activate CatalogService #lightgreen
+    CatalogService ->> search.eonum : /de/icds/ICD10-GM-2016/search?search=query
+
+    activate search.eonum #orange
+    search.eonum --> CatalogService: results: json
+    deactivate search.eonum
+
+    CatalogService --> SwissDrgCatalog: searchResults: CatalogElement[]
+    deactivate CatalogService
+
+    SwissDrgCatalog --> SearchMainComponent: searchResults: CatalogElement[]
+    deactivate SwissDrgCatalog
+
+    SearchMainComponent -> SearchResultsComponent: searchResults: CatalogElement[]
+    activate SearchResultsComponent #lightblue
+    SearchResultsComponent -> SearchResultsComponent: display results or message
+    SearchResultsComponent --> SearchMainComponent
+    deactivate SearchResultsComponent
+
+end
+
+SearchMainComponent -> SearchFormComponent: ICDCatalog:Catalog
+activate SearchFormComponent #lightblue
+SearchFormComponent -> SearchFormComponent: mark icd & display query
+SearchFormComponent --> SearchMainComponent
+deactivate SearchFormComponent
+
+SearchMainComponent --> Router
+deactivate SearchMainComponent
+
+Router --> User: display
+deactivate Router
+
+newpage
+
+== Change Language ==
+User -> AppComponent: select language, e.g. french
+activate AppComponent #lightblue
+
+AppComponent -> CatalogResolver: get route parameter to active catalog
+activate CatalogResolver #lightgreen
+CatalogResolver -> SwissDrgCatalog: getActiveVersion
+
+activate SwissDrgCatalog #lightgreen
+SwissDrgCatalog --> CatalogResolver: 'ICD10-GM-2016'
+deactivate SwissDrgCatalog
+
+CatalogResolver --> AppComponent: ['icds', 'ICD10-GM-2016']
+deactivate CatalogResolver
+
+AppComponent -> Router: navigate to '/fr/icds/ICD10-GM-2016' (ignore query)
+deactivate AppComponent
+
+activate Router #orange
+Router -> LanguageGuard: canActivate(fr)?
+
+activate LanguageGuard #lightgreen
+LanguageGuard -> TranslateService: setLanguage(fr)
+LanguageGuard --> Router: grant access
+deactivate LanguageGuard
+
+Router ->> CatalogResolver: resolve(icds, ICD10-GM-2016)
+activate CatalogResolver #lightgreen
+
+CatalogResolver -> CatalogResolver: resolve(icds)
+
+CatalogResolver ->> SwissDrgCatalog: activateVersion(ICD10-GM-2016)
+
+activate SwissDrgCatalog #lightgreen
+
+note left of CatalogResolver #lightgrey
+    Catalog and Version match
+    (navigated from valid catalog version)
+end note
+
+note over SwissDrgCatalog #lightgrey
+    versions are saved
+end note
+
+SwissDrgCatalog --> CatalogResolver: success
+
+deactivate SwissDrgCatalog
+
+CatalogResolver --> Router: ICDCatalog: Catalog
+
+deactivate CatalogResolver
+
+Router -> SearchMainComponent: data:{ICDCatalog}, params: {}
+
+activate SearchMainComponent #lightblue
+SearchMainComponent -> SearchFormComponent: ICDCatalog:Catalog
+
+activate SearchFormComponent #lightblue
+SearchFormComponent -> SearchFormComponent: mark icd & display query
+SearchFormComponent --> SearchMainComponent
+deactivate SearchFormComponent
+
+SearchMainComponent --> Router
+deactivate SearchMainComponent
+
+Router --> User: display
+deactivate Router
+
+@enduml

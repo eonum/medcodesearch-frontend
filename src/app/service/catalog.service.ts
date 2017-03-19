@@ -65,8 +65,7 @@ export class CatalogService implements ICatalogService {
       catch(e){
         let error = e;
       }
-    };
-
+    }
     return Promise.resolve(results);
   }
 
@@ -92,7 +91,7 @@ export class CatalogService implements ICatalogService {
    * @param code the code to search for
    */
   public async getByCode(version: string, code: string): Promise<CatalogElement> {
-    let types = this.retrievableCodes
+    let types = this.retrievableCodes;
     let result: CatalogElement[];
 
     for (let i = 0; i < types.length; i++){
@@ -104,8 +103,7 @@ export class CatalogService implements ICatalogService {
       catch(e){
         let error = e;
       }
-    };
-
+    }
     if (result.length > 0){
       return Promise.resolve(result[0]);
     }
@@ -116,7 +114,7 @@ export class CatalogService implements ICatalogService {
   private async getSingleElementForTypeByCode(elementType: string, version: string, code: string) : Promise<CatalogElement>{
     let locale: string = this.getLocale();
     let url : string =  `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
-    if(environment.dev) console.log(url)
+    if(environment.dev) console.log(url);
 
     return this.http.get(url).toPromise()
       .then(result => result.json().data as CatalogElement)
@@ -125,7 +123,7 @@ export class CatalogService implements ICatalogService {
 
   private async getSearchForType(elementType: string, version: string, query: string) : Promise<CatalogElement[]>{
     let url : string = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
-    if(environment.dev) console.log(url)
+    if(environment.dev) console.log(url);
 
     return this.http.get(url).toPromise()
       .then(result => {
