@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+  <!--
+  This page is part of a hack that allows angular, hosted as github project page to resolve the routing and CAN BE REMOVED WHEN THE APP IS NOT HOSTED AS GITHUB PAGE. So is the script in src/index.html
+
+  This stores the URL the user was attempting to go to in sessionStorage,
+  and then redirects all 404 responses to the app’s index.html page -->
+  <!-- See http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/ -->
+  <script>
+    sessionStorage.redirect = location.href;
+  </script>
+  <meta http-equiv="refresh" content="0;URL='https://eonum.github.io/medcodelogic-frontend/'"></meta>
+</head>
+<body>
+</body>
+</html>
