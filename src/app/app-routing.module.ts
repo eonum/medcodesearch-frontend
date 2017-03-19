@@ -23,8 +23,8 @@ const routes: Routes = [
       }
     ]
   },
-  {path: '', redirectTo: '/de/', pathMatch: 'full'},
-  {path: '**', redirectTo: '/de/'}
+  {path: '', redirectTo: 'de', pathMatch: 'full'},
+  {path: '**', redirectTo: 'de'}
 
 ];
 
