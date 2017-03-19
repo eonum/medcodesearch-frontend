@@ -9,10 +9,10 @@ import {environment} from '../../../environments/environment';
 /**
  * This service acts as resolver for a path that contains a `catalog`
  * and `version` parameter.
- * It gives the target component access to a {@link Catalog} that is resolved from the
- * path. And saves it for global usage.
+ * It gives the {@link SearchMainComponent} access to the {@link Catalog}
+ * that corresponds to the route, and saves it for global usage.
  *
- * For usage see {@link AppRoutingModule }.
+ * @see {@link AppRoutingModule}.
  */
 @Injectable()
 export class CatalogResolver implements Resolve<Catalog> {
@@ -75,6 +75,7 @@ export class CatalogResolver implements Resolve<Catalog> {
 
   /**
    * Return the active route parameters `[catalog, version]`.
+   * Used for redirect to active catalog and version after language change.
    * @returns {string[]}
    */
   getActiveRouteParams(): string[] {

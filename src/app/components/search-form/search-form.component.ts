@@ -59,6 +59,4 @@ export class SearchFormComponent {
     this.router.navigate(params).catch(error => console.log(error));
   }
 
-
-
 }

@@ -18,7 +18,7 @@ import {Observable} from 'rxjs';
  *
  * The catalog is resolved by the {@link CatalogResolver} and passed as input
  * to the {@link SearchFormComponent}. Each time the `query` or `catalog` changes,
- * the `searchResults` for the {@link ResultsComponent} are updated.
+ * the `searchResults` for the {@link ResultsComponent} are updated accordingly.
  */
 export class SearchMainComponent implements OnInit {
 
@@ -49,7 +49,8 @@ export class SearchMainComponent implements OnInit {
    */
   ngOnInit() {
 
-    // Zip data and params to get one observable that changes always
+    /* Zip data and params to get one observable that fires always, when either
+    the rout data or parameters changed. */
     Observable.zip(
       this.route.data,
       this.route.params,
@@ -66,8 +67,8 @@ export class SearchMainComponent implements OnInit {
   }
 
   /**
-   * Perform the search and assign the results or reset the
-   * search results when no `query` is given.
+   * Perform the search and assign the results, or reset the
+   * search results when no `query` or `catalog` is given.
    * @param query
    */
   private updateResults(query: string) {

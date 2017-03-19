@@ -94,14 +94,6 @@ export abstract class Catalog {
     this.service.init(this.elements[0], this.elements[1], this.elements[2]);
   }
 
-  public getName(): string {
-    return this.name;
-  }
-
-  public getDomain(): string {
-    return this.name.toLowerCase();
-  }
-
   /**
    * Update the active version if it is a valid option.
    * If the versions are not yet loaded, load them first.
@@ -132,5 +124,13 @@ export abstract class Catalog {
 
   getVersions(): string[] {
     return this.versions;
+  }
+
+  public getName(): string {
+    return this.name;
+  }
+
+  public getDomain(): string {
+    return this.name.toLowerCase();
   }
 }
