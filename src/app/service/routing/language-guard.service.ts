@@ -6,7 +6,9 @@ import {TranslateService} from "@ngx-translate/core";
  * This is an authentication guard that grants always access,
  * but sets the translation according to the `language` parameter in the path.
  *
- *  For usage, see {@link AppRoutingModule}.
+ *  @see
+ *  {@link AppRoutingModule},
+ *  {@link https://angular.io/docs/ts/latest/guide/router.html#guard-admin-feature}
  */
 
 @Injectable()

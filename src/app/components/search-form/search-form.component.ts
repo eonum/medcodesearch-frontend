@@ -12,6 +12,17 @@ import {Catalog} from '../../catalog/catalog';
   providers: []
 })
 
+/**
+ * Component that allows a user to select a {@link Catalog} and version,
+ * and enter a search query.
+ *
+ * On selection changes, the {@link Router} is used to navigate to the
+ * {@link SearchMainComponent} where the parameters are used to update the
+ * input for the {@link SearchResultComponent}.
+ *
+ * After a re-routing to the {@link SearchMainComponent}, the selected {@link Catalog}
+ * and query are passed as input to this component, to allow displaying the selected catalog and query.
+ */
 export class SearchFormComponent {
 
   // selected values (resolved in search-main component from route)

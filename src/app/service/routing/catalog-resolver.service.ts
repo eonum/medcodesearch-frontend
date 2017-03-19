@@ -12,7 +12,10 @@ import {environment} from '../../../environments/environment';
  * It gives the {@link SearchMainComponent} access to the {@link Catalog}
  * that corresponds to the route, and saves it for global usage.
  *
- * @see {@link AppRoutingModule}.
+ * @see
+ * {@link AppRoutingModule},
+ * {@link https://angular.io/docs/ts/latest/guide/router.html#resolve-guard}
+ *
  */
 @Injectable()
 export class CatalogResolver implements Resolve<Catalog> {

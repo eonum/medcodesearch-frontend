@@ -13,6 +13,10 @@ import {Catalog} from '../../catalog/catalog';
     styleUrls: ['search-results.component.css'],
 })
 
+/**
+ * Component to display the search results.
+ * Receives the `searchResults` as input from the {@link SearchMainComponent}.
+ */
 export class SearchResultsComponent {
     @Input() searchResults: CatalogElement[];
 }
