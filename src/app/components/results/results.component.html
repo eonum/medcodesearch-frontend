@@ -1,6 +1,5 @@
-
 <dl *ngIf="searchResults">
-    <template ngFor let-result [ngForOf]="searchResults">
+    <p *ngFor="let result of searchResults">
         <dt>{{result.code}}</dt>
         <template [ngIf]="result.highlight.text != undefined">
             <dd [innerHtml]="result.highlight.text[0]"></dd>
@@ -8,7 +7,7 @@
         <template [ngIf]="result.highlight.text == undefined">
             <dd [innerHtml]="result.text"></dd>
         </template>
-    </template>
+    </p>
   <p *ngIf="searchResults.length==0">
     {{ 'NO_RESULTS' | translate }}
   </p>

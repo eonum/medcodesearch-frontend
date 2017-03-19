@@ -17,13 +17,6 @@ const routes: Routes = [
         }
       },
       {
-        path: ':catalog/:version/:query',
-        component: SearchMainComponent,
-        resolve: {
-          catalog: CatalogResolver
-        }
-      },
-      {
         path: '',
         redirectTo: 'swissdrg/V6.0',
         pathMatch: 'full'

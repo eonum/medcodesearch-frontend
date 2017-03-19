@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
 import { ICatalogService } from "./i.catalog.service";
 import 'rxjs/add/operator/toPromise';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class CatalogService implements ICatalogService {
@@ -115,6 +116,8 @@ export class CatalogService implements ICatalogService {
   private async getSingleElementForTypeByCode(elementType: string, version: string, code: string) : Promise<CatalogElement>{
     let locale: string = this.getLocale();
     let url : string =  `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
+    if(environment.dev) console.log(url)
+
     return this.http.get(url).toPromise()
       .then(result => result.json().data as CatalogElement)
       .catch(reason => {throw new Error(reason)});
@@ -122,6 +125,8 @@ export class CatalogService implements ICatalogService {
 
   private async getSearchForType(elementType: string, version: string, query: string) : Promise<CatalogElement[]>{
     let url : string = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
+    if(environment.dev) console.log(url)
+
     return this.http.get(url).toPromise()
       .then(result => {
         let data = result.json();

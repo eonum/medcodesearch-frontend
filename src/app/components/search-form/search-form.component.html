@@ -14,7 +14,7 @@
 
         <div class="btn-group" dropdown *ngFor="let cat of catalogs">
             <button type="button" class="catalog btn btn-default"
-                    [ngClass]="{'active': cat.name === catalog.getName()}"
+                    [ngClass]="{'active': cat.name === catalog.name}"
                     (click)="updateCatalog(cat)">{{cat.name}}</button>
 
             <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
@@ -35,5 +35,4 @@
     </div>
 </div>
 
-<hr />
-<results></results>
+

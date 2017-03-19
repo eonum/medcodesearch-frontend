@@ -1,10 +1,9 @@
-import {Component, OnInit, ViewChild, Input, OnChanges} from '@angular/core';
-import {ActivatedRoute, Router, Params} from '@angular/router';
+import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
 import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {ICDCatalog} from '../../catalog/icd.catalog';
 import {CHOPCatalog} from '../../catalog/chop.catalog';
 import {TranslateService} from '@ngx-translate/core';
-import {ResultsComponent} from '../results/results.component';
 import {Catalog} from '../../catalog/catalog';
 
 @Component({
@@ -14,67 +13,52 @@ import {Catalog} from '../../catalog/catalog';
   providers: []
 })
 
-export class SearchFormComponent implements OnChanges {
+export class SearchFormComponent {
 
   @Input() catalog: Catalog;
+  @Input() query: string;
 
   catalogs: Catalog[];
-  query: string;
 
-  @ViewChild(ResultsComponent)
-  private resultsComponent: ResultsComponent;
-
-  constructor(private route: ActivatedRoute,
+  constructor(private translate: TranslateService,
               private router: Router,
               private swissDrgCatalog: SwissDrgCatalog,
               private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog,
-              private translate: TranslateService) {
+              private icdCatalog: ICDCatalog) {
 
     this.catalogs = [swissDrgCatalog, chopCatalog, icdCatalog]
   }
 
   /**
-   * Preselect the proper catalog version if given through url
-   */
-  ngOnChanges() {
-
-    this.route.params.subscribe((params: Params) => {
-
-      this.query   = params['query'] ? params['query'] : '';
-
-      if (this.query) {
-        this.resultsComponent.updateResults(this.catalog, this.query);
-      }
-    });
-
-  }
-
-  /**
    * Update based on catalog selection.
    */
-  public updateCatalog(catalog:Catalog, version?: string): void {
+  public updateCatalog(catalog: Catalog, version?: string): void {
     version = version || catalog.getActiveVersion();
+    this.redirect(catalog, version, this.query);
 
-    let params = [ this.translate.currentLang,  catalog.getDomain(), version];
-    if (this.query) { params.push(this.query); }
-
-    this.router.navigate(params).catch(error => console.log(error) );
   }
 
   /**
    * Update based on search
    */
   public search(query: string): void {
-    this.query = query;
-
-    let params = [
-      this.translate.currentLang,
-      this.catalog.getDomain(),
-      this.catalog.getActiveVersion(),
-      query
-    ]
-    this.router.navigate(params).catch(error => console.log(error) );
+    this.redirect(this.catalog, this.catalog.getActiveVersion(), query)
   }
+
+  /**
+   * Do the search or catalog selection by redirecting with the given parameters.
+   * @param catalog
+   * @param version
+   * @param query
+   */
+  private redirect(catalog:Catalog, version:string, query:string):void {
+    let params = query ?
+      [this.translate.currentLang, catalog.getDomain(), version, {query: query}] :
+      [this.translate.currentLang, catalog.getDomain(), version];
+
+    this.router.navigate(params).catch(error => console.log(error));
+  }
+
+
 
 }

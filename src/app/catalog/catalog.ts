@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CatalogElement} from '../model/catalog.element';
 import {ICatalogService} from '../service/i.catalog.service';
+import {environment} from '../../environments/environment';
 
 /**
  * Class representing a catalog containing medical
@@ -37,6 +38,7 @@ export abstract class Catalog {
    * @param query the query to search for
    */
   public async search(version: string, query: string): Promise<CatalogElement[]> {
+
     if (this.isCode(query)) {
       const singleResult             = await this.getByCode(version, query);
       const result: CatalogElement[] = [];
