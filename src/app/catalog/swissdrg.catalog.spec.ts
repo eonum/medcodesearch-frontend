@@ -6,7 +6,7 @@ import {Catalog} from './catalog';
 describe("SwissDrgCatalog", () => {
     it('Should get a list of versions', async(() => {
         let catalog : Catalog = new SwissDrgCatalog(new CatalogServiceMock());
-        catalog.loadVersions().subscribe(versions => {
+        catalog.loadVersions().then(versions => {
             expect(versions.length).toBe(4);
         });
     }));

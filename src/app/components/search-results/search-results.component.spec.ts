@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultsComponent } from './results.component';
+import { SearchResultsComponent } from './search-results.component';
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpLoaderFactory } from "../../app.module";
 import { Http, HttpModule } from "@angular/http";
 
-describe('ResultsComponent', () => {
-  let component: ResultsComponent;
-  let fixture: ComponentFixture<ResultsComponent>;
+describe('SearchResultsComponent', () => {
+  let component: SearchResultsComponent;
+  let fixture: ComponentFixture<SearchResultsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultsComponent ],
+      declarations: [ SearchResultsComponent ],
       imports: [
         HttpModule,
         TranslateModule.forRoot({
@@ -27,7 +27,7 @@ describe('ResultsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResultsComponent);
+    fixture = TestBed.createComponent(SearchResultsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

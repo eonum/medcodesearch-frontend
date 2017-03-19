@@ -21,7 +21,7 @@ export class CatalogResolver implements Resolve<Catalog> {
   private catalogs: {[domain: string]: Catalog};
 
   /**To give global access to the active catalog*/
-  activeCatalog: Catalog;
+  private activeCatalog: Catalog;
 
   /**
    * Constructor for class CatalogResolver.

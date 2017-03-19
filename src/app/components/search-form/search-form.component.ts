@@ -1,9 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {ICDCatalog} from '../../catalog/icd.catalog';
 import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {TranslateService} from '@ngx-translate/core';
 import {Catalog} from '../../catalog/catalog';
 
 @Component({
@@ -15,12 +14,13 @@ import {Catalog} from '../../catalog/catalog';
 
 export class SearchFormComponent {
 
+  // selected values (resolved in search-main component from route)
   @Input() catalog: Catalog;
   @Input() query: string;
 
-  catalogs: Catalog[];
+  catalogs: Catalog[]; // to display catalog selection
 
-  constructor(private translate: TranslateService,
+  constructor(private route: ActivatedRoute,
               private router: Router,
               private swissDrgCatalog: SwissDrgCatalog,
               private chopCatalog: CHOPCatalog,
@@ -35,7 +35,6 @@ export class SearchFormComponent {
   public updateCatalog(catalog: Catalog, version?: string): void {
     version = version || catalog.getActiveVersion();
     this.redirect(catalog, version, this.query);
-
   }
 
   /**
@@ -53,10 +52,10 @@ export class SearchFormComponent {
    */
   private redirect(catalog:Catalog, version:string, query:string):void {
     let params = query ?
-      [this.translate.currentLang, catalog.getDomain(), version, {query: query}] :
-      [this.translate.currentLang, catalog.getDomain(), version];
+      [catalog.getDomain(), version, {query: query}] :
+      [catalog.getDomain(), version];
 
-    this.router.navigate(params).catch(error => console.log(error));
+    this.router.navigate(params, {relativeTo: this.route.parent}).catch(error => console.log(error));
   }
 
 }

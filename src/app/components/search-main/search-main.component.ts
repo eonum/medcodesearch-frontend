@@ -12,31 +12,31 @@ import {Observable} from 'rxjs';
 })
 
 /**
- * Container for the {@link SearchFormComponent} and {@link ResultsComponent}.
+ * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
  * The component is assigned to the route `<catalog>/<version>/` and takes an
  * optional `query` parameter.
  *
- * The catalog is resolved by the {@link CatalogResolver} and passed as input
+ * The catalog is resolved by the {@link CatalogResolver} and then passed as input
  * to the {@link SearchFormComponent}. Each time the `query` or `catalog` changes,
- * the `searchResults` for the {@link ResultsComponent} are updated accordingly.
+ * the `searchResults` for the {@link SearchResultsComponent} are updated accordingly.
  */
 export class SearchMainComponent implements OnInit {
 
   /**
    * The active catalog, resolved from the activated route.
-   * Input for the search-form.
+   * Serves as input for the search-form.
    * */
   public catalog: Catalog;
 
   /**
    * The search query from the route.
-   * Input for the search-form component.
+   * Serves as input for the search-form component.
    * */
   public query: string;
 
   /**
-   * The search results, updated when the route changes.
-   * Input for the search-results component
+   * The search results, updated after the route changed.
+   * Serves as input for the search-results component.
    */
   public searchResults: CatalogElement[];
 
@@ -44,13 +44,13 @@ export class SearchMainComponent implements OnInit {
 
   /**
    * Subscribe to route data from {@link CatalogResolver} and to
-   * the route parameters and update each time the search results,
+   * the route parameters; update each time the search results,
    * when one of those values changes.
    */
   ngOnInit() {
 
-    /* Zip data and params to get one observable that fires always, when either
-    the rout data or parameters changed. */
+    /* Zip route data and params to get one observable that fires always, when
+    one of the two values changed. */
     Observable.zip(
       this.route.data,
       this.route.params,
@@ -60,10 +60,7 @@ export class SearchMainComponent implements OnInit {
         this.query   = params['query'] || '';
         return this.query;
       }
-    ).subscribe(query => {
-      // update results after route data and params are ready
-      this.updateResults(query);
-    })
+    ).subscribe(query => { this.updateResults(query); })
   }
 
   /**
@@ -72,12 +69,13 @@ export class SearchMainComponent implements OnInit {
    * @param query
    */
   private updateResults(query: string) {
-
+    // reset results
     if (!this.catalog || !this.query) {
       this.searchResults = null;
       return;
     }
 
+    // perform search
     this.catalog.search(this.catalog.getActiveVersion(), query)
       .then(results => {
         this.searchResults = results;

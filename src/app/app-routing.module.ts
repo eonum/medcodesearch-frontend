@@ -23,7 +23,9 @@ const routes: Routes = [
       }
     ]
   },
-  {path: '', redirectTo: '/de/swissdrg/V6.0', pathMatch: 'full'}
+  {path: '', redirectTo: '/de/', pathMatch: 'full'},
+  {path: '**', redirectTo: '/de/'}
+
 ];
 
 @NgModule({
@@ -31,6 +33,7 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [LanguageGuard, CatalogResolver]
 })
+
 
 export class AppRoutingModule {
 }

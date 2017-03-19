@@ -9,10 +9,10 @@ import {Catalog} from '../../catalog/catalog';
 
 @Component({
     selector: 'search-results',
-    templateUrl: './results.component.html',
-    styleUrls: ['./results.component.css'],
+    templateUrl: 'search-results.component.html',
+    styleUrls: ['search-results.component.css'],
 })
 
-export class ResultsComponent {
+export class SearchResultsComponent {
     @Input() searchResults: CatalogElement[];
 }

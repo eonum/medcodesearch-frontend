@@ -10,7 +10,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CatalogService} from './service/catalog.service';
 import {SearchFormComponent} from './components/search-form/search-form.component';
-import {ResultsComponent} from './components/results/results.component';
+import {SearchResultsComponent} from './components/search-results/search-results.component';
 import {DropdownModule, CollapseModule} from 'ng2-bootstrap';
 import {CatalogResolver} from './service/routing/catalog-resolver.service';
 import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
@@ -27,7 +27,7 @@ export function HttpLoaderFactory(http: Http) {
     declarations: [
         AppComponent,
         SearchFormComponent,
-        ResultsComponent,
+        SearchResultsComponent,
         SearchMainComponent
     ],
     imports: [
