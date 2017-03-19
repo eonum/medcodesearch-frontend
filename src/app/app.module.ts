@@ -24,12 +24,12 @@ export function HttpLoaderFactory(http: Http) {
 }
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        SearchFormComponent,
-        SearchResultsComponent,
-        SearchMainComponent
-    ],
+  declarations: [
+    AppComponent,
+    SearchFormComponent,
+    SearchResultsComponent,
+    SearchMainComponent
+  ],
     imports: [
         BrowserModule,
         FormsModule,

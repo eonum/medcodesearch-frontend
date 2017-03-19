@@ -4,10 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpLoaderFactory } from "./app.module";
-import {SearchComponent} from "./components/search/search.component";
 import { HttpModule, Http } from "@angular/http";
-import { CatalogComponent } from "./components/catalog/catalog.component";
-import { CatalogSelectComponent } from "./components/catalog-select/catalog-select.component";
 import {CatalogResolver} from './service/routing/catalog-resolver.service';
 import {CHOPCatalog} from './catalog/chop.catalog';
 import {ICDCatalog} from './catalog/icd.catalog';
@@ -33,7 +30,7 @@ describe('AppComponent', () => {
       ],
       providers: [
         {provide: 'ICatalogService', useClass: CatalogServiceMock},
-        CatalogResolver,SwissDrgCatalog, CHOPCatalog, ICDCatalog, CatalogResolver]
+        SwissDrgCatalog, CHOPCatalog, ICDCatalog, CatalogResolver]
     }).compileComponents();
   }));
 
