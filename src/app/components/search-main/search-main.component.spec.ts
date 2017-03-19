@@ -10,6 +10,8 @@ import {CatalogServiceMock} from '../../service/catalog.service.mock';
 import {ICDCatalog} from '../../catalog/icd.catalog';
 import {CHOPCatalog} from '../../catalog/chop.catalog';
 import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
+import {Catalog} from '../../catalog/catalog';
+import {ICatalogService} from '../../service/i.catalog.service';
 
 describe('SearchMainComponent', () => {
   let component: SearchMainComponent;

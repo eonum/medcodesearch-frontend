@@ -7,16 +7,17 @@ import {CatalogService} from '../../service/catalog.service';
 import {CatalogElement} from '../../model/catalog.element';
 import {Catalog} from '../../catalog/catalog';
 
+/**
+ * Component to display the search results.
+ * Receives the `searchResults` as input from the {@link SearchMainComponent}.
+ */
 @Component({
     selector: 'search-results',
     templateUrl: 'search-results.component.html',
     styleUrls: ['search-results.component.css'],
 })
 
-/**
- * Component to display the search results.
- * Receives the `searchResults` as input from the {@link SearchMainComponent}.
- */
+
 export class SearchResultsComponent {
     @Input() searchResults: CatalogElement[];
 }

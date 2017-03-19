@@ -5,13 +5,6 @@ import {ICDCatalog} from '../../catalog/icd.catalog';
 import {CHOPCatalog} from '../../catalog/chop.catalog';
 import {Catalog} from '../../catalog/catalog';
 
-@Component({
-  selector: 'search-form',
-  templateUrl: './search-form.component.html',
-  styleUrls: ['./search-form.component.css'],
-  providers: []
-})
-
 /**
  * Component that allows a user to select a {@link Catalog} and version,
  * and enter a search query.
@@ -23,6 +16,14 @@ import {Catalog} from '../../catalog/catalog';
  * After a re-routing to the {@link SearchMainComponent}, the selected {@link Catalog}
  * and query are passed as input to this component, to allow displaying the selected catalog and query.
  */
+@Component({
+  selector: 'search-form',
+  templateUrl: './search-form.component.html',
+  styleUrls: ['./search-form.component.css'],
+  providers: []
+})
+
+
 export class SearchFormComponent {
 
   // selected values (resolved in search-main component from route)

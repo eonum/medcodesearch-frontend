@@ -4,13 +4,6 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {CatalogElement} from '../../model/catalog.element';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
-
-@Component({
-  selector: 'app-search-main',
-  templateUrl: 'search-main.component.html',
-  styleUrls: ['search-main.component.css']
-})
-
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
  * The component is assigned to the route `<catalog>/<version>/` and takes an
@@ -20,6 +13,12 @@ import {Observable} from 'rxjs';
  * to the {@link SearchFormComponent}. Each time the `query` or `catalog` changes,
  * the `searchResults` for the {@link SearchResultsComponent} are updated accordingly.
  */
+@Component({
+  selector: 'app-search-main',
+  templateUrl: 'search-main.component.html',
+  styleUrls: ['search-main.component.css']
+})
+
 export class SearchMainComponent implements OnInit {
 
   /**

@@ -3,6 +3,9 @@ import {Injectable} from '@angular/core';
 import {NavigationExtras} from '@angular/router';
 import {Observable} from 'rxjs';
 
+/**
+ * Replacement for the angular Router in tests.
+ */
 export class RouterStub {
   navigate(commands: string[], extras?: NavigationExtras) {
     return {
@@ -12,7 +15,9 @@ export class RouterStub {
   }
 }
 
-
+/**
+ * Replacement for the angular ActivatedRoute in tests.
+ */
 @Injectable()
 export class ActivatedRouteStub {
 
@@ -30,7 +35,7 @@ export class ActivatedRouteStub {
 
   set testParams(params: {}) {
     this._testParams = params;
-    this.subject.next(params);
+    this.paramsSubject.next(params);
   }
 
   // ActivatedRoute.snapshot.params
