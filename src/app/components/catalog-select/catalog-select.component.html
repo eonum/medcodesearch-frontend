@@ -1,9 +1,0 @@
-<!-- Use the component to navigate to catalog -->
-<select #selection (change)="gotoCatalog('drgs', selection.value)">
-  <option *ngFor="let version of drgVersions" [value]="version">{{version}}</option>
-</select>
-
-<!-- Or use router links (this way the selected link has the style class 'active')-->
-<a routerLink="/de/drgs/V1.0" routerLinkActive="active"> DRGS V1.0</a>
-<a routerLink="/de/drgs/V6.0" routerLinkActive="active"> DRGS V6.0</a>
-

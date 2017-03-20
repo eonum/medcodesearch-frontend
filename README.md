@@ -1,10 +1,17 @@
-medcodelogic-frontend
+# medcodelogic-frontend
 
 Frontend for the medcodelogic search service: A joint project with the University of Berne (PSE 2017)
 
 ----------------------------------------------
+## Documentation Folder
 
-This project was generated as described in [Angular CLI Quickstart](https://angular.io/docs/ts/latest/cli-quickstart.html).
+- `code` [Typedoc](http://typedoc.org/) generated from the source.
+- `uml` [PlantUML](http://plantuml.com) Sequence Diagrams for the control flow of the *page load*, *catalog/version change and query/code search*, and the *language-switch*.
+- `architecture` Description of the service structur that is used as interface for the `search.eonum.ch` API.
+
+
+## Setup
+This project was generated with the [Angular CLI](https://angular.io/docs/ts/latest/cli-quickstart.html).
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

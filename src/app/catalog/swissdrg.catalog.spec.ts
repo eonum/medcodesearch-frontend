@@ -3,31 +3,35 @@ import { SwissDrgCatalog } from "./swissdrg.catalog";
 import * as TypeMoq from "typemoq";
 import { ICatalogService } from "../service/i.catalog.service";
 import { CatalogElement } from "../model/catalog.element";
+import {Catalog} from './catalog';
 
 describe("SwissDrgCatalog", () => {
 
     it('Should initialize service when retrieving versions', async(() => {
         const mock : TypeMoq.IMock<ICatalogService> = TypeMoq.Mock.ofType<ICatalogService>();
+        mock.setup(x => x.getVersions()).returns(() => Promise.resolve([ "V1.0","V2.0","V3.0","V4.0" ]));
         mock.setup(x => x.init(
                             TypeMoq.It.isValue([ 'drgs', 'adrgs']), 
                             TypeMoq.It.isValue([ 'drgs', 'adrgs', 'partition', 'mdc' ]), 
                             TypeMoq.It.isValue('drgs'))
-                    ).verifiable(TypeMoq.Times.once());
+                    ).verifiable(TypeMoq.Times.atLeastOnce());
 
         const catalog : SwissDrgCatalog = new SwissDrgCatalog(mock.object);
-        catalog.getVersions().then( versions => mock.verifyAll() );     
+        catalog.getVersions();
+        mock.verifyAll();     
     }));
 
     it('Should initialize service when searching', async(() => {
         const mock : TypeMoq.IMock<ICatalogService> = TypeMoq.Mock.ofType<ICatalogService>();
+        mock.setup(x => x.getVersions()).returns(() => Promise.resolve([ "V1.0","V2.0","V3.0","V4.0" ]));
         mock.setup(x => x.init(
                             TypeMoq.It.isValue([ 'drgs', 'adrgs']), 
                             TypeMoq.It.isValue([ 'drgs', 'adrgs', 'partition', 'mdc' ]), 
                             TypeMoq.It.isValue('drgs'))
-                    ).verifiable(TypeMoq.Times.once());
+                    ).verifiable(TypeMoq.Times.atLeastOnce());
 
         const catalog : SwissDrgCatalog = new SwissDrgCatalog(mock.object);
-        catalog.search('V1.0', 'test').then(versions => {
+        catalog.search('V1.0', 'test').then(results => {
             mock.verifyAll()
         });     
     }));
@@ -39,7 +43,7 @@ describe("SwissDrgCatalog", () => {
         const catalog : SwissDrgCatalog = new SwissDrgCatalog(mock.object);
         catalog.getVersions().then(versions => {
             expect(versions.length).toBe(4);
-        });
+        });        
     }));
 
     it('Should return a list of results', async(() => {
@@ -50,6 +54,7 @@ describe("SwissDrgCatalog", () => {
 
         const mock : TypeMoq.IMock<ICatalogService> = TypeMoq.Mock.ofType<ICatalogService>();
         mock.setup(x => x.search('V1.0', 'Content')).returns(() => Promise.resolve(catalogs));
+        mock.setup(x => x.getVersions()).returns(() => Promise.resolve([ "V1.0","V2.0","V3.0","V4.0" ]));
 
         const catalog : SwissDrgCatalog = new SwissDrgCatalog(mock.object);
         catalog.search('V1.0', 'Content').then(results => {
@@ -60,6 +65,7 @@ describe("SwissDrgCatalog", () => {
     it('Should return a single result by code', async(() => {
         const mock : TypeMoq.IMock<ICatalogService> = TypeMoq.Mock.ofType<ICatalogService>();
         mock.setup(x => x.getByCode('V1.0', 'P20A')).returns(() => Promise.resolve({ code: "Content 1", text: "Description content 1", url: "/url/to/content1" }));
+        mock.setup(x => x.getVersions()).returns(() => Promise.resolve([ "V1.0","V2.0","V3.0","V4.0" ]));
 
         const catalog : SwissDrgCatalog = new SwissDrgCatalog(mock.object);
         catalog.search('V1.0', 'P20A').then(results => {
@@ -70,6 +76,7 @@ describe("SwissDrgCatalog", () => {
     it('Should throw an error because no code found', async(() => {
         const mock : TypeMoq.IMock<ICatalogService> = TypeMoq.Mock.ofType<ICatalogService>();
         mock.setup(x => x.getByCode('V1.0', 'P23')).throws(new Error());
+        mock.setup(x => x.getVersions()).returns(() => Promise.resolve([ "V1.0","V2.0","V3.0","V4.0" ]));
 
         const catalog : SwissDrgCatalog = new SwissDrgCatalog(mock.object);
         catalog.search('V1.0', 'P23')

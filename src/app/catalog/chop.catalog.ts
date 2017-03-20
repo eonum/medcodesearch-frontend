@@ -8,11 +8,8 @@ import { ICatalogService } from "../service/i.catalog.service";
  */
 @Injectable()
 export class CHOPCatalog extends Catalog {
-    
+
     constructor(@Inject("ICatalogService") service: ICatalogService) {
-        super(service);
-        this.name = "CHOP";
-        this.codeRegex = "^[\\d\\.]$";
-        this.elements = [['chops'], ['chops'], 'chops'];
+        super(service, "CHOP", "^[\\d\\.]$", [['chops'], ['chops'], 'chops']);
     }
 }

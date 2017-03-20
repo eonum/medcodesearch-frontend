@@ -8,11 +8,9 @@ import { ICatalogService } from "../service/i.catalog.service";
  */
 @Injectable()
 export class ICDCatalog extends Catalog {
-    
+
     constructor(@Inject("ICatalogService") service: ICatalogService) {
-        super(service);
-        this.name = "ICD";
-        this.codeRegex = "^\\w[\\d\\.]$";
-        this.elements = [['icds'], ['icds', 'icd_groups', 'icd_chapters'], 'icds'];
-    } 
+        super(service, "ICD", "^\\w[\\d\\.]$",
+          [['icds'], ['icds', 'icd_groups', 'icd_chapters'], 'icds'] );
+    }
 }

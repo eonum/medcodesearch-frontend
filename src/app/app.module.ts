@@ -7,14 +7,16 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 import {AppRoutingModule} from './app-routing.module';
 
-import {CatalogComponent} from './components/catalog/catalog.component';
-import {SearchComponent} from './components/search/search.component';
 import {AppComponent} from './app.component';
-import {CatalogSelectComponent} from './components/catalog-select/catalog-select.component';
 import {CatalogService} from './service/catalog.service';
 import {SearchFormComponent} from './components/search-form/search-form.component';
-import {ResultsComponent} from './components/results/results.component';
+import {SearchResultsComponent} from './components/search-results/search-results.component';
 import {DropdownModule, CollapseModule} from 'ng2-bootstrap';
+import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
+import {CHOPCatalog} from './catalog/chop.catalog';
+import {ICDCatalog} from './catalog/icd.catalog';
+import { SearchMainComponent } from './components/search-main/search-main.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -22,14 +24,12 @@ export function HttpLoaderFactory(http: Http) {
 }
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        CatalogComponent,
-        SearchComponent,
-        CatalogSelectComponent,
-        SearchFormComponent,
-        ResultsComponent
-    ],
+  declarations: [
+    AppComponent,
+    SearchFormComponent,
+    SearchResultsComponent,
+    SearchMainComponent
+  ],
     imports: [
         BrowserModule,
         FormsModule,
@@ -45,7 +45,10 @@ export function HttpLoaderFactory(http: Http) {
         DropdownModule.forRoot(),
         CollapseModule.forRoot()
     ],
-    providers: [{provide: 'ICatalogService', useClass: CatalogService}],
+    providers: [
+      {provide: 'ICatalogService', useClass: CatalogService},
+      SwissDrgCatalog, CHOPCatalog, ICDCatalog, CatalogResolver
+      ],
     bootstrap: [AppComponent]
 })
 

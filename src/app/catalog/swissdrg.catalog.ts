@@ -8,10 +8,9 @@ import { ICatalogService } from '../service/i.catalog.service';
 @Injectable()
 export class SwissDrgCatalog extends Catalog {
 
-    constructor(@Inject('ICatalogService') service: ICatalogService) {
-        super(service);
-        this.name = 'SwissDRG';
-        this.codeRegex = '^[A-Za-z]\\d{1,2}[A-Za-z]{0,1}$';
-        this.elements = [[ 'drgs', 'adrgs'], [ 'drgs', 'adrgs', 'partition', 'mdc' ], 'drgs'];
+    constructor(@Inject("ICatalogService") service: ICatalogService) {
+        super(service, "SwissDRG", "^[A-Za-z]\\d{1,2}[A-Za-z]{0,1}$",
+          [[ "drgs", "adrgs"], [ "drgs", "adrgs", "partition", "mdc" ], "drgs"] );
+
     }
 }
