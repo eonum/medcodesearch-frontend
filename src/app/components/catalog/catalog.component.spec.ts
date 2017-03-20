@@ -4,17 +4,21 @@ import { CatalogComponent } from './catalog.component';
 import { RouterTestingModule } from "@angular/router/testing";
 import { CatalogSelectComponent } from "../catalog-select/catalog-select.component";
 import { SearchComponent } from "../search/search.component";
-import { CatalogServiceMock } from "../../service/catalog.service.mock";
+import { CatalogService } from "../../service/catalog.service";
+import * as TypeMoq from "typemoq";
+import { ICatalogService } from "../../service/i.catalog.service";
 
 describe('CatalogComponent', () => {
   let component: CatalogComponent;
   let fixture: ComponentFixture<CatalogComponent>;
 
   beforeEach(async(() => {
+    const mock: TypeMoq.IMock<ICatalogService> = TypeMoq.Mock.ofType<ICatalogService>();
+
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule],
       declarations: [ CatalogComponent, CatalogSelectComponent, SearchComponent ],
-      providers: [ {provide: "ICatalogService", useClass: CatalogServiceMock} ]
+      providers: [ {provide: "ICatalogService", useValue: mock.object} ]
     })
     .compileComponents();
   }));

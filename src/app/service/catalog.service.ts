@@ -52,17 +52,16 @@ export class CatalogService implements ICatalogService {
      * @param query the query to search for
      */
     public async search(version: string, query: string): Promise<CatalogElement[]> {
-        let types : string[] = this.searchableCodes;
         let results: CatalogElement[] = [];
 
-        for (let i = 0; i < types.length; i++){
-            let type: string = types[i];
+        for (let i = 0; i < this.searchableCodes.length; i++){
             try {
+                let type: string = this.searchableCodes[i];
                 let webResults = await this.getSearchForType(type, version, query);
                 results = results.concat(webResults)
             }
             catch(e){
-                let error = e;
+                throw new Error("Failed to get search results");
             }
         };
         
@@ -77,8 +76,12 @@ export class CatalogService implements ICatalogService {
         
         return this.http.get(url)
                         .toPromise()
-                        .then( response => response.json() as string[] )
-                        .catch(reason => {throw new Error(reason)});
+                        .then( response => {
+                            return response.json() as string[];
+                        })
+                        .catch(reason => {
+                            throw new Error(reason)
+                        });
     }
 
     /**
@@ -91,17 +94,16 @@ export class CatalogService implements ICatalogService {
      * @param code the code to search for
      */
     public async getByCode(version: string, code: string): Promise<CatalogElement> {
-        let types = this.retrievableCodes
         let result: CatalogElement[];
 
-        for (let i = 0; i < types.length; i++){
-            let elementType: string = types[i];
+        for (let i = 0; i < this.retrievableCodes.length; i++){
+            let elementType: string = this.retrievableCodes[i];
             try {
                 let webResult = await this.getSingleElementForTypeByCode(elementType, version, code);
                 result.push(webResult);
             }
             catch(e){
-                let error = e;
+                throw new Error("Failed to retrieve code");
             }
         };
 
@@ -116,8 +118,12 @@ export class CatalogService implements ICatalogService {
         let locale: string = this.getLocale();
         let url : string =  `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
         return this.http.get(url).toPromise()
-                    .then(result => result.json().data as CatalogElement)
-                    .catch(reason => {throw new Error(reason)});
+                    .then(result => {
+                        return result.json().data as CatalogElement;
+                    })
+                    .catch(reason => {
+                        throw new Error(reason)
+                    });
     }
 
     private async getSearchForType(elementType: string, version: string, query: string) : Promise<CatalogElement[]>{
