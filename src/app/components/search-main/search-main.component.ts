@@ -4,14 +4,16 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {CatalogElement} from '../../model/catalog.element';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
+
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
  * The component is assigned to the route `<catalog>/<version>/` and takes an
  * optional `query` parameter.
  *
- * The catalog is resolved by the {@link CatalogResolver} and then passed as input
- * to the {@link SearchFormComponent}. Each time the `query` or `catalog` changes,
- * the `searchResults` for the {@link SearchResultsComponent} are updated accordingly.
+ * A catalog is resolved by the {@link CatalogResolver} and then passed as input
+ * to the {@link SearchFormComponent}. Each time the `query` or `catalog` in the
+ * Routers params or data changes, the `searchResults` that are bound as Input
+ * to the {@link SearchResultsComponent} are updated with new search results.
  */
 @Component({
   selector: 'app-search-main',
@@ -48,8 +50,8 @@ export class SearchMainComponent implements OnInit {
    */
   ngOnInit() {
 
-    /* Zip route data and params to get one observable that fires always, when
-    one of the two values changed. */
+    /* Zip route data and params to get one observable that fires always (the
+    result of the projection function), when one of the two values changed. */
     Observable.zip(
       this.route.data,
       this.route.params,

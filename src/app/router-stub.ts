@@ -2,6 +2,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Injectable} from '@angular/core';
 import {NavigationExtras} from '@angular/router';
 import {Observable} from 'rxjs';
+import {Catalog} from './catalog/catalog';
 
 /**
  * Replacement for the angular Router in tests.
@@ -20,26 +21,45 @@ export class RouterStub {
  */
 @Injectable()
 export class ActivatedRouteStub {
-
-  // ActivatedRoute.params is Observable
+// Test parameters
+  private testParams: {} = {};
+  private testData: {} = {};
+  // ActivatedRoute.params and data are Observable
   private paramsSubject = new BehaviorSubject(this.testParams);
+          dataSubject = new BehaviorSubject(this.testData);
           params  = this.paramsSubject.asObservable();
-          data = Observable.of();
+          data = this.dataSubject.asObservable();
 
-  // TODO adjust for ES5
-  // Test parameters
-  private _testParams: {};
-  get testParams() {
-    return this._testParams;
+
+
+  public getTestParams() {
+    return this.testParams;
   }
 
-  set testParams(params: {}) {
-    this._testParams = params;
+  public setTestParams(params: {}) {
+    this.testParams = params;
     this.paramsSubject.next(params);
   }
 
-  // ActivatedRoute.snapshot.params
-  get snapshot() {
-    return {params: this.testParams};
+  public getTestData(){
+    return this.testData;
+  }
+
+  public setTestData(data: {}) {
+    this.testData = data;
+    this.dataSubject.next(data);
+  }
+
+  public setCatalog(catalog: Catalog){
+    this.setTestData({catalog: catalog});
+  }
+
+  public navigateToCatalog(catalogDomain:string, version:string, query?:string){
+    let params = {
+      'catalog': catalogDomain,
+      'version': version,
+    }
+    if(query) params['query'] = query;
+    this.setTestParams(params);
   }
 }
