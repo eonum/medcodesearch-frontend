@@ -9,28 +9,23 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CatalogServiceMock} from '../../service/catalog.service.mock';
 import {ICDCatalog} from '../../catalog/icd.catalog';
 import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {Catalog} from '../../catalog/catalog';
-import {ICatalogService} from '../../service/i.catalog.service';
-import Spy = jasmine.Spy;
-import { async } from "@angular/core/testing";
-import { SwissDrgCatalog } from "./swissdrg.catalog";
 import * as TypeMoq from "typemoq";
-import { ICatalogService } from "../service/i.catalog.service";
-import { CatalogElement } from "../model/catalog.element";
-
+import {ICatalogService} from '../../service/i.catalog.service';
+import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
+import {CatalogElement} from '../../model/catalog.element';
 
 describe('SearchMainComponent', () => {
 
   let component: SearchMainComponent;
   let fixture: ComponentFixture<SearchMainComponent>;
+
   let route: ActivatedRouteStub;
-  let catalogService: ICatalogService;
-  let catalog: Catalog;
-  let swissDrgCatalog: SwissDrgCatalog;
-  let query:string;
   let mock : TypeMoq.IMock<SwissDrgCatalog>
 
+  /*Test data*/
+
+  let query:string = 'Some search query';
+  let version:string = 'V4.0';
   let searchResults: CatalogElement[] = [
     { code: "Content 1", text: "Description content 1", url: "/url/to/content1",
       highlight: {text:['content'],relevantCodes:[]}},
@@ -60,46 +55,35 @@ describe('SearchMainComponent', () => {
     fixture = TestBed.createComponent(SearchMainComponent);
     component = fixture.componentInstance;
 
-    catalogService = fixture.debugElement.injector.get('ICatalogService');
-    route = fixture.debugElement.injector.get(ActivatedRoute);
-    swissDrgCatalog = new SwissDrgCatalog(catalogService);
+    // Set up a catalog mock
     mock = TypeMoq.Mock.ofType<SwissDrgCatalog>();
-    mock.setup(x => x.getActiveVersion()).returns(() => 'V4.0');
+    mock.setup(x => x.getActiveVersion()).returns(() => version);
+    mock.setup(x => x.search(version, query)).returns(() => Promise.resolve(searchResults));
 
-    mock.setup(x => x.search(TypeMoq.It.isAny(), TypeMoq.It.isAny())).returns(() => Promise.resolve(searchResults));
-
-    //catalog = swissDrgCatalog;
-    //spy = spyOn(swissDrgCatalog, 'search');
-
-    query = "Search query";
-
+    // Set up the activated route stub
+    route = fixture.debugElement.injector.get(ActivatedRoute);
     route.setCatalog(mock.object);
     route.setTestParams({'query': query});
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    mock.setup(x => x.search('V4.0', query)).returns(() => Promise.resolve(searchResults));
     expect(component).toBeTruthy();
   });
 
-  it('should store the catalog', async(() => {
+  it('should store the catalog',() => {
     expect(component.catalog).toBe(mock.object);
-  }));
+  });
 
   it('should store the query', () => {
     expect(component.query).toBe(query);
   });
 
-  it('should call the catalogs search function with the query', async(() => {
-    route.setCatalog(mock.object);
-    route.setTestParams({'query': query});
+  it('should call the catalogs search function and set the results', () => {
     fixture.whenStable().then(() => {
-      // 2nd change detection displays the async-fetched hero
-      fixture.detectChanges();
+      // search should now be finished and the results set
       expect(component.searchResults).toBe(searchResults);
-
     });
-   // expect(spy.calls.any()).toBe(true, 'Catalogs search function called');
-  }));
+  });
 });
