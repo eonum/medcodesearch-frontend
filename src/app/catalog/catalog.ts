@@ -29,7 +29,7 @@ export abstract class Catalog {
                      protected name: string,
                      protected codeRegex: string,
                      protected elements: any[],) { // TODO name properly
-    this.loadVersions();
+    this.getVersions();
   }
 
   /**
@@ -75,7 +75,7 @@ export abstract class Catalog {
   /**
    * Get and save the versions this catalog can have.
    */
-  public async loadVersions(): Promise<string[]> {
+  public getVersions(): Promise<string[]> {
     if (this.versions) return Promise.resolve(this.versions);
 
     this.initService();
@@ -86,7 +86,8 @@ export abstract class Catalog {
       },
       error => console.log(error)
     );
-    return Promise.resolve(versions);
+
+    return versions;
   }
 
 
@@ -105,7 +106,7 @@ export abstract class Catalog {
 
     if (!this.versions) {
       // load versions and then run again
-      return this.loadVersions().then(() => this.activateVersion(version))
+      return this.getVersions().then(() => this.activateVersion(version))
     }
 
     if (this.versions.indexOf(version) > -1) {
@@ -118,12 +119,8 @@ export abstract class Catalog {
     }
   }
 
-  getActiveVersion(): string {
+  public getActiveVersion(): string {
     return this.activeVersion;
-  }
-
-  getVersions(): string[] {
-    return this.versions;
   }
 
   public getName(): string {
