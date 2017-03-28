@@ -43,6 +43,8 @@ export class CatalogResolver implements Resolve<Catalog> {
     this.catalogs[swissDrgCatalog.getDomain()] = swissDrgCatalog;
     this.catalogs[chopCatalog.getDomain()]     = chopCatalog;
     this.catalogs[icdCatalog.getDomain()]      = icdCatalog;
+
+
   }
 
   /**

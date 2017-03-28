@@ -29,7 +29,7 @@ export abstract class Catalog {
                      protected name: string,
                      protected codeRegex: string,
                      protected elements: any[],) { // TODO name properly
-    this.getVersions();
+
   }
 
   /**

@@ -39,7 +39,10 @@ export class CatalogService implements ICatalogService {
   }
 
   private getLocale(): string {
-    return this.translate.currentLang || 'de';
+    if (environment.dev && !this.translate.currentLang){
+      console.log("%c No currentLanguage set", "color:red")
+    }
+    return this.translate.currentLang;
   }
 
   /**

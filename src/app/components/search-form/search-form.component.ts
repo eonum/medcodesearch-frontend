@@ -39,6 +39,11 @@ export class SearchFormComponent {
               private icdCatalog: ICDCatalog) {
 
     this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog]
+
+    // Initialize the versions
+    this.swissDrgCatalog.getVersions();
+    this.chopCatalog.getVersions();
+    this.icdCatalog.getVersions();
   }
 
   /**
