@@ -20,4 +20,6 @@ describe('CatalogResolver', () => {
   it('should ...', inject([CatalogResolver], (service: CatalogResolver) => {
     expect(service).toBeTruthy();
   }));
+
+
 });

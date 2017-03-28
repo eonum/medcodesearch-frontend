@@ -25,7 +25,7 @@ export class SearchMainComponent implements OnInit {
 
   /**
    * The active catalog, resolved from the activated route.
-   * Serves as input for the search-form.
+   * Serves as input for the search-form component.
    * */
   public catalog: Catalog;
 

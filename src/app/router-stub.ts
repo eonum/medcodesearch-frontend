@@ -21,38 +21,34 @@ export class RouterStub {
  */
 @Injectable()
 export class ActivatedRouteStub {
-// Test parameters
+
+  /*Set up stub for observable field 'params'*/
   private testParams: {} = {};
-  private testData: {} = {};
-  // ActivatedRoute.params and data are Observable
-  private paramsSubject = new BehaviorSubject(this.testParams);
-          dataSubject = new BehaviorSubject(this.testData);
+          paramsSubject = new BehaviorSubject(this.testParams);
           params  = this.paramsSubject.asObservable();
+
+  /*Set up stub for observable field 'data'*/
+  private testData: {} = {};
+          dataSubject = new BehaviorSubject(this.testData);
           data = this.dataSubject.asObservable();
 
-
-
-  public getTestParams() {
-    return this.testParams;
-  }
-
+  /*Set the given params as next value in the 'params'-observable*/
   public setTestParams(params: {}) {
     this.testParams = params;
     this.paramsSubject.next(params);
   }
 
-  public getTestData(){
-    return this.testData;
-  }
-
+  /*Set the given data as next value in the 'data'-observable*/
   public setTestData(data: {}) {
     this.testData = data;
     this.dataSubject.next(data);
   }
 
+  /*Set the catalog as next value in the 'data'-observable*/
   public setCatalog(catalog: Catalog){
     this.setTestData({catalog: catalog});
   }
+
 
   public navigateToCatalog(catalogDomain:string, version:string, query?:string){
     let params = {
