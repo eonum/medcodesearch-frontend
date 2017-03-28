@@ -9,6 +9,13 @@ const routes: Routes = [
     path: ':language',
     canActivate: [LanguageGuard],
     children: [
+        {
+        path: ':catalog',
+        component: SearchMainComponent,
+        resolve: {
+          catalog: CatalogResolver
+        }
+      },
       {
         path: ':catalog/:version',
         component: SearchMainComponent,
@@ -18,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'swissdrg/V6.0',
+        redirectTo: 'icd',
         pathMatch: 'full'
       }
     ]

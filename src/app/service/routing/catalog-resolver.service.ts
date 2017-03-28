@@ -61,19 +61,35 @@ export class CatalogResolver implements Resolve<Catalog> {
 
     // Activate catalog and return it, or redirect to start
     if (catalog) {
-      return catalog.activateVersion(version).then(
-        (success: boolean) => {
-          if (success) { //valid version
-            this.activeCatalog = catalog;
-            return catalog;
+        if(version){
+          return catalog.activateVersion(version).then(
+          (success: boolean) => {
+            if (success) { //valid version
+              this.activeCatalog = catalog;
+              return catalog;
           } else this.redirectToStart(route);
         }
-      )
+        )      
+      } else this.redirectToDefaultCatalog(route);
+
     } else this.redirectToStart(route);
   }
 
   private redirectToStart(route: ActivatedRouteSnapshot) {
     return this.router.navigate([route.params['language']]).catch(e => console.log(e));
+  }
+
+  private redirectToDefaultCatalog(route: ActivatedRouteSnapshot) {
+    let domain  = route.params['catalog'];
+    let catalog = this.catalogs[domain];
+    if (catalog) {
+        catalog.loadVersions().then( versions => {
+          this.router.navigate([route.params['language'], route.params['catalog'], versions[0]]).catch(e => console.log(e));
+      },
+      error => console.log(error)
+    );
+
+    } else this.redirectToStart(route);
   }
 
   /**

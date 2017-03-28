@@ -38,7 +38,7 @@ export class SearchFormComponent {
               private chopCatalog: CHOPCatalog,
               private icdCatalog: ICDCatalog) {
 
-    this.catalogs = [swissDrgCatalog, chopCatalog, icdCatalog]
+    this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog]
   }
 
   /**
