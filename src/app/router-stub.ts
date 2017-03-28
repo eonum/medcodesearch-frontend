@@ -8,12 +8,20 @@ import {Catalog} from './catalog/catalog';
  * Replacement for the angular Router in tests.
  */
 export class RouterStub {
+
+  public url;
+  public extras;
+
   navigate(commands: string[], extras?: NavigationExtras) {
+    this.url = commands.join('/');
+     this.extras=extras;
     return {
       'url': commands.join('/'),
       'extras': extras
     }
   }
+
+
 }
 
 /**

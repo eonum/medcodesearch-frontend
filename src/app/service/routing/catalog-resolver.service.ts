@@ -43,8 +43,6 @@ export class CatalogResolver implements Resolve<Catalog> {
     this.catalogs[swissDrgCatalog.getDomain()] = swissDrgCatalog;
     this.catalogs[chopCatalog.getDomain()]     = chopCatalog;
     this.catalogs[icdCatalog.getDomain()]      = icdCatalog;
-
-
   }
 
   /**
@@ -55,7 +53,7 @@ export class CatalogResolver implements Resolve<Catalog> {
    * @param route
    * @param state
    */
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Catalog> {
+  resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<Catalog> {
 
     let domain  = route.params['catalog'];
     let version = route.params['version'];
