@@ -11,3 +11,7 @@
     color: grey;
     padding-left: 16px;
 }
+.language-select .active {
+    color: black;
+    text-decoration: underline;
+}
