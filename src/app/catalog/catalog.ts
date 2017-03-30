@@ -94,7 +94,7 @@ export abstract class Catalog {
         error => console.log(error)
       );
       if(lang == "de") versions_de = versions;
-    
+
     }
     return versions_de;
 
@@ -140,5 +140,12 @@ export abstract class Catalog {
 
   public getDomain(): string {
     return this.name.toLowerCase();
+  }
+
+  hasVersionInCurrentLanguage(version:string) {
+    if (this.versions_lang[this.service.getLocale()]){
+      return this.versions_lang[this.service.getLocale()].indexOf(version) > -1;
+    }
+    return false;
   }
 }

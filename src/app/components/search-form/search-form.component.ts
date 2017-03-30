@@ -1,9 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {ICDCatalog} from '../../catalog/icd.catalog';
 import {CHOPCatalog} from '../../catalog/chop.catalog';
 import {Catalog} from '../../catalog/catalog';
+import {ModalDirective} from 'ng2-bootstrap';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -46,12 +47,26 @@ export class SearchFormComponent {
     this.icdCatalog.getVersions();
   }
 
+  @ViewChild('childModal') public childModal:ModalDirective;
+
+  public showChildModal():void {
+    this.childModal.show();
+  }
+
+  public hideChildModal():void {
+    this.childModal.hide();
+  }
+
   /**
    * Update based on catalog selection.
    */
   public updateCatalog(catalog: Catalog, version?: string): void {
     version = version || catalog.getActiveVersion();
-    this.redirect(catalog, version, this.query);
+    if (!catalog.hasVersionInCurrentLanguage(version)) {
+      this.childModal.show();
+    } else {
+      this.redirect(catalog, version, this.query);
+    }
   }
 
   /**

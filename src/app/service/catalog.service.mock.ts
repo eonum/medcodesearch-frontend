@@ -32,4 +32,12 @@ export class CatalogServiceMock implements ICatalogService {
             throw new Error("Not found");
         }
     }
+
+    public getLocale():string {
+      return 'de';
+    }
+
+    public getLangs(): string[] {
+      return ['de', 'fr', 'it', 'en'];
+    }
 }

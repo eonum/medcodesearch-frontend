@@ -14,6 +14,7 @@ describe('CatalogResolver', () => {
   let routeMock:TypeMoq.IMock<ActivatedRouteSnapshot>
   let routeParams: {catalog:string, version?:string, language:string};
   let fixture;
+
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
       providers: [CatalogResolver,{ provide: Router, useClass: RouterStub },
