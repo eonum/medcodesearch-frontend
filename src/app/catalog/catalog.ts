@@ -12,7 +12,8 @@ import {environment} from '../../environments/environment';
 export abstract class Catalog {
 
   /**Cache for the versions*/
-  protected versions: string[];
+
+  protected versions_lang: string[];
 
   /**To access the selected catalog globally*/
   protected activeVersion: string;
@@ -30,6 +31,7 @@ export abstract class Catalog {
                      protected codeRegex: string,
                      protected elements: any[],) { // TODO name properly
 
+        this.versions_lang = [];
   }
 
   /**
@@ -76,18 +78,26 @@ export abstract class Catalog {
    * Get and save the versions this catalog can have.
    */
   public getVersions(): Promise<string[]> {
-    if (this.versions) return Promise.resolve(this.versions);
+    if (this.versions_lang[this.service.getLocale()]) return Promise.resolve(this.versions_lang[this.service.getLocale()]);
 
     this.initService();
-    let versions = this.service.getVersions();
-    versions.then( data => {
-        this.versions      = data.reverse();
-        this.activeVersion = data[0];
-      },
-      error => console.log(error)
-    );
+    let languages = this.service.getLangs();
+    console.log("languages: " + languages);
+    let versions_de;
+    for (let lang of languages){
+      let versions = this.service.getVersions(lang);
+        versions.then( data => {
+          this.versions_lang[lang] = data.reverse();
+          if(lang == "de") this.activeVersion = data[0];
+          console.log("this.versions: "+ lang + " " + this.versions_lang[lang]);
+        },
+        error => console.log(error)
+      );
+      if(lang == "de") versions_de = versions;
+    
+    }
+    return versions_de;
 
-    return versions;
   }
 
 
@@ -104,18 +114,19 @@ export abstract class Catalog {
    */
   public async activateVersion(version: string): Promise<boolean> {
 
-    if (!this.versions) {
+    if (!this.versions_lang[this.service.getLocale()]) {
       // load versions and then run again
       return this.getVersions().then(() => this.activateVersion(version))
     }
 
-    if (this.versions.indexOf(version) > -1) {
-      // valid version
-      this.activeVersion = version;
-      return Promise.resolve(true);
-    } else {
-      console.log('Version does not exists: ' + version);
-      return Promise.resolve(false);
+    if(this.versions_lang[this.service.getLocale()].indexOf(version) > -1){
+        console.log("valid version " + this.service.getLocale());
+        this.activeVersion = version;
+        return Promise.resolve(true);
+
+    }else{
+        console.log("invalid version " + this.service.getLocale());
+        return Promise.resolve(false);
     }
   }
 
