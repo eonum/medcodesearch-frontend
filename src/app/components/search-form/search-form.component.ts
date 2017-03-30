@@ -12,7 +12,7 @@ import {ModalDirective} from 'ng2-bootstrap';
  *
  * On selection changes, the {@link Router} is used to navigate to the
  * {@link SearchMainComponent} where the parameters are used to update the
- * input for the {@link SearchResultComponent}.
+ * input for the {@link SearchResultsComponent}.
  *
  * After a re-routing to the {@link SearchMainComponent}, the selected {@link Catalog}
  * and query are passed as input to this component, to allow displaying the selected catalog and query.
@@ -42,7 +42,7 @@ export class SearchFormComponent {
               private chopCatalog: CHOPCatalog,
               private icdCatalog: ICDCatalog) {
 
-    this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog]
+    this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog];
 
     // Initialize the versions
     this.swissDrgCatalog.getVersions();
@@ -62,7 +62,7 @@ export class SearchFormComponent {
 
   public changeLanguage(language: string):void {
     this.childModal.hide();
-    this.router.navigate([language,this.selectedCatalog.getDomain(),this.selectedVersion]).catch(error => console.log(error));
+    this.router.navigate([language, this.selectedCatalog.getDomain(), this.selectedVersion]).catch(error => console.log(error));
   }
 
   /**
