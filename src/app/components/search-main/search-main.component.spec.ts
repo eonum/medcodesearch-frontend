@@ -13,6 +13,7 @@ import * as TypeMoq from "typemoq";
 import {ICatalogService} from '../../service/i.catalog.service';
 import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {CatalogElement} from '../../model/catalog.element';
+import {ModalModule} from 'ng2-bootstrap';
 
 describe('SearchMainComponent', () => {
 
@@ -24,12 +25,12 @@ describe('SearchMainComponent', () => {
 
   /*Test data*/
 
-  let query:string = 'Some search query';
-  let version:string = 'V4.0';
-  let searchResults: CatalogElement[] = [
-    { code: "Content 1", text: "Description content 1", url: "/url/to/content1",
+  const query:string = 'Some search query';
+  const version:string = 'V4.0';
+  const searchResults: CatalogElement[] = [
+    { code: 'Content 1', text: 'Description content 1', url: '/url/to/content1',
       highlight: {text:['content'],relevantCodes:[]}},
-    { code: "Content 2", text: "Description content 2", url: "/url/to/content2" ,
+    { code: 'Content 2', text: 'Description content 2', url: '/url/to/content2' ,
       highlight: {text:['2'],relevantCodes:[]}},
   ];
 
@@ -40,7 +41,8 @@ describe('SearchMainComponent', () => {
         SearchFormComponent,
         SearchResultsComponent
       ],
-      imports: [TranslateModule.forRoot()],
+      imports: [TranslateModule.forRoot(),
+        ModalModule.forRoot()],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },

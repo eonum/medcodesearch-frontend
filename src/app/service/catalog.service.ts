@@ -66,7 +66,7 @@ export class CatalogService implements ICatalogService {
       let type: string = types[i];
       try {
         let webResults = await this.getSearchForType(type, version, query);
-        results = results.concat(webResults)
+        results = results.concat(webResults);
       }
       catch(e){
         let error = e;

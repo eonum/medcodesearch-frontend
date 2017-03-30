@@ -1,5 +1,5 @@
-import { CatalogElement } from "../model/catalog.element";
 
+import {CatalogElement} from '../model/catalog.element';
 /**
  * Interface for a catalog data source
  */
@@ -9,5 +9,5 @@ export interface ICatalogService {
     getVersions(lang: string): Promise<string[]>;
     getByCode(version: string, code: string): Promise<CatalogElement>;
     getLocale(): string;
-    getLangs(): string[]
+    getLangs(): string[];
 }

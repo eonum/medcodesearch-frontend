@@ -11,6 +11,7 @@ import {CatalogServiceMock} from '../../service/catalog.service.mock';
 import {ICatalogService} from '../../service/i.catalog.service';
 import {Catalog} from '../../catalog/catalog';
 import {By} from '@angular/platform-browser';
+import {ModalModule} from 'ng2-bootstrap';
 
 
 describe('SearchFormComponent', () => {
@@ -23,7 +24,10 @@ describe('SearchFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TranslateModule ],
+      imports: [
+        TranslateModule,
+        ModalModule.forRoot(),
+      ],
       declarations: [ SearchFormComponent],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },

@@ -85,10 +85,12 @@ export abstract class Catalog {
     console.log("languages: " + languages);
     let versions_de;
     for (let lang of languages){
-      let versions = this.service.getVersions(lang);
+      const versions = this.service.getVersions(lang);
         versions.then( data => {
           this.versions_lang[lang] = data.reverse();
-          if(lang == "de") this.activeVersion = data[0];
+          if (lang === "de") {
+            this.activeVersion = data[0];
+          }
           console.log("this.versions: "+ lang + " " + this.versions_lang[lang]);
         },
         error => console.log(error)

@@ -4,7 +4,7 @@ import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {ICDCatalog} from '../../catalog/icd.catalog';
 import {CHOPCatalog} from '../../catalog/chop.catalog';
 import {Catalog} from '../../catalog/catalog';
-import {ModalDirective} from 'ng2-bootstrap';
+import {ModalDirective, ModalModule} from 'ng2-bootstrap';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -21,7 +21,7 @@ import {ModalDirective} from 'ng2-bootstrap';
   selector: 'search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.css'],
-  providers: []
+  providers: [],
 })
 
 
