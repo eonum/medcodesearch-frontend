@@ -48,7 +48,9 @@
       <div class="modal-body">
         Catalog not available in currently selected language
       </div>
+
       <div class="modal-footer">
+        <button class="btn btn-default pull-left" (click)="hideChildModal()">Back</button>
           <button *ngFor="let lang of languages"
             type="button" class="btn btn-default" data-dismiss="modal" (click)="changeLanguage(lang)">{{lang}} </button>
       </div>
