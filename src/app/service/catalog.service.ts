@@ -38,11 +38,14 @@ export class CatalogService implements ICatalogService {
 
   }
 
-  private getLocale(): string {
+  public getLocale(): string {
     if (environment.dev && !this.translate.currentLang){
       console.log("%c No currentLanguage set", "color:red")
     }
     return this.translate.currentLang;
+  }
+  public getLangs(): string[] {
+    return this.translate.getLangs();
   }
 
   /**
@@ -75,8 +78,9 @@ export class CatalogService implements ICatalogService {
   /**
    * Get all versions supported by the catalog
    */
-  public getVersions(): Promise<string[]> {
-    let url: string = `${this.baseUrl}${this.getLocale()}/${this.versionParam}/versions`;
+
+   public getVersions(lang: string): Promise<string[]> {
+    let url: string = `${this.baseUrl}${lang}/${this.versionParam}/versions`;
 
     return this.http.get(url)
       .toPromise()
