@@ -148,4 +148,15 @@ export abstract class Catalog {
     }
     return false;
   }
+   getVersionLanguages(version:string) {
+    let languages = this.service.getLangs();
+    let validLangs = [];
+    for (let lang of languages){
+      if (this.versions_lang[lang].indexOf(version) > -1){
+        validLangs.push(lang);
+      }
+
+    }
+      return validLangs;
+  }
 }
