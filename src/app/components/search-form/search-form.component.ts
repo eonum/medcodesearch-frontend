@@ -32,6 +32,9 @@ export class SearchFormComponent {
   @Input() query: string;
 
   catalogs: Catalog[]; // to display catalog selection
+  languages: string[];
+  selectedCatalog: Catalog;
+  selectedVersion: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -57,12 +60,20 @@ export class SearchFormComponent {
     this.childModal.hide();
   }
 
+  public changeLanguage(language: string):void {
+    this.childModal.hide();
+    this.router.navigate([language,this.selectedCatalog.getDomain(),this.selectedVersion]).catch(error => console.log(error));
+  }
+
   /**
    * Update based on catalog selection.
    */
   public updateCatalog(catalog: Catalog, version?: string): void {
     version = version || catalog.getActiveVersion();
     if (!catalog.hasVersionInCurrentLanguage(version)) {
+      this.languages = catalog.getVersionLanguages(version);
+      this.selectedCatalog = catalog;
+      this.selectedVersion = version;
       this.childModal.show();
     } else {
       this.redirect(catalog, version, this.query);
