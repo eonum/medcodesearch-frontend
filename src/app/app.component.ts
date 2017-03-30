@@ -16,6 +16,7 @@ export class AppComponent {
   constructor( public translate: TranslateService,
                private catalogResolver: CatalogResolver,
                private router: Router) {
+      translate.addLangs(this.languages);
   }
 
   setLanguage(language:string):void {
