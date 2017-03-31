@@ -262,7 +262,13 @@ The following section describes the user stories of the eonum MedCode search web
 
 ### 3.2 Non-functional requirements
 #### 3.2.1 Responsiveness
-**TODO:** Insert responsiveness requirements here (e.g. should work on Desktop, Tablet and Mobile)
+| Title                              | Description                      | Status |
+|:-----------------------------------|:---------------------------------|:---------|
+|Compatibility| **Expected**<br> The software should work with Google Chrome, InternetExplorer, Firefox and Safari<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                    
+| Pending|
+Responsiveness| **Expected**<br> The software should either respond immediately or show that it is loding data<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                    
+| Pending|---------------|:---------|
+
 
 #### 3.2.2 Usability
 **TODO:** Insert usability reqirements here (e.g. usable without manual for users with domain knowledge in medical coding)
@@ -271,6 +277,7 @@ The following section describes the user stories of the eonum MedCode search web
 
 <li>Domain should be available in Switzerland</li>
 <li>Name should be distinguishable from existing alternatives</li>
+
 
 #### 3.2.3 License
 <li>Application should be released under an Open Source License (MIT License)</li>
