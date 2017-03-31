@@ -264,10 +264,9 @@ The following section describes the user stories of the eonum MedCode search web
 #### 3.2.1 Responsiveness
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
-|Compatibility| **Expected**<br> The software should work with Google Chrome, InternetExplorer, Firefox and Safari<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                    
-| Pending|
-Responsiveness| **Expected**<br> The software should either respond immediately or show that it is loding data<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                    
-| Pending|---------------|:---------|
+|Compatibility| **Expected**<br> The software should work with Google Chrome, InternetExplorer, Firefox and Safari<br><br>**Constraints**<br><br><br>**Main Actor**<br>User|Pending|
+|Responsiveness| **Expected**<br> The software should either respond immediately or show that it is loding data<br><br>**Constraints**<br><br><br>**Main Actor**<br>User|Pending|
+|Customer satisfied| **Expected**<br> Our website design must satisfy our customer<br><br>**Constraints**<br><br><br>**Main Actor**<br>Customer|Pending|
 
 
 #### 3.2.2 Usability
