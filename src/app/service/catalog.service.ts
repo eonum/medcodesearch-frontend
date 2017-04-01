@@ -95,12 +95,13 @@ export class CatalogService implements ICatalogService {
    * throws an error if the element doesn't exist.
    *
    * @param version the version of the catalog to use
+   * @param type the type of the element
    * @param code the code to search for
    */
   public async getByCode(version: string, type: string, code: string): Promise<CatalogElement> {
     try {
       const webResult: CatalogElement = await this.getSingleElementForTypeByCode(type, version, code);
-      if (webResult != undefined) {
+      if (webResult != undefined && webResult != null) {
         webResult.type = type;
         return webResult;
       }

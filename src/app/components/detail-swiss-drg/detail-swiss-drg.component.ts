@@ -1,6 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CatalogElement } from "../../model/catalog.element";
 
+/**
+   * Component to display custom details of an element
+   * within the {@link SwissDrgCatalog}.
+   * Receives the `selectedElement` from the {@link DetailComponent}.
+   */
+
 @Component({
   selector: 'app-detail-swiss-drg',
   templateUrl: './detail-swiss-drg.component.html',

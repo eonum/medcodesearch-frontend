@@ -1,6 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CatalogElement } from "../../model/catalog.element";
 
+/**
+   * Component to display custom details of an element
+   * within the {@link IcdCatalog}.
+   * Receives the `selectedElement` from the {@link DetailComponent}.
+   */
+
 @Component({
   selector: 'app-detail-icd',
   templateUrl: './detail-icd.component.html',

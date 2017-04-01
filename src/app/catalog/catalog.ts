@@ -47,6 +47,11 @@ export abstract class Catalog {
     return this.service.search(version, query);
   }
 
+  /**
+   * Get a specific element from the catalog
+   * @param type the type of the {@link CatalogElement} to load
+   * @param code the code of the {@link CatalogElement} to load
+   */
   public async getByCode(type: string, code: string): Promise<CatalogElement> {
     this.initService();
     return this.service.getByCode(this.activeVersion, type, code.replace(' ', '_'));
