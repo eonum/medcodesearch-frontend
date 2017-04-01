@@ -94,9 +94,9 @@ export class SearchFormComponent {
    * @param query
    */
   private redirect(catalog: Catalog, version: string, query: string): void {
-    let params = query ?
-      [catalog.getDomain(), version, { query: query }] :
-      [catalog.getDomain(), version];
+    let params = query
+      ? [catalog.getDomain(), version, { query: query }]
+      : [catalog.getDomain(), version];
 
     this.router.navigate(params, { relativeTo: this.route.parent }).catch(error => console.log(error));
   }

@@ -13,7 +13,6 @@ import { CatalogConfiguration } from "./catalog.configuration";
 export abstract class Catalog {
 
   /**Cache for the versions*/
-
   protected versions_lang: string[];
 
   /**To access the selected catalog globally*/
@@ -40,11 +39,6 @@ export abstract class Catalog {
    */
   public async search(version: string, query: string): Promise<CatalogElement[]> {
     this.initService();
-    return await this.getBySearch(version, query);
-  }
-
-  protected async getBySearch(version: string, query: string): Promise<CatalogElement[]> {
-    this.initService();
     return this.service.search(version, query);
   }
 
@@ -62,12 +56,15 @@ export abstract class Catalog {
    * Get and save the versions this catalog can have.
    */
   public getVersions(): Promise<string[]> {
-    if (this.versions_lang[this.service.getLocale()]) return Promise.resolve(this.versions_lang[this.service.getLocale()]);
+    if (this.versions_lang[this.service.getLocale()])
+    {
+      return Promise.resolve(this.versions_lang[this.service.getLocale()]);
+    }
 
     this.initService();
-    let languages = this.service.getLangs();
-    console.log("languages: " + languages);
-    let versions_de;
+    let languages: string[] = this.service.getLangs();
+    let germanVersions: Promise<string[]>;
+
     for (let lang of languages) {
       const versions = this.service.getVersions(lang);
       versions.then(data => {
@@ -75,19 +72,20 @@ export abstract class Catalog {
         if (lang === "de") {
           this.activeVersion = data[0];
         }
-        console.log("this.versions: " + lang + " " + this.versions_lang[lang]);
-      },
-        error => console.log(error)
-      );
-      if (lang == "de") versions_de = versions;
+      })
+      .catch(error => {
+        console.log(error)
+      });
+
+      if (lang == "de") {
+        germanVersions = versions
+      };
 
     }
-    return versions_de;
-
+    return germanVersions;
   }
 
-
-  private initService() {
+  private initService(): void {
     this.service.init(this.config);
   }
 
@@ -128,15 +126,16 @@ export abstract class Catalog {
     return this.name.toLowerCase();
   }
 
-  hasVersionInCurrentLanguage(version: string) {
+  public hasVersionInCurrentLanguage(version: string): boolean {
     if (this.versions_lang[this.service.getLocale()]) {
       return this.versions_lang[this.service.getLocale()].indexOf(version) > -1;
     }
     return false;
   }
-  getVersionLanguages(version: string) {
-    let languages = this.service.getLangs();
-    let validLangs = [];
+
+  public getVersionLanguages(version: string): string[] {
+    const languages: string[] = this.service.getLangs();
+    const validLangs: string[] = [];
     for (let lang of languages) {
       if (this.versions_lang[lang].indexOf(version) > -1) {
         validLangs.push(lang);

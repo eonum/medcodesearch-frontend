@@ -45,8 +45,7 @@ describe('SearchMainComponent', () => {
         SearchFormComponent,
         SearchResultsComponent
       ],
-      imports: [RouterModule, TranslateModule.forRoot(),
-      ModalModule.forRoot()],
+      imports: [RouterModule, TranslateModule.forRoot(), ModalModule.forRoot()],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },

@@ -22,11 +22,11 @@ describe("SwissDrgCatalog", () => {
   it('Should initialize service when retrieving versions', async(() => {
 
     mock.setup(x => x.init(TypeMoq.It.isValue(
-    { 
-      searchableTypes: ['drgs'], 
-      retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdc'], 
-      versionParam: 'drgs'
-    }))).verifiable(TypeMoq.Times.atLeastOnce());
+      {
+        searchableTypes: ['drgs'],
+        retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdc'],
+        versionParam: 'drgs'
+      }))).verifiable(TypeMoq.Times.atLeastOnce());
 
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
     catalog.getVersions();
@@ -36,11 +36,11 @@ describe("SwissDrgCatalog", () => {
   it('Should initialize service when searching', async(() => {
 
     mock.setup(x => x.init(TypeMoq.It.isValue(
-    { 
-      searchableTypes: ['drgs'], 
-      retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdc'], 
-      versionParam: 'drgs'
-    }))).verifiable(TypeMoq.Times.atLeastOnce());
+      {
+        searchableTypes: ['drgs'],
+        retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdc'],
+        versionParam: 'drgs'
+      }))).verifiable(TypeMoq.Times.atLeastOnce());
 
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
     catalog.search('V1.0', 'test').then(results => {
