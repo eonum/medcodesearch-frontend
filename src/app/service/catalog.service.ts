@@ -5,15 +5,14 @@ import { CatalogElement } from "../model/catalog.element";
 import { ICatalogService } from "./i.catalog.service";
 import 'rxjs/add/operator/toPromise';
 import { environment } from '../../environments/environment';
+import { CatalogConfiguration } from "../catalog/catalog.configuration";
 
 @Injectable()
 export class CatalogService implements ICatalogService {
 
   private baseUrl: string = "https://search.eonum.ch/";
 
-  private searchableTypes: string[];
-  private retrievableTypes: string[];
-  private versionParam: string;
+  private config: CatalogConfiguration;
 
   public constructor(private http: Http, private translate: TranslateService) { }
 
@@ -21,21 +20,12 @@ export class CatalogService implements ICatalogService {
    * Initializes the service with catalog specific parameters.
    * Must be called before the first call to the service.
    *
-   * @param searchableCodes
-   *              the identifier for element types which
-   *              can be searched within the catalog
-   * @param retrievableCodes
-   *              the identifier for element types which
-   *              can be retrieved directly from the catalog
-   * @param versionParam
-   *              the catalog-specific url part for accessing
-   *              the versions of the catalog
+   * @param config
+   *              the configuration of the catalog to configure
+   *              the service with
    */
-  public init(searchableTypes: string[], retrievableTypes: string[], versionParam: string): void {
-    this.searchableTypes = searchableTypes;
-    this.retrievableTypes = retrievableTypes;
-    this.versionParam = versionParam;
-
+  public init(config: CatalogConfiguration): void {
+    this.config = config;
   }
 
   public getLocale(): string {
@@ -59,7 +49,7 @@ export class CatalogService implements ICatalogService {
    * @param query the query to search for
    */
   public async search(version: string, query: string): Promise<CatalogElement[]> {
-    let types: string[] = this.searchableTypes;
+    let types: string[] = this.config.searchableTypes;
     let results: CatalogElement[] = [];
 
     for (let i = 0; i < types.length; i++) {
@@ -69,7 +59,7 @@ export class CatalogService implements ICatalogService {
         results = results.concat(webResults);
       }
       catch (e) {
-        let error = e;
+        console.log(e);
       }
     }
     return Promise.resolve(results);
@@ -80,7 +70,7 @@ export class CatalogService implements ICatalogService {
    */
 
   public getVersions(lang: string): Promise<string[]> {
-    let url: string = `${this.baseUrl}${lang}/${this.versionParam}/versions`;
+    let url: string = `${this.baseUrl}${lang}/${this.config.versionParam}/versions`;
 
     return this.http.get(url)
       .toPromise()

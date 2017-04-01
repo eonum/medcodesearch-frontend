@@ -88,7 +88,7 @@ export abstract class Catalog {
 
 
   private initService() {
-    this.service.init(this.config.searchableTypes, this.config.retrievableTypes, this.config.versionParam);
+    this.service.init(this.config);
   }
 
   /**

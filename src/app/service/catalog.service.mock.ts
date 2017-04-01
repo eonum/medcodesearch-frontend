@@ -1,21 +1,22 @@
 import { CatalogElement } from "../model/catalog.element";
 import { ICatalogService } from "./i.catalog.service";
 import { Observable } from 'rxjs';
+import { CatalogConfiguration } from "../catalog/catalog.configuration";
 
 export class CatalogServiceMock implements ICatalogService {
 
-  init(searchableCodes: string[], retrievableCodes: string[], versionParam: string): void {
+  init(config: CatalogConfiguration): void {
 
   }
 
   private CONTENTS: CatalogElement[] = [
-    { code: "Content 1", text: "Description content 1", url: "/url/to/content1" },
-    { code: "Content 2", text: "Description content 2", url: "/url/to/content2" },
-    { code: "Content 3", text: "Description content 3", url: "/url/to/content3" },
-    { code: "Content 4", text: "Description content 4", url: "/url/to/content4" },
-    { code: "Content 5", text: "Description content 5", url: "/url/to/content5" },
-    { code: "Content 6", text: "Description content 6", url: "/url/to/content6" },
-    { code: "Content 7", text: "Description content 7", url: "/url/to/content7" }
+    { code: "Content 1", text: "Description content 1", url: "/url/to/content1", type: 'drgs' },
+    { code: "Content 2", text: "Description content 2", url: "/url/to/content2", type: 'drgs' },
+    { code: "Content 3", text: "Description content 3", url: "/url/to/content3", type: 'drgs' },
+    { code: "Content 4", text: "Description content 4", url: "/url/to/content4", type: 'drgs' },
+    { code: "Content 5", text: "Description content 5", url: "/url/to/content5", type: 'drgs' },
+    { code: "Content 6", text: "Description content 6", url: "/url/to/content6", type: 'drgs' },
+    { code: "Content 7", text: "Description content 7", url: "/url/to/content7", type: 'drgs' }
   ];
 
   search(version: string, search: string): Promise<CatalogElement[]> {
