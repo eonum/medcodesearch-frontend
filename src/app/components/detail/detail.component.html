@@ -21,12 +21,14 @@
     <app-detail-chop *ngIf="catalog.name === 'CHOP'"[selectedElement]="selectedElement" ></app-detail-chop>
     <app-detail-icd *ngIf="catalog.name === 'ICD'"[selectedElement]="selectedElement" ></app-detail-icd>
 
-    <h4>Kinder</h4>
-    <ul *ngIf="children">
-        <li *ngFor="let child of children">
-            <a [routerLink]="['../../', child.type, extractCodeFromUrl(child.url)]">{{child.code}}</a>: {{child.text}}
-        </li>
-    </ul>
+    <template [ngIf]="children?.length > 0">
+        <h4>Kinder</h4>
+        <ul>
+            <li *ngFor="let child of children">
+                <a [routerLink]="['../../', child.type, extractCodeFromUrl(child.url)]">{{child.code}}</a>: {{child.text}}
+            </li>
+        </ul>
+    </template>
 
 </template>
     
