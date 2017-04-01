@@ -25,7 +25,7 @@ const routes: Routes = [
         }
       },
       {
-        path: ':catalog/:version/:code',
+        path: ':catalog/:version/:type/:code',
         component: DetailComponent,
         resolve: {
           catalog: CatalogResolver

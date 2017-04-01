@@ -47,9 +47,9 @@ export abstract class Catalog {
     return this.service.search(version, query);
   }
 
-  public async getByCode(code: string): Promise<CatalogElement> {
+  public async getByCode(type: string, code: string): Promise<CatalogElement> {
     this.initService();
-    return this.service.getByCode(this.activeVersion, code);
+    return this.service.getByCode(this.activeVersion, type, code);
   }
 
   /**

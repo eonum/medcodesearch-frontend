@@ -97,34 +97,24 @@ export class CatalogService implements ICatalogService {
    * @param version the version of the catalog to use
    * @param code the code to search for
    */
-  public async getByCode(version: string, code: string): Promise<CatalogElement> {
-    let types = this.retrievableTypes;
-    let result: CatalogElement[] = [];
-
-    for (let i = 0; i < types.length; i++) {
-      let elementType: string = types[i];
-      try {
-        let webResult = await this.getSingleElementForTypeByCode(elementType, version, code);
-        if (webResult != undefined) {
-          result.push(webResult);
-          // If we found a result, we don't look for others
-          break;
-        }
-      }
-      catch (error) {
-        console.log(error);
+  public async getByCode(version: string, type:string, code: string): Promise<CatalogElement> {
+    try {
+      const webResult: CatalogElement = await this.getSingleElementForTypeByCode(type, version, code);
+      if (webResult != undefined) {
+        webResult.type = type;
+        return webResult;
       }
     }
-    if (result.length > 0) {
-      return Promise.resolve(result[0]);
+    catch (error) {
+      console.log(error);
     }
 
     throw new Error("Not found");
   }
 
   private async getSingleElementForTypeByCode(elementType: string, version: string, code: string): Promise<CatalogElement> {
-    let locale: string = this.getLocale();
-    let url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
+    const locale: string = this.getLocale();
+    const url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
     if (environment.dev) console.log(url);
 
     return this.http.get(url).toPromise()
@@ -138,8 +128,11 @@ export class CatalogService implements ICatalogService {
 
     return this.http.get(url).toPromise()
       .then(result => {
-        let data = result.json();
-        return data as CatalogElement[]
+        const data: CatalogElement[] = result.json() as CatalogElement[];
+        data.forEach(element => {
+          element.type = elementType;
+        });
+        return data;
       })
       .catch(reason => {
         throw new Error(reason);
