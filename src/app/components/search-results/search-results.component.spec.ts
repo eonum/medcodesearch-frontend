@@ -11,7 +11,7 @@ describe('SearchResultsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchResultsComponent ],
+      declarations: [SearchResultsComponent],
       imports: [
         HttpModule,
         TranslateModule.forRoot({
@@ -23,7 +23,7 @@ describe('SearchResultsComponent', () => {
         })
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

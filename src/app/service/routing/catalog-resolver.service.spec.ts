@@ -1,25 +1,25 @@
-import {TestBed, inject, async} from '@angular/core/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
 
 import { CatalogResolver } from './catalog-resolver.service';
-import {RouterStub, ActivatedRouteStub} from '../../router-stub';
-import {Router, ActivatedRouteSnapshot} from '@angular/router';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {CatalogServiceMock} from '../catalog.service.mock';
+import { RouterStub, ActivatedRouteStub } from '../../router-stub';
+import { Router, ActivatedRouteSnapshot } from '@angular/router';
+import { ICDCatalog } from '../../catalog/icd.catalog';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { CatalogServiceMock } from '../catalog.service.mock';
 import * as TypeMoq from "typemoq";
 
 describe('CatalogResolver', () => {
 
-  let routeMock:TypeMoq.IMock<ActivatedRouteSnapshot>
-  let routeParams: {catalog:string, version?:string, language:string};
+  let routeMock: TypeMoq.IMock<ActivatedRouteSnapshot>
+  let routeParams: { catalog: string, version?: string, language: string };
   let fixture;
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      providers: [CatalogResolver,{ provide: Router, useClass: RouterStub },
+      providers: [CatalogResolver, { provide: Router, useClass: RouterStub },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        {provide: 'ICatalogService', useClass: CatalogServiceMock},]
+        { provide: 'ICatalogService', useClass: CatalogServiceMock },]
     });
 
     routeMock = TypeMoq.Mock.ofType<ActivatedRouteSnapshot>();

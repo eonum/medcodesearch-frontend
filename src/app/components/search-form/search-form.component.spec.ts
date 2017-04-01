@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchFormComponent } from './search-form.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ActivatedRouteStub, RouterStub} from '../../router-stub';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {CatalogServiceMock} from '../../service/catalog.service.mock';
-import {ICatalogService} from '../../service/i.catalog.service';
-import {Catalog} from '../../catalog/catalog';
-import {By} from '@angular/platform-browser';
-import {ModalModule} from 'ng2-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRouteStub, RouterStub } from '../../router-stub';
+import { ICDCatalog } from '../../catalog/icd.catalog';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { CatalogServiceMock } from '../../service/catalog.service.mock';
+import { ICatalogService } from '../../service/i.catalog.service';
+import { Catalog } from '../../catalog/catalog';
+import { By } from '@angular/platform-browser';
+import { ModalModule } from 'ng2-bootstrap';
 
 
 describe('SearchFormComponent', () => {
@@ -19,7 +19,7 @@ describe('SearchFormComponent', () => {
   let fixture: ComponentFixture<SearchFormComponent>;
   let catalogService: ICatalogService;
   let catalog: Catalog;
-  let query:string;
+  let query: string;
   let buttons: any;
 
   beforeEach(async(() => {
@@ -28,15 +28,15 @@ describe('SearchFormComponent', () => {
         TranslateModule,
         ModalModule.forRoot(),
       ],
-      declarations: [ SearchFormComponent],
+      declarations: [SearchFormComponent],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        {provide: 'ICatalogService', useClass: CatalogServiceMock},
+        { provide: 'ICatalogService', useClass: CatalogServiceMock },
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

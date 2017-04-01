@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
 import { ICatalogService } from "./i.catalog.service";
 import 'rxjs/add/operator/toPromise';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CatalogService implements ICatalogService {
@@ -15,7 +15,7 @@ export class CatalogService implements ICatalogService {
   private retrievableCodes: string[];
   private versionParam: string;
 
-  public constructor(private http: Http, private translate: TranslateService) {  }
+  public constructor(private http: Http, private translate: TranslateService) { }
 
   /**
    * Initializes the service with catalog specific parameters.
@@ -31,7 +31,7 @@ export class CatalogService implements ICatalogService {
    *              the catalog-specific url part for accessing
    *              the versions of the catalog
    */
-  public init(searchableCodes: string[], retrievableCodes: string[], versionParam: string): void{
+  public init(searchableCodes: string[], retrievableCodes: string[], versionParam: string): void {
     this.searchableCodes = searchableCodes;
     this.retrievableCodes = retrievableCodes;
     this.versionParam = versionParam;
@@ -39,7 +39,7 @@ export class CatalogService implements ICatalogService {
   }
 
   public getLocale(): string {
-    if (environment.dev && !this.translate.currentLang){
+    if (environment.dev && !this.translate.currentLang) {
       console.log("%c No currentLanguage set", "color:red")
     }
     return this.translate.currentLang;
@@ -59,16 +59,16 @@ export class CatalogService implements ICatalogService {
    * @param query the query to search for
    */
   public async search(version: string, query: string): Promise<CatalogElement[]> {
-    let types : string[] = this.searchableCodes;
+    let types: string[] = this.searchableCodes;
     let results: CatalogElement[] = [];
 
-    for (let i = 0; i < types.length; i++){
+    for (let i = 0; i < types.length; i++) {
       let type: string = types[i];
       try {
         let webResults = await this.getSearchForType(type, version, query);
         results = results.concat(webResults);
       }
-      catch(e){
+      catch (e) {
         let error = e;
       }
     }
@@ -79,13 +79,13 @@ export class CatalogService implements ICatalogService {
    * Get all versions supported by the catalog
    */
 
-   public getVersions(lang: string): Promise<string[]> {
+  public getVersions(lang: string): Promise<string[]> {
     let url: string = `${this.baseUrl}${lang}/${this.versionParam}/versions`;
 
     return this.http.get(url)
       .toPromise()
-      .then( response => response.json() as string[] )
-      .catch(reason => {throw new Error(reason)});
+      .then(response => response.json() as string[])
+      .catch(reason => { throw new Error(reason) });
   }
 
   /**
@@ -101,38 +101,38 @@ export class CatalogService implements ICatalogService {
     let types = this.retrievableCodes;
     let result: CatalogElement[] = [];
 
-    for (let i = 0; i < types.length; i++){
+    for (let i = 0; i < types.length; i++) {
       let elementType: string = types[i];
       try {
         let webResult = await this.getSingleElementForTypeByCode(elementType, version, code);
-        if (webResult != undefined){
+        if (webResult != undefined) {
           result.push(webResult);
         }
       }
-      catch(e){
+      catch (e) {
         let error = e;
       }
     }
-    if (result.length > 0){
+    if (result.length > 0) {
       return Promise.resolve(result[0]);
     }
 
     throw new Error("Not found");
   }
 
-  private async getSingleElementForTypeByCode(elementType: string, version: string, code: string) : Promise<CatalogElement>{
+  private async getSingleElementForTypeByCode(elementType: string, version: string, code: string): Promise<CatalogElement> {
     let locale: string = this.getLocale();
-    let url : string =  `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
-    if(environment.dev) console.log(url);
+    let url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
+    if (environment.dev) console.log(url);
 
     return this.http.get(url).toPromise()
       .then(result => { return result.json() as CatalogElement })
-      .catch(reason => {throw new Error(reason)});
+      .catch(reason => { throw new Error(reason) });
   }
 
-  private async getSearchForType(elementType: string, version: string, query: string) : Promise<CatalogElement[]>{
-    let url : string = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
-    if(environment.dev) console.log(url);
+  private async getSearchForType(elementType: string, version: string, query: string): Promise<CatalogElement[]> {
+    let url: string = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
+    if (environment.dev) console.log(url);
 
     return this.http.get(url).toPromise()
       .then(result => {

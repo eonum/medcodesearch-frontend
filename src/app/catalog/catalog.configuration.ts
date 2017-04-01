@@ -1,5 +1,5 @@
 export class CatalogConfiguration {
-    public searchableTypes: string[];
-    public retrievableTypes: string[];
-    public versionParam: string;
+  public searchableTypes: string[];
+  public retrievableTypes: string[];
+  public versionParam: string;
 }

@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {LanguageGuard} from './service/routing/language-guard.service';
-import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { LanguageGuard } from './service/routing/language-guard.service';
+import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { SearchMainComponent } from './components/search-main/search-main.component';
 import { DetailComponent } from "./components/detail/detail.component";
 
@@ -10,7 +10,7 @@ const routes: Routes = [
     path: ':language',
     canActivate: [LanguageGuard],
     children: [
-        {
+      {
         path: ':catalog',
         component: SearchMainComponent,
         resolve: {
@@ -38,8 +38,8 @@ const routes: Routes = [
       }
     ]
   },
-  {path: '', redirectTo: 'de', pathMatch: 'full'},
-  {path: '**', redirectTo: 'de'}
+  { path: '', redirectTo: 'de', pathMatch: 'full' },
+  { path: '**', redirectTo: 'de' }
 
 ];
 

@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import {Catalog} from '../../catalog/catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {environment} from '../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Catalog } from '../../catalog/catalog';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { ICDCatalog } from '../../catalog/icd.catalog';
+import { environment } from '../../../environments/environment';
 
 /**
  * This service acts as resolver for a path that contains a `catalog`
@@ -21,7 +21,7 @@ import {environment} from '../../../environments/environment';
 export class CatalogResolver implements Resolve<Catalog> {
 
   /**Domain to catalog map for all available catalogs.*/
-  private catalogs: {[domain: string]: Catalog};
+  private catalogs: { [domain: string]: Catalog };
 
   /**To give global access to the active catalog*/
   private activeCatalog: Catalog;
@@ -35,14 +35,14 @@ export class CatalogResolver implements Resolve<Catalog> {
    * @param icdCatalog
    */
   constructor(private router: Router,
-              private swissDrgCatalog: SwissDrgCatalog,
-              private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog,) {
+    private swissDrgCatalog: SwissDrgCatalog,
+    private chopCatalog: CHOPCatalog,
+    private icdCatalog: ICDCatalog, ) {
 
-    this.catalogs                              = {};
+    this.catalogs = {};
     this.catalogs[swissDrgCatalog.getDomain()] = swissDrgCatalog;
-    this.catalogs[chopCatalog.getDomain()]     = chopCatalog;
-    this.catalogs[icdCatalog.getDomain()]      = icdCatalog;
+    this.catalogs[chopCatalog.getDomain()] = chopCatalog;
+    this.catalogs[icdCatalog.getDomain()] = icdCatalog;
   }
 
   /**
@@ -55,20 +55,20 @@ export class CatalogResolver implements Resolve<Catalog> {
    */
   resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<Catalog> {
 
-    let domain  = route.params['catalog'];
+    let domain = route.params['catalog'];
     let version = route.params['version'];
     let catalog = this.catalogs[domain];
 
     // Activate catalog and return it, or redirect to start
     if (catalog) {
-        if(version){
-          return catalog.activateVersion(version).then(
+      if (version) {
+        return catalog.activateVersion(version).then(
           (success: boolean) => {
             if (success) { //valid version
               this.activeCatalog = catalog;
               return catalog;
-          } else this.redirectToStart(route);
-        }
+            } else this.redirectToStart(route);
+          }
         )
       } else this.redirectToDefaultCatalog(route);
 
@@ -80,14 +80,14 @@ export class CatalogResolver implements Resolve<Catalog> {
   }
 
   private redirectToDefaultCatalog(route: ActivatedRouteSnapshot) {
-    let domain  = route.params['catalog'];
+    let domain = route.params['catalog'];
     let catalog = this.catalogs[domain];
     if (catalog) {
-        catalog.getVersions().then( versions => {
-          this.router.navigate([route.params['language'], route.params['catalog'], versions[0]]).catch(e => console.log(e));
+      catalog.getVersions().then(versions => {
+        this.router.navigate([route.params['language'], route.params['catalog'], versions[0]]).catch(e => console.log(e));
       },
-      error => console.log(error)
-    );
+        error => console.log(error)
+      );
 
     } else this.redirectToStart(route);
   }

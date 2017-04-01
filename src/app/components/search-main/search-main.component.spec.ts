@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchMainComponent } from './search-main.component';
-import {SearchFormComponent} from '../search-form/search-form.component';
-import {SearchResultsComponent} from '../search-results/search-results.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {ActivatedRouteStub, RouterStub} from '../../router-stub';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CatalogServiceMock} from '../../service/catalog.service.mock';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
+import { SearchFormComponent } from '../search-form/search-form.component';
+import { SearchResultsComponent } from '../search-results/search-results.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { ActivatedRouteStub, RouterStub } from '../../router-stub';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CatalogServiceMock } from '../../service/catalog.service.mock';
+import { ICDCatalog } from '../../catalog/icd.catalog';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
 import * as TypeMoq from "typemoq";
-import {ICatalogService} from '../../service/i.catalog.service';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {CatalogElement} from '../../model/catalog.element';
-import {ModalModule} from 'ng2-bootstrap';
+import { ICatalogService } from '../../service/i.catalog.service';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { CatalogElement } from '../../model/catalog.element';
+import { ModalModule } from 'ng2-bootstrap';
 
 describe('SearchMainComponent', () => {
 
@@ -21,17 +21,21 @@ describe('SearchMainComponent', () => {
   let fixture: ComponentFixture<SearchMainComponent>;
 
   let route: ActivatedRouteStub;
-  let mock : TypeMoq.IMock<SwissDrgCatalog>
+  let mock: TypeMoq.IMock<SwissDrgCatalog>
 
   /*Test data*/
 
-  const query:string = 'Some search query';
-  const version:string = 'V4.0';
+  const query: string = 'Some search query';
+  const version: string = 'V4.0';
   const searchResults: CatalogElement[] = [
-    { code: 'Content 1', text: 'Description content 1', url: '/url/to/content1',
-      highlight: {text:['content'],relevantCodes:[]}},
-    { code: 'Content 2', text: 'Description content 2', url: '/url/to/content2' ,
-      highlight: {text:['2'],relevantCodes:[]}},
+    {
+      code: 'Content 1', text: 'Description content 1', url: '/url/to/content1',
+      highlight: { text: ['content'], relevantCodes: [] }
+    },
+    {
+      code: 'Content 2', text: 'Description content 2', url: '/url/to/content2',
+      highlight: { text: ['2'], relevantCodes: [] }
+    },
   ];
 
   beforeEach(async(() => {
@@ -42,15 +46,15 @@ describe('SearchMainComponent', () => {
         SearchResultsComponent
       ],
       imports: [TranslateModule.forRoot(),
-        ModalModule.forRoot()],
+      ModalModule.forRoot()],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        {provide: 'ICatalogService', useClass: CatalogServiceMock},
+        { provide: 'ICatalogService', useClass: CatalogServiceMock },
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -65,7 +69,7 @@ describe('SearchMainComponent', () => {
     // Set up the activated route stub
     route = fixture.debugElement.injector.get(ActivatedRoute);
     route.setCatalog(mock.object);
-    route.setTestParams({'query': query});
+    route.setTestParams({ 'query': query });
 
     fixture.detectChanges();
   });
@@ -74,7 +78,7 @@ describe('SearchMainComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should store the catalog',() => {
+  it('should store the catalog', () => {
     expect(component.catalog).toBe(mock.object);
   });
 

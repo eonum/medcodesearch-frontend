@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Catalog} from '../../catalog/catalog';
-import {ActivatedRoute, Params} from '@angular/router';
-import {CatalogElement} from '../../model/catalog.element';
-import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Catalog } from '../../catalog/catalog';
+import { ActivatedRoute, Params } from '@angular/router';
+import { CatalogElement } from '../../model/catalog.element';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
@@ -41,7 +41,7 @@ export class SearchMainComponent implements OnInit {
    */
   public searchResults: CatalogElement[];
 
-  constructor(private route: ActivatedRoute,) { }
+  constructor(private route: ActivatedRoute, ) { }
 
   /**
    * Subscribe to route data from {@link CatalogResolver} and to
@@ -55,10 +55,10 @@ export class SearchMainComponent implements OnInit {
     Observable.zip(
       this.route.data,
       this.route.params,
-      (data: {catalog: Catalog}, params: Params): string => {
+      (data: { catalog: Catalog }, params: Params): string => {
         //project to search query and assign values
         this.catalog = data.catalog;
-        this.query   = params['query'] || '';
+        this.query = params['query'] || '';
         return this.query;
       }
     ).subscribe(query => { this.updateResults(query); })

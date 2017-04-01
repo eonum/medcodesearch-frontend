@@ -1,8 +1,8 @@
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Injectable} from '@angular/core';
-import {NavigationExtras} from '@angular/router';
-import {Observable} from 'rxjs';
-import {Catalog} from './catalog/catalog';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Injectable } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Catalog } from './catalog/catalog';
 
 /**
  * Replacement for the angular Router in tests.
@@ -14,7 +14,7 @@ export class RouterStub {
 
   navigate(commands: string[], extras?: NavigationExtras) {
     this.url = commands.join('/');
-     this.extras=extras;
+    this.extras = extras;
     return {
       'url': commands.join('/'),
       'extras': extras
@@ -32,13 +32,13 @@ export class ActivatedRouteStub {
 
   /*Set up stub for observable field 'params'*/
   private testParams: {} = {};
-          paramsSubject = new BehaviorSubject(this.testParams);
-          params  = this.paramsSubject.asObservable();
+  paramsSubject = new BehaviorSubject(this.testParams);
+  params = this.paramsSubject.asObservable();
 
   /*Set up stub for observable field 'data'*/
   private testData: {} = {};
-          dataSubject = new BehaviorSubject(this.testData);
-          data = this.dataSubject.asObservable();
+  dataSubject = new BehaviorSubject(this.testData);
+  data = this.dataSubject.asObservable();
 
   /*Set the given params as next value in the 'params'-observable*/
   public setTestParams(params: {}) {
@@ -53,17 +53,17 @@ export class ActivatedRouteStub {
   }
 
   /*Set the catalog as next value in the 'data'-observable*/
-  public setCatalog(catalog: Catalog){
-    this.setTestData({catalog: catalog});
+  public setCatalog(catalog: Catalog) {
+    this.setTestData({ catalog: catalog });
   }
 
 
-  public navigateToCatalog(catalogDomain:string, version:string, query?:string){
+  public navigateToCatalog(catalogDomain: string, version: string, query?: string) {
     let params = {
       'catalog': catalogDomain,
       'version': version,
     }
-    if(query) params['query'] = query;
+    if (query) params['query'] = query;
     this.setTestParams(params);
   }
 }

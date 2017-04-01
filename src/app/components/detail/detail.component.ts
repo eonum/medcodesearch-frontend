@@ -26,15 +26,15 @@ export class DetailComponent implements OnInit {
     Observable.zip(
       this.route.params,
       this.route.data,
-      (params: Params, data : { catalog: Catalog }) : string => {
+      (params: Params, data: { catalog: Catalog }): string => {
         this.catalog = data.catalog;
         let code = params['code'];
         return code;
-      }).subscribe(code => {      
+      }).subscribe(code => {
         this.catalog.getByCode(code).then(element => {
           this.selectedElement = element;
         });
-    });
+      });
   }
 
 }

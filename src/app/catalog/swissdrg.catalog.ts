@@ -8,8 +8,8 @@ import { ICatalogService } from '../service/i.catalog.service';
 @Injectable()
 export class SwissDrgCatalog extends Catalog {
 
-    constructor(@Inject("ICatalogService") service: ICatalogService) {
-        super(service, "SwissDRG",
-          { searchableTypes: [ "drgs", "adrgs"], retrievableTypes:  ["drgs", "adrgs", "partition", "mdc" ], versionParam: "drgs" });
-    }
+  constructor( @Inject("ICatalogService") service: ICatalogService) {
+    super(service, "SwissDRG",
+      { searchableTypes: ["drgs", "adrgs"], retrievableTypes: ["drgs", "adrgs", "partition", "mdc"], versionParam: "drgs" });
+  }
 }
