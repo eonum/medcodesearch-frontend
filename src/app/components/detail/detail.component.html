@@ -2,12 +2,32 @@
 <hr />
 
 <template [ngIf]="selectedElement">
+
+    <ol class="breadcrumb">
+        <li *ngFor="let element of hierarchy">
+            <template [ngIf]="selectedElement !== element">
+                <a [routerLink]="['../../', element.type, extractCodeFromUrl(element.url)]" >{{element.code}}</a>
+            </template>
+            <template [ngIf]="selectedElement === element">
+                {{element.code}}
+            </template>
+        </li>
+    </ol>
+
     <h3>{{selectedElement.code}}</h3>
     <p>{{selectedElement.text}}</p>
 
     <app-detail-swiss-drg *ngIf="catalog.name === 'SwissDRG'"[selectedElement]="selectedElement" ></app-detail-swiss-drg>
     <app-detail-chop *ngIf="catalog.name === 'CHOP'"[selectedElement]="selectedElement" ></app-detail-chop>
     <app-detail-icd *ngIf="catalog.name === 'ICD'"[selectedElement]="selectedElement" ></app-detail-icd>
+
+    <h4>Kinder</h4>
+    <ul *ngIf="children">
+        <li *ngFor="let child of children">
+            <a [routerLink]="['../../', child.type, extractCodeFromUrl(child.url)]">{{child.code}}</a>: {{child.text}}
+        </li>
+    </ul>
+
 </template>
     
 <a [routerLink]="['../../']">{{'BACK_SEARCH' | translate}}</a>
