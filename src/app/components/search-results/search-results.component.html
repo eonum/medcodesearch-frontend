@@ -1,6 +1,6 @@
 <dl *ngIf="searchResults">
     <p *ngFor="let result of searchResults">
-        <dt><a (click)="showDetail(result)">{{result.code}}</a></dt>
+        <dt><a [routerLink]="['./', result.code]">{{result.code}}</a></dt>
         <template [ngIf]="result.highlight.text != undefined">
             <dd [innerHtml]="result.highlight.text[0]"></dd>
         </template>
