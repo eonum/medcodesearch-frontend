@@ -99,13 +99,15 @@ export class CatalogService implements ICatalogService {
    */
   public async getByCode(version: string, code: string): Promise<CatalogElement> {
     let types = this.retrievableCodes;
-    let result: CatalogElement[];
+    let result: CatalogElement[] = [];
 
     for (let i = 0; i < types.length; i++){
       let elementType: string = types[i];
       try {
         let webResult = await this.getSingleElementForTypeByCode(elementType, version, code);
-        result.push(webResult);
+        if (webResult != undefined){
+          result.push(webResult);
+        }
       }
       catch(e){
         let error = e;
@@ -124,7 +126,7 @@ export class CatalogService implements ICatalogService {
     if(environment.dev) console.log(url);
 
     return this.http.get(url).toPromise()
-      .then(result => result.json().data as CatalogElement)
+      .then(result => { return result.json() as CatalogElement })
       .catch(reason => {throw new Error(reason)});
   }
 

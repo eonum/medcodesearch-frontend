@@ -17,6 +17,7 @@ import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
 import {CHOPCatalog} from './catalog/chop.catalog';
 import {ICDCatalog} from './catalog/icd.catalog';
 import { SearchMainComponent } from './components/search-main/search-main.component';
+import { DetailComponent } from './components/detail/detail.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -28,7 +29,8 @@ export function HttpLoaderFactory(http: Http) {
     AppComponent,
     SearchFormComponent,
     SearchResultsComponent,
-    SearchMainComponent
+    SearchMainComponent,
+    DetailComponent
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,32 @@
+<search-form [catalog]="catalog"></search-form>
+<hr />
+<div *ngIf="selectedElement">
+    <h3>{{selectedElement.code}}</h3>
+    <p>{{selectedElement.text}}</p>
+    <a [routerLink]="['../']">Back</a>
+    <template [ngIf]="selectedElement.exclusions?.length > 0">
+        <h4>Exklusionen</h4>
+        <ul>
+            <li *ngFor="let exclusion of selectedElement.exclusions">
+                {{exclusion}}
+            </li>
+        </ul>
+    </template>
+    <template [ngIf]="selectedElement.inclusions?.length > 0">
+        <h4>Inklusionen</h4>
+        <ul>
+            <li *ngFor="let inclusion of selectedElement.inclusions">
+                {{inclusion}}
+            </li>
+        </ul>
+    </template>
+    <template [ngIf]="selectedElement.synonyms?.length > 0">
+        <h4>Synonyme</h4>
+        <ul>
+            <li *ngFor="let synonym of selectedElement.synonyms">
+                {{synonym}}
+            </li>
+        </ul>
+    </template>
+    
+</div>

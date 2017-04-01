@@ -5,7 +5,8 @@ import {CHOPCatalog} from '../../catalog/chop.catalog';
 import {ICDCatalog} from '../../catalog/icd.catalog';
 import {CatalogService} from '../../service/catalog.service';
 import {CatalogElement} from '../../model/catalog.element';
-import {Catalog} from '../../catalog/catalog';
+import { Catalog } from '../../catalog/catalog';
+import { Router, ActivatedRoute } from "@angular/router";
 
 /**
  * Component to display the search results.
@@ -20,4 +21,19 @@ import {Catalog} from '../../catalog/catalog';
 
 export class SearchResultsComponent {
     @Input() searchResults: CatalogElement[];
+
+    public catalog: Catalog;
+
+    public constructor(private router: Router, private route: ActivatedRoute){
+        
+    }
+
+    public showDetail(result: any) : void {
+        let params = [result.code];
+
+        this.router.navigate(params, { relativeTo: this.route })
+        .catch(error => {
+            console.log(error)
+        });
+    }
 }
