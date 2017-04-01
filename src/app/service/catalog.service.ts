@@ -11,8 +11,8 @@ export class CatalogService implements ICatalogService {
 
   private baseUrl: string = "https://search.eonum.ch/";
 
-  private searchableCodes: string[];
-  private retrievableCodes: string[];
+  private searchableTypes: string[];
+  private retrievableTypes: string[];
   private versionParam: string;
 
   public constructor(private http: Http, private translate: TranslateService) { }
@@ -31,9 +31,9 @@ export class CatalogService implements ICatalogService {
    *              the catalog-specific url part for accessing
    *              the versions of the catalog
    */
-  public init(searchableCodes: string[], retrievableCodes: string[], versionParam: string): void {
-    this.searchableCodes = searchableCodes;
-    this.retrievableCodes = retrievableCodes;
+  public init(searchableTypes: string[], retrievableTypes: string[], versionParam: string): void {
+    this.searchableTypes = searchableTypes;
+    this.retrievableTypes = retrievableTypes;
     this.versionParam = versionParam;
 
   }
@@ -59,7 +59,7 @@ export class CatalogService implements ICatalogService {
    * @param query the query to search for
    */
   public async search(version: string, query: string): Promise<CatalogElement[]> {
-    let types: string[] = this.searchableCodes;
+    let types: string[] = this.searchableTypes;
     let results: CatalogElement[] = [];
 
     for (let i = 0; i < types.length; i++) {
@@ -98,7 +98,7 @@ export class CatalogService implements ICatalogService {
    * @param code the code to search for
    */
   public async getByCode(version: string, code: string): Promise<CatalogElement> {
-    let types = this.retrievableCodes;
+    let types = this.retrievableTypes;
     let result: CatalogElement[] = [];
 
     for (let i = 0; i < types.length; i++) {
@@ -107,10 +107,12 @@ export class CatalogService implements ICatalogService {
         let webResult = await this.getSingleElementForTypeByCode(elementType, version, code);
         if (webResult != undefined) {
           result.push(webResult);
+          // If we found a result, we don't look for others
+          break;
         }
       }
-      catch (e) {
-        let error = e;
+      catch (error) {
+        console.log(error);
       }
     }
     if (result.length > 0) {
