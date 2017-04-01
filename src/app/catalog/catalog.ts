@@ -28,7 +28,7 @@ export abstract class Catalog {
    * @param elements - elements within a catalog
    */
   public constructor(private service: ICatalogService,
-    protected name: string,
+    public name: string,
     protected config: CatalogConfiguration) {
     this.versions_lang = [];
   }

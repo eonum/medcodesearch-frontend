@@ -18,6 +18,9 @@ import { CHOPCatalog } from './catalog/chop.catalog';
 import { ICDCatalog } from './catalog/icd.catalog';
 import { SearchMainComponent } from './components/search-main/search-main.component';
 import { DetailComponent } from './components/detail/detail.component';
+import { DetailSwissDrgComponent } from './components/detail-swiss-drg/detail-swiss-drg.component';
+import { DetailChopComponent } from './components/detail-chop/detail-chop.component';
+import { DetailIcdComponent } from './components/detail-icd/detail-icd.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -30,7 +33,10 @@ export function HttpLoaderFactory(http: Http) {
     SearchFormComponent,
     SearchResultsComponent,
     SearchMainComponent,
-    DetailComponent
+    DetailComponent,
+    DetailSwissDrgComponent,
+    DetailChopComponent,
+    DetailIcdComponent
   ],
   imports: [
     BrowserModule,
