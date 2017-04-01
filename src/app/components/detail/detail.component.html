@@ -22,7 +22,7 @@
     <app-detail-icd *ngIf="catalog.name === 'ICD'"[selectedElement]="selectedElement" ></app-detail-icd>
 
     <template [ngIf]="children?.length > 0">
-        <h4>Kinder</h4>
+        <h4>{{'LBL_CHILDREN' | translate}}</h4>
         <ul>
             <li *ngFor="let child of children">
                 <a [routerLink]="['../../', child.type, extractCodeFromUrl(child.url)]">{{child.code}}</a>: {{child.text}}
@@ -32,4 +32,4 @@
 
 </template>
     
-<a [routerLink]="['../../']">{{'BACK_SEARCH' | translate}}</a>
+<a [routerLink]="['../../']">{{'LBL_BACK_SEARCH' | translate}}</a>

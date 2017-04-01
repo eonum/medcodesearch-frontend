@@ -1,6 +1,16 @@
 {
   "LANGUAGE": "Deutsch",
-  "NO_RESULTS": "Die Suche erzielte keinen Treffer.",
-  "BACK_SEARCH": "Zurück zur Suche"
+  "LBL_NO_RESULTS": "Die Suche erzielte keinen Treffer.",
+  "LBL_BACK_SEARCH": "Zurück zur Suche",
+  "LBL_CHILDREN": "Untergeordnete Elemente",
+  "LBL_SEARCH_PLACEHOLDER": "Suchbegriff oder Code eingeben...",
+  "LBL_EXCLUSIONS": "Exklusionen",
+  "LBL_INCLUSIONS": "Inklusionen",
+  "LBL_NOTE": "Hinweis",
+  "LBL_NOTES": "Hinweise",
+  "LBL_CODE_NOTE": "Codierungs-Hinweis",
+  "LBL_SUPPLEMENT_CODES": "Zusätzliche Codes",
+  "LBL_USAGE": "Verwendung",
+  "LBL_SYNONYMS": "Synonyme"
 }
 

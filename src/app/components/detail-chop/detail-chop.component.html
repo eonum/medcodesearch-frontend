@@ -1,6 +1,6 @@
 <template [ngIf]="selectedElement">
     <template [ngIf]="selectedElement.exclusions?.length > 0">
-        <h4>Exklusionen</h4>
+        <h4>{{'LBL_EXCLUSIONS' | translate}}</h4>
         <ul>
             <li *ngFor="let exclusion of selectedElement.exclusions">
                 {{exclusion}}
@@ -8,7 +8,7 @@
         </ul>
     </template>
     <template [ngIf]="selectedElement.inclusions?.length > 0">
-        <h4>Inklusionen</h4>
+        <h4>{{'LBL_INCLUSIONS' | translate}}</h4>
         <ul>
             <li *ngFor="let inclusion of selectedElement.inclusions">
                 {{inclusion}}
@@ -16,11 +16,11 @@
         </ul>
     </template>
     <template [ngIf]="selectedElement.notes">
-    <h4>Hinweise</h4>
+    <h4>{{'LBL_NOTES' | translate}}</h4>
     <p>{{selectedElement.notes}}</p>
     </template>
     <template [ngIf]="selectedElement.supplement_codes">
-    <h4>Inklusionen</h4>
+    <h4>{{'LBL_SUPPLEMENT_CODES' | translate}}</h4>
         <ul>
             <li *ngFor="let supplement of selectedElement.supplement_codes">
                 {{supplement}}

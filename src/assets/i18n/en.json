@@ -1,5 +1,15 @@
 {
   "LANGUAGE": "English",
-  "NO_RESULTS": "The search did not match.",
-  "BACK_SEARCH": "Back to search"
+  "LBL_NO_RESULTS": "The search did not match.",
+  "LBL_BACK_SEARCH": "Back to search",
+  "LBL_CHILDREN": "Subordinate elements",
+  "LBL_SEARCH_PLACEHOLDER": "Enter search query or code...",
+  "LBL_EXCLUSIONS": "Exclusions",
+  "LBL_INCLUSIONS": "Inclusions",
+  "LBL_NOTE": "Note",
+  "LBL_NOTES": "Notes",
+  "LBL_CODE_NOTE": "Coding note",
+  "LBL_SUPPLEMENT_CODES": "Supplement codes",
+  "LBL_USAGE": "Usage",
+  "LBL_SYNONYMS": "Synonyms"
 }
