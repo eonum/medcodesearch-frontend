@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {CatalogElement} from '../model/catalog.element';
 import {ICatalogService} from '../service/i.catalog.service';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
+import { CatalogConfiguration } from "./catalog.configuration";
 
 /**
  * Class representing a catalog containing medical
@@ -28,9 +29,7 @@ export abstract class Catalog {
    */
   public constructor(private service: ICatalogService,
                      protected name: string,
-                     protected codeRegex: string,
-                     protected elements: any[],) { // TODO name properly
-
+                     protected config: CatalogConfiguration) {
         this.versions_lang = [];
   }
 
@@ -40,28 +39,7 @@ export abstract class Catalog {
    * @param query the query to search for
    */
   public async search(version: string, query: string): Promise<CatalogElement[]> {
-
-    if (this.isCode(query)) {
-      const singleResult             = await this.getByCode(version, query);
-      const result: CatalogElement[] = [];
-      if (singleResult != null) {
-        result.push(singleResult);
-      }
-      return Promise.resolve(result);
-    } else {
-      return await this.getBySearch(version, query);
-    }
-  }
-
-  /**
-   * Check whether the query is a code or a normal
-   * search string.
-   *
-   * @param query the query to search for within the catalog
-   */
-  private isCode(query: string): boolean {
-    const regex = new RegExp(this.codeRegex);
-    return regex.test(query);
+    return await this.getBySearch(version, query);
   }
 
   protected async getBySearch(version: string, query: string): Promise<CatalogElement[]> {
@@ -69,9 +47,9 @@ export abstract class Catalog {
     return this.service.search(version, query);
   }
 
-  protected async getByCode(version: string, code: string): Promise<CatalogElement> {
+  public async getByCode(code: string): Promise<CatalogElement> {
     this.initService();
-    return this.service.getByCode(version, code);
+    return this.service.getByCode(this.activeVersion, code);
   }
 
   /**
@@ -104,7 +82,7 @@ export abstract class Catalog {
 
 
   private initService() {
-    this.service.init(this.elements[0], this.elements[1], this.elements[2]);
+    this.service.init(this.config.searchableTypes, this.config.retrievableTypes, this.config.versionParam);
   }
 
   /**

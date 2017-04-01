@@ -9,8 +9,7 @@ import { ICatalogService } from '../service/i.catalog.service';
 export class SwissDrgCatalog extends Catalog {
 
     constructor(@Inject("ICatalogService") service: ICatalogService) {
-        super(service, "SwissDRG", "^[A-Za-z]\\d{1,2}[A-Za-z]{0,1}$",
-          [[ "drgs", "adrgs"], [ "drgs", "adrgs", "partition", "mdc" ], "drgs"] );
-
+        super(service, "SwissDRG",
+          { searchableTypes: [ "drgs", "adrgs"], retrievableTypes:  ["drgs", "adrgs", "partition", "mdc" ], versionParam: "drgs" });
     }
 }

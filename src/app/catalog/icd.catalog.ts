@@ -10,7 +10,7 @@ import { ICatalogService } from "../service/i.catalog.service";
 export class ICDCatalog extends Catalog {
 
     constructor(@Inject("ICatalogService") service: ICatalogService) {
-        super(service, "ICD", "^\\w[\\d\\.]$",
-          [['icds'], ['icds', 'icd_groups', 'icd_chapters'], 'icds'] );
+        super(service, "ICD",
+          { searchableTypes: ['icds'], retrievableTypes: ['icds', 'icd_groups', 'icd_chapters'], versionParam: 'icds'} );
     }
 }
