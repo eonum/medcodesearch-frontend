@@ -1,36 +1,38 @@
-<template [ngIf]="selectedElement.exclusions?.length > 0">
-    <h4>Exklusionen</h4>
-    <ul>
-        <li *ngFor="let exclusion of selectedElement.exclusions">
-            {{exclusion}}
-        </li>
-    </ul>
-</template>
-<template [ngIf]="selectedElement.inclusions?.length > 0">
-    <h4>Inklusionen</h4>
-    <ul>
-        <li *ngFor="let inclusion of selectedElement.inclusions">
-            {{inclusion}}
-        </li>
-    </ul>
-</template>
-<template [ngIf]="selectedElement.synonyms?.length > 0">
-    <h4>Synonyme</h4>
-    <ul>
-        <li *ngFor="let synonym of selectedElement.synonyms">
-            {{synonym}}
-        </li>
-    </ul>
-</template>
-<template [ngIf]="selectedElement.note">
-  <h4>Hinweis</h4>
-  <p>{{selectedElement.note}}</p>
-</template>
-<template [ngIf]="selectedElement.usage">
-  <h4>Verwendung</h4>
-  <p>{{selectedElement.usage}}</p>
-</template>
-<template [ngIf]="selectedElement.coding_hint">
-  <h4>Codierungs-Hinweis</h4>
-  <p>{{selectedElement.coding_hint}}</p>
+<template [ngIf]="selectedElement">
+    <template [ngIf]="selectedElement.exclusions?.length > 0">
+        <h4>Exklusionen</h4>
+        <ul>
+            <li *ngFor="let exclusion of selectedElement.exclusions">
+                {{exclusion}}
+            </li>
+        </ul>
+    </template>
+    <template [ngIf]="selectedElement.inclusions?.length > 0">
+        <h4>Inklusionen</h4>
+        <ul>
+            <li *ngFor="let inclusion of selectedElement.inclusions">
+                {{inclusion}}
+            </li>
+        </ul>
+    </template>
+    <template [ngIf]="selectedElement.synonyms?.length > 0">
+        <h4>Synonyme</h4>
+        <ul>
+            <li *ngFor="let synonym of selectedElement.synonyms">
+                {{synonym}}
+            </li>
+        </ul>
+    </template>
+    <template [ngIf]="selectedElement.note">
+    <h4>Hinweis</h4>
+    <p>{{selectedElement.note}}</p>
+    </template>
+    <template [ngIf]="selectedElement.usage">
+    <h4>Verwendung</h4>
+    <p>{{selectedElement.usage}}</p>
+    </template>
+    <template [ngIf]="selectedElement.coding_hint">
+    <h4>Codierungs-Hinweis</h4>
+    <p>{{selectedElement.coding_hint}}</p>
+    </template>
 </template>

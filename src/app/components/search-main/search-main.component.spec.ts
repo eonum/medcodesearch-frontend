@@ -5,7 +5,7 @@ import { SearchFormComponent } from '../search-form/search-form.component';
 import { SearchResultsComponent } from '../search-results/search-results.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRouteStub, RouterStub } from '../../router-stub';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CatalogServiceMock } from '../../service/catalog.service.mock';
 import { ICDCatalog } from '../../catalog/icd.catalog';
 import { CHOPCatalog } from '../../catalog/chop.catalog';
@@ -30,11 +30,11 @@ describe('SearchMainComponent', () => {
   const searchResults: CatalogElement[] = [
     {
       code: 'Content 1', text: 'Description content 1', url: '/url/to/content1',
-      highlight: { text: ['content'], relevantCodes: [] }
+      highlight: { text: ['content'], relevantCodes: [] }, type: 'drg'
     },
     {
       code: 'Content 2', text: 'Description content 2', url: '/url/to/content2',
-      highlight: { text: ['2'], relevantCodes: [] }
+      highlight: { text: ['2'], relevantCodes: [] }, type: 'drg'
     },
   ];
 
@@ -45,13 +45,13 @@ describe('SearchMainComponent', () => {
         SearchFormComponent,
         SearchResultsComponent
       ],
-      imports: [TranslateModule.forRoot(),
+      imports: [RouterModule, TranslateModule.forRoot(),
       ModalModule.forRoot()],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        { provide: 'ICatalogService', useClass: CatalogServiceMock },
+        { provide: 'ICatalogService', useClass: CatalogServiceMock }
       ]
     })
       .compileComponents();

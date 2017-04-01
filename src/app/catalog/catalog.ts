@@ -39,6 +39,7 @@ export abstract class Catalog {
    * @param query the query to search for
    */
   public async search(version: string, query: string): Promise<CatalogElement[]> {
+    this.initService();
     return await this.getBySearch(version, query);
   }
 

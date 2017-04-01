@@ -4,6 +4,7 @@ import { SearchResultsComponent } from './search-results.component';
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpLoaderFactory } from "../../app.module";
 import { Http, HttpModule } from "@angular/http";
+import { RouterModule } from "@angular/router";
 
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
@@ -12,16 +13,7 @@ describe('SearchResultsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchResultsComponent],
-      imports: [
-        HttpModule,
-        TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [Http]
-          }
-        })
-      ]
+      imports: [RouterModule, TranslateModule.forRoot()]
     })
       .compileComponents();
   }));

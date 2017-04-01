@@ -22,7 +22,7 @@ describe("SwissDrgCatalog", () => {
   it('Should initialize service when retrieving versions', async(() => {
 
     mock.setup(x => x.init(
-      TypeMoq.It.isValue(['drgs', 'adrgs']),
+      TypeMoq.It.isValue(['drgs']),
       TypeMoq.It.isValue(['drgs', 'adrgs', 'partition', 'mdc']),
       TypeMoq.It.isValue('drgs'))
     ).verifiable(TypeMoq.Times.atLeastOnce());
@@ -35,7 +35,7 @@ describe("SwissDrgCatalog", () => {
   it('Should initialize service when searching', async(() => {
 
     mock.setup(x => x.init(
-      TypeMoq.It.isValue(['drgs', 'adrgs']),
+      TypeMoq.It.isValue(['drgs']),
       TypeMoq.It.isValue(['drgs', 'adrgs', 'partition', 'mdc']),
       TypeMoq.It.isValue('drgs'))
     ).verifiable(TypeMoq.Times.atLeastOnce());
@@ -56,8 +56,8 @@ describe("SwissDrgCatalog", () => {
 
   it('Should return a list of results', async(() => {
     const catalogs: CatalogElement[] = [
-      { code: "Content 1", text: "Description content 1", url: "/url/to/content1" },
-      { code: "Content 2", text: "Description content 2", url: "/url/to/content2" }
+      { code: "Content 1", text: "Description content 1", url: "/url/to/content1", type: "drgs" },
+      { code: "Content 2", text: "Description content 2", url: "/url/to/content2", type: "drgs" }
     ];
 
     mock.setup(x => x.search('V1.0', 'Content')).returns(() => Promise.resolve(catalogs));
@@ -68,29 +68,13 @@ describe("SwissDrgCatalog", () => {
     });
   }));
 
-  it('Should return a single result by code', async(() => {
-    mock.setup(x => x.getByCode('V1.0', 'P20A')).returns(() => Promise.resolve({
-      code: "Content 1",
-      text: "Description content 1",
-      url: "/url/to/content1"
-    }));
-
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
-    catalog.search('V1.0', 'P20A').then(results => {
-      expect(results.length).toBe(1);
-    });
-  }));
-
-  it('Should throw an error because no code found', async(() => {
-    mock.setup(x => x.getByCode('V1.0', 'P23')).throws(new Error());
+  it('Should return empty array if error is thrown', async(() => {
+    mock.setup(x => x.search('V1.0', 'P23')).returns(() => Promise.resolve([]));
 
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
     catalog.search('V1.0', 'P23')
       .then(result => {
-        fail("Got unexpected result")
-      })
-      .catch(reason => {
-        //Ok - should throw
+        expect(result.length).toBe(0);
       });
   }));
 });
