@@ -1,3 +1,28 @@
-<p>
-  detail-chop works!
-</p>
+<template [ngIf]="selectedElement.exclusions?.length > 0">
+    <h4>Exklusionen</h4>
+    <ul>
+        <li *ngFor="let exclusion of selectedElement.exclusions">
+            {{exclusion}}
+        </li>
+    </ul>
+</template>
+<template [ngIf]="selectedElement.inclusions?.length > 0">
+    <h4>Inklusionen</h4>
+    <ul>
+        <li *ngFor="let inclusion of selectedElement.inclusions">
+            {{inclusion}}
+        </li>
+    </ul>
+</template>
+<template [ngIf]="selectedElement.notes">
+  <h4>Hinweise</h4>
+  <p>{{selectedElement.notes}}</p>
+</template>
+<template [ngIf]="selectedElement.supplement_codes">
+  <h4>Inklusionen</h4>
+    <ul>
+        <li *ngFor="let supplement of selectedElement.supplement_codes">
+            {{supplement}}
+        </li>
+    </ul>
+</template>
