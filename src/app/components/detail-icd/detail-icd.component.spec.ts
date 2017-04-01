@@ -8,9 +8,9 @@ describe('DetailIcdComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailIcdComponent ]
+      declarations: [DetailIcdComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

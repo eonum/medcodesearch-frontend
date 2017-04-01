@@ -97,7 +97,7 @@ export class CatalogService implements ICatalogService {
    * @param version the version of the catalog to use
    * @param code the code to search for
    */
-  public async getByCode(version: string, type:string, code: string): Promise<CatalogElement> {
+  public async getByCode(version: string, type: string, code: string): Promise<CatalogElement> {
     try {
       const webResult: CatalogElement = await this.getSingleElementForTypeByCode(type, version, code);
       if (webResult != undefined) {

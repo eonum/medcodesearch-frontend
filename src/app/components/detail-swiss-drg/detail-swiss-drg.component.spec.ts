@@ -8,9 +8,9 @@ describe('DetailSwissDrgComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailSwissDrgComponent ]
+      declarations: [DetailSwissDrgComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
