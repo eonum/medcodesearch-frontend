@@ -33,7 +33,7 @@ export class DetailComponent implements OnInit {
    * The search query from the route.
    * Serves as input for the search-form component.
    * */
-  private query: string;
+  public query: string;
 
   /**
    * The current element for which the details are displayed

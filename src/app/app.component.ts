@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'medCodeSearch';
-  private languages = ['de', 'fr', 'it', 'en'];
+  public languages = ['de', 'fr', 'it', 'en'];
 
   constructor(public translate: TranslateService,
     private catalogResolver: CatalogResolver,
