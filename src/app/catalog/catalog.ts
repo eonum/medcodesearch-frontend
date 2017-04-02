@@ -56,8 +56,7 @@ export abstract class Catalog {
    * Get and save the versions this catalog can have.
    */
   public getVersions(): Promise<string[]> {
-    if (this.versions_lang[this.service.getLocale()])
-    {
+    if (this.versions_lang[this.service.getLocale()]) {
       return Promise.resolve(this.versions_lang[this.service.getLocale()]);
     }
 
@@ -73,9 +72,9 @@ export abstract class Catalog {
           this.activeVersion = data[0];
         }
       })
-      .catch(error => {
-        console.log(error)
-      });
+        .catch(error => {
+          console.log(error)
+        });
 
       if (lang == "de") {
         germanVersions = versions

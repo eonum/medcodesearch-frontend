@@ -25,7 +25,7 @@ describe('SearchFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        TranslateModule,
+        TranslateModule.forRoot(),
         ModalModule.forRoot(),
       ],
       declarations: [SearchFormComponent],

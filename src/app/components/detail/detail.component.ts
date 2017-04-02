@@ -3,6 +3,7 @@ import { Catalog } from "../../catalog/catalog";
 import { ActivatedRoute, Params } from "@angular/router";
 import { CatalogElement } from "../../model/catalog.element";
 import { Observable } from "rxjs/Observable";
+import { SortHelper } from "../../helper/sort.helper";
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -101,9 +102,15 @@ export class DetailComponent implements OnInit {
       });
 
       this.children = children.sort((a: CatalogElement, b: CatalogElement) => {
-        if (a.code < b.code) return -1;
-        if (a.code > b.code) return 1;
-        return 0;
+        if (SortHelper.isNumberWithLeadingLetter(a.code)) {
+          return SortHelper.compareAsNumberWithLeadingLetter(a.code, b.code);
+        }
+        if (SortHelper.isRomanNumber(a.code)) {
+          return SortHelper.compareAsRomanNumber(a.code, b.code);
+        }
+        else {
+          return SortHelper.compareAsLiteral(a.code, b.code);
+        }
       });
     }
     else {

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetailChopComponent } from './detail-chop.component';
+import { TranslateModule } from "@ngx-translate/core";
 
 describe('DetailChopComponent', () => {
   let component: DetailChopComponent;
@@ -8,7 +9,8 @@ describe('DetailChopComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DetailChopComponent]
+      declarations: [DetailChopComponent],
+      imports: [TranslateModule.forRoot()]
     })
       .compileComponents();
   }));
