@@ -50,7 +50,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-default pull-left" (click)="hideChildModal()">{{'BACK' | translate}}</button>
+        <button class="btn btn-default pull-left" (click)="hideChildModal()">{{'LBL_BACK' | translate}}</button>
           <button *ngFor="let lang of languages"
             type="button" class="btn btn-default" data-dismiss="modal" (click)="changeLanguage(lang)">{{lang}}</button>
       </div>

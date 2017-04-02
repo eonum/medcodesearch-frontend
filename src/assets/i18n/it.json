@@ -3,5 +3,5 @@
   "NO_RESULTS": "La ricerca ha prodotto alcun risultato.",
   "LBL_SELECT_LANGUAGE": "Scegliere la lingua",
   "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "Il catalogo selezionato non è disponibile nel linguaggio corrente.",
-  "BACK": "Ritorno"
+  "LBL_BACK": "Ritorno"
 }
