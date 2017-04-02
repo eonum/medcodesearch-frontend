@@ -1,15 +1,53 @@
+/**
+ * Helper class for sorting. Provides some custom compare-methods
+ */
 export class SortHelper {
+
+  /**
+   * Compares two strings lexicographically.
+   * Returns a positive number, if the first argument is lexicographically
+   * larger than the second argument. Returns a negative number otherwise.
+   * Returns 0 if they're equal.
+   * 
+   * @param a the first argument to compare
+   * @param b the second argument to compare
+   */
   public static compareAsLiteral(a: string, b: string): number {
     if (a < b) return -1;
     if (a > b) return 1;
     return 0;
   }
 
+  /**
+   * Returns true if the literal starts with letters and ends with a number.
+   * Otherwise returns false.
+   * 
+   * Example: 'AB1000' -> true, '8999' -> false
+   * 
+   * @param literal the literal to check
+   */
   public static isNumberWithLeadingLetter(literal: string): boolean {
     const regex = new RegExp('^[A-Z]+([0-9]+)$');
     return regex.test(literal);
   }
 
+  /**
+   * Compares two literal with a number preceeded by letters.
+   * First, the arguments are compared lexicographically by their
+   * leading characters. Second, they're compared by their ending
+   * numbers.
+   * Returns a negative number, if the first argument is smaller than
+   * the second argument, a positive number if the first argument is
+   * larger than the second argument and 0 if they're equal.
+   * 
+   * Examples:
+   * 'ab9', 'ab10' -> -1
+   * 'z1', 'f1' -> -1
+   * 'zz10', 'ab10' -> 1 
+   * 
+   * @param a the first argument to compare
+   * @param b the second argument to compare
+   */
   public static compareAsNumberWithLeadingLetter(a: string, b: string): number {
     const regex = new RegExp('^([A-Z]+)([0-9]+)$');
 
@@ -25,11 +63,21 @@ export class SortHelper {
     return numA - numB;
   }
 
-  public static isRomanNumber(code: string): boolean {
+  /**
+   * Checks whether the given literal is a roman number
+   * (like 'MMXIV')
+   * @param literal the literal to check 
+   */
+  public static isRomanNumber(literal: string): boolean {
     const regex = new RegExp('^[MDCLXVI]+$');
-    return regex.test(code);
+    return regex.test(literal);
   }
 
+  /**
+   * Compares two literal which are roman numbers
+   * @param a the first argument to compare
+   * @param b the second argument to compare
+   */
   public static compareAsRomanNumber(a: string, b: string) {
     let numA: number = this.convertRomanToNumber(a);
     let numB: number = this.convertRomanToNumber(b);
@@ -37,6 +85,10 @@ export class SortHelper {
     return numA - numB;
   }
 
+  /**
+   * Converts a given roman number into an integer.
+   * @param literal the literal to convert
+   */
   public static convertRomanToNumber(literal: string) {
     let num: number = 0;
     let currentLiteral: string = literal;
