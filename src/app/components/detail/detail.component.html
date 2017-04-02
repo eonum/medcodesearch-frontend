@@ -1,4 +1,4 @@
-<search-form [catalog]="catalog"></search-form>
+<search-form [catalog]="catalog" [query]="query"></search-form>
 <hr />
 
 <template [ngIf]="selectedElement">
@@ -6,7 +6,8 @@
     <ol class="breadcrumb">
         <li *ngFor="let element of hierarchy">
             <template [ngIf]="selectedElement !== element">
-                <a [routerLink]="['../../', element.type, extractCodeFromUrl(element.url)]" >{{element.code}}</a>
+                <span class="link" (click)="openCode(element)">{{element.code}}</span>
+                <!--<a [routerLink]="['../../', element.type, extractCodeFromUrl(element.url)]" >{{element.code}}</a>-->
             </template>
             <template [ngIf]="selectedElement === element">
                 {{element.code}}
@@ -25,11 +26,13 @@
         <h4>{{'LBL_CHILDREN' | translate}}</h4>
         <ul>
             <li *ngFor="let child of children">
-                <a [routerLink]="['../../', child.type, extractCodeFromUrl(child.url)]">{{child.code}}</a>: {{child.text}}
+                <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
+                <!--<a [routerLink]="['../../', child.type, extractCodeFromUrl(child.url)]">{{child.code}}</a>: {{child.text}}-->
             </li>
         </ul>
     </template>
 
 </template>
-    
-<a [routerLink]="['../../']">{{'LBL_BACK_SEARCH' | translate}}</a>
+
+<span class="link "(click)="toSearch()">{{'LBL_BACK_SEARCH' | translate}}</span>
+<!--<a [routerLink]="['../../']">{{'LBL_BACK_SEARCH' | translate}}</a>-->

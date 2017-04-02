@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Catalog } from "../../catalog/catalog";
-import { ActivatedRoute, Params } from "@angular/router";
+import { Router, ActivatedRoute, Params } from "@angular/router";
 import { CatalogElement } from "../../model/catalog.element";
 import { Observable } from "rxjs/Observable";
 import { SortHelper } from "../../helper/sort.helper";
@@ -20,6 +20,7 @@ import { SortHelper } from "../../helper/sort.helper";
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
+
 export class DetailComponent implements OnInit {
 
   /**
@@ -27,6 +28,12 @@ export class DetailComponent implements OnInit {
    * Serves as input for the search-form component.
    * */
   public catalog: Catalog;
+
+  /**
+   * The search query from the route.
+   * Serves as input for the search-form component.
+   * */
+  private query: string;
 
   /**
    * The current element for which the details are displayed
@@ -43,7 +50,7 @@ export class DetailComponent implements OnInit {
    */
   public children: CatalogElement[] = [];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     Observable.zip(
@@ -51,8 +58,9 @@ export class DetailComponent implements OnInit {
       this.route.data,
       (params: Params, data: { catalog: Catalog }): any => {
         this.catalog = data.catalog;
-        const type = params['type']
+        const type = params['type'];
         const code = params['code'];
+        this.query = params['query'] || '';
         return { type, code };
       }).subscribe(params => {
         this.updateView(params.type, params.code);
@@ -138,5 +146,21 @@ export class DetailComponent implements OnInit {
       return url.substr(lastSlash + 1);
     }
     return '';
+  }
+
+  /**
+   * Navigates to a particular code.
+   *
+   * @param elm
+   */
+  public openCode(elm) {
+    this.router.navigate([this.catalog.getDomain(), this.catalog.getActiveVersion(), elm.type, this.extractCodeFromUrl(elm.url), {query: this.query}], { relativeTo: this.route.parent }).catch(error => console.log(error));
+  }
+
+  /**
+   * Navigates back to the original search.
+   */
+  public toSearch() {
+    this.router.navigate([this.catalog.getDomain(), this.catalog.getActiveVersion(), {query: this.query}], { relativeTo: this.route.parent }).catch(error => console.log(error));
   }
 }

@@ -1,3 +1,13 @@
 app-root > * {
     min-width: 340px;
 }
+
+.link {
+  color: #337ab7;
+  text-decoration: none;
+  cursor: pointer;
+}
+.link:hover {
+  color: #23527c;
+  text-decoration: underline;
+}

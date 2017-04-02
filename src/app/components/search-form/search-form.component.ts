@@ -84,7 +84,7 @@ export class SearchFormComponent {
    * Update based on search
    */
   public search(query: string): void {
-    this.redirect(this.catalog, this.catalog.getActiveVersion(), query)
+    this.redirect(this.catalog, this.catalog.getActiveVersion(), query);
   }
 
   /**

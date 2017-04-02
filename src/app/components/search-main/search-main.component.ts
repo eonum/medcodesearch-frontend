@@ -56,7 +56,6 @@ export class SearchMainComponent implements OnInit {
       this.route.data,
       this.route.params,
       (data: { catalog: Catalog }, params: Params): string => {
-        //project to search query and assign values
         this.catalog = data.catalog;
         this.query = params['query'] || '';
         return this.query;
