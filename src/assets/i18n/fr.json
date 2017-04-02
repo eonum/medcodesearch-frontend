@@ -1,5 +1,8 @@
 {
   "LANGUAGE": "Français",
-  "NO_RESULTS": "La recherche n'a produit aucun résultat."
+  "NO_RESULTS": "La recherche n'a produit aucun résultat.",
+  "LBL_SELECT_LANGUAGE": "Choisissez la langue",
+  "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "Le catalogue sélectionné n'est pas disponible dans la langue actuelle.",
+  "BACK": "Retour"
 }
 

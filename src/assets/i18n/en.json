@@ -1,4 +1,7 @@
 {
   "LANGUAGE": "English",
-  "NO_RESULTS": "The search did not match."
+  "NO_RESULTS": "The search did not match.",
+  "LBL_SELECT_LANGUAGE": "Select your language",
+  "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "The selected catalog is not available for the current language.",
+  "BACK": "Back"
 }
