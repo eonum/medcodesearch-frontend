@@ -11,6 +11,9 @@
   "LBL_CODE_NOTE": "Codierungs-Hinweis",
   "LBL_SUPPLEMENT_CODES": "Zusätzliche Codes",
   "LBL_USAGE": "Verwendung",
-  "LBL_SYNONYMS": "Synonyme"
+  "LBL_SYNONYMS": "Synonyme",
+  "LBL_SELECT_LANGUAGE": "Sprache wählen",
+  "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "Der gewählte Katalog ist in der aktuellen Sprache nicht verfügbar.",
+  "LBL_BACK": "Zurück"
 }
 
