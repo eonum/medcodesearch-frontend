@@ -67,6 +67,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Helper class for sorting. Provides some custom compare-methods</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -105,16 +112,30 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/482923e/src/app/helper/sort.helper.ts#L2">src/app/helper/sort.helper.ts:2</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/helper/sort.helper.ts#L15">src/app/helper/sort.helper.ts:15</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Compares two strings lexicographically.
+										Returns a positive number, if the first argument is lexicographically
+										larger than the second argument. Returns a negative number otherwise.
+									Returns 0 if they&#39;re equal.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>a: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the first argument to compare</p>
+									</div>
 								</li>
 								<li>
 									<h5>b: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the second argument to compare</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -131,16 +152,37 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/482923e/src/app/helper/sort.helper.ts#L13">src/app/helper/sort.helper.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/helper/sort.helper.ts#L51">src/app/helper/sort.helper.ts:51</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Compares two literal with a number preceeded by letters.
+										First, the arguments are compared lexicographically by their
+										leading characters. Second, they&#39;re compared by their ending
+										numbers.
+										Returns a negative number, if the first argument is smaller than
+										the second argument, a positive number if the first argument is
+									larger than the second argument and 0 if they&#39;re equal.</p>
+								</div>
+								<p>Examples:
+									&#39;ab9&#39;, &#39;ab10&#39; -&gt; -1
+									&#39;z1&#39;, &#39;f1&#39; -&gt; -1
+								&#39;zz10&#39;, &#39;ab10&#39; -&gt; 1</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>a: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the first argument to compare</p>
+									</div>
 								</li>
 								<li>
 									<h5>b: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the second argument to compare</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -157,16 +199,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/482923e/src/app/helper/sort.helper.ts#L33">src/app/helper/sort.helper.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/helper/sort.helper.ts#L81">src/app/helper/sort.helper.ts:81</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Compares two literal which are roman numbers</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>a: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the first argument to compare</p>
+									</div>
 								</li>
 								<li>
 									<h5>b: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the second argument to compare</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -183,13 +236,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/482923e/src/app/helper/sort.helper.ts#L40">src/app/helper/sort.helper.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/helper/sort.helper.ts#L92">src/app/helper/sort.helper.ts:92</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts a given roman number into an integer.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>literal: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the literal to convert</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -206,13 +267,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/482923e/src/app/helper/sort.helper.ts#L8">src/app/helper/sort.helper.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/helper/sort.helper.ts#L29">src/app/helper/sort.helper.ts:29</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns true if the literal starts with letters and ends with a number.
+									Otherwise returns false.</p>
+								</div>
+								<p>Example: &#39;AB1000&#39; -&gt; true, &#39;8999&#39; -&gt; false</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>literal: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the literal to check</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -223,19 +294,28 @@
 					<a name="isromannumber" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> is<wbr>Roman<wbr>Number</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Roman<wbr>Number<span class="tsd-signature-symbol">(</span>code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Roman<wbr>Number<span class="tsd-signature-symbol">(</span>literal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/482923e/src/app/helper/sort.helper.ts#L28">src/app/helper/sort.helper.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/helper/sort.helper.ts#L71">src/app/helper/sort.helper.ts:71</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks whether the given literal is a roman number
+									(like &#39;MMXIV&#39;)</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>code: <span class="tsd-signature-type">string</span></h5>
+									<h5>literal: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the literal to check</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
