@@ -2,6 +2,12 @@
 
 Frontend for the medcodelogic search service: A joint project with the University of Berne (PSE 2017)
 
+--------------------------------------------
+
+V0.2 is hosted as GithubProject Page for this repo.
+
+[eonum.github.io/medcodelogic-frontend](https://eonum.github.io/medcodelogic-frontend)
+
 ----------------------------------------------
 ## Documentation Folder
 
