@@ -1,4 +1,18 @@
 {
   "LANGUAGE": "Italiano",
-  "NO_RESULTS": "La ricerca ha prodotto alcun risultato."
+  "LBL_NO_RESULTS": "La ricerca ha prodotto alcun risultato.",
+  "LBL_BACK_SEARCH": "Torna alla ricerca",
+  "LBL_CHILDREN": "Elementi subordinati",
+  "LBL_SEARCH_PLACEHOLDER": "Inserisci la parola chiave o il codice...",
+  "LBL_EXCLUSIONS": "Esclusioni",
+  "LBL_INCLUSIONS": "Inclusioni",
+  "LBL_NOTE": "Osservazione",
+  "LBL_NOTES": "Osservazioni",
+  "LBL_CODE_NOTE": "Osservare alla codifica",
+  "LBL_SUPPLEMENT_CODES": "Codici aggiuntivi",
+  "LBL_USAGE": "Uso",
+  "LBL_SYNONYMS": "Sinonimi",
+  "LBL_SELECT_LANGUAGE": "Scegliere la lingua",
+  "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "Il catalogo selezionato non è disponibile nel linguaggio corrente.",
+  "LBL_BACK": "Ritorno"
 }
