@@ -1,6 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Router, ActivatedRouteSnapshot, CanActivate } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
+import {Injectable} from "@angular/core";
+import {Router, ActivatedRouteSnapshot, CanActivate} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {browser} from "protractor";
+import {environment} from "../../../environments/environment";
 
 /**
  * This is an authentication guard that grants always access,
@@ -24,15 +26,40 @@ export class LanguageGuard implements CanActivate {
   /**
    * This function is a hook for the authentication,
    * i.e. it is called always before the Route gets activated.
-   * In this case it applies the translation and grants access.
+   * In this case it applies the translation and grants access if an existing
+   * language is present in the root. Otherwise it redirects to the browser (or default) language.
    *
    * @param {ActivatedRouteSnapshot} route - contains route params up to the point where this guard gets activated.
-   * @returns {boolean} - always True
-   */
+   * @returns {boolean} - True, if a valid language parameter is in the route.   */
   canActivate(route: ActivatedRouteSnapshot) {
+
     let language = route.params['language'];
-    this.setLanguage(language);
-    return true;
+
+    // set language and return if it exists
+    if (language && this.languages.indexOf(language) > -1) {
+      this.setLanguage(language);
+      return true;
+    }
+
+    // get browser language or default
+    language = this.matchingLanguage(navigator.language) || this.DEFAULT_LANGUAGE;
+
+    // redirect
+    this.router.navigate([language]);
+    return false;
+  }
+
+  /**
+   * Return a available language tag, that is contained in the given language. Or undefined.
+   *
+   * E.g. en_US => en, CH => ch, foo => undefined.
+   *
+   * @param {string} language
+   * @returns {undefined|string}
+   */
+  private matchingLanguage(language: string): string {
+    language = language.toLowerCase();
+    return this.languages.filter(lang => language.search(lang) > -1).shift();
   }
 
   /**
@@ -49,3 +76,4 @@ export class LanguageGuard implements CanActivate {
     }
   }
 }
+

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LanguageGuard } from './service/routing/language-guard.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { SearchMainComponent } from './components/search-main/search-main.component';
-import { DetailComponent } from "./components/detail/detail.component";
+import { DetailComponent } from './components/detail/detail.component';
 
 const routes: Routes = [
   {
@@ -38,10 +38,12 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '', redirectTo: 'de', pathMatch: 'full' },
-  { path: '**', redirectTo: 'de' }
+  { path: '', canActivate: [LanguageGuard], redirectTo: '', pathMatch: 'full' },  // redirect to browser language
+  { path: '**', redirectTo: '' }
 
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
