@@ -1,3 +1,7 @@
 <search-form [catalog]="catalog" [query]="query"></search-form>
 <hr />
-<search-results [catalog]="catalog" [query]="query" [searchResults]="searchResults"></search-results>
+
+
+<detail-component *ngIf="showDetails"></detail-component>
+
+<search-results *ngIf="showResults()" [catalog]="catalog" [query]="query" [searchResults]="searchResults"></search-results>

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Catalog } from '../../catalog/catalog';
-import { ActivatedRoute, Params } from '@angular/router';
-import { CatalogElement } from '../../model/catalog.element';
-import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Catalog} from '../../catalog/catalog';
+import {ActivatedRoute, Params} from '@angular/router';
+import {CatalogElement} from '../../model/catalog.element';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs/Observable';
 
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
@@ -41,7 +41,15 @@ export class MainComponent implements OnInit {
    */
   public searchResults: CatalogElement[];
 
-  constructor(private route: ActivatedRoute, ) { }
+  public showDetails = false;
+
+  constructor(private route: ActivatedRoute,) {
+  }
+
+
+  public showResults(): boolean {
+    return !this.showDetails;
+  }
 
   /**
    * Subscribe to route data from {@link CatalogResolver} and to
@@ -51,17 +59,21 @@ export class MainComponent implements OnInit {
   ngOnInit() {
 
     /* Zip route data and params to get one observable that fires always (the
-    result of the projection function), when one of the two values changed. */
+     result of the projection function), when one of the two values changed. */
     Observable.zip(
       this.route.data,
       this.route.params,
       (data: { catalog: Catalog }, params: Params): string => {
         this.catalog = data.catalog;
         this.query = params['query'] || '';
+        this.showDetails = params['code'];
         return this.query;
       }
-    ).subscribe(query => { this.updateResults(query); })
+    ).subscribe(query => {
+      this.updateResults(query);
+    });
   }
+
 
   /**
    * Perform the search and assign the results, or reset the
@@ -90,4 +102,5 @@ export class MainComponent implements OnInit {
       console.log(error);
     }
   }
+
 }
