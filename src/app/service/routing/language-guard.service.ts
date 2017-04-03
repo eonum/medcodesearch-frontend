@@ -52,7 +52,7 @@ export class LanguageGuard implements CanActivate {
   /**
    * Return a available language tag, that is contained in the given language. Or undefined.
    *
-   * E.g. en_US => en, CH => ch, foo => undefined.
+   * E.g. en_US => en, DE => de, foo => undefined.
    *
    * @param {string} language
    * @returns {undefined|string}
