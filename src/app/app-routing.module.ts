@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LanguageGuard } from './service/routing/language-guard.service';
-import { CatalogResolver } from './service/routing/catalog-resolver.service';
-import { SearchMainComponent } from './components/search-main/search-main.component';
-import { DetailComponent } from './components/detail/detail.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LanguageGuard} from './service/routing/language-guard.service';
+import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import {SearchMainComponent} from './components/search-main/search-main.component';
+import {DetailComponent} from './components/details/detail/detail.component';
 
 const routes: Routes = [
   {
@@ -38,11 +38,10 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '', canActivate: [LanguageGuard], redirectTo: '', pathMatch: 'full' },  // redirect to browser language
-  { path: '**', redirectTo: '' }
+  {path: '', canActivate: [LanguageGuard], redirectTo: '', pathMatch: 'full'},  // redirect to browser language
+  {path: '**', redirectTo: ''}
 
 ];
-
 
 
 @NgModule({

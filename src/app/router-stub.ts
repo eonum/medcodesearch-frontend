@@ -1,8 +1,7 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Injectable } from '@angular/core';
-import { NavigationExtras } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Catalog } from './catalog/catalog';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Injectable} from '@angular/core';
+import {NavigationExtras} from '@angular/router';
+import {Catalog} from './catalog/catalog';
 
 /**
  * Replacement for the angular Router in tests.
@@ -54,7 +53,7 @@ export class ActivatedRouteStub {
 
   /*Set the catalog as next value in the 'data'-observable*/
   public setCatalog(catalog: Catalog) {
-    this.setTestData({ catalog: catalog });
+    this.setTestData({catalog: catalog});
   }
 
 

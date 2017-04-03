@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {CatalogResolver} from './service/routing/catalog-resolver.service';
 import {TranslateService} from '@ngx-translate/core';
-import {LanguageGuard} from './service/routing/language-guard.service';
 import {Router} from '@angular/router';
 
 @Component({
