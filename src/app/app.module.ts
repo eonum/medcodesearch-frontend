@@ -16,7 +16,7 @@ import {CatalogResolver} from './service/routing/catalog-resolver.service';
 import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
 import {CHOPCatalog} from './catalog/chop.catalog';
 import {ICDCatalog} from './catalog/icd.catalog';
-import {SearchMainComponent} from './components/search-main/search-main.component';
+import {MainComponent} from './components/main/main.component';
 import {DetailComponent} from './components/details/detail/detail.component';
 import {DetailSwissDrgComponent} from './components/details/detail-swiss-drg/detail-swiss-drg.component';
 import {DetailChopComponent} from './components/details/detail-chop/detail-chop.component';
@@ -32,7 +32,7 @@ export function HttpLoaderFactory(http: Http) {
     AppComponent,
     SearchFormComponent,
     SearchResultsComponent,
-    SearchMainComponent,
+    MainComponent,
     DetailComponent,
     DetailSwissDrgComponent,
     DetailChopComponent,

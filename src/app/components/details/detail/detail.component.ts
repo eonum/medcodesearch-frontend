@@ -17,7 +17,7 @@ import {SortHelper} from '../../../helper/sort.helper';
  */
 
 @Component({
-  selector: 'app-detail',
+  selector: 'detail-component',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })

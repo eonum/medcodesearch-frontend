@@ -5,7 +5,7 @@ import {Catalog} from '../../../catalog/catalog';
 
 /**
  * Component to display the search results.
- * Receives the `searchResults` as input from the {@link SearchMainComponent}.
+ * Receives the `searchResults` as input from the {@link MainComponent}.
  */
 @Component({
   selector: 'search-results',
@@ -15,7 +15,7 @@ import {Catalog} from '../../../catalog/catalog';
 
 
 export class SearchResultsComponent {
-  // selected values (resolved in search-main component from route)
+  // selected values (resolved in main component from route)
   @Input() searchResults: CatalogElement[];
   @Input() catalog: Catalog;
   @Input() query: string;

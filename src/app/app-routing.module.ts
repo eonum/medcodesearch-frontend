@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LanguageGuard} from './service/routing/language-guard.service';
 import {CatalogResolver} from './service/routing/catalog-resolver.service';
-import {SearchMainComponent} from './components/search-main/search-main.component';
+import {MainComponent} from './components/main/main.component';
 import {DetailComponent} from './components/details/detail/detail.component';
 
 const routes: Routes = [
@@ -12,14 +12,14 @@ const routes: Routes = [
     children: [
       {
         path: ':catalog',
-        component: SearchMainComponent,
+        component: MainComponent,
         resolve: {
           catalog: CatalogResolver
         }
       },
       {
         path: ':catalog/:version',
-        component: SearchMainComponent,
+        component: MainComponent,
         resolve: {
           catalog: CatalogResolver
         }

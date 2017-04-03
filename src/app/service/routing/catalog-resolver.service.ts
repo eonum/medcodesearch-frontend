@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 /**
  * This service acts as resolver for a path that contains a `catalog`
  * and `version` parameter.
- * It gives the {@link SearchMainComponent} access to the {@link Catalog}
+ * It gives the {@link MainComponent} access to the {@link Catalog}
  * that corresponds to the route, and saves it for global usage.
  *
  * @see
@@ -48,7 +48,7 @@ export class CatalogResolver implements Resolve<Catalog> {
   /**
    * Try to resolve `catalog` and `version` parameters from the route to a catalog.
    * On success, update the `activeCatalog` for global usage and return the
-   * catalog for the search-main component. Else, redirect to start.
+   * catalog for the main component. Else, redirect to start.
    *
    * @param route
    * @param state

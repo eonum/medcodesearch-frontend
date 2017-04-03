@@ -1,15 +1,12 @@
-import {Injectable} from "@angular/core";
-import {Router, ActivatedRouteSnapshot, CanActivate} from "@angular/router";
-import {TranslateService} from "@ngx-translate/core";
-import {browser} from "protractor";
-import {environment} from "../../../environments/environment";
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  * This is an authentication guard that grants always access,
  * but sets the translation according to the `language` parameter in the path.
  *
- *  @see
- *  {@link AppRoutingModule},
+ *  @see {@link AppRoutingModule},
  *  {@link https://angular.io/docs/ts/latest/guide/router.html#guard-admin-feature}
  */
 
@@ -24,8 +21,8 @@ export class LanguageGuard implements CanActivate {
   }
 
   /**
-   * This function is a hook for the authentication,
-   * i.e. it is called always before the Route gets activated.
+   * This function is a hook for the authentication, i.e. it is called always before the Route gets activated.
+   *
    * In this case it applies the translation and grants access if an existing
    * language is present in the root. Otherwise it redirects to the browser (or default) language.
    *
@@ -45,7 +42,7 @@ export class LanguageGuard implements CanActivate {
     language = this.matchingLanguage(navigator.language) || this.DEFAULT_LANGUAGE;
 
     // redirect
-    this.router.navigate([language]);
+    this.router.navigate([language]).catch(error => console.log(error));
     return false;
   }
 
@@ -70,7 +67,7 @@ export class LanguageGuard implements CanActivate {
    */
   private setLanguage(language: string): void {
     if (this.languages.indexOf(language) > -1) {
-      this.translate.use(language)
+      this.translate.use(language);
     } else {
       this.router.navigate([this.DEFAULT_LANGUAGE]);
     }

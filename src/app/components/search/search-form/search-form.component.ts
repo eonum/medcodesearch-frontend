@@ -11,10 +11,10 @@ import {ICDCatalog} from "../../../catalog/icd.catalog";
  * and enter a search query.
  *
  * On selection changes, the {@link Router} is used to navigate to the
- * {@link SearchMainComponent} where the parameters are used to update the
+ * {@link MainComponent} where the parameters are used to update the
  * input for the {@link SearchResultsComponent}.
  *
- * After a re-routing to the {@link SearchMainComponent}, the selected {@link Catalog}
+ * After a re-routing to the {@link MainComponent}, the selected {@link Catalog}
  * and query are passed as input to this component, to allow displaying the selected catalog and query.
  */
 @Component({
@@ -27,7 +27,7 @@ import {ICDCatalog} from "../../../catalog/icd.catalog";
 
 export class SearchFormComponent {
 
-  // selected values (resolved in search-main component from route)
+  // selected values (resolved in main component from route)
   @Input() catalog: Catalog;
   @Input() query: string;
 
