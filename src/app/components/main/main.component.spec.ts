@@ -14,6 +14,10 @@ import { ICatalogService } from '../../service/i.catalog.service';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
 import { CatalogElement } from '../../model/catalog.element';
 import { ModalModule } from 'ng2-bootstrap';
+import {DetailComponent} from '../details/detail/detail.component';
+import {DetailSwissDrgComponent} from '../details/detail-swiss-drg/detail-swiss-drg.component';
+import {DetailIcdComponent} from '../details/detail-icd/detail-icd.component';
+import {DetailChopComponent} from "../details/detail-chop/detail-chop.component";
 
 describe('MainComponent', () => {
 
@@ -43,7 +47,12 @@ describe('MainComponent', () => {
       declarations: [
         MainComponent,
         SearchFormComponent,
-        SearchResultsComponent
+        SearchResultsComponent,
+        DetailComponent,
+        DetailSwissDrgComponent,
+        DetailChopComponent,
+        DetailIcdComponent
+
       ],
       imports: [RouterModule, TranslateModule.forRoot(), ModalModule.forRoot()],
       providers: [
@@ -55,6 +64,8 @@ describe('MainComponent', () => {
     })
       .compileComponents();
   }));
+
+  // TODO move to SearchResults and SearchForm Components
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MainComponent);
@@ -76,6 +87,7 @@ describe('MainComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 
   it('should store the catalog', () => {
     expect(component.catalog).toBe(mock.object);

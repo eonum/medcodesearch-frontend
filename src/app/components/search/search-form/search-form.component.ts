@@ -1,10 +1,10 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ModalDirective, ModalModule } from 'ng2-bootstrap';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ModalDirective} from 'ng2-bootstrap';
 import {Catalog} from '../../../catalog/catalog';
 import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
 import {CHOPCatalog} from '../../../catalog/chop.catalog';
-import {ICDCatalog} from "../../../catalog/icd.catalog";
+import {ICDCatalog} from '../../../catalog/icd.catalog';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -25,10 +25,10 @@ import {ICDCatalog} from "../../../catalog/icd.catalog";
 })
 
 
-export class SearchFormComponent {
+export class SearchFormComponent implements OnInit {
 
   // selected values (resolved in main component from route)
-  @Input() catalog: Catalog;
+  @Input() currentCatalogDomain: string;
   @Input() query: string;
 
   catalogs: Catalog[]; // to display catalog selection
@@ -37,10 +37,10 @@ export class SearchFormComponent {
   selectedVersion: string;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    private swissDrgCatalog: SwissDrgCatalog,
-    private chopCatalog: CHOPCatalog,
-    private icdCatalog: ICDCatalog) {
+              private router: Router,
+              private swissDrgCatalog: SwissDrgCatalog,
+              private chopCatalog: CHOPCatalog,
+              private icdCatalog: ICDCatalog) {
 
     this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog];
 
@@ -51,6 +51,20 @@ export class SearchFormComponent {
   }
 
   @ViewChild('childModal') public childModal: ModalDirective;
+
+  /**
+   * Subscribe to route parameter to mark the selected catalog and displaythe query.
+   */
+  public ngOnInit() {
+
+    this.route.params.subscribe(
+      params => {
+        this.currentCatalogDomain = params['catalog'];
+        this.query = params['query'] || '';
+      }
+    );
+
+  }
 
   public showChildModal(): void {
     this.childModal.show();
@@ -84,7 +98,7 @@ export class SearchFormComponent {
    * Update based on search
    */
   public search(query: string): void {
-    this.router.navigate([{ query: query }], { relativeTo: this.route }).catch(error => console.log(error));
+    this.router.navigate([{query: query}], {relativeTo: this.route}).catch(error => console.log(error));
   }
 
   /**
@@ -95,10 +109,10 @@ export class SearchFormComponent {
    */
   private redirect(catalog: Catalog, version: string, query: string): void {
     let params = query
-      ? [catalog.getDomain(), version, { query: query }]
+      ? [catalog.getDomain(), version, {query: query}]
       : [catalog.getDomain(), version];
 
-    this.router.navigate(params, { relativeTo: this.route.parent }).catch(error => console.log(error));
+    this.router.navigate(params, {relativeTo: this.route.parent}).catch(error => console.log(error));
   }
 
 }

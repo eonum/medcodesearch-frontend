@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchResultsComponent } from './search-results.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {RouterModule} from '@angular/router';
+import {ActivatedRoute, RouterModule} from '@angular/router';
+import {ActivatedRouteStub} from '../../../router-stub';
 
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
@@ -11,7 +12,10 @@ describe('SearchResultsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchResultsComponent],
-      imports: [RouterModule, TranslateModule.forRoot()]
+      imports: [RouterModule, TranslateModule.forRoot()],
+      providers: [
+        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+      ]
     })
       .compileComponents();
   }));
