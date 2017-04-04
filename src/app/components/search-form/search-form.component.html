@@ -18,7 +18,7 @@
                     (click)="updateCatalog(cat)">{{cat.name}}</button>
 
             <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
-                <span>{{cat.activeVersion }}</span>
+                <span>{{cat.activeVersion | correctVersion}}</span>
                 <span class="caret"></span>
                 <span class="sr-only">{{cat.activeVersion}}</span>
             </button>
@@ -26,7 +26,7 @@
                 <li *ngFor="let version of cat.versions_lang['de'] "
                     [ngClass]="{'active': cat.activeVersion === version}" role="menuitem"
                     (click)="updateCatalog(cat, version)">
-                  <a class="dropdown-item" href="javascript:void(0)">{{version}}</a>
+                  <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
                 </li>
             </ul>
 

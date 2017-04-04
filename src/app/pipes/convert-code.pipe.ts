@@ -14,6 +14,13 @@ export class ConvertCodePipe implements PipeTransform {
     const regex = new RegExp(/[\{\(](([\w\d]{1,3}\.?){1,3})(-(([\w\d]{1,3}\.?){1,3})?)?[\}\)]/g);
     s = s.replace(regex, this.wrapCode);
     return this.sanitizer.bypassSecurityTrustHtml(s);
+
+    /*
+        PROBLEME
+        --------
+        Die Kategorien Z40-Z54 dienen
+        Einzelne Episoden von reaktiver Depression (F32.0, F32.1, F32.2)
+     */
   }
 
   private wrapCode(match, c1, c2, c3, c4, c5) {

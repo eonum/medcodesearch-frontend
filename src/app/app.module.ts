@@ -23,6 +23,7 @@ import { DetailChopComponent } from './components/detail-chop/detail-chop.compon
 import { DetailIcdComponent } from './components/detail-icd/detail-icd.component';
 
 import { ConvertCodePipe } from './pipes/convert-code.pipe';
+import { CorrectVersionPipe } from './pipes/correct-version.pipe';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -39,7 +40,8 @@ export function HttpLoaderFactory(http: Http) {
     DetailSwissDrgComponent,
     DetailChopComponent,
     DetailIcdComponent,
-    ConvertCodePipe
+    ConvertCodePipe,
+    CorrectVersionPipe
   ],
   imports: [
     BrowserModule,
