@@ -2,29 +2,23 @@
     <template [ngIf]="selectedElement.exclusions?.length > 0">
         <h4>{{'LBL_EXCLUSIONS' | translate}}</h4>
         <ul>
-            <li *ngFor="let exclusion of selectedElement.exclusions">
-                {{exclusion}}
-            </li>
+            <li *ngFor="let exclusion of selectedElement.exclusions" [innerHTML]="exclusion | convertCode"></li>
         </ul>
     </template>
     <template [ngIf]="selectedElement.inclusions?.length > 0">
         <h4>{{'LBL_INCLUSIONS' | translate}}</h4>
         <ul>
-            <li *ngFor="let inclusion of selectedElement.inclusions">
-                {{inclusion}}
-            </li>
+            <li *ngFor="let inclusion of selectedElement.inclusions" [innerHTML]="inclusion | convertCode"></li>
         </ul>
     </template>
     <template [ngIf]="selectedElement.notes">
     <h4>{{'LBL_NOTES' | translate}}</h4>
-    <p>{{selectedElement.notes}}</p>
+    <p [innerHTML]="selectedElement.notes | convertCode"></p>
     </template>
     <template [ngIf]="selectedElement.supplement_codes">
     <h4>{{'LBL_SUPPLEMENT_CODES' | translate}}</h4>
         <ul>
-            <li *ngFor="let supplement of selectedElement.supplement_codes">
-                {{supplement}}
-            </li>
+            <li *ngFor="let supplement of selectedElement.supplement_codes" [innerHTML]="supplement | convertCode"></li>
         </ul>
     </template>
 </template>

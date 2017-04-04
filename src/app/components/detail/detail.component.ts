@@ -148,6 +148,7 @@ export class DetailComponent implements OnInit {
     return '';
   }
 
+
   /**
    * Navigates to a particular code.
    *

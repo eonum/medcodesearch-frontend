@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -22,6 +22,8 @@ import { DetailSwissDrgComponent } from './components/detail-swiss-drg/detail-sw
 import { DetailChopComponent } from './components/detail-chop/detail-chop.component';
 import { DetailIcdComponent } from './components/detail-icd/detail-icd.component';
 
+import { ConvertCodePipe } from './pipes/convert-code.pipe';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, 'assets/i18n/');
@@ -36,7 +38,8 @@ export function HttpLoaderFactory(http: Http) {
     DetailComponent,
     DetailSwissDrgComponent,
     DetailChopComponent,
-    DetailIcdComponent
+    DetailIcdComponent,
+    ConvertCodePipe
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,9 @@ export function HttpLoaderFactory(http: Http) {
     ModalModule.forRoot(),
     DropdownModule.forRoot(),
     CollapseModule.forRoot()
+  ],
+  exports: [
+    ConvertCodePipe
   ],
   providers: [
     { provide: 'ICatalogService', useClass: CatalogService },
