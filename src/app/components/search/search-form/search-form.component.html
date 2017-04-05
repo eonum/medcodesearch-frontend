@@ -1,7 +1,7 @@
 <div class="row search">
     <div class="col-xs-12">
         <div class="input-group">
-            <input type="text" class="form-control" [formControl]="livesearchForm" placeholder="{{'LBL_SEARCH_PLACEHOLDER' | translate}}" #searchBox value="{{query}}" (keyup.enter)="search(searchBox.value)">
+            <input type="text" class="form-control" [formControl]="searchForm" placeholder="{{'LBL_SEARCH_PLACEHOLDER' | translate}}" #searchBox value="{{query}}" (keyup.enter)="search(searchBox.value)">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" (click)="search(searchBox.value);">Go!</button>
             </span>

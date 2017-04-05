@@ -38,7 +38,7 @@ export class SearchFormComponent {
   languages: string[];
   selectedCatalog: Catalog;
   selectedVersion: string;
-  livesearchForm = new FormControl();
+  searchForm = new FormControl();
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -53,7 +53,7 @@ export class SearchFormComponent {
     this.chopCatalog.getVersions();
     this.icdCatalog.getVersions();
 
-      this.livesearchForm.valueChanges
+      this.searchForm.valueChanges
       .debounceTime(500)
       .distinctUntilChanged()
       .subscribe((value: string) => {
