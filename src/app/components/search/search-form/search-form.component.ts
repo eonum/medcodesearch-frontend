@@ -1,6 +1,9 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalDirective, ModalModule } from 'ng2-bootstrap';
+import {FormsModule, FormControl, ReactiveFormsModule} from '@angular/forms';
+import "rxjs/add/operator/distinctUntilChanged";  
+import "rxjs/add/operator/debounceTime";
 import {Catalog} from '../../../catalog/catalog';
 import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
 import {CHOPCatalog} from '../../../catalog/chop.catalog';
@@ -35,6 +38,7 @@ export class SearchFormComponent {
   languages: string[];
   selectedCatalog: Catalog;
   selectedVersion: string;
+  livesearchForm = new FormControl();
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -42,12 +46,22 @@ export class SearchFormComponent {
     private chopCatalog: CHOPCatalog,
     private icdCatalog: ICDCatalog) {
 
-    this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog];
-
+    this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog];    
+    
     // Initialize the versions
     this.swissDrgCatalog.getVersions();
     this.chopCatalog.getVersions();
     this.icdCatalog.getVersions();
+
+      this.livesearchForm.valueChanges
+      .debounceTime(500)
+      .distinctUntilChanged()
+      .subscribe((value: string) => {
+        this.query = value;
+        this.search(this.query);
+      });
+
+         
   }
 
   @ViewChild('childModal') public childModal: ModalDirective;
