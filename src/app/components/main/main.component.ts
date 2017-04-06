@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Catalog} from '../../catalog/catalog';
 import {environment} from '../../../environments/environment';
-
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
  * The component is assigned to the route `<catalog>/<version>/` and takes an
@@ -16,7 +15,8 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-main',
   templateUrl: 'main.component.html',
-  styleUrls: ['main.component.css']
+  styleUrls: ['main.component.css'],
+
 })
 
 export class MainComponent implements OnInit {
@@ -27,7 +27,6 @@ export class MainComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {
   }
-
   /**
    * Subscribe to route parameter determine if the details view should be displayed
    */

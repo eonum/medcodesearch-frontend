@@ -1,15 +1,14 @@
-
-<template [ngIf]="selectedElement">
+<ng-template [ngIf]="selectedElement">
 
     <ol class="breadcrumb">
         <li *ngFor="let element of hierarchy">
-            <template [ngIf]="selectedElement !== element">
+          <ng-template [ngIf]="selectedElement !== element">
                 <span class="link" (click)="openCode(element)">{{element.code}}</span>
                 <!--<a [routerLink]="['../../', element.type, extractCodeFromUrl(element.url)]" >{{element.code}}</a>-->
-            </template>
-            <template [ngIf]="selectedElement === element">
+          </ng-template>
+          <ng-template [ngIf]="selectedElement === element">
                 {{element.code}}
-            </template>
+          </ng-template>
         </li>
     </ol>
 
@@ -20,7 +19,7 @@
     <app-detail-chop *ngIf="catalog.name === 'CHOP'" [selectedElement]="selectedElement" ></app-detail-chop>
     <app-detail-icd *ngIf="catalog.name === 'ICD'" [selectedElement]="selectedElement" ></app-detail-icd>
 
-    <template [ngIf]="children?.length > 0">
+  <ng-template [ngIf]="children?.length > 0">
         <h4>{{'LBL_CHILDREN' | translate}}</h4>
         <ul>
             <li *ngFor="let child of children">
@@ -28,9 +27,9 @@
                 <!--<a [routerLink]="['../../', child.type, extractCodeFromUrl(child.url)]">{{child.code}}</a>: {{child.text}}-->
             </li>
         </ul>
-    </template>
+  </ng-template>
 
-</template>
+</ng-template>
 
 <!--
 <span class="link " (click)="toSearch()">{{'LBL_BACK_SEARCH' | translate}}</span>

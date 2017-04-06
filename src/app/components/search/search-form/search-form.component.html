@@ -22,7 +22,7 @@
                 <span class="caret"></span>
                 <span class="sr-only">{{cat.activeVersion}}</span>
             </button>
-            <ul class="dropdown-menu dropdown-menu-right" dropdownMenu role="menu" aria-labelledby="split-button">
+          <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
                 <li *ngFor="let version of cat.versions_lang['de'] "
                     [ngClass]="{'active': cat.activeVersion === version}" role="menuitem"
                     (click)="updateCatalog(cat, version)">
