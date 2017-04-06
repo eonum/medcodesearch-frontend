@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LanguageGuard} from './service/routing/language-guard.service';
 import {CatalogResolver} from './service/routing/catalog-resolver.service';
 import {MainComponent} from './components/main/main.component';
+import {DetailComponent} from './components/details/detail/detail.component';
 
 const routes: Routes = [
   {
@@ -21,14 +22,15 @@ const routes: Routes = [
         component: MainComponent,
         resolve: {
           catalog: CatalogResolver
-        }
-      },
-      {
-        path: ':catalog/:version/:type/:code',
-        component: MainComponent,
-        resolve: {
-          catalog: CatalogResolver
-        }
+        },
+        children: [
+
+          {
+            path: ':type/:code',
+            component: DetailComponent,
+
+          }
+        ]
       },
       {
         path: '',
@@ -37,7 +39,12 @@ const routes: Routes = [
       }
     ]
   },
-  {path: '', canActivate: [LanguageGuard], redirectTo: '', pathMatch: 'full'},  // redirect to browser language
+  {
+    path: '',
+    pathMatch: 'full',
+    canActivate: [LanguageGuard], // does redirect to browser language
+    redirectTo: '',
+  },
   {path: '**', redirectTo: ''}
 
 ];

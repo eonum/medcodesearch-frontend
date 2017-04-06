@@ -18,7 +18,7 @@ import {ICDCatalog} from '../../../catalog/icd.catalog';
  * and query are passed as input to this component, to allow displaying the selected catalog and query.
  */
 @Component({
-  selector: 'search-form',
+  selector: 'app-search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.css'],
   providers: [],
@@ -60,8 +60,11 @@ export class SearchFormComponent implements OnInit {
     this.route.params.subscribe(
       params => {
         this.currentCatalogDomain = params['catalog'];
-        this.query = params['query'] || '';
       }
+    );
+
+    this.route.queryParams.subscribe(
+      params => this.query = params['query'] || ''
     );
 
   }
@@ -76,7 +79,8 @@ export class SearchFormComponent implements OnInit {
 
   public changeLanguage(language: string): void {
     this.childModal.hide();
-    this.router.navigate([language, this.selectedCatalog.getDomain(), this.selectedVersion]).catch(error => console.log(error));
+    this.router.navigate([language, this.selectedCatalog.getDomain(), this.selectedVersion]
+    ).catch(error => console.log(error));
   }
 
   /**
@@ -98,7 +102,10 @@ export class SearchFormComponent implements OnInit {
    * Update based on search
    */
   public search(query: string): void {
-    this.router.navigate([{query: query}], {relativeTo: this.route}).catch(error => console.log(error));
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {query: query}
+    }).catch(error => console.log(error));
   }
 
   /**
@@ -108,11 +115,13 @@ export class SearchFormComponent implements OnInit {
    * @param query
    */
   private redirect(catalog: Catalog, version: string, query: string): void {
-    let params = query
-      ? [catalog.getDomain(), version, {query: query}]
-      : [catalog.getDomain(), version];
 
-    this.router.navigate(params, {relativeTo: this.route.parent}).catch(error => console.log(error));
+    const params = [catalog.getDomain(), version];
+
+    this.router.navigate(params, {
+      relativeTo: this.route.parent,
+      preserveQueryParams: true
+    }).catch(error => console.log(error));
   }
 
 }

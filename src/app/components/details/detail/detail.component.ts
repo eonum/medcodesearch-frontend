@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Catalog} from '../../../catalog/catalog';
-import {CatalogElement} from "../../../model/catalog.element";
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {CatalogElement} from '../../../model/catalog.element';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 import {SortHelper} from '../../../helper/sort.helper';
 
+
+import 'rxjs/add/observable/merge';
+
+import {environment} from '../../../../environments/environment';
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -31,12 +35,6 @@ export class DetailComponent implements OnInit {
   public catalog: Catalog;
 
   /**
-   * The search query from the route.
-   * Serves as input for the search-form component.
-   * */
-  public query: string;
-
-  /**
    * The current element for which the details are displayed
    */
   public selectedElement: CatalogElement;
@@ -51,21 +49,27 @@ export class DetailComponent implements OnInit {
    */
   public children: CatalogElement[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
-    Observable.zip(
+    if (environment.dev) {
+      console.log('>> DetailComponent on init.');
+    }
+
+    /* Merge the route params type and code with the
+     catalog in the route data into one single observable
+     stream.
+     */
+    Observable.merge(
+      this.route.parent.data,
       this.route.params,
-      this.route.data,
-      (params: Params, data: { catalog: Catalog }): any => {
-        this.catalog = data.catalog;
-        const type = params['type'];
-        const code = params['code'];
-        this.query = params['query'] || '';
-        return { type, code };
-      }).subscribe(params => {
-        this.updateView(params.type, params.code);
-      });
+    ).subscribe(
+      params => {
+        this.catalog = params['catalog'] || this.catalog;
+        this.updateView(params['type'], params['code']);
+      }
+    );
   }
 
   /**
@@ -74,12 +78,18 @@ export class DetailComponent implements OnInit {
    * @param code the code of the element to display
    */
   private updateView(type: string, code: string) {
+
+    if (!type || !code) {
+      this.hierarchy = this.children = [];
+      return;
+    }
+
     this.catalog.getByCode(type, code).then(element => {
       this.selectedElement = element;
       this.hierarchy = [];
       this.loadHierarchy(element);
       this.loadChildren(element);
-    });
+    }).catch(error => console.log(error));
   }
 
   /**
@@ -95,12 +105,12 @@ export class DetailComponent implements OnInit {
       this.catalog.getByCode(type, code).then(element => {
         element.url = parent.url;
         this.loadHierarchy(element);
-      });
+      }).catch(error => console.log(error));
     }
   }
 
   /**
-   * Loads the immeadiate children of the currentElement
+   * Loads the immediate children of the currentElement
    * @param currentElement the element of which the children will be loaded
    */
   private loadChildren(currentElement: CatalogElement) {
@@ -155,13 +165,24 @@ export class DetailComponent implements OnInit {
    * @param elm
    */
   public openCode(elm) {
-    this.router.navigate([this.catalog.getDomain(), this.catalog.getActiveVersion(), elm.type, this.extractCodeFromUrl(elm.url), {query: this.query}], { relativeTo: this.route.parent }).catch(error => console.log(error));
+
+    this.router.navigate(
+      [elm.type, this.extractCodeFromUrl(elm.url)], {
+        relativeTo: this.route.parent,
+        preserveQueryParams: true
+      }).catch(error => console.log(error.message));
+
   }
 
   /**
    * Navigates back to the original search.
    */
   public toSearch() {
-    this.router.navigate([this.catalog.getDomain(), this.catalog.getActiveVersion(), {query: this.query}], { relativeTo: this.route.parent }).catch(error => console.log(error));
+    this.router.navigate(
+      [this.catalog.getDomain(), this.catalog.getActiveVersion()], {
+        relativeTo: this.route.parent.parent,
+        preserveQueryParams: true
+      }
+    ).catch(error => console.log(error));
   }
 }

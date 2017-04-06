@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Catalog} from '../../catalog/catalog';
+import {environment} from '../../../environments/environment';
 
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
@@ -20,22 +22,38 @@ import {ActivatedRoute} from '@angular/router';
 export class MainComponent implements OnInit {
 
   public showDetails = false;
+  public query = '';
+  public catalog: Catalog;
 
-  constructor(private route: ActivatedRoute,) { }
+  constructor(private route: ActivatedRoute) {
+  }
 
   /**
    * Subscribe to route parameter determine if the details view should be displayed
    */
   ngOnInit() {
-    console.log('Main Component on init.');
+    if (environment.dev) {
+      console.log('>> MainComponent on init.');
+    }
 
     this.route.params.subscribe(
-      params => this.showDetails = params['code']
+      params => {
+        this.showDetails = params['code'] !== null;
+      }
     );
+
+    this.route.queryParams.subscribe(
+      params => this.query = params['query']
+    );
+
+    this.route.data.subscribe(
+      data => this.catalog = data.catalog
+    );
+
   }
 
   public showResults(): boolean {
-    return !this.showDetails;
+    return true;
   }
 
 }
