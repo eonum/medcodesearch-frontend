@@ -23,6 +23,11 @@ export class SearchResultsComponent {
   public constructor(private route: ActivatedRoute, private router: Router) {}
 
   public openCode(type, code) {
+	
+	if(this.query !== undefined && this.query != '')
+	this.catalog.sendAnalytics(this.catalog.getDomain(),this.catalog.getActiveVersion(), type, code, this.query);  
+	  
+	  
     this.router.navigate([this.catalog.getDomain(), this.catalog.getActiveVersion(), type, code, {query: this.query}],
                           { relativeTo: this.route.parent }).catch(error => console.log(error));
   }
