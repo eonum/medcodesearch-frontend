@@ -22,6 +22,9 @@ import {DetailSwissDrgComponent} from './components/details/detail-swiss-drg/det
 import {DetailChopComponent} from './components/details/detail-chop/detail-chop.component';
 import {DetailIcdComponent} from './components/details/detail-icd/detail-icd.component';
 
+import {ConvertCodePipe} from './pipes/convert-code.pipe';
+import {CorrectVersionPipe} from './pipes/correct-version.pipe';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, 'assets/i18n/');
@@ -36,7 +39,9 @@ export function HttpLoaderFactory(http: Http) {
     DetailComponent,
     DetailSwissDrgComponent,
     DetailChopComponent,
-    DetailIcdComponent
+    DetailIcdComponent,
+    ConvertCodePipe,
+    CorrectVersionPipe
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,9 @@ export function HttpLoaderFactory(http: Http) {
     ModalModule.forRoot(),
     DropdownModule.forRoot(),
     CollapseModule.forRoot()
+  ],
+  exports: [
+    ConvertCodePipe
   ],
   providers: [
     {provide: 'ICatalogService', useClass: CatalogService},

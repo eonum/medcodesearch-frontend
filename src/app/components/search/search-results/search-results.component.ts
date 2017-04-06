@@ -28,6 +28,17 @@ export class SearchResultsComponent implements OnChanges {
   }
 
   public openCode(type, code) {
+    if(''){
+      console.log('empty is false')
+    }
+    if(undefined){
+      console.log('undefined is true')
+    }
+    if (this.query !== undefined && this.query != '')
+      this.catalog.sendAnalytics(
+        this.catalog.getDomain(),this.catalog.getActiveVersion(), type, code, this.query
+      );
+
 
     this.router.navigate(
       [type, code], {

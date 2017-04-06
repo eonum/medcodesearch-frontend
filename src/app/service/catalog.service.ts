@@ -66,6 +66,19 @@ export class CatalogService implements ICatalogService {
   }
 
   /**
+  *	Sends an analytics notification to eonum
+  *
+  */
+  public sendAnalytics(elementType: string ,version: string, type: string, code: string, query:string): void{
+	  
+	  const locale: string = this.getLocale();
+	  const url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?query=${query}`;
+	  console.log("Sending analytics: \n"+url);
+	  this.http.get(url);
+  }
+
+  
+  /**
    * Get all versions supported by the catalog
    */
 
