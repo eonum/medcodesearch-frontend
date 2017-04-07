@@ -1,20 +1,19 @@
-<dl *ngIf="searchResults">
-    <p *ngFor="let result of searchResults">
-        <dt>
-          <span class="link" (click)="openCode(result.type, result.code)">{{result.code}}</span>
-          <!--<a [routerLink]="['./', result.type, result.code]">{{result.code}}</a>-->
-        </dt>
-        <template [ngIf]="result.highlight.text != undefined">
-            <dd [innerHtml]="result.highlight.text[0]"></dd>
-        </template>
-        <template [ngIf]="result.highlight.text == undefined">
-            <dd [innerHtml]="result.text"></dd>
-        </template>
+<div class="box" *ngIf="searchResults">
+    <dl *ngIf="searchResults">
+        <p *ngFor="let result of searchResults">
+            <dt>
+            <span class="link" (click)="openCode(result.type, result.code)">{{result.code}}</span>
+            <!--<a [routerLink]="['./', result.type, result.code]">{{result.code}}</a>-->
+            </dt>
+            <template [ngIf]="result.highlight.text != undefined">
+                <dd [innerHtml]="result.highlight.text[0]"></dd>
+            </template>
+            <template [ngIf]="result.highlight.text == undefined">
+                <dd [innerHtml]="result.text"></dd>
+            </template>
+        </p>
+    <p *ngIf="searchResults.length==0">
+        {{ 'LBL_NO_RESULTS' | translate }}
     </p>
-  <p *ngIf="searchResults.length==0">
-    {{ 'LBL_NO_RESULTS' | translate }}
-  </p>
-</dl>
-
-
-
+    </dl>
+</div>

@@ -1,6 +1,6 @@
 <div class="row search">
     <div class="col-xs-12">
-        <div class="input-group">
+        <div class="input-group search-center">
             <input type="text" class="form-control" placeholder="{{'LBL_SEARCH_PLACEHOLDER' | translate}}" #searchBox value="{{query}}" (keyup.enter)="search(searchBox.value)">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" (click)="search(searchBox.value);">Go!</button>
@@ -11,25 +11,26 @@
 
 <div class="row">
     <div class="col-xs-12">
+        <div class="search-center">
+            <div class="btn-group" dropdown *ngFor="let cat of catalogs">
+                <button type="button" class="catalog btn btn-default"
+                        [ngClass]="{'active': cat === catalog}"
+                        (click)="updateCatalog(cat)">{{cat.name}}</button>
 
-        <div class="btn-group" dropdown *ngFor="let cat of catalogs">
-            <button type="button" class="catalog btn btn-default"
-                    [ngClass]="{'active': cat === catalog}"
-                    (click)="updateCatalog(cat)">{{cat.name}}</button>
+                <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
+                    <span>{{cat.activeVersion | correctVersion}}</span>
+                    <span class="caret"></span>
+                    <span class="sr-only">{{cat.activeVersion}}</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" dropdownMenu role="menu" aria-labelledby="split-button">
+                    <li *ngFor="let version of cat.versions_lang['de'] "
+                        [ngClass]="{'active': cat.activeVersion === version}" role="menuitem"
+                        (click)="updateCatalog(cat, version)">
+                    <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
+                    </li>
+                </ul>
 
-            <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
-                <span>{{cat.activeVersion | correctVersion}}</span>
-                <span class="caret"></span>
-                <span class="sr-only">{{cat.activeVersion}}</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-right" dropdownMenu role="menu" aria-labelledby="split-button">
-                <li *ngFor="let version of cat.versions_lang['de'] "
-                    [ngClass]="{'active': cat.activeVersion === version}" role="menuitem"
-                    (click)="updateCatalog(cat, version)">
-                  <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
-                </li>
-            </ul>
-
+            </div>
         </div>
 
     </div>
