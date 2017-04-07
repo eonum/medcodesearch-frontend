@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform, NgZone} from '@angular/core';
+import {NgZone, Pipe, PipeTransform} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -16,10 +16,10 @@ export class ConvertCodePipe implements PipeTransform {
     return this.sanitizer.bypassSecurityTrustHtml(s);
 
     /*
-        PROBLEME
-        --------
-        Die Kategorien Z40-Z54 dienen
-        Einzelne Episoden von reaktiver Depression (F32.0, F32.1, F32.2)
+     PROBLEME
+     --------
+     Die Kategorien Z40-Z54 dienen
+     Einzelne Episoden von reaktiver Depression (F32.0, F32.1, F32.2)
      */
   }
 
@@ -45,7 +45,10 @@ export class ConvertCodePipe implements PipeTransform {
     }
     const catalog = currentRoute.snapshot.data.catalog;
 
-    this.router.navigate([catalog.getDomain(), catalog.getActiveVersion(), {query: query}], {relativeTo: this.route.parent}).catch(error => console.log(error));
+    this.router.navigate(['.'], {
+      relativeTo: this.route.parent,
+      queryParams: {query: query}
+    }).catch(error => console.log(error));
   }
 }
 
