@@ -169,7 +169,7 @@ export class DetailComponent implements OnInit {
     this.router.navigate(
       [elm.type, this.extractCodeFromUrl(elm.url)], {
         relativeTo: this.route.parent,
-        preserveQueryParams: true
+        queryParamsHandling: 'merge'
       }).catch(error => console.log(error.message));
 
   }
@@ -181,7 +181,7 @@ export class DetailComponent implements OnInit {
     this.router.navigate(
       [this.catalog.getDomain(), this.catalog.getActiveVersion()], {
         relativeTo: this.route.parent.parent,
-        preserveQueryParams: true
+        queryParamsHandling: 'merge'
       }
     ).catch(error => console.log(error));
   }

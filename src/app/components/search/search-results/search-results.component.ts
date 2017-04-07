@@ -43,7 +43,7 @@ export class SearchResultsComponent implements OnChanges {
     this.router.navigate(
       [type, code], {
         relativeTo: this.route,    // :catalog/:version/
-        preserveQueryParams: true  // keep search query
+        queryParamsHandling: 'merge'
       }
     ).catch(error => this.handleError(error.message));
   }

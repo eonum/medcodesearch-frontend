@@ -135,7 +135,7 @@ export class SearchFormComponent implements OnInit {
 
     this.router.navigate(params, {
       relativeTo: this.route.parent,
-      preserveQueryParams: true
+      queryParamsHandling: 'merge'
     }).catch(error => console.log(error));
   }
 
