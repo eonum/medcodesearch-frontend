@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Catalog } from '../../catalog/catalog';
 import { environment } from '../../../environments/environment';
 import { CatalogElement } from "../../model/catalog.element";
+import { Observable } from "rxjs/Observable";
+
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
  * The component is assigned to the route `<catalog>/<version>/` and takes an
@@ -22,13 +24,16 @@ import { CatalogElement } from "../../model/catalog.element";
 
 export class MainComponent implements OnInit {
 
-  public showDetails = false;
   public query = '';
   public catalog: Catalog;
 
-  public rootElement: CatalogElement;
+  public selectedElement: CatalogElement;
+  public searchResults: CatalogElement[];
 
-  constructor(private route: ActivatedRoute) {
+  private code: string;
+  private type: string;
+
+  constructor(private route: ActivatedRoute, private router: Router) {
   }
   /**
    * Subscribe to route parameter determine if the details view should be displayed
@@ -40,33 +45,73 @@ export class MainComponent implements OnInit {
 
     this.route.params.subscribe(
       params => {
-        this.showDetails = params['code'] !== undefined;
-        this.updateRootElement();
+        this.code = params['code'];
+        this.type = params['type'];
+        this.updateView();
       }
     );
 
     this.route.queryParams.subscribe(
-      params => this.query = params['query']
+      params => {
+        this.query = params['query'];
+        this.updateView();
+      }
     );
 
     this.route.data.subscribe(
       data => {
         this.catalog = data.catalog;
-        this.updateRootElement();
+        this.updateView();
       }
     );
-
   }
 
-  public updateRootElement(): void {
-    if (this.catalog === undefined || this.catalog === null){
-      return;
+  private updateView(): void {
+    if (this.catalog){
+      this.updateDetailView();
+      this.updateSearchResultsView();
     }
-    this.rootElement = null;
-    this.catalog.getRootElement().then(element => this.rootElement = element);
   }
 
-  public showResults(): boolean {
-    return true;
+  private updateDetailView(): void {
+    if (this.code && this.type){
+        this.catalog.getByCode(this.type, this.code)
+          .then(element => {
+            this.selectedElement = element;
+          })
+          .catch(error => {
+            this.handleError(error);
+          });
+    }
+    else if (!this.query) {
+      this.catalog.getRootElement()
+        .then(element => {
+          this.selectedElement = element;
+        })
+        .catch(error => {
+          this.handleError(error);
+        });
+    }
+  }
+
+  private updateSearchResultsView(): void {
+    if (this.query){
+        this.catalog.search(this.catalog.getActiveVersion(), this.query)
+          .then(results => {
+            this.searchResults = results;
+          })
+          .catch(error => {
+            this.handleError(error);
+          });
+    }
+    else {
+      this.searchResults = null;
+    }
+  }
+
+  private handleError(error): void {
+    if (environment.dev) {
+      console.log(error);
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDirective } from 'ng2-bootstrap';
 import { FormControl } from '@angular/forms';
+import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 
@@ -32,12 +33,11 @@ import { ICDCatalog } from '../../../catalog/icd.catalog';
 export class SearchFormComponent implements OnInit {
 
   // selected values (resolved in main component from route)
-  @Input() currentCatalogDomain: string;
   @Input() query: string;
+  @Input() catalog: Catalog;
 
   catalogs: Catalog[]; // to display catalog selection
   languages: string[];
-  selectedCatalog: Catalog;
   selectedVersion: string;
   searchForm = new FormControl();
 
@@ -61,8 +61,6 @@ export class SearchFormComponent implements OnInit {
         this.query = value;
         this.search(this.query);
       });
-
-
   }
 
   @ViewChild('childModal') public childModal: ModalDirective;
@@ -71,17 +69,9 @@ export class SearchFormComponent implements OnInit {
    * Subscribe to route parameter to mark the selected catalog and displaythe query.
    */
   public ngOnInit() {
-
-    this.route.params.subscribe(
-      params => {
-        this.currentCatalogDomain = params['catalog'];
-      }
-    );
-
-    this.route.queryParams.subscribe(
-      params => this.query = params['query'] || ''
-    );
-
+    if (environment.dev) {
+      console.log('>> MainComponent on init.');
+    }
   }
 
   public showChildModal(): void {
@@ -94,7 +84,7 @@ export class SearchFormComponent implements OnInit {
 
   public changeLanguage(language: string): void {
     this.childModal.hide();
-    this.router.navigate([language, this.selectedCatalog.getDomain(), this.selectedVersion]
+    this.router.navigate([language, this.catalog.getDomain(), this.selectedVersion]
     ).catch(error => console.log(error));
   }
 
@@ -105,7 +95,7 @@ export class SearchFormComponent implements OnInit {
     version = version || catalog.getActiveVersion();
     if (!catalog.hasVersionInCurrentLanguage(version)) {
       this.languages = catalog.getVersionLanguages(version);
-      this.selectedCatalog = catalog;
+      this.catalog = catalog;
       this.selectedVersion = version;
       this.childModal.show();
     } else {
@@ -119,7 +109,7 @@ export class SearchFormComponent implements OnInit {
   public search(query: string): void {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { query: query }
+      queryParams: query.length > 0 ? { query: query } : null
     }).catch(error => console.log(error));
   }
 
