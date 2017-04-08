@@ -1,6 +1,10 @@
 .row {
   margin-bottom: 10px;
 }
+.search-center {
+    max-width: 500px;
+    margin: auto;
+}
 .btn-group:not(:first-child) {
     margin-left: 10px;
 }

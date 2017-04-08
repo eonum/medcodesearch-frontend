@@ -1,16 +1,18 @@
 <div class="row search">
     <div class="col-xs-12">
-        <div class="input-group">
+        <div class="input-group search-center">
             <input type="text" class="form-control" [formControl]="searchForm" placeholder="{{'LBL_SEARCH_PLACEHOLDER' | translate}}" #searchBox value="{{query}}" (keyup.enter)="search(searchBox.value)">
-            <span class="input-group-btn">
+
+          <span class="input-group-btn">
                 <button class="btn btn-default" type="button" (click)="search(searchBox.value);">Go!</button>
             </span>
-        </div><!-- /input-group -->
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-xs-12">
+      <div class="search-center">
 
         <div class="btn-group" dropdown *ngFor="let cat of catalogs">
             <button type="button" class="catalog btn btn-default"
@@ -30,6 +32,7 @@
                 </li>
             </ul>
 
+            </div>
         </div>
 
     </div>

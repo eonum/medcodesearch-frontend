@@ -1,14 +1,19 @@
 <div id="main-component">
+
   <app-search-form></app-search-form>
-  <hr/>
 
   <div class="row">
+
     <div id="search-result-component" [class.col-sm-6]="showDetails">
-      <app-search-results *ngIf="showResults()" [catalog]="catalog" [query]="query"></app-search-results>
+
+      <app-search-results *ngIf="showResults()"
+                          [catalog]="catalog"
+                          [query]="query"></app-search-results>
     </div>
 
     <div id="detail-component" [class.col-sm-6]="showDetails">
       <router-outlet></router-outlet>
     </div>
+
   </div>
 </div>

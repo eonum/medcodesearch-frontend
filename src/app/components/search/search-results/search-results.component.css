@@ -1,0 +1,8 @@
+em {
+  color: lightblue;
+}
+.box {
+  background-color: rgba(255, 255, 255, 0.55);
+  padding: 15px;
+  margin-top: 10px;
+}

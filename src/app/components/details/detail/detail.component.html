@@ -12,10 +12,12 @@
         </li>
     </ol>
 
+  <div class="box">
     <h3>{{selectedElement.code}}</h3>
     <p>{{selectedElement.text}}</p>
 
-    <app-detail-swiss-drg *ngIf="catalog.name === 'SwissDRG'" [selectedElement]="selectedElement" ></app-detail-swiss-drg>
+    <app-detail-swiss-drg *ngIf="catalog.name === 'SwissDRG'" [selectedElement]="selectedElement" >
+    </app-detail-swiss-drg>
     <app-detail-chop *ngIf="catalog.name === 'CHOP'" [selectedElement]="selectedElement" ></app-detail-chop>
     <app-detail-icd *ngIf="catalog.name === 'ICD'" [selectedElement]="selectedElement" ></app-detail-icd>
 
@@ -28,6 +30,7 @@
             </li>
         </ul>
   </ng-template>
+  </div>
 
 </ng-template>
 

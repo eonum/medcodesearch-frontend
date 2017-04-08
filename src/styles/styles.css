@@ -2,6 +2,19 @@ app-root > * {
     min-width: 340px;
 }
 
+body{
+  background-color: rgb(230,230,230);
+ /*
+  background: url(steto_smartphone_hd.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+ */
+}
+
+
 .link {
   color: #337ab7;
   text-decoration: none;
@@ -11,3 +24,5 @@ app-root > * {
   color: #23527c;
   text-decoration: underline;
 }
+
+
