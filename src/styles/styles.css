@@ -3,7 +3,7 @@ app-root > * {
 }
 
 body{
-  background-color: rgb(230,230,230);
+  background-color: rgb(245,245,245);
  /*
   background: url(steto_smartphone_hd.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -25,4 +25,8 @@ body{
   text-decoration: underline;
 }
 
-
+.box {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 15px;
+  margin-top: 10px;
+}

@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { CatalogElement } from '../model/catalog.element';
-import { ICatalogService } from '../service/i.catalog.service';
-import { environment } from '../../environments/environment';
-import { CatalogConfiguration } from "./catalog.configuration";
+import {Injectable} from '@angular/core';
+import {CatalogElement} from '../model/catalog.element';
+import {ICatalogService} from '../service/i.catalog.service';
+import {CatalogConfiguration} from './catalog.configuration';
 
 /**
  * Class representing a catalog containing medical
@@ -78,8 +77,7 @@ export abstract class Catalog {
 
       if (lang == "de") {
         germanVersions = versions
-      };
-
+      }
     }
     return germanVersions;
   }
@@ -143,20 +141,20 @@ export abstract class Catalog {
     }
     return validLangs;
   }
-  
+
 
 	/**
 	* Sends an analytic notification to eonum
 	*
-	*/ 
-  public sendAnalytics( elementType: string ,version: string, type: string, code: string, query:string ):void{
-	  
-	  this.service.sendAnalytics(elementType ,version, type, code, query);
-	  
-	  
+	*/
+  public sendAnalytics( elementType: string ,version: string, element: CatalogElement, query:string ):void{
+
+	  this.service.sendAnalytics(elementType ,version, element.type, element.code, query);
+
+
   }
-  
-  
-  
-  
+
+
+
+
 }

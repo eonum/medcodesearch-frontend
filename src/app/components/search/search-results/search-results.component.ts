@@ -21,27 +21,26 @@ export class SearchResultsComponent implements OnChanges {
   @Input() catalog: Catalog = null;
   @Input() query = '';
 
+  selectedElement: CatalogElement;
   searchResults: CatalogElement[];
 
   public constructor(private route: ActivatedRoute,
                      private router: Router) {
   }
 
-  public openCode(type, code) {
-    if(''){
-      console.log('empty is false')
-    }
-    if(undefined){
-      console.log('undefined is true')
-    }
-    if (this.query !== undefined && this.query != '')
+  public openCode(result) {
+
+    this.selectedElement = result;
+
+    if (this.query) {
       this.catalog.sendAnalytics(
-        this.catalog.getDomain(),this.catalog.getActiveVersion(), type, code, this.query
+        this.catalog.getDomain(), this.catalog.getActiveVersion(), result, this.query
       );
+    }
 
 
     this.router.navigate(
-      [type, code], {
+      [result.type, result.code], {
         relativeTo: this.route,    // :catalog/:version/
         queryParamsHandling: 'merge'
       }
