@@ -1,14 +1,14 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ModalDirective} from 'ng2-bootstrap';
-import {FormControl} from '@angular/forms';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalDirective } from 'ng2-bootstrap';
+import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 
-import {Catalog} from '../../../catalog/catalog';
-import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
-import {CHOPCatalog} from '../../../catalog/chop.catalog';
-import {ICDCatalog} from '../../../catalog/icd.catalog';
+import { Catalog } from '../../../catalog/catalog';
+import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
+import { CHOPCatalog } from '../../../catalog/chop.catalog';
+import { ICDCatalog } from '../../../catalog/icd.catalog';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -42,10 +42,10 @@ export class SearchFormComponent implements OnInit {
   searchForm = new FormControl();
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private swissDrgCatalog: SwissDrgCatalog,
-              private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog) {
+    private router: Router,
+    private swissDrgCatalog: SwissDrgCatalog,
+    private chopCatalog: CHOPCatalog,
+    private icdCatalog: ICDCatalog) {
 
     this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog];
 
@@ -119,7 +119,7 @@ export class SearchFormComponent implements OnInit {
   public search(query: string): void {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: {query: query}
+      queryParams: { query: query }
     }).catch(error => console.log(error));
   }
 

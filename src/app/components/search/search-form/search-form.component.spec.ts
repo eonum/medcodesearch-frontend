@@ -5,13 +5,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { ModalModule } from 'ng2-bootstrap';
-import {ICatalogService} from '../../../service/i.catalog.service';
-import {Catalog} from '../../../catalog/catalog';
-import {ActivatedRouteStub, RouterStub} from '../../../router-stub';
-import {ICDCatalog} from '../../../catalog/icd.catalog';
-import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
-import {CHOPCatalog} from '../../../catalog/chop.catalog';
-import {CatalogServiceMock} from '../../../service/catalog.service.mock';
+import { ICatalogService } from '../../../service/i.catalog.service';
+import { Catalog } from '../../../catalog/catalog';
+import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
+import { ICDCatalog } from '../../../catalog/icd.catalog';
+import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
+import { CHOPCatalog } from '../../../catalog/chop.catalog';
+import { CatalogServiceMock } from '../../../service/catalog.service.mock';
 
 
 describe('SearchFormComponent', () => {

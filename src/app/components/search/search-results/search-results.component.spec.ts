@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchResultsComponent } from './search-results.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {ActivatedRoute, RouterModule} from '@angular/router';
-import {ActivatedRouteStub} from '../../../router-stub';
+import { TranslateModule } from '@ngx-translate/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRouteStub } from '../../../router-stub';
 
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;

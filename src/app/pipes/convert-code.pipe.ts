@@ -1,8 +1,8 @@
-import {NgZone, Pipe, PipeTransform} from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
+import { NgZone, Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
-@Pipe({name: 'convertCode'})
+@Pipe({ name: 'convertCode' })
 export class ConvertCodePipe implements PipeTransform {
 
   constructor(private sanitizer: DomSanitizer, private ngZone: NgZone, private route: ActivatedRoute, private router: Router) {
@@ -47,7 +47,7 @@ export class ConvertCodePipe implements PipeTransform {
 
     this.router.navigate(['.'], {
       relativeTo: this.route.parent,
-      queryParams: {query: query}
+      queryParams: { query: query }
     }).catch(error => console.log(error));
   }
 }

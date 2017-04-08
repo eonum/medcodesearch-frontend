@@ -144,19 +144,14 @@ export abstract class Catalog {
     return validLangs;
   }
   
+  /**
+  * Sends an analytic notification to eonum
+  *
+  */
+  public sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void {
 
-	/**
-	* Sends an analytic notification to eonum
-	*
-	*/ 
-  public sendAnalytics( elementType: string ,version: string, type: string, code: string, query:string ):void{
-	  
-	  this.service.sendAnalytics(elementType ,version, type, code, query);
-	  
-	  
+    this.service.sendAnalytics(elementType, version, type, code, query);
+
+
   }
-  
-  
-  
-  
 }

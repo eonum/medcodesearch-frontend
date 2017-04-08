@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import {DetailIcdComponent} from './detail-icd.component';
+import { DetailIcdComponent } from './detail-icd.component';
 
 describe('DetailIcdComponent', () => {
   let component: DetailIcdComponent;

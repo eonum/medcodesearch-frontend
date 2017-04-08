@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Catalog} from '../../catalog/catalog';
-import {environment} from '../../../environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Catalog } from '../../catalog/catalog';
+import { environment } from '../../../environments/environment';
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
  * The component is assigned to the route `<catalog>/<version>/` and takes an

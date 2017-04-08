@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {LanguageGuard} from './service/routing/language-guard.service';
-import {CatalogResolver} from './service/routing/catalog-resolver.service';
-import {MainComponent} from './components/main/main.component';
-import {DetailComponent} from './components/details/detail/detail.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LanguageGuard } from './service/routing/language-guard.service';
+import { CatalogResolver } from './service/routing/catalog-resolver.service';
+import { MainComponent } from './components/main/main.component';
+import { DetailComponent } from './components/details/detail/detail.component';
 
 const routes: Routes = [
   {
@@ -45,7 +45,7 @@ const routes: Routes = [
     canActivate: [LanguageGuard], // does redirect to browser language
     redirectTo: '',
   },
-  {path: '**', redirectTo: ''}
+  { path: '**', redirectTo: '' }
 
 ];
 

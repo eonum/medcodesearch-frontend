@@ -1,8 +1,8 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CatalogElement} from '../../../model/catalog.element';
-import {Catalog} from '../../../catalog/catalog';
-import {environment} from '../../../../environments/environment';
+import { Component, Input, OnChanges } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CatalogElement } from '../../../model/catalog.element';
+import { Catalog } from '../../../catalog/catalog';
+import { environment } from '../../../../environments/environment';
 
 /**
  * Component to display the search results.
@@ -24,19 +24,19 @@ export class SearchResultsComponent implements OnChanges {
   searchResults: CatalogElement[];
 
   public constructor(private route: ActivatedRoute,
-                     private router: Router) {
+    private router: Router) {
   }
 
   public openCode(type, code) {
-    if(''){
+    if ('') {
       console.log('empty is false')
     }
-    if(undefined){
+    if (undefined) {
       console.log('undefined is true')
     }
     if (this.query !== undefined && this.query != '')
       this.catalog.sendAnalytics(
-        this.catalog.getDomain(),this.catalog.getActiveVersion(), type, code, this.query
+        this.catalog.getDomain(), this.catalog.getActiveVersion(), type, code, this.query
       );
 
 

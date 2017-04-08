@@ -11,5 +11,5 @@ export interface ICatalogService {
   getByCode(version: string, type: string, code: string): Promise<CatalogElement>;
   getLocale(): string;
   getLangs(): string[];
-  sendAnalytics(elementType: string ,version: string, type: string, code: string, query:string): void;
+  sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void;
 }

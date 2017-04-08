@@ -14,10 +14,10 @@ import { ICatalogService } from '../../service/i.catalog.service';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
 import { CatalogElement } from '../../model/catalog.element';
 import { ModalModule } from 'ng2-bootstrap';
-import {DetailComponent} from '../details/detail/detail.component';
-import {DetailSwissDrgComponent} from '../details/detail-swiss-drg/detail-swiss-drg.component';
-import {DetailIcdComponent} from '../details/detail-icd/detail-icd.component';
-import {DetailChopComponent} from "../details/detail-chop/detail-chop.component";
+import { DetailComponent } from '../details/detail/detail.component';
+import { DetailSwissDrgComponent } from '../details/detail-swiss-drg/detail-swiss-drg.component';
+import { DetailIcdComponent } from '../details/detail-icd/detail-icd.component';
+import { DetailChopComponent } from "../details/detail-chop/detail-chop.component";
 
 describe('MainComponent', () => {
 
