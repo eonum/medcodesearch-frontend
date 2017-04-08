@@ -149,7 +149,9 @@ export abstract class Catalog {
 	*/
   public sendAnalytics( elementType: string ,version: string, element: CatalogElement, query:string ):void{
 
-	  this.service.sendAnalytics(elementType ,version, element.type, element.code, query);
+    console.log('Skip sending analytics (because its broken!)');
+    // TODO Patrick: fix this
+	  //this.service.sendAnalytics(elementType ,version, element.type, element.code, query);
 
 
   }

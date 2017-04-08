@@ -73,14 +73,21 @@ export class CatalogService implements ICatalogService {
    */
   public sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void {
 
-    const locale: string = this.getLocale();
-    const url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?query=${query}`;
+    // TODO Patrick: Fix this
 
-    if (environment.production) {
-      this.http.get(url);
-    } else {
-      console.log("Sending analytics: \n" + url);
-    }
+    const locale: string = this.getLocale();
+    const url = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?query=${query}`;
+
+    this.http.get(url).subscribe(
+      response => {
+        if (response.status === 200 && environment.dev) {
+          console.log('Sent Analytics: ' + url);
+        } else if (environment.dev) {
+          console.log('ERROR - Could not send analytics. Url: ' + url);
+          console.log(response);
+        }
+      }
+    );
   }
 
 
@@ -95,7 +102,7 @@ export class CatalogService implements ICatalogService {
       .toPromise()
       .then(response => response.json() as string[])
       .catch(reason => {
-        throw new Error(reason)
+        throw new Error(reason);
       });
   }
 
