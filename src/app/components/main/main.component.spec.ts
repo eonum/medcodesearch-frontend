@@ -18,6 +18,9 @@ import { DetailComponent } from '../details/detail/detail.component';
 import { DetailSwissDrgComponent } from '../details/detail-swiss-drg/detail-swiss-drg.component';
 import { DetailIcdComponent } from '../details/detail-icd/detail-icd.component';
 import { DetailChopComponent } from "../details/detail-chop/detail-chop.component";
+import { ConvertCodePipe } from "../../pipes/convert-code.pipe";
+import { CorrectVersionPipe } from "../../pipes/correct-version.pipe";
+import { ReactiveFormsModule, FormsModule, FormControl } from "@angular/forms";
 
 describe('MainComponent', () => {
 
@@ -51,10 +54,12 @@ describe('MainComponent', () => {
         DetailComponent,
         DetailSwissDrgComponent,
         DetailChopComponent,
-        DetailIcdComponent
+        DetailIcdComponent,
+        ConvertCodePipe,
+        CorrectVersionPipe
 
       ],
-      imports: [RouterModule, TranslateModule.forRoot(), ModalModule.forRoot()],
+      imports: [RouterModule, TranslateModule.forRoot(), ModalModule.forRoot(), ReactiveFormsModule],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },

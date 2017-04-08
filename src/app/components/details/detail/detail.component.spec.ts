@@ -14,6 +14,7 @@ import { CatalogServiceMock } from '../../../service/catalog.service.mock';
 import { ICDCatalog } from '../../../catalog/icd.catalog';
 import { SearchFormComponent } from '../../search/search-form/search-form.component';
 import * as TypeMoq from "typemoq";
+import { ConvertCodePipe } from "../../../pipes/convert-code.pipe";
 
 
 describe('DetailComponent', () => {
@@ -41,7 +42,14 @@ describe('DetailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterModule, TranslateModule.forRoot(), ModalModule.forRoot()],
-      declarations: [DetailComponent, SearchFormComponent, DetailSwissDrgComponent, DetailChopComponent, DetailIcdComponent],
+      declarations: [
+        DetailComponent, 
+        SearchFormComponent, 
+        DetailSwissDrgComponent, 
+        DetailChopComponent, 
+        DetailIcdComponent,
+        ConvertCodePipe
+      ],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
