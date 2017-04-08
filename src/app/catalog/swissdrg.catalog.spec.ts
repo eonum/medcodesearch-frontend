@@ -17,6 +17,8 @@ describe("SwissDrgCatalog", () => {
     mock.setup(service =>
       service.getLangs()
     ).returns(() => ['de', 'en']);
+
+    mock.setup(service => service.getLocale()).returns(() => 'de');
   });
 
   it('Should initialize service when retrieving versions', async(() => {
@@ -24,8 +26,9 @@ describe("SwissDrgCatalog", () => {
     mock.setup(x => x.init(TypeMoq.It.isValue(
       {
         searchableTypes: ['drgs'],
-        retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdc'],
-        versionParam: 'drgs'
+        retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
+        versionParam: 'drgs',
+        rootElementType: 'mdcs'
       }))).verifiable(TypeMoq.Times.atLeastOnce());
 
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
@@ -38,8 +41,9 @@ describe("SwissDrgCatalog", () => {
     mock.setup(x => x.init(TypeMoq.It.isValue(
       {
         searchableTypes: ['drgs'],
-        retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdc'],
-        versionParam: 'drgs'
+        retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
+        versionParam: 'drgs',
+        rootElementType: 'mdcs'
       }))).verifiable(TypeMoq.Times.atLeastOnce());
 
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
@@ -49,10 +53,18 @@ describe("SwissDrgCatalog", () => {
   }));
 
   it('Should get a list of versions', async(() => {
-
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
     catalog.getVersions().then(versions => {
       expect(versions.length).toBe(4);
+    });
+  }));
+
+  it('Should get a list of versions from cache', async(() => {
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    catalog.getVersions().then(outerVersions => {
+      catalog.getVersions().then(versions => {
+        expect(versions.length).toBe(4);
+      });
     });
   }));
 
@@ -78,5 +90,48 @@ describe("SwissDrgCatalog", () => {
       .then(result => {
         expect(result.length).toBe(0);
       });
+  }));
+
+  it('Should return "V1.0" after version is activated', async(() => {
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    catalog.activateVersion('V1.0').then(res => {
+      expect(catalog.getActiveVersion()).toBe('V1.0');
+    });
+  }))
+
+  it('Should return the root element', async(() => {
+    const root: CatalogElement = { code: 'ALL', text: 'The root', url: 'url/to/root', type: 'drgs' };
+    mock.setup(x => x.getByCode('V1.0', 'mdcs', 'ALL')).returns(() => {
+      return Promise.resolve(root);
+    });
+
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    catalog.activateVersion('V1.0').then(res => {
+      catalog.getRootElement().then(element => {
+        expect(element).toBe(root);
+      });
+    });
+  }));
+
+  it('Should have version "V4.0" in current lang', async(() => {
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    catalog.activateVersion('V1.0').then(res => {
+      const result = catalog.hasVersionInCurrentLanguage('V4.0');
+      expect(result).toBe(true);
+    });
+  }));
+
+  it('Should not have version "V5.0" in current lang', async(() => {
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    catalog.activateVersion('V1.0').then(res => {
+      const result = catalog.hasVersionInCurrentLanguage('V5.0');
+      expect(result).toBe(false);
+    });
+  }));
+
+  it('Should not have version "V4.0" in current lang if versions are not loaded', async(() => {
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const result = catalog.hasVersionInCurrentLanguage('V4.0');
+    expect(result).toBe(false);
   }));
 });
