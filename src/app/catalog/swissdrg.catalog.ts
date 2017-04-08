@@ -13,7 +13,7 @@ export class SwissDrgCatalog extends Catalog {
       { searchableTypes: ["drgs"], retrievableTypes: ["drgs", "adrgs", "partition", "mdcs"], versionParam: "drgs", rootElementType: 'mdcs' });
   }
 
-  public getRootElementCode(): string {
+  protected getRootElementCode(): string {
     return 'ALL';
   }
 }

@@ -91,11 +91,11 @@ export abstract class Catalog {
     return this.getByCode(rootElementType, rootElementCode);
   }
 
-  public getRootElementType(): string {
+  protected getRootElementType(): string {
     return this.config.rootElementType;
   }
 
-  public getRootElementCode(): string {
+  protected getRootElementCode(): string {
     return this.activeVersion;
   }
 
