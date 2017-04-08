@@ -51,6 +51,10 @@ describe('SortHelper', () => {
     expect(SortHelper.compareAsNumberWithLeadingLetter('B10', 'A2')).toBeGreaterThan(0);
   });
 
+  it(`'A2' should be smaller than 'B10'`, () => {
+    expect(SortHelper.compareAsNumberWithLeadingLetter('A2', 'B10')).toBeLessThan(0);
+  });
+
   let numberWithLeadingLetterTestData = [
     ['AB10', true],
     ['A10AA', false],
@@ -65,4 +69,17 @@ describe('SortHelper', () => {
       expect(SortHelper.isNumberWithLeadingLetter(testCase[0] as string)).toBe(testCase[1]);
     })
   });
+
+  let normalLiteralsTestData = [
+    ['A', 'A', 0],
+    ['A', 'B', -1],
+    ['B', 'A', 1]
+  ];
+
+  normalLiteralsTestData.forEach(testCase => {
+    it(`Comparison of '${testCase[0]}' with '${testCase[1]}' should return ${testCase[2]}`, () => {
+      expect(SortHelper.compareAsLiteral(testCase[0] as string, testCase[1] as string)).toBe(testCase[2]);
+    });
+  });
+
 });
