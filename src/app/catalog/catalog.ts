@@ -84,6 +84,21 @@ export abstract class Catalog {
     return germanVersions;
   }
 
+  public getRootElement(): Promise<CatalogElement> {
+    const rootElementType: string = this.getRootElementType();
+    const rootElementCode: string = this.getRootElementCode();
+
+    return this.getByCode(rootElementType, rootElementCode);
+  }
+
+  public getRootElementType(): string {
+    return this.config.rootElementType;
+  }
+
+  public getRootElementCode(): string {
+    return this.activeVersion;
+  }
+
   private initService(): void {
     this.service.init(this.config);
   }
@@ -143,7 +158,7 @@ export abstract class Catalog {
     }
     return validLangs;
   }
-  
+
   /**
   * Sends an analytic notification to eonum
   *

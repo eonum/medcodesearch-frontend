@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LanguageGuard } from './service/routing/language-guard.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { MainComponent } from './components/main/main.component';
-import { DetailComponent } from './components/details/detail/detail.component';
+import { DetailContainerComponent } from "./components/details/detail-container/detail-container.component";
 
 const routes: Routes = [
   {
@@ -27,8 +27,7 @@ const routes: Routes = [
 
           {
             path: ':type/:code',
-            component: DetailComponent,
-
+            component: DetailContainerComponent
           }
         ]
       },

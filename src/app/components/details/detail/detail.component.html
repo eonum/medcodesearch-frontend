@@ -4,7 +4,6 @@
         <li *ngFor="let element of hierarchy">
           <ng-template [ngIf]="selectedElement !== element">
                 <span class="link" (click)="openCode(element)">{{element.code}}</span>
-                <!--<a [routerLink]="['../../', element.type, extractCodeFromUrl(element.url)]" >{{element.code}}</a>-->
           </ng-template>
           <ng-template [ngIf]="selectedElement === element">
                 {{element.code}}
@@ -26,7 +25,6 @@
         <ul>
             <li *ngFor="let child of children">
                 <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
-                <!--<a [routerLink]="['../../', child.type, extractCodeFromUrl(child.url)]">{{child.code}}</a>: {{child.text}}-->
             </li>
         </ul>
   </ng-template>

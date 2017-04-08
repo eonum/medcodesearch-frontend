@@ -1,6 +1,13 @@
 <div id="main-component">
-
+  {{showDetails}}
   <app-search-form></app-search-form>
+
+  <!-- Component for displaying of root element if no search is performed -->
+  <div class="row" *ngIf="rootElement && (!query || query?.length === 0) && !showDetails">
+    <div class="col-sm-12">
+      <app-detail-component [selectedElement]="rootElement" [catalog]="catalog"></app-detail-component>
+    </div>
+  </div>
 
   <div class="row">
 

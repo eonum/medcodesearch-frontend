@@ -10,6 +10,6 @@ import { ICatalogService } from "../service/i.catalog.service";
 export class CHOPCatalog extends Catalog {
 
   constructor( @Inject("ICatalogService") service: ICatalogService) {
-    super(service, "CHOP", { searchableTypes: ['chops'], retrievableTypes: ['chops'], versionParam: 'chops' });
+    super(service, "CHOP", { searchableTypes: ['chops'], retrievableTypes: ['chops', 'chop_chapters'], versionParam: 'chops', rootElementType: 'chop_chapters' });
   }
 }

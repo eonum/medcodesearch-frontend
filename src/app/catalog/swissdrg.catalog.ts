@@ -10,6 +10,10 @@ export class SwissDrgCatalog extends Catalog {
 
   constructor( @Inject("ICatalogService") service: ICatalogService) {
     super(service, "SwissDRG",
-      { searchableTypes: ["drgs"], retrievableTypes: ["drgs", "adrgs", "partition", "mdc"], versionParam: "drgs" });
+      { searchableTypes: ["drgs"], retrievableTypes: ["drgs", "adrgs", "partition", "mdcs"], versionParam: "drgs", rootElementType: 'mdcs' });
+  }
+
+  public getRootElementCode(): string {
+    return 'ALL';
   }
 }

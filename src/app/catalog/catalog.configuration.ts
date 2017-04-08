@@ -28,4 +28,6 @@ export class CatalogConfiguration {
    * Example: '/de/drgs/versions' -> 'drgs' is the versionParam
    */
   public versionParam: string;
+
+  public rootElementType: string;
 }

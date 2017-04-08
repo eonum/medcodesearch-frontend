@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Catalog } from '../../catalog/catalog';
 import { environment } from '../../../environments/environment';
+import { CatalogElement } from "../../model/catalog.element";
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
  * The component is assigned to the route `<catalog>/<version>/` and takes an
@@ -25,6 +26,8 @@ export class MainComponent implements OnInit {
   public query = '';
   public catalog: Catalog;
 
+  public rootElement: CatalogElement;
+
   constructor(private route: ActivatedRoute) {
   }
   /**
@@ -37,7 +40,8 @@ export class MainComponent implements OnInit {
 
     this.route.params.subscribe(
       params => {
-        this.showDetails = params['code'] !== null;
+        this.showDetails = params['code'] !== undefined;
+        this.updateRootElement();
       }
     );
 
@@ -46,13 +50,23 @@ export class MainComponent implements OnInit {
     );
 
     this.route.data.subscribe(
-      data => this.catalog = data.catalog
+      data => {
+        this.catalog = data.catalog;
+        this.updateRootElement();
+      }
     );
 
+  }
+
+  public updateRootElement(): void {
+    if (this.catalog === undefined || this.catalog === null){
+      return;
+    }
+    this.rootElement = null;
+    this.catalog.getRootElement().then(element => this.rootElement = element);
   }
 
   public showResults(): boolean {
     return true;
   }
-
 }

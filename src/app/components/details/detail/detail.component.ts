@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChange, Input } from '@angular/core';
 import { Catalog } from '../../../catalog/catalog';
 import { CatalogElement } from '../../../model/catalog.element';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,17 +26,19 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./detail.component.css']
 })
 
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnChanges {
 
   /**
    * The active catalog, resolved from the activated route.
    * Serves as input for the search-form component.
    * */
+  @Input()
   public catalog: Catalog;
 
   /**
    * The current element for which the details are displayed
    */
+  @Input()
   public selectedElement: CatalogElement;
 
   /**
@@ -56,20 +58,10 @@ export class DetailComponent implements OnInit {
     if (environment.dev) {
       console.log('>> DetailComponent on init.');
     }
+  }
 
-    /* Merge the route params type and code with the
-     catalog in the route data into one single observable
-     stream.
-     */
-    Observable.merge(
-      this.route.parent.data,
-      this.route.params,
-    ).subscribe(
-      params => {
-        this.catalog = params['catalog'] || this.catalog;
-        this.updateView(params['type'], params['code']);
-      }
-      );
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    this.updateView();
   }
 
   /**
@@ -77,19 +69,15 @@ export class DetailComponent implements OnInit {
    * @param type the type of the element to display
    * @param code the code of the element to display
    */
-  private updateView(type: string, code: string) {
+  private updateView() {
+      if (this.selectedElement === undefined ||
+      this.selectedElement === null){
+        return;
+      }
 
-    if (!type || !code) {
-      this.hierarchy = this.children = [];
-      return;
-    }
-
-    this.catalog.getByCode(type, code).then(element => {
-      this.selectedElement = element;
       this.hierarchy = [];
-      this.loadHierarchy(element);
-      this.loadChildren(element);
-    }).catch(error => console.log(error));
+      this.loadHierarchy(this.selectedElement);
+      this.loadChildren(this.selectedElement);
   }
 
   /**
@@ -164,20 +152,21 @@ export class DetailComponent implements OnInit {
    *
    * @param elm
    */
-  public openCode(elm) {
+  public openCode(element: CatalogElement): void {
+    const languageRouteParam = this.route.snapshot.params['language'];
+    const catalogRouteParam = this.route.snapshot.params['catalog'];
+    const versionRouteParam = this.route.snapshot.params['version'];
 
     this.router.navigate(
-      [elm.type, this.extractCodeFromUrl(elm.url)], {
-        relativeTo: this.route.parent,
+      ['', languageRouteParam, catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
         queryParamsHandling: 'merge'
       }).catch(error => console.log(error.message));
-
   }
 
   /**
    * Navigates back to the original search.
    */
-  public toSearch() {
+  public toSearch(): void {
     this.router.navigate(
       [this.catalog.getDomain(), this.catalog.getActiveVersion()], {
         relativeTo: this.route.parent.parent,

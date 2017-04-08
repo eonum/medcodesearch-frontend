@@ -21,6 +21,7 @@ import { DetailComponent } from './components/details/detail/detail.component';
 import { DetailSwissDrgComponent } from './components/details/detail-swiss-drg/detail-swiss-drg.component';
 import { DetailChopComponent } from './components/details/detail-chop/detail-chop.component';
 import { DetailIcdComponent } from './components/details/detail-icd/detail-icd.component';
+import { DetailContainerComponent } from './components/details/detail-container/detail-container.component';
 
 import { ConvertCodePipe } from './pipes/convert-code.pipe';
 import { CorrectVersionPipe } from './pipes/correct-version.pipe';
@@ -41,7 +42,8 @@ export function HttpLoaderFactory(http: Http) {
     DetailChopComponent,
     DetailIcdComponent,
     ConvertCodePipe,
-    CorrectVersionPipe
+    CorrectVersionPipe,
+    DetailContainerComponent
   ],
   imports: [
     BrowserModule,
