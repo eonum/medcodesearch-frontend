@@ -4,7 +4,7 @@ import {ActivatedRouteStub, RouterStub} from '../../../router-stub';
 import {CatalogElement} from '../../../model/catalog.element';
 import {TranslateModule} from '@ngx-translate/core';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import {ModalModule} from 'ng2-bootstrap';
+import {ModalModule, TooltipModule} from 'ng2-bootstrap';
 import {DetailSwissDrgComponent} from '../detail-swiss-drg/detail-swiss-drg.component';
 import {DetailChopComponent} from '../detail-chop/detail-chop.component';
 import {DetailIcdComponent} from '../detail-icd/detail-icd.component';
@@ -15,6 +15,8 @@ import {ICDCatalog} from '../../../catalog/icd.catalog';
 import {SearchFormComponent} from '../../search/search-form/search-form.component';
 import * as TypeMoq from 'typemoq';
 import {ConvertCodePipe} from '../../../pipes/convert-code.pipe';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CorrectVersionPipe} from '../../../pipes/correct-version.pipe';
 
 
 describe('DetailComponent', () => {
@@ -26,35 +28,42 @@ describe('DetailComponent', () => {
 
   /*Test data*/
 
-  const query: string = 'Some search query';
-  const version: string = 'V4.0';
+  const query = 'Some search query';
+  const version = 'V4.0';
   const searchResults: CatalogElement[] = [
     {
       code: 'Content 1', text: 'Description content 1', url: '/url/to/content1',
-      highlight: { text: ['content'], relevantCodes: [] }, type: 'drg'
+      highlight: {text: ['content'], relevantCodes: []}, type: 'drg'
     },
     {
       code: 'Content 2', text: 'Description content 2', url: '/url/to/content2',
-      highlight: { text: ['2'], relevantCodes: [] }, type: 'drg'
+      highlight: {text: ['2'], relevantCodes: []}, type: 'drg'
     },
   ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterModule, TranslateModule.forRoot(), ModalModule.forRoot()],
+      imports: [
+        RouterModule,
+        TranslateModule.forRoot(),
+        ModalModule.forRoot(),
+        TooltipModule.forRoot(),
+        ReactiveFormsModule,
+      ],
       declarations: [
         DetailComponent,
         SearchFormComponent,
         DetailSwissDrgComponent,
         DetailChopComponent,
         DetailIcdComponent,
-        ConvertCodePipe
+        ConvertCodePipe,
+        CorrectVersionPipe
       ],
       providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: Router, useClass: RouterStub },
+        {provide: ActivatedRoute, useClass: ActivatedRouteStub},
+        {provide: Router, useClass: RouterStub},
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        { provide: 'ICatalogService', useClass: CatalogServiceMock }
+        {provide: 'ICatalogService', useClass: CatalogServiceMock}
       ]
     })
       .compileComponents();
@@ -72,7 +81,7 @@ describe('DetailComponent', () => {
     // Set up the activated route stub
     route = fixture.debugElement.injector.get(ActivatedRoute);
     route.setCatalog(mock.object);
-    route.setTestParams({ 'query': query });
+    route.setTestParams({'query': query});
 
     fixture.detectChanges();
   });

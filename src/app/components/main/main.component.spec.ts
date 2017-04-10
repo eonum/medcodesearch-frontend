@@ -13,7 +13,7 @@ import * as TypeMoq from 'typemoq';
 import {ICatalogService} from '../../service/i.catalog.service';
 import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {CatalogElement} from '../../model/catalog.element';
-import {ModalModule} from 'ng2-bootstrap';
+import {ModalModule, TooltipModule} from 'ng2-bootstrap';
 import {DetailComponent} from '../details/detail/detail.component';
 import {DetailSwissDrgComponent} from '../details/detail-swiss-drg/detail-swiss-drg.component';
 import {DetailIcdComponent} from '../details/detail-icd/detail-icd.component';
@@ -37,11 +37,11 @@ describe('MainComponent', () => {
   const searchResults: CatalogElement[] = [
     {
       code: 'Content 1', text: 'Description content 1', url: '/url/to/content1',
-      highlight: { text: ['content'], relevantCodes: [] }, type: 'drg'
+      highlight: {text: ['content'], relevantCodes: []}, type: 'drg'
     },
     {
       code: 'Content 2', text: 'Description content 2', url: '/url/to/content2',
-      highlight: { text: ['2'], relevantCodes: [] }, type: 'drg'
+      highlight: {text: ['2'], relevantCodes: []}, type: 'drg'
     },
   ];
 
@@ -59,12 +59,17 @@ describe('MainComponent', () => {
         CorrectVersionPipe
 
       ],
-      imports: [RouterModule, TranslateModule.forRoot(), ModalModule.forRoot(), ReactiveFormsModule],
+      imports: [RouterModule,
+        TranslateModule.forRoot(),
+        ModalModule.forRoot(),
+        ReactiveFormsModule,
+        TooltipModule.forRoot(),
+      ],
       providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: Router, useClass: RouterStub },
+        {provide: ActivatedRoute, useClass: ActivatedRouteStub},
+        {provide: Router, useClass: RouterStub},
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        { provide: 'ICatalogService', useClass: CatalogServiceMock }
+        {provide: 'ICatalogService', useClass: CatalogServiceMock}
       ]
     })
       .compileComponents();
@@ -84,8 +89,7 @@ describe('MainComponent', () => {
     // Set up the activated route stub
     route = fixture.debugElement.injector.get(ActivatedRoute);
     route.setCatalog(mock.object);
-    route.setTestParams({ 'query': query });
-
+    route.setQuery(query);
     fixture.detectChanges();
   });
 

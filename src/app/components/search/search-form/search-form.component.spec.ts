@@ -12,6 +12,8 @@ import {ICDCatalog} from '../../../catalog/icd.catalog';
 import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
 import {CHOPCatalog} from '../../../catalog/chop.catalog';
 import {CatalogServiceMock} from '../../../service/catalog.service.mock';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CorrectVersionPipe} from '../../../pipes/correct-version.pipe';
 
 
 describe('SearchFormComponent', () => {
@@ -25,15 +27,17 @@ describe('SearchFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        ReactiveFormsModule,
         TranslateModule.forRoot(),
         ModalModule.forRoot(),
       ],
-      declarations: [SearchFormComponent],
+      declarations: [SearchFormComponent, CorrectVersionPipe
+      ],
       providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: Router, useClass: RouterStub },
+        {provide: ActivatedRoute, useClass: ActivatedRouteStub},
+        {provide: Router, useClass: RouterStub},
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        { provide: 'ICatalogService', useClass: CatalogServiceMock },
+        {provide: 'ICatalogService', useClass: CatalogServiceMock},
       ]
     })
       .compileComponents();

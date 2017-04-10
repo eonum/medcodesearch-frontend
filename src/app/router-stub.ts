@@ -17,7 +17,7 @@ export class RouterStub {
     return {
       'url': commands.join('/'),
       'extras': extras
-    }
+    };
   }
 
 
@@ -39,10 +39,22 @@ export class ActivatedRouteStub {
   dataSubject = new BehaviorSubject(this.testData);
   data = this.dataSubject.asObservable();
 
+  /*Set up stub for observable field 'queryParams'*/
+  private testQueryParams: {} = {};
+  queryParamsSubject = new BehaviorSubject(this.testQueryParams);
+  queryParams = this.queryParamsSubject.asObservable();
+
   /*Set the given params as next value in the 'params'-observable*/
   public setTestParams(params: {}) {
     this.testParams = params;
     this.paramsSubject.next(params);
+
+  }
+
+  /*Set the given params as next value in the 'params'-observable*/
+  public setTestQueryParams(queryParams: {}) {
+    this.testQueryParams = queryParams;
+    this.queryParamsSubject.next(queryParams);
   }
 
   /*Set the given data as next value in the 'data'-observable*/
@@ -53,16 +65,21 @@ export class ActivatedRouteStub {
 
   /*Set the catalog as next value in the 'data'-observable*/
   public setCatalog(catalog: Catalog) {
-    this.setTestData({ catalog: catalog });
+    this.setTestData({catalog: catalog});
   }
 
 
   public navigateToCatalog(catalogDomain: string, version: string, query?: string) {
-    let params = {
+    const params = {
       'catalog': catalogDomain,
       'version': version,
     };
-    if (query) params['query'] = query;
+    const queryParams = query ? {'query': query} : {};
     this.setTestParams(params);
+    this.setTestQueryParams(query);
+  }
+
+  setQuery(query: string) {
+    this.setTestQueryParams({'query': query});
   }
 }
