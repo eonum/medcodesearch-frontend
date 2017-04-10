@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Catalog} from '../../../catalog/catalog';
 import {CatalogElement} from '../../../model/catalog.element';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -59,7 +59,7 @@ export class DetailComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+  ngOnChanges() {
     this.updateView();
   }
 
@@ -156,9 +156,11 @@ export class DetailComponent implements OnInit, OnChanges {
     const catalogRouteParam = this.route.snapshot.params['catalog'];
     const versionRouteParam = this.route.snapshot.params['version'];
 
+    console.log(this.route);
     this.router.navigate(
-      ['', languageRouteParam, catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
-        queryParamsHandling: 'merge'
+      [ catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
+        queryParamsHandling: 'merge',
+        relativeTo: this.route.parent
       }).catch(error => console.log(error.message));
   }
 
@@ -166,9 +168,10 @@ export class DetailComponent implements OnInit, OnChanges {
    * Navigates back to the original search.
    */
   public toSearch(): void {
+    console.log();
     this.router.navigate(
       [this.catalog.getDomain(), this.catalog.getActiveVersion()], {
-        relativeTo: this.route.parent.parent,
+        relativeTo: this.route.parent,
         queryParamsHandling: 'merge'
       }
     ).catch(error => console.log(error));
