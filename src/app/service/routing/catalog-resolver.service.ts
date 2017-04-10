@@ -70,9 +70,13 @@ export class CatalogResolver implements Resolve<Catalog> {
             } else this.redirectToStart(route);
           }
         )
-      } else this.redirectToDefaultCatalog(route);
+      } else {
+        this.redirectToDefaultCatalog(route);
+      }
 
-    } else this.redirectToStart(route);
+    } else {
+      this.redirectToStart(route);
+    }
   }
 
   private redirectToStart(route: ActivatedRouteSnapshot) {

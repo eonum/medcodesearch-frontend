@@ -1,8 +1,9 @@
-import {NgZone, Pipe, PipeTransform} from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
+import { NgZone, Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Catalog } from "../catalog/catalog";
 
-@Pipe({name: 'convertCode'})
+@Pipe({ name: 'convertCode' })
 export class ConvertCodePipe implements PipeTransform {
 
   constructor(private sanitizer: DomSanitizer, private ngZone: NgZone, private route: ActivatedRoute, private router: Router) {
@@ -43,11 +44,12 @@ export class ConvertCodePipe implements PipeTransform {
     while (currentRoute.children[0] !== undefined) {
       currentRoute = currentRoute.children[0];
     }
-    const catalog = currentRoute.snapshot.data.catalog;
+    const catalog: Catalog = currentRoute.snapshot.data.catalog;
+    const version: string = currentRoute.snapshot.params['version'];
+    const language: string = currentRoute.snapshot.params['language'];
 
-    this.router.navigate(['.'], {
-      relativeTo: this.route.parent,
-      queryParams: {query: query}
+    this.router.navigate([language, catalog.getDomain(), version], {
+      queryParams: { 'query': query }
     }).catch(error => console.log(error));
   }
 }

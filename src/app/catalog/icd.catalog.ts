@@ -11,6 +11,6 @@ export class ICDCatalog extends Catalog {
 
   constructor( @Inject("ICatalogService") service: ICatalogService) {
     super(service, "ICD",
-      { searchableTypes: ['icds'], retrievableTypes: ['icds', 'icd_groups', 'icd_chapters'], versionParam: 'icds' });
+      { searchableTypes: ['icds'], retrievableTypes: ['icds', 'icd_groups', 'icd_chapters'], versionParam: 'icds', rootElementType: 'icd_chapters' });
   }
 }

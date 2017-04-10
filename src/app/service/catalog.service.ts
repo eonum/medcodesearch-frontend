@@ -1,11 +1,11 @@
-import {Http} from '@angular/http';
-import {TranslateService} from '@ngx-translate/core';
-import {Injectable} from '@angular/core';
-import {CatalogElement} from '../model/catalog.element';
-import {ICatalogService} from './i.catalog.service';
+import { Http } from '@angular/http';
+import { TranslateService } from '@ngx-translate/core';
+import { Injectable } from '@angular/core';
+import { CatalogElement } from '../model/catalog.element';
+import { ICatalogService } from './i.catalog.service';
 import 'rxjs/add/operator/toPromise';
-import {environment} from '../../environments/environment';
-import {CatalogConfiguration} from '../catalog/catalog.configuration';
+import { environment } from '../../environments/environment';
+import { CatalogConfiguration } from '../catalog/catalog.configuration';
 
 @Injectable()
 export class CatalogService implements ICatalogService {

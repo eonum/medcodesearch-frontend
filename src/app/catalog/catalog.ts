@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {CatalogElement} from '../model/catalog.element';
-import {ICatalogService} from '../service/i.catalog.service';
-import {CatalogConfiguration} from './catalog.configuration';
+import { Injectable } from '@angular/core';
+import { CatalogElement } from '../model/catalog.element';
+import { ICatalogService } from '../service/i.catalog.service';
+import { environment } from '../../environments/environment';
+import { CatalogConfiguration } from "./catalog.configuration";
 
 /**
  * Class representing a catalog containing medical
@@ -82,6 +83,21 @@ export abstract class Catalog {
     return germanVersions;
   }
 
+  public getRootElement(): Promise<CatalogElement> {
+    const rootElementType: string = this.getRootElementType();
+    const rootElementCode: string = this.getRootElementCode();
+
+    return this.getByCode(rootElementType, rootElementCode);
+  }
+
+  protected getRootElementType(): string {
+    return this.config.rootElementType;
+  }
+
+  protected getRootElementCode(): string {
+    return this.activeVersion;
+  }
+
   private initService(): void {
     this.service.init(this.config);
   }
@@ -143,15 +159,13 @@ export abstract class Catalog {
   }
 
 
-	/**
-	* Sends an analytic notification to eonum
-	*
-	*/
-  public sendAnalytics( elementType: string ,version: string, element: CatalogElement, query:string ):void{
+  /**
+  * Sends an analytic notification to eonum
+  *
+  */
+  public sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void {
 
-    console.log('Skip sending analytics (because its broken!)');
-    // TODO Patrick: fix this
-	  //this.service.sendAnalytics(elementType ,version, element.type, element.code, query);
+    this.service.sendAnalytics(elementType, version, type, code, query);
 
 
   }

@@ -1,18 +1,14 @@
 <div id="main-component">
-
-  <app-search-form></app-search-form>
+  <app-search-form [catalog]="catalog" [query]="query"></app-search-form>
 
   <div class="row">
 
-    <div id="search-result-component" [class.col-sm-6]="showDetails">
-
-      <app-search-results *ngIf="showResults()"
-                          [catalog]="catalog"
-                          [query]="query"></app-search-results>
+    <div id="search-result-component" class="col-sm-6" *ngIf="searchResults">
+      <app-search-results [catalog]="catalog" [searchResults]="searchResults"></app-search-results>
     </div>
 
-    <div id="detail-component" [class.col-sm-6]="showDetails">
-      <router-outlet></router-outlet>
+    <div id="detail-component" class="col-sm-6" *ngIf="selectedElement">
+      <app-detail-component [catalog]="catalog" [selectedElement]="selectedElement"></app-detail-component>
     </div>
 
   </div>

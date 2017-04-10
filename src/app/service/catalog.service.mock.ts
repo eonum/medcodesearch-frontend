@@ -1,17 +1,17 @@
-import {ICatalogService} from './i.catalog.service';
-import {CatalogConfiguration} from '../catalog/catalog.configuration';
-import {CatalogElement} from '../model/catalog.element';
+import { ICatalogService } from './i.catalog.service';
+import { CatalogConfiguration } from '../catalog/catalog.configuration';
+import { CatalogElement } from '../model/catalog.element';
 
 export class CatalogServiceMock implements ICatalogService {
 
   private CONTENTS: CatalogElement[] = [
-    {code: 'Content 1', text: 'Description content 1', url: '/url/to/content1', type: 'drgs'},
-    {code: 'Content 2', text: 'Description content 2', url: '/url/to/content2', type: 'drgs'},
-    {code: 'Content 3', text: 'Description content 3', url: '/url/to/content3', type: 'drgs'},
-    {code: 'Content 4', text: 'Description content 4', url: '/url/to/content4', type: 'drgs'},
-    {code: 'Content 5', text: 'Description content 5', url: '/url/to/content5', type: 'drgs'},
-    {code: 'Content 6', text: 'Description content 6', url: '/url/to/content6', type: 'drgs'},
-    {code: 'Content 7', text: 'Description content 7', url: '/url/to/content7', type: 'drgs'}
+    { code: 'Content 1', text: 'Description content 1', url: '/url/to/content1', type: 'drgs' },
+    { code: 'Content 2', text: 'Description content 2', url: '/url/to/content2', type: 'drgs' },
+    { code: 'Content 3', text: 'Description content 3', url: '/url/to/content3', type: 'drgs' },
+    { code: 'Content 4', text: 'Description content 4', url: '/url/to/content4', type: 'drgs' },
+    { code: 'Content 5', text: 'Description content 5', url: '/url/to/content5', type: 'drgs' },
+    { code: 'Content 6', text: 'Description content 6', url: '/url/to/content6', type: 'drgs' },
+    { code: 'Content 7', text: 'Description content 7', url: '/url/to/content7', type: 'drgs' }
   ];
 
   init(config: CatalogConfiguration): void {
