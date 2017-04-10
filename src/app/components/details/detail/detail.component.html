@@ -1,9 +1,9 @@
 <ng-template [ngIf]="selectedElement">
 
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" >
         <li *ngFor="let element of hierarchy">
           <ng-template [ngIf]="selectedElement !== element">
-                <span class="link" (click)="openCode(element)">{{element.code}}</span>
+                <span class="link" (click)="openCode(element)" tooltip={{element.text}}>{{element.code}}</span>
                 <!--<a [routerLink]="['../../', element.type, extractCodeFromUrl(element.url)]" >{{element.code}}</a>-->
           </ng-template>
           <ng-template [ngIf]="selectedElement === element">
@@ -12,7 +12,7 @@
         </li>
     </ol>
 
-  <div class="box">
+  <div class="box" >
     <h3>{{selectedElement.code}}</h3>
     <p>{{selectedElement.text}}</p>
 
@@ -24,8 +24,8 @@
   <ng-template [ngIf]="children?.length > 0">
         <h4>{{'LBL_CHILDREN' | translate}}</h4>
         <ul>
-            <li *ngFor="let child of children">
-                <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
+            <li *ngFor="let child of children" >
+                <span class="link" (click)="openCode(child)" >{{child.code}}</span>: {{child.text}}
                 <!--<a [routerLink]="['../../', child.type, extractCodeFromUrl(child.url)]">{{child.code}}</a>: {{child.text}}-->
             </li>
         </ul>

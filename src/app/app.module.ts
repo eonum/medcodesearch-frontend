@@ -11,7 +11,7 @@ import {AppComponent} from './app.component';
 import {CatalogService} from './service/catalog.service';
 import {SearchFormComponent} from './components/search/search-form/search-form.component';
 import {SearchResultsComponent} from './components/search/search-results/search-results.component';
-import {BsDropdownModule, CollapseModule, ModalModule} from 'ng2-bootstrap';
+import {BsDropdownModule, CollapseModule, ModalModule, TooltipModule} from 'ng2-bootstrap';
 import {CatalogResolver} from './service/routing/catalog-resolver.service';
 import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
 import {CHOPCatalog} from './catalog/chop.catalog';
@@ -58,7 +58,8 @@ export function HttpLoaderFactory(http: Http) {
     }),
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   exports: [
     ConvertCodePipe
