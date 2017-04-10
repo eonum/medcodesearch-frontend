@@ -1,20 +1,20 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DetailComponent } from './detail.component';
-import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
-import { CatalogElement } from '../../../model/catalog.element';
-import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ModalModule } from 'ng2-bootstrap';
-import { DetailSwissDrgComponent } from '../detail-swiss-drg/detail-swiss-drg.component';
-import { DetailChopComponent } from '../detail-chop/detail-chop.component';
-import { DetailIcdComponent } from '../detail-icd/detail-icd.component';
-import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
-import { CHOPCatalog } from '../../../catalog/chop.catalog';
-import { CatalogServiceMock } from '../../../service/catalog.service.mock';
-import { ICDCatalog } from '../../../catalog/icd.catalog';
-import { SearchFormComponent } from '../../search/search-form/search-form.component';
-import * as TypeMoq from "typemoq";
-import { ConvertCodePipe } from "../../../pipes/convert-code.pipe";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {DetailComponent} from './detail.component';
+import {ActivatedRouteStub, RouterStub} from '../../../router-stub';
+import {CatalogElement} from '../../../model/catalog.element';
+import {TranslateModule} from '@ngx-translate/core';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import {ModalModule} from 'ng2-bootstrap';
+import {DetailSwissDrgComponent} from '../detail-swiss-drg/detail-swiss-drg.component';
+import {DetailChopComponent} from '../detail-chop/detail-chop.component';
+import {DetailIcdComponent} from '../detail-icd/detail-icd.component';
+import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
+import {CHOPCatalog} from '../../../catalog/chop.catalog';
+import {CatalogServiceMock} from '../../../service/catalog.service.mock';
+import {ICDCatalog} from '../../../catalog/icd.catalog';
+import {SearchFormComponent} from '../../search/search-form/search-form.component';
+import * as TypeMoq from 'typemoq';
+import {ConvertCodePipe} from '../../../pipes/convert-code.pipe';
 
 
 describe('DetailComponent', () => {
@@ -22,7 +22,7 @@ describe('DetailComponent', () => {
   let fixture: ComponentFixture<DetailComponent>;
 
   let route: ActivatedRouteStub;
-  let mock: TypeMoq.IMock<SwissDrgCatalog>
+  let mock: TypeMoq.IMock<SwissDrgCatalog>;
 
   /*Test data*/
 
@@ -43,10 +43,10 @@ describe('DetailComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterModule, TranslateModule.forRoot(), ModalModule.forRoot()],
       declarations: [
-        DetailComponent, 
-        SearchFormComponent, 
-        DetailSwissDrgComponent, 
-        DetailChopComponent, 
+        DetailComponent,
+        SearchFormComponent,
+        DetailSwissDrgComponent,
+        DetailChopComponent,
         DetailIcdComponent,
         ConvertCodePipe
       ],

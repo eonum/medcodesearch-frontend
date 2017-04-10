@@ -1,6 +1,6 @@
-import { Catalog } from './catalog';
-import { Inject, Injectable } from '@angular/core';
-import { ICatalogService } from '../service/i.catalog.service';
+import {Catalog} from './catalog';
+import {Inject, Injectable} from '@angular/core';
+import {ICatalogService} from '../service/i.catalog.service';
 
 /**
  * Concrete implementation of catalog class for the SwissDRG catalog.

@@ -1,4 +1,4 @@
-import { CorrectVersionPipe } from "./correct-version.pipe";
+import {CorrectVersionPipe} from './correct-version.pipe';
 
 describe('CorrectVersionPipe', () => {
 
@@ -23,4 +23,4 @@ describe('CorrectVersionPipe', () => {
         const res = pipe.transform(null);
         expect(res).toBe(null);
     });
-})
+});

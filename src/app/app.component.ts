@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { CatalogResolver } from './service/routing/catalog-resolver.service';
-import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',

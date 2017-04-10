@@ -1,7 +1,7 @@
-import { NgZone, Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Catalog } from "../catalog/catalog";
+import {NgZone, Pipe, PipeTransform} from '@angular/core';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Catalog} from '../catalog/catalog';
 
 @Pipe({ name: 'convertCode' })
 export class ConvertCodePipe implements PipeTransform {

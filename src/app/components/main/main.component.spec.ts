@@ -1,26 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MainComponent } from './main.component';
-import { SearchFormComponent } from '../search/search-form/search-form.component';
-import { SearchResultsComponent } from '../search/search-results/search-results.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRouteStub, RouterStub } from '../../router-stub';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CatalogServiceMock } from '../../service/catalog.service.mock';
-import { ICDCatalog } from '../../catalog/icd.catalog';
-import { CHOPCatalog } from '../../catalog/chop.catalog';
-import * as TypeMoq from "typemoq";
-import { ICatalogService } from '../../service/i.catalog.service';
-import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
-import { CatalogElement } from '../../model/catalog.element';
-import { ModalModule } from 'ng2-bootstrap';
-import { DetailComponent } from '../details/detail/detail.component';
-import { DetailSwissDrgComponent } from '../details/detail-swiss-drg/detail-swiss-drg.component';
-import { DetailIcdComponent } from '../details/detail-icd/detail-icd.component';
-import { DetailChopComponent } from "../details/detail-chop/detail-chop.component";
-import { ConvertCodePipe } from "../../pipes/convert-code.pipe";
-import { CorrectVersionPipe } from "../../pipes/correct-version.pipe";
-import { ReactiveFormsModule, FormsModule, FormControl } from "@angular/forms";
+import {MainComponent} from './main.component';
+import {SearchFormComponent} from '../search/search-form/search-form.component';
+import {SearchResultsComponent} from '../search/search-results/search-results.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {ActivatedRouteStub, RouterStub} from '../../router-stub';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import {CatalogServiceMock} from '../../service/catalog.service.mock';
+import {ICDCatalog} from '../../catalog/icd.catalog';
+import {CHOPCatalog} from '../../catalog/chop.catalog';
+import * as TypeMoq from 'typemoq';
+import {ICatalogService} from '../../service/i.catalog.service';
+import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
+import {CatalogElement} from '../../model/catalog.element';
+import {ModalModule} from 'ng2-bootstrap';
+import {DetailComponent} from '../details/detail/detail.component';
+import {DetailSwissDrgComponent} from '../details/detail-swiss-drg/detail-swiss-drg.component';
+import {DetailIcdComponent} from '../details/detail-icd/detail-icd.component';
+import {DetailChopComponent} from '../details/detail-chop/detail-chop.component';
+import {ConvertCodePipe} from '../../pipes/convert-code.pipe';
+import {CorrectVersionPipe} from '../../pipes/correct-version.pipe';
+import {ReactiveFormsModule} from '@angular/forms';
 
 describe('MainComponent', () => {
 
@@ -28,7 +28,7 @@ describe('MainComponent', () => {
   let fixture: ComponentFixture<MainComponent>;
 
   let route: ActivatedRouteStub;
-  let mock: TypeMoq.IMock<SwissDrgCatalog>
+  let mock: TypeMoq.IMock<SwissDrgCatalog>;
 
   /*Test data*/
 

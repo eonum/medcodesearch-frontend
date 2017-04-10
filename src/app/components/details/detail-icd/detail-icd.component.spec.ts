@@ -1,9 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { DetailIcdComponent } from './detail-icd.component';
-import { ConvertCodePipe } from "../../../pipes/convert-code.pipe";
-import { RouterModule, ActivatedRoute, Router } from "@angular/router";
-import { ActivatedRouteStub, RouterStub } from "../../../router-stub";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {TranslateModule} from '@ngx-translate/core';
+import {DetailIcdComponent} from './detail-icd.component';
+import {ConvertCodePipe} from '../../../pipes/convert-code.pipe';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import {ActivatedRouteStub, RouterStub} from '../../../router-stub';
 
 describe('DetailIcdComponent', () => {
   let component: DetailIcdComponent;

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Catalog } from '../../catalog/catalog';
-import { environment } from '../../../environments/environment';
-import { CatalogElement } from "../../model/catalog.element";
-import { Observable } from "rxjs/Observable";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Catalog} from '../../catalog/catalog';
+import {environment} from '../../../environments/environment';
+import {CatalogElement} from '../../model/catalog.element';
 
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.

@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CatalogElement } from '../../../model/catalog.element';
-import { Catalog } from '../../../catalog/catalog';
-import { environment } from '../../../../environments/environment';
+import {Component, Input} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CatalogElement} from '../../../model/catalog.element';
+import {Catalog} from '../../../catalog/catalog';
+import {environment} from '../../../../environments/environment';
 
 /**
  * Component to display the search results.
@@ -36,12 +36,8 @@ export class SearchResultsComponent {
 
   private sendAnalytics(type: string, code: string): void {
     const query = this.route.snapshot.queryParams['query'];
-    if (query !== undefined && query !== null && query.lenght > 0){
-  public openCode(result) {
 
-    this.selectedElement = result;
-
-    if (this.query) {
+    if (query) {
       this.catalog.sendAnalytics(
         this.catalog.getDomain(), this.catalog.getActiveVersion(), type, code, query
       );

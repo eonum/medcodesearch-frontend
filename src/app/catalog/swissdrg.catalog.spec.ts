@@ -1,8 +1,8 @@
-import { async } from '@angular/core/testing';
-import { SwissDrgCatalog } from './swissdrg.catalog';
+import {async} from '@angular/core/testing';
+import {SwissDrgCatalog} from './swissdrg.catalog';
 import * as TypeMoq from 'typemoq';
-import { ICatalogService } from '../service/i.catalog.service';
-import { CatalogElement } from '../model/catalog.element';
+import {ICatalogService} from '../service/i.catalog.service';
+import {CatalogElement} from '../model/catalog.element';
 
 describe("SwissDrgCatalog", () => {
 
@@ -97,7 +97,7 @@ describe("SwissDrgCatalog", () => {
     catalog.activateVersion('V1.0').then(res => {
       expect(catalog.getActiveVersion()).toBe('V1.0');
     });
-  }))
+  }));
 
   it('Should return the root element', async(() => {
     const root: CatalogElement = { code: 'ALL', text: 'The root', url: 'url/to/root', type: 'drgs' };

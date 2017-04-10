@@ -1,15 +1,15 @@
-import { async, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import {async, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
-import { AppComponent } from './app.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpLoaderFactory } from './app.module';
-import { Http, HttpModule } from '@angular/http';
-import { CatalogResolver } from './service/routing/catalog-resolver.service';
-import { CHOPCatalog } from './catalog/chop.catalog';
-import { ICDCatalog } from './catalog/icd.catalog';
-import { SwissDrgCatalog } from './catalog/swissdrg.catalog';
-import { CatalogServiceMock } from './service/catalog.service.mock';
+import {AppComponent} from './app.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpLoaderFactory} from './app.module';
+import {Http, HttpModule} from '@angular/http';
+import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import {CHOPCatalog} from './catalog/chop.catalog';
+import {ICDCatalog} from './catalog/icd.catalog';
+import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
+import {CatalogServiceMock} from './service/catalog.service.mock';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

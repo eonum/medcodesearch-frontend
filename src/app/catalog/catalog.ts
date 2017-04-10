@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { CatalogElement } from '../model/catalog.element';
-import { ICatalogService } from '../service/i.catalog.service';
-import { environment } from '../../environments/environment';
-import { CatalogConfiguration } from "./catalog.configuration";
+import {Injectable} from '@angular/core';
+import {CatalogElement} from '../model/catalog.element';
+import {ICatalogService} from '../service/i.catalog.service';
+import {CatalogConfiguration} from './catalog.configuration';
 
 /**
  * Class representing a catalog containing medical
@@ -27,8 +26,8 @@ export abstract class Catalog {
    * @param elements - elements within a catalog
    */
   public constructor(private service: ICatalogService,
-    public name: string,
-    protected config: CatalogConfiguration) {
+                     public name: string,
+                     protected config: CatalogConfiguration) {
     this.versions_lang = [];
   }
 
@@ -160,17 +159,19 @@ export abstract class Catalog {
 
 
   /**
-  * Sends an analytic notification to eonum
-  *
-  */
+   * Sends an analytic notification to eonum
+   *
+   */
   public sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void {
 
-    this.service.sendAnalytics(elementType, version, type, code, query);
+
+    console.log('Not sending analytics since it has the wrong url...');
+
+    /*TODO Patrick: use searcheable type from catalog configuration instead of using the 'type' from getDomain()
+     this.service.sendAnalytics(elementType, version, type, code, query);*/
 
 
   }
-
-
 
 
 }

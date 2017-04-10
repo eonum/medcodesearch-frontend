@@ -1,4 +1,4 @@
-import { SortHelper } from "./sort.helper";
+import {SortHelper} from './sort.helper';
 
 describe('SortHelper', () => {
 

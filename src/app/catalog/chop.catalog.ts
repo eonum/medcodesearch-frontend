@@ -1,7 +1,6 @@
-import { Catalog } from './catalog'
-import { Inject, Injectable } from "@angular/core";
-import { CatalogElement } from "../model/catalog.element";
-import { ICatalogService } from "../service/i.catalog.service";
+import {Catalog} from './catalog';
+import {Inject, Injectable} from '@angular/core';
+import {ICatalogService} from '../service/i.catalog.service';
 
 /**
  * Concrete implementation of catalog class for the CHOP catalog.
@@ -9,7 +8,12 @@ import { ICatalogService } from "../service/i.catalog.service";
 @Injectable()
 export class CHOPCatalog extends Catalog {
 
-  constructor( @Inject("ICatalogService") service: ICatalogService) {
-    super(service, "CHOP", { searchableTypes: ['chops'], retrievableTypes: ['chops', 'chop_chapters'], versionParam: 'chops', rootElementType: 'chop_chapters' });
+  constructor(@Inject('ICatalogService') service: ICatalogService) {
+    super(service, 'CHOP', {
+      searchableTypes: ['chops'],
+      retrievableTypes: ['chops', 'chop_chapters'],
+      versionParam: 'chops',
+      rootElementType: 'chop_chapters'
+    });
   }
 }

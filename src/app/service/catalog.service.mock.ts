@@ -1,6 +1,6 @@
-import { ICatalogService } from './i.catalog.service';
-import { CatalogConfiguration } from '../catalog/catalog.configuration';
-import { CatalogElement } from '../model/catalog.element';
+import {ICatalogService} from './i.catalog.service';
+import {CatalogConfiguration} from '../catalog/catalog.configuration';
+import {CatalogElement} from '../model/catalog.element';
 
 export class CatalogServiceMock implements ICatalogService {
 

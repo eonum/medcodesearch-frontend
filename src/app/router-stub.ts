@@ -1,7 +1,7 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Injectable } from '@angular/core';
-import { NavigationExtras } from '@angular/router';
-import { Catalog } from './catalog/catalog';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Injectable} from '@angular/core';
+import {NavigationExtras} from '@angular/router';
+import {Catalog} from './catalog/catalog';
 
 /**
  * Replacement for the angular Router in tests.
@@ -61,7 +61,7 @@ export class ActivatedRouteStub {
     let params = {
       'catalog': catalogDomain,
       'version': version,
-    }
+    };
     if (query) params['query'] = query;
     this.setTestParams(params);
   }
