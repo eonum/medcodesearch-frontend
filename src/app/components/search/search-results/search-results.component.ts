@@ -4,6 +4,7 @@ import {CatalogElement} from '../../../model/catalog.element';
 import {Catalog} from '../../../catalog/catalog';
 import {environment} from '../../../../environments/environment';
 
+
 /**
  * Component to display the search results.
  * Receives the `searchResults` as input from the {@link MainComponent}.
@@ -33,9 +34,7 @@ export class SearchResultsComponent implements OnChanges {
     this.selectedElement = result;
 
     if (this.query) {
-      this.catalog.sendAnalytics(
-        this.catalog.getDomain(), this.catalog.getActiveVersion(), result, this.query
-      );
+      this.catalog.sendAnalytics(this.selectedElement.url, this.query);
     }
 
 

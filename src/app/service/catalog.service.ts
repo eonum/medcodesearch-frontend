@@ -71,17 +71,17 @@ export class CatalogService implements ICatalogService {
    *  Sends an analytics notification to eonum
    *
    */
-  public sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void {
-
-    // TODO Patrick: Fix this
+  public sendAnalytics(urlInput:string, query:string): void {
 
     const locale: string = this.getLocale();
-    const url = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?query=${query}`;
+    const url = `${this.baseUrl}${urlInput}?query=${query}`;
 
+	console.log('Attemting to send Analytics: '+url);
+	
     this.http.get(url).subscribe(
       response => {
         if (response.status === 200 && environment.dev) {
-          console.log('Sent Analytics: ' + url);
+          console.log('Successfully sent Analytics: ' + url);
         } else if (environment.dev) {
           console.log('ERROR - Could not send analytics. Url: ' + url);
           console.log(response);

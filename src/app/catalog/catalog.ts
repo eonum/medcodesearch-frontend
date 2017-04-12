@@ -147,12 +147,9 @@ export abstract class Catalog {
 	* Sends an analytic notification to eonum
 	*
 	*/
-  public sendAnalytics( elementType: string ,version: string, element: CatalogElement, query:string ):void{
+  public sendAnalytics( url:string, query:string ):void{
 
-    console.log('Skip sending analytics (because its broken!)');
-    // TODO Patrick: fix this
-	  //this.service.sendAnalytics(elementType ,version, element.type, element.code, query);
-
+	  this.service.sendAnalytics(url, query);
 
   }
 
