@@ -34,7 +34,15 @@ export class SearchResultsComponent implements OnChanges {
     this.selectedElement = result;
 
     if (this.query) {
-      this.catalog.sendAnalytics(this.selectedElement.url, this.query);
+		
+		let urlHolder = this.selectedElement.url;
+		
+		// remove the first "/" letter if it exists
+		if( urlHolder.indexOf("/")==0 )	
+			urlHolder = urlHolder.substring(1,urlHolder.length);
+		
+		
+      this.catalog.sendAnalytics(urlHolder, this.query);
     }
 
 
