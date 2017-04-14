@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Inject } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDirective} from 'ng2-bootstrap';
 import {FormControl} from '@angular/forms';
@@ -9,7 +9,8 @@ import 'rxjs/add/operator/debounceTime';
 import {Catalog} from '../../../catalog/catalog';
 import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
 import {CHOPCatalog} from '../../../catalog/chop.catalog';
-import {ICDCatalog} from '../../../catalog/icd.catalog';
+import { ICDCatalog } from '../../../catalog/icd.catalog';
+import { ILoggerService } from "../../../service/i.logger.service";
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -43,6 +44,7 @@ export class SearchFormComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService,
     private swissDrgCatalog: SwissDrgCatalog,
     private chopCatalog: CHOPCatalog,
     private icdCatalog: ICDCatalog) {
@@ -69,9 +71,7 @@ export class SearchFormComponent implements OnInit {
    * Subscribe to route parameter to mark the selected catalog and displaythe query.
    */
   public ngOnInit() {
-    if (environment.dev) {
-      console.log('>> MainComponent on init.');
-    }
+    this.logger.log('>> MainComponent on init.');
   }
 
   public showChildModal(): void {
@@ -85,7 +85,7 @@ export class SearchFormComponent implements OnInit {
   public changeLanguage(language: string): void {
     this.childModal.hide();
     this.router.navigate([language, this.catalog.getDomain(), this.selectedVersion]
-    ).catch(error => console.log(error));
+    ).catch(error => this.logger.log(error));
   }
 
   /**
@@ -110,7 +110,7 @@ export class SearchFormComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: query.length > 0 ? { query: query } : null
-    }).catch(error => console.log(error));
+    }).catch(error => this.logger.log(error));
   }
 
   /**
@@ -126,7 +126,7 @@ export class SearchFormComponent implements OnInit {
     this.router.navigate(params, {
       relativeTo: this.route.parent,
       queryParamsHandling: 'merge'
-    }).catch(error => console.log(error));
+    }).catch(error => this.logger.log(error));
   }
 
 }

@@ -1,6 +1,7 @@
-import {Injectable} from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ILoggerService } from "../i.logger.service";
 
 /**
  * This is an authentication guard that grants always access,
@@ -16,7 +17,9 @@ export class LanguageGuard implements CanActivate {
   private DEFAULT_LANGUAGE = 'de';
   private languages = ['de', 'fr', 'it', 'en'];
 
-  constructor(private translate: TranslateService, private router: Router) {
+  constructor(private translate: TranslateService,
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService) {
     translate.setDefaultLang(this.DEFAULT_LANGUAGE);
   }
 
@@ -42,7 +45,7 @@ export class LanguageGuard implements CanActivate {
     language = this.matchingLanguage(navigator.language) || this.DEFAULT_LANGUAGE;
 
     // redirect
-    this.router.navigate([language]).catch(error => console.log(error));
+    this.router.navigate([language]).catch(error => this.logger.log(error));
     return false;
   }
 

@@ -13,7 +13,8 @@ import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
 import {CHOPCatalog} from '../../../catalog/chop.catalog';
 import {CatalogServiceMock} from '../../../service/catalog.service.mock';
 import {ReactiveFormsModule} from '@angular/forms';
-import {CorrectVersionPipe} from '../../../pipes/correct-version.pipe';
+import { CorrectVersionPipe } from '../../../pipes/correct-version.pipe';
+import { NullLoggerService } from "../../../service/null.logger.service";
 
 
 describe('SearchFormComponent', () => {
@@ -38,6 +39,7 @@ describe('SearchFormComponent', () => {
         {provide: Router, useClass: RouterStub},
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         {provide: 'ICatalogService', useClass: CatalogServiceMock},
+        {provide: 'ILoggerService', useClass: NullLoggerService}
       ]
     })
       .compileComponents();
@@ -50,7 +52,7 @@ describe('SearchFormComponent', () => {
     catalogService = fixture.debugElement.injector.get('ICatalogService');
     buttons = fixture.debugElement.queryAll(By.css('button'));
 
-    catalog = new SwissDrgCatalog(catalogService);
+    catalog = new SwissDrgCatalog(catalogService, new NullLoggerService());
     component.catalog = catalog;
     component.query = 'Search query';
     fixture.detectChanges();

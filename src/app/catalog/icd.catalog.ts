@@ -1,6 +1,7 @@
 import {Catalog} from './catalog';
 import {Inject, Injectable} from '@angular/core';
-import {ICatalogService} from '../service/i.catalog.service';
+import { ICatalogService } from '../service/i.catalog.service';
+import { ILoggerService } from "../service/i.logger.service";
 
 /**
  * Concrete implementation of catalog class for the ICD catalog.
@@ -8,8 +9,12 @@ import {ICatalogService} from '../service/i.catalog.service';
 @Injectable()
 export class ICDCatalog extends Catalog {
 
-  constructor( @Inject("ICatalogService") service: ICatalogService) {
-    super(service, "ICD",
-      { searchableTypes: ['icds'], retrievableTypes: ['icds', 'icd_groups', 'icd_chapters'], versionParam: 'icds', rootElementType: 'icd_chapters' });
+  constructor( @Inject("ICatalogService") service: ICatalogService, @Inject('ILoggerService') logger: ILoggerService) {
+    super(service, logger, "ICD", {
+      searchableTypes: ['icds'], 
+      retrievableTypes: ['icds', 'icd_groups', 'icd_chapters'], 
+      versionParam: 'icds', 
+      rootElementType: 'icd_chapters'
+    });
   }
 }

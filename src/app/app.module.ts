@@ -9,6 +9,7 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
 import {CatalogService} from './service/catalog.service';
+import { DevLoggerService } from "./service/dev.logger.service";
 import {SearchFormComponent} from './components/search/search-form/search-form.component';
 import {SearchResultsComponent} from './components/search/search-results/search-results.component';
 import {BsDropdownModule, CollapseModule, ModalModule, TooltipModule} from 'ng2-bootstrap';
@@ -23,7 +24,7 @@ import {DetailChopComponent} from './components/details/detail-chop/detail-chop.
 import {DetailIcdComponent} from './components/details/detail-icd/detail-icd.component';
 
 import {ConvertCodePipe} from './pipes/convert-code.pipe';
-import {CorrectVersionPipe} from './pipes/correct-version.pipe';
+import { CorrectVersionPipe } from './pipes/correct-version.pipe';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -66,7 +67,11 @@ export function HttpLoaderFactory(http: Http) {
   ],
   providers: [
     { provide: 'ICatalogService', useClass: CatalogService },
-    SwissDrgCatalog, CHOPCatalog, ICDCatalog, CatalogResolver
+    { provide: 'ILoggerService', useClass: DevLoggerService },
+    SwissDrgCatalog,
+    CHOPCatalog, 
+    ICDCatalog, 
+    CatalogResolver
   ],
   bootstrap: [AppComponent]
 })

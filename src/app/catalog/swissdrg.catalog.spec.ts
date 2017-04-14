@@ -2,7 +2,8 @@ import {async} from '@angular/core/testing';
 import {SwissDrgCatalog} from './swissdrg.catalog';
 import * as TypeMoq from 'typemoq';
 import {ICatalogService} from '../service/i.catalog.service';
-import {CatalogElement} from '../model/catalog.element';
+import { CatalogElement } from '../model/catalog.element';
+import { NullLoggerService } from "../service/null.logger.service";
 
 describe("SwissDrgCatalog", () => {
 
@@ -31,7 +32,7 @@ describe("SwissDrgCatalog", () => {
         rootElementType: 'mdcs'
       }))).verifiable(TypeMoq.Times.atLeastOnce());
 
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.getVersions();
     mock.verifyAll();
   }));
@@ -46,21 +47,21 @@ describe("SwissDrgCatalog", () => {
         rootElementType: 'mdcs'
       }))).verifiable(TypeMoq.Times.atLeastOnce());
 
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.search('V1.0', 'test').then(results => {
       mock.verifyAll();
     });
   }));
 
   it('Should get a list of versions', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.getVersions().then(versions => {
       expect(versions.length).toBe(4);
     });
   }));
 
   it('Should get a list of versions from cache', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.getVersions().then(outerVersions => {
       catalog.getVersions().then(versions => {
         expect(versions.length).toBe(4);
@@ -76,7 +77,7 @@ describe("SwissDrgCatalog", () => {
 
     mock.setup(x => x.search('V1.0', 'Content')).returns(() => Promise.resolve(catalogs));
 
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.search('V1.0', 'Content').then(results => {
       expect(results.length).toBe(2);
     });
@@ -85,7 +86,7 @@ describe("SwissDrgCatalog", () => {
   it('Should return empty array if error is thrown', async(() => {
     mock.setup(x => x.search('V1.0', 'P23')).returns(() => Promise.resolve([]));
 
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.search('V1.0', 'P23')
       .then(result => {
         expect(result.length).toBe(0);
@@ -93,7 +94,7 @@ describe("SwissDrgCatalog", () => {
   }));
 
   it('Should return "V1.0" after version is activated', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.activateVersion('V1.0').then(res => {
       expect(catalog.getActiveVersion()).toBe('V1.0');
     });
@@ -105,7 +106,7 @@ describe("SwissDrgCatalog", () => {
       return Promise.resolve(root);
     });
 
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.activateVersion('V1.0').then(res => {
       catalog.getRootElement().then(element => {
         expect(element).toBe(root);
@@ -114,7 +115,7 @@ describe("SwissDrgCatalog", () => {
   }));
 
   it('Should have version "V4.0" in current lang', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.activateVersion('V1.0').then(res => {
       const result = catalog.hasVersionInCurrentLanguage('V4.0');
       expect(result).toBe(true);
@@ -122,7 +123,7 @@ describe("SwissDrgCatalog", () => {
   }));
 
   it('Should not have version "V5.0" in current lang', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.activateVersion('V1.0').then(res => {
       const result = catalog.hasVersionInCurrentLanguage('V5.0');
       expect(result).toBe(false);
@@ -130,7 +131,7 @@ describe("SwissDrgCatalog", () => {
   }));
 
   it('Should not have version "V4.0" in current lang if versions are not loaded', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object);
+    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     const result = catalog.hasVersionInCurrentLanguage('V4.0');
     expect(result).toBe(false);
   }));

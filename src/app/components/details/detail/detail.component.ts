@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChange, Inject } from '@angular/core';
 import {Catalog} from '../../../catalog/catalog';
 import {CatalogElement} from '../../../model/catalog.element';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,7 +7,8 @@ import {SortHelper} from '../../../helper/sort.helper';
 
 import 'rxjs/add/observable/merge';
 
-import {environment} from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
+import { ILoggerService } from "../../../service/i.logger.service";
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -50,16 +51,16 @@ export class DetailComponent implements OnInit, OnChanges {
    */
   public children: CatalogElement[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   ngOnInit() {
-    if (environment.dev) {
-      console.log('>> DetailComponent on init.');
-    }
+    this.logger.log('>> DetailComponent on init.');
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     this.updateView();
   }
 
@@ -92,7 +93,7 @@ export class DetailComponent implements OnInit, OnChanges {
       this.catalog.getByCode(type, code).then(element => {
         element.url = parent.url;
         this.loadHierarchy(element);
-      }).catch(error => console.log(error));
+      }).catch(error => this.logger.log(error));
     }
   }
 
@@ -156,24 +157,22 @@ export class DetailComponent implements OnInit, OnChanges {
     const catalogRouteParam = this.route.snapshot.params['catalog'];
     const versionRouteParam = this.route.snapshot.params['version'];
 
-    console.log(this.route);
     this.router.navigate(
       [ catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
         queryParamsHandling: 'merge',
         relativeTo: this.route.parent
-      }).catch(error => console.log(error.message));
+      }).catch(error => this.logger.log(error.message));
   }
 
   /**
    * Navigates back to the original search.
    */
   public toSearch(): void {
-    console.log();
     this.router.navigate(
       [this.catalog.getDomain(), this.catalog.getActiveVersion()], {
         relativeTo: this.route.parent,
         queryParamsHandling: 'merge'
       }
-    ).catch(error => console.log(error));
+    ).catch(error => this.logger.log(error));
   }
 }

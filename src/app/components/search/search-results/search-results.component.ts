@@ -1,8 +1,10 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CatalogElement} from '../../../model/catalog.element';
 import {Catalog} from '../../../catalog/catalog';
-import {environment} from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
+import { ILoggerService } from "../../../service/i.logger.service";
+
 
 /**
  * Component to display the search results.
@@ -24,7 +26,8 @@ export class SearchResultsComponent {
 
 
   public constructor(private route: ActivatedRoute,
-                     private router: Router) {
+                     private router: Router,
+                     @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   public openCode(type, code) {
@@ -38,9 +41,7 @@ export class SearchResultsComponent {
     const query = this.route.snapshot.queryParams['query'];
 
     if (query) {
-      this.catalog.sendAnalytics(
-        this.catalog.getDomain(), this.catalog.getActiveVersion(), type, code, query
-      );
+      this.catalog.sendAnalytics(type, code, query);
     }
   }
 
@@ -55,8 +56,6 @@ export class SearchResultsComponent {
   }
 
   private handleError(error): void {
-    if (environment.dev) {
-      console.log(error);
-    }
+    this.logger.log(error);
   }
 }

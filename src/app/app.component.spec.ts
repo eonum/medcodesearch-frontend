@@ -9,7 +9,8 @@ import {CatalogResolver} from './service/routing/catalog-resolver.service';
 import {CHOPCatalog} from './catalog/chop.catalog';
 import {ICDCatalog} from './catalog/icd.catalog';
 import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
-import {CatalogServiceMock} from './service/catalog.service.mock';
+import { CatalogServiceMock } from './service/catalog.service.mock';
+import { NullLoggerService } from "./service/null.logger.service";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -30,6 +31,7 @@ describe('AppComponent', () => {
       ],
       providers: [
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
+        { provide: 'ILoggerService', useClass: NullLoggerService },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog, CatalogResolver]
     }).compileComponents();
   }));

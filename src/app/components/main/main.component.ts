@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Catalog} from '../../catalog/catalog';
 import {environment} from '../../../environments/environment';
-import {CatalogElement} from '../../model/catalog.element';
+import { CatalogElement } from '../../model/catalog.element';
+import { ILoggerService } from "../../service/i.logger.service";
 
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
@@ -32,15 +33,15 @@ export class MainComponent implements OnInit {
   private code: string;
   private type: string;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService) {
   }
   /**
    * Subscribe to route parameter determine if the details view should be displayed
    */
   ngOnInit() {
-    if (environment.dev) {
-      console.log('>> MainComponent on init.');
-    }
+    this.logger.log('>> MainComponent on init.');
 
     this.route.params.subscribe(
       params => {
@@ -109,8 +110,6 @@ export class MainComponent implements OnInit {
   }
 
   private handleError(error): void {
-    if (environment.dev) {
-      console.log(error);
-    }
+    this.logger.log(error);
   }
 }

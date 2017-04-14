@@ -20,7 +20,8 @@ import {DetailIcdComponent} from '../details/detail-icd/detail-icd.component';
 import {DetailChopComponent} from '../details/detail-chop/detail-chop.component';
 import {ConvertCodePipe} from '../../pipes/convert-code.pipe';
 import {CorrectVersionPipe} from '../../pipes/correct-version.pipe';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NullLoggerService } from "../../service/null.logger.service";
 
 describe('MainComponent', () => {
 
@@ -69,7 +70,8 @@ describe('MainComponent', () => {
         {provide: ActivatedRoute, useClass: ActivatedRouteStub},
         {provide: Router, useClass: RouterStub},
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        {provide: 'ICatalogService', useClass: CatalogServiceMock}
+        {provide: 'ICatalogService', useClass: CatalogServiceMock},
+        {provide: 'ILoggerService', useClass: NullLoggerService}
       ]
     })
       .compileComponents();

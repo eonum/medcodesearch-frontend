@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import {CatalogElement} from '../model/catalog.element';
 import {ICatalogService} from '../service/i.catalog.service';
-import {CatalogConfiguration} from './catalog.configuration';
+import { CatalogConfiguration } from './catalog.configuration';
+import { ILoggerService } from "../service/i.logger.service";
 
 /**
  * Class representing a catalog containing medical
@@ -26,6 +27,7 @@ export abstract class Catalog {
    * @param elements - elements within a catalog
    */
   public constructor(private service: ICatalogService,
+                     private logger: ILoggerService,
                      public name: string,
                      protected config: CatalogConfiguration) {
     this.versions_lang = [];
@@ -72,7 +74,7 @@ export abstract class Catalog {
         }
       })
         .catch(error => {
-          console.log(error)
+          this.logger.log(error);
         });
 
       if (lang == "de") {
@@ -116,12 +118,12 @@ export abstract class Catalog {
     }
 
     if (this.versions_lang[this.service.getLocale()].indexOf(version) > -1) {
-      console.log("valid version " + this.service.getLocale());
+      this.logger.log("valid version " + this.service.getLocale());
       this.activeVersion = version;
       return Promise.resolve(true);
 
     } else {
-      console.log("invalid version " + this.service.getLocale());
+      this.logger.log("invalid version " + this.service.getLocale());
       return Promise.resolve(false);
     }
   }
@@ -157,21 +159,11 @@ export abstract class Catalog {
     return validLangs;
   }
 
-
-  /**
-   * Sends an analytic notification to eonum
-   *
-   */
-  public sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void {
-
-
-    console.log('Not sending analytics since it has the wrong url...');
-
-    /*TODO Patrick: use searcheable type from catalog configuration instead of using the 'type' from getDomain()
-     this.service.sendAnalytics(elementType, version, type, code, query);*/
-
-
+	/**
+	* Sends an analytic notification to eonum
+	*
+	*/
+  public sendAnalytics(type: string, code: string, query: string): void {
+	  this.service.sendAnalytics(this.activeVersion, type, code, query);
   }
-
-
 }
