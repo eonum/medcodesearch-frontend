@@ -8,6 +8,7 @@ import { CHOPCatalog } from '../../catalog/chop.catalog';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
 import { CatalogServiceMock } from '../catalog.service.mock';
 import * as TypeMoq from "typemoq";
+import { NullLoggerService } from "../null.logger.service";
 
 describe('CatalogResolver', () => {
 
@@ -19,7 +20,8 @@ describe('CatalogResolver', () => {
     fixture = TestBed.configureTestingModule({
       providers: [CatalogResolver, { provide: Router, useClass: RouterStub },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        { provide: 'ICatalogService', useClass: CatalogServiceMock },]
+        { provide: 'ICatalogService', useClass: CatalogServiceMock },
+        {provide: 'ILoggerService', useClass: NullLoggerService}]
     });
 
     routeMock = TypeMoq.Mock.ofType<ActivatedRouteSnapshot>();

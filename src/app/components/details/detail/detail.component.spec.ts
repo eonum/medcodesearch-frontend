@@ -16,7 +16,8 @@ import {SearchFormComponent} from '../../search/search-form/search-form.componen
 import * as TypeMoq from 'typemoq';
 import {ConvertCodePipe} from '../../../pipes/convert-code.pipe';
 import {ReactiveFormsModule} from '@angular/forms';
-import {CorrectVersionPipe} from '../../../pipes/correct-version.pipe';
+import { CorrectVersionPipe } from '../../../pipes/correct-version.pipe';
+import { NullLoggerService } from "../../../service/null.logger.service";
 
 
 describe('DetailComponent', () => {
@@ -63,7 +64,8 @@ describe('DetailComponent', () => {
         {provide: ActivatedRoute, useClass: ActivatedRouteStub},
         {provide: Router, useClass: RouterStub},
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        {provide: 'ICatalogService', useClass: CatalogServiceMock}
+        {provide: 'ICatalogService', useClass: CatalogServiceMock},
+        {provide: 'ILoggerService', useClass: NullLoggerService}
       ]
     })
       .compileComponents();

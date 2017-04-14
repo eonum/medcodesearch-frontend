@@ -3,7 +3,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {SearchResultsComponent} from './search-results.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import {ActivatedRouteStub, RouterStub} from '../../../router-stub';
+import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
+import { NullLoggerService } from "../../../service/null.logger.service";
 
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
@@ -15,7 +16,8 @@ describe('SearchResultsComponent', () => {
       imports: [RouterModule, TranslateModule.forRoot(), TranslateModule.forRoot()],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: Router, useClass: RouterStub }
+        { provide: Router, useClass: RouterStub },
+        {provide: 'ILoggerService', useClass: NullLoggerService}
       ]
     })
       .compileComponents();

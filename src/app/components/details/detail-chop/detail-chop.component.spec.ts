@@ -4,7 +4,8 @@ import {DetailChopComponent} from './detail-chop.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ConvertCodePipe} from '../../../pipes/convert-code.pipe';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import {ActivatedRouteStub, RouterStub} from '../../../router-stub';
+import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
+import { NullLoggerService } from "../../../service/null.logger.service";
 
 describe('DetailChopComponent', () => {
   let component: DetailChopComponent;
@@ -14,8 +15,10 @@ describe('DetailChopComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DetailChopComponent, ConvertCodePipe],
       imports: [RouterModule, TranslateModule.forRoot(), TranslateModule.forRoot()],
-      providers: [{ provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: Router, useClass: RouterStub }]
+      providers: [
+        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+        { provide: Router, useClass: RouterStub },
+        {provide: 'ILoggerService', useClass: NullLoggerService}]
     })
       .compileComponents();
   }));
