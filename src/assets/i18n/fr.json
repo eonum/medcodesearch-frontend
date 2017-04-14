@@ -14,6 +14,8 @@
   "LBL_SYNONYMS": "Synonymes",
   "LBL_SELECT_LANGUAGE": "Choisissez la langue",
   "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "Le catalogue sélectionné n'est pas disponible dans la langue actuelle.",
-  "LBL_BACK": "Retour"
+  "LBL_BACK": "Retour",
+  "LBL_REMEMBER_TITLE": "Eléments marqués",
+  "LBL_REMEMBER_NOELEMENTS": "Vous n'avez marqué aucun élément jusqu'à maintenant."
 }
 
