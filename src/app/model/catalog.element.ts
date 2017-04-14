@@ -5,7 +5,7 @@ import { Highlight } from "./Highlight";
  * Contains information about medical treatments and
  * diagnosis.
  */
-export abstract class CatalogElement {
+export class CatalogElement {
   code: string;
   text: string;
   type: string;
