@@ -68,33 +68,34 @@ export class CatalogService implements ICatalogService {
   }
 
   /**
-   *  Sends an analytics notification to eonum
-   *
+   * Send information about how the user found the selected code
+   * to the eonum API.
+   * 
+   * @param version the version of the catalog to use
+   * @param type the type of the element to send analytics for
+   * @param code the code of the element to send analytics for
+   * @param query the query which was used before retrieving this element
    */
-  public sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void {
+  public sendAnalytics(version: string, type: string, code:string, query:string): void {
 
-    // TODO Patrick: Fix this
-
-    const locale: string = this.getLocale();
-    const url = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?query=${query}`;
-
-    this.http.get(url).subscribe(
-      response => {
-        if (response.status === 200 && environment.dev) {
-          console.log('Sent Analytics: ' + url);
-        } else if (environment.dev) {
-          console.log('ERROR - Could not send analytics. Url: ' + url);
-          console.log(response);
+    this.getSingleElementForTypeByCode(type, version, code, query)
+      .then(result => {
+        if (environment.dev){
+          console.log('Successfully sent Analytics.');
         }
-      }
-    );
+      })
+      .catch(error => {
+        if (environment.dev){
+          console.log('ERROR - Could not send analytics. Error: ' + error); 
+        }
+      });
   }
 
-
   /**
-   * Get all versions supported by the catalog
+   * Get all versions supported by the catalog in the specified language
+   * 
+   * @param lang the language to get the supported versions for
    */
-
   public getVersions(lang: string): Promise<string[]> {
     let url: string = `${this.baseUrl}${lang}/${this.config.versionParam}/versions`;
 
@@ -131,10 +132,17 @@ export class CatalogService implements ICatalogService {
     throw new Error("Not found");
   }
 
-  private async getSingleElementForTypeByCode(elementType: string, version: string, code: string): Promise<CatalogElement> {
+  private async getSingleElementForTypeByCode(elementType: string, version: string, code: string, query?: string): Promise<CatalogElement> {
     const locale: string = this.getLocale();
-    const url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
-    if (environment.dev) console.log(url);
+    let url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
+    
+    if (query){
+      url += `&query=${query}`;
+    }
+
+    if (environment.dev) {
+      console.log(url)
+    };
 
     return this.http.get(url).toPromise()
       .then(result => {

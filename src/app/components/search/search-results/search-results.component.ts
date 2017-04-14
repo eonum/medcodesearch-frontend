@@ -4,6 +4,7 @@ import {CatalogElement} from '../../../model/catalog.element';
 import {Catalog} from '../../../catalog/catalog';
 import {environment} from '../../../../environments/environment';
 
+
 /**
  * Component to display the search results.
  * Receives the `searchResults` as input from the {@link MainComponent}.
@@ -38,9 +39,7 @@ export class SearchResultsComponent {
     const query = this.route.snapshot.queryParams['query'];
 
     if (query) {
-      this.catalog.sendAnalytics(
-        this.catalog.getDomain(), this.catalog.getActiveVersion(), type, code, query
-      );
+      this.catalog.sendAnalytics(type, code, query);
     }
   }
 

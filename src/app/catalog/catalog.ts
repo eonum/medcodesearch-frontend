@@ -157,21 +157,11 @@ export abstract class Catalog {
     return validLangs;
   }
 
-
-  /**
-   * Sends an analytic notification to eonum
-   *
-   */
-  public sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void {
-
-
-    console.log('Not sending analytics since it has the wrong url...');
-
-    /*TODO Patrick: use searcheable type from catalog configuration instead of using the 'type' from getDomain()
-     this.service.sendAnalytics(elementType, version, type, code, query);*/
-
-
+	/**
+	* Sends an analytic notification to eonum
+	*
+	*/
+  public sendAnalytics(type: string, code: string, query: string): void {
+	  this.service.sendAnalytics(this.activeVersion, type, code, query);
   }
-
-
 }
