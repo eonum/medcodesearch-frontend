@@ -71,7 +71,8 @@ export class DetailComponent implements OnInit, OnChanges {
   public rememberCode(element: CatalogElement): void {
     const language: string = this.route.snapshot.params['language'];
     const catalog: string = this.route.snapshot.params['catalog'];
-    this.rememberService.add(element, catalog, language);
+    const version: string = this.route.snapshot.params['version'];
+    this.rememberService.add(element, version, catalog, language);
   }
 
   /**

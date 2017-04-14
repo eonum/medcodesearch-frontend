@@ -21,8 +21,8 @@ export class RememberElementService {
         return this.numberOfElements;
     }
 
-    public add(element: CatalogElement, catalog: string, language: string): void {
-        const elementToStore = RememberedElement.from(element, catalog, language);
+    public add(element: CatalogElement, version:string, catalog: string, language: string): void {
+        const elementToStore = RememberedElement.from(element, version, catalog, language);
         if (!this.rememberedElements[elementToStore.getId()]){
             this.rememberedElements[elementToStore.getId()] = elementToStore; 
             this.numberOfElements++;
