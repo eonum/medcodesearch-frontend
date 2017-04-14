@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {CatalogResolver} from './service/routing/catalog-resolver.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { ILoggerService } from "./service/i.logger.service";
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent {
   public languages = ['de', 'fr', 'it', 'en'];
 
   constructor(public translate: TranslateService,
+    @Inject('ILoggerService') private logger: ILoggerService,
     private catalogResolver: CatalogResolver,
     private router: Router) {
 
@@ -25,6 +27,6 @@ export class AppComponent {
   setLanguage(language: string): void {
     this.router.navigate(
       [language].concat(this.catalogResolver.getActiveRouteParams())
-    ).catch(e => console.log(e));
+    ).catch(e => this.logger.log(e));
   }
 }

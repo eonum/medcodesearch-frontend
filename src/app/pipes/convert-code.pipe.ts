@@ -1,12 +1,17 @@
-import {NgZone, Pipe, PipeTransform} from '@angular/core';
+import { NgZone, Pipe, PipeTransform, Inject } from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Catalog} from '../catalog/catalog';
+import { Catalog } from '../catalog/catalog';
+import { ILoggerService } from "../service/i.logger.service";
 
 @Pipe({ name: 'convertCode' })
 export class ConvertCodePipe implements PipeTransform {
 
-  constructor(private sanitizer: DomSanitizer, private ngZone: NgZone, private route: ActivatedRoute, private router: Router) {
+  constructor(private sanitizer: DomSanitizer,
+              private ngZone: NgZone, 
+              private route: ActivatedRoute, 
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService) {
     window['eonum'] = window['eonum'] || {};
     window['eonum'].searchCode = this.searchCode.bind(this);
   }
@@ -50,7 +55,7 @@ export class ConvertCodePipe implements PipeTransform {
 
     this.router.navigate([language, catalog.getDomain(), version], {
       queryParams: { 'query': query }
-    }).catch(error => console.log(error));
+    }).catch(error => this.logger.log(error));
   }
 }
 

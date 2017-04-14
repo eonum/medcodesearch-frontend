@@ -1,11 +1,12 @@
 import {Http} from '@angular/http';
 import {TranslateService} from '@ngx-translate/core';
-import {Injectable} from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import {CatalogElement} from '../model/catalog.element';
 import {ICatalogService} from './i.catalog.service';
 import 'rxjs/add/operator/toPromise';
 import {environment} from '../../environments/environment';
-import {CatalogConfiguration} from '../catalog/catalog.configuration';
+import { CatalogConfiguration } from '../catalog/catalog.configuration';
+import { ILoggerService } from "./i.logger.service";
 
 @Injectable()
 export class CatalogService implements ICatalogService {
@@ -14,7 +15,9 @@ export class CatalogService implements ICatalogService {
 
   private config: CatalogConfiguration;
 
-  public constructor(private http: Http, private translate: TranslateService) {
+  public constructor(private http: Http, 
+                     private translate: TranslateService,
+                     @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   /**
@@ -30,8 +33,8 @@ export class CatalogService implements ICatalogService {
   }
 
   public getLocale(): string {
-    if (environment.dev && !this.translate.currentLang) {
-      console.log("%c No currentLanguage set", "color:red")
+    if (!this.translate.currentLang) {
+      this.logger.log("No currentLanguage set")
     }
     return this.translate.currentLang;
   }
@@ -61,7 +64,7 @@ export class CatalogService implements ICatalogService {
         results = results.concat(webResults);
       }
       catch (e) {
-        console.log(e);
+        this.logger.log(e);
       }
     }
     return Promise.resolve(results);
@@ -80,14 +83,10 @@ export class CatalogService implements ICatalogService {
 
     this.getSingleElementForTypeByCode(type, version, code, query)
       .then(result => {
-        if (environment.dev){
-          console.log('Successfully sent Analytics.');
-        }
+        this.logger.log('Successfully sent Analytics.');
       })
       .catch(error => {
-        if (environment.dev){
-          console.log('ERROR - Could not send analytics. Error: ' + error); 
-        }
+        this.logger.log('ERROR - Could not send analytics. Error: ' + error);
       });
   }
 
@@ -126,7 +125,7 @@ export class CatalogService implements ICatalogService {
       }
     }
     catch (error) {
-      console.log(error);
+      this.logger.log(error);
     }
 
     throw new Error("Not found");
@@ -140,9 +139,7 @@ export class CatalogService implements ICatalogService {
       url += `&query=${query}`;
     }
 
-    if (environment.dev) {
-      console.log(url)
-    };
+    this.logger.log(url);
 
     return this.http.get(url).toPromise()
       .then(result => {
@@ -155,7 +152,7 @@ export class CatalogService implements ICatalogService {
 
   private async getSearchForType(elementType: string, version: string, query: string): Promise<CatalogElement[]> {
     let url: string = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
-    if (environment.dev) console.log(url);
+    this.logger.log(url);
 
     return this.http.get(url).toPromise()
       .then(result => {

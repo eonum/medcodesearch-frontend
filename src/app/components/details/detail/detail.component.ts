@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChange, Inject } from '@angular/core';
 import {Catalog} from '../../../catalog/catalog';
 import {CatalogElement} from '../../../model/catalog.element';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,7 +7,8 @@ import {SortHelper} from '../../../helper/sort.helper';
 
 import 'rxjs/add/observable/merge';
 
-import {environment} from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
+import { ILoggerService } from "../../../service/i.logger.service";
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -50,13 +51,13 @@ export class DetailComponent implements OnInit, OnChanges {
    */
   public children: CatalogElement[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, 
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   ngOnInit() {
-    if (environment.dev) {
-      console.log('>> DetailComponent on init.');
-    }
+    this.logger.log('>> DetailComponent on init.');
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
@@ -92,7 +93,7 @@ export class DetailComponent implements OnInit, OnChanges {
       this.catalog.getByCode(type, code).then(element => {
         element.url = parent.url;
         this.loadHierarchy(element);
-      }).catch(error => console.log(error));
+      }).catch(error => this.logger.log(error));
     }
   }
 
@@ -159,7 +160,7 @@ export class DetailComponent implements OnInit, OnChanges {
     this.router.navigate(
       ['', languageRouteParam, catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
         queryParamsHandling: 'merge'
-      }).catch(error => console.log(error.message));
+      }).catch(error => this.logger.log(error.message));
   }
 
   /**
@@ -171,6 +172,6 @@ export class DetailComponent implements OnInit, OnChanges {
         relativeTo: this.route.parent.parent,
         queryParamsHandling: 'merge'
       }
-    ).catch(error => console.log(error));
+    ).catch(error => this.logger.log(error));
   }
 }
