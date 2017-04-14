@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
 import { CatalogElement } from "../model/catalog.element";
+import { RememberedElement } from "../model/remembered.element";
+import { Catalog } from "../catalog/catalog";
 
 @Injectable()
 export class RememberElementService {
 
-    private rememberedElements: {[key: string]: CatalogElement};
+    private rememberedElements: {[key: string]: RememberedElement};
     private numberOfElements: number;
 
     private subscribers: (() => void)[];
@@ -19,23 +21,24 @@ export class RememberElementService {
         return this.numberOfElements;
     }
 
-    public add(element: CatalogElement): void {
-        if (!this.rememberedElements[element.code]){
-            this.rememberedElements[element.code] = element;
+    public add(element: CatalogElement, catalog: string, language: string): void {
+        const elementToStore = RememberedElement.from(element, catalog, language);
+        if (!this.rememberedElements[elementToStore.getId()]){
+            this.rememberedElements[elementToStore.getId()] = elementToStore; 
             this.numberOfElements++;
             this.notify();
         }
     }
 
-    public remove(code: string): void {
-        if (this.rememberedElements[code]){
-            this.rememberedElements[code] = undefined;
+    public remove(id: string): void {
+        if (this.rememberedElements[id]){
+            delete this.rememberedElements[id];
             this.numberOfElements--;
             this.notify();
         }
     }
 
-    public getRememberedElements(): CatalogElement[] {
+    public getRememberedElements(): RememberedElement[] {
         const elements = [];
         const keys = Object.keys(this.rememberedElements);
         keys.forEach(key => {
@@ -48,7 +51,7 @@ export class RememberElementService {
         this.subscribers.push(callback);
     }
 
-    public notify(): void {
+    private notify(): void {
         this.subscribers.forEach(callback => {
             callback();
         });

@@ -11,6 +11,9 @@ import {ICDCatalog} from './catalog/icd.catalog';
 import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
 import { CatalogServiceMock } from './service/catalog.service.mock';
 import { NullLoggerService } from "./service/null.logger.service";
+import { PopoverModule } from "ng2-bootstrap";
+import { RememberElementComponent } from "./components/remember-element/remember-element.component";
+import { RememberElementService } from "./service/remember.element.service";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -24,15 +27,21 @@ describe('AppComponent', () => {
             useFactory: HttpLoaderFactory,
             deps: [Http]
           }
-        })
+        }),
+        PopoverModule.forRoot()
       ],
       declarations: [
         AppComponent,
+        RememberElementComponent
       ],
       providers: [
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
-        SwissDrgCatalog, CHOPCatalog, ICDCatalog, CatalogResolver]
+        SwissDrgCatalog, 
+        CHOPCatalog, 
+        ICDCatalog, 
+        CatalogResolver, 
+        RememberElementService]
     }).compileComponents();
   }));
 

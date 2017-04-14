@@ -9,6 +9,7 @@ import 'rxjs/add/observable/merge';
 
 import { environment } from '../../../../environments/environment';
 import { ILoggerService } from "../../../service/i.logger.service";
+import { RememberElementService } from "../../../service/remember.element.service";
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -51,17 +52,26 @@ export class DetailComponent implements OnInit, OnChanges {
    */
   public children: CatalogElement[] = [];
 
+  public count: number = 0;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private rememberService: RememberElementService,
               @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.logger.log('>> DetailComponent on init.');
   }
 
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+  public ngOnChanges(changes: {[propKey: string]: SimpleChange}): void {
     this.updateView();
+  }
+
+  public rememberCode(element: CatalogElement): void {
+    const language: string = this.route.snapshot.params['language'];
+    const catalog: string = this.route.snapshot.params['catalog'];
+    this.rememberService.add(element, catalog, language);
   }
 
   /**

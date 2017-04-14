@@ -18,6 +18,7 @@ import {ConvertCodePipe} from '../../../pipes/convert-code.pipe';
 import {ReactiveFormsModule} from '@angular/forms';
 import { CorrectVersionPipe } from '../../../pipes/correct-version.pipe';
 import { NullLoggerService } from "../../../service/null.logger.service";
+import { RememberElementService } from "../../../service/remember.element.service";
 
 
 describe('DetailComponent', () => {
@@ -65,7 +66,8 @@ describe('DetailComponent', () => {
         {provide: Router, useClass: RouterStub},
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         {provide: 'ICatalogService', useClass: CatalogServiceMock},
-        {provide: 'ILoggerService', useClass: NullLoggerService}
+        {provide: 'ILoggerService', useClass: NullLoggerService},
+        RememberElementService
       ]
     })
       .compileComponents();

@@ -12,7 +12,7 @@ import {CatalogService} from './service/catalog.service';
 import { DevLoggerService } from "./service/dev.logger.service";
 import {SearchFormComponent} from './components/search/search-form/search-form.component';
 import {SearchResultsComponent} from './components/search/search-results/search-results.component';
-import {BsDropdownModule, CollapseModule, ModalModule, TooltipModule} from 'ng2-bootstrap';
+import {BsDropdownModule, CollapseModule, ModalModule, TooltipModule, PopoverModule} from 'ng2-bootstrap';
 import {CatalogResolver} from './service/routing/catalog-resolver.service';
 import {SwissDrgCatalog} from './catalog/swissdrg.catalog';
 import {CHOPCatalog} from './catalog/chop.catalog';
@@ -22,9 +22,11 @@ import {DetailComponent} from './components/details/detail/detail.component';
 import {DetailSwissDrgComponent} from './components/details/detail-swiss-drg/detail-swiss-drg.component';
 import {DetailChopComponent} from './components/details/detail-chop/detail-chop.component';
 import {DetailIcdComponent} from './components/details/detail-icd/detail-icd.component';
+import { RememberElementComponent } from './components/remember-element/remember-element.component';
 
 import {ConvertCodePipe} from './pipes/convert-code.pipe';
 import { CorrectVersionPipe } from './pipes/correct-version.pipe';
+import { RememberElementService } from "./service/remember.element.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -42,7 +44,8 @@ export function HttpLoaderFactory(http: Http) {
     DetailChopComponent,
     DetailIcdComponent,
     ConvertCodePipe,
-    CorrectVersionPipe
+    CorrectVersionPipe,
+    RememberElementComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ export function HttpLoaderFactory(http: Http) {
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    PopoverModule.forRoot()
   ],
   exports: [
     ConvertCodePipe
@@ -68,6 +72,7 @@ export function HttpLoaderFactory(http: Http) {
   providers: [
     { provide: 'ICatalogService', useClass: CatalogService },
     { provide: 'ILoggerService', useClass: DevLoggerService },
+    RememberElementService,
     SwissDrgCatalog,
     CHOPCatalog, 
     ICDCatalog, 

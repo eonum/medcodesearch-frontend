@@ -14,7 +14,7 @@ describe('DetailChopComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DetailChopComponent, ConvertCodePipe],
-      imports: [RouterModule, TranslateModule.forRoot(), TranslateModule.forRoot()],
+      imports: [RouterModule, TranslateModule.forRoot()],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
