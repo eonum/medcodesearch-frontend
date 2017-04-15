@@ -1,8 +1,8 @@
-import { Catalog } from '../../catalog/catalog';
-import { CatalogElement } from '../../model/catalog.element';
-import { ILoggerService } from '../../service/logging/i.logger.service';
-import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Catalog} from '../../catalog/catalog';
+import {CatalogElement} from '../../model/catalog.element';
+import {ILoggerService} from '../../service/logging/i.logger.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 /**
  * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
@@ -87,14 +87,11 @@ export class MainComponent implements OnInit {
         .catch(error => {
           this.handleError(error);
         });
-    } else if (!this.query) {
-      this.catalog.getRootElement()
-        .then(element => {
-          this.selectedElement = element;
-        })
-        .catch(error => {
-          this.handleError(error);
-        });
+    } else {
+      this.router.navigate(this.catalog.getRootElementParams(), {
+        relativeTo: this.route,
+        queryParamsHandling: 'merge'
+      })
     }
   }
 

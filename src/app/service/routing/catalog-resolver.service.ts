@@ -1,10 +1,10 @@
-import { Catalog } from '../../catalog/catalog';
-import { CHOPCatalog } from '../../catalog/chop.catalog';
-import { ICDCatalog } from '../../catalog/icd.catalog';
-import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
-import { ILoggerService } from '../logging/i.logger.service';
-import { Inject, Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import {Catalog} from '../../catalog/catalog';
+import {CHOPCatalog} from '../../catalog/chop.catalog';
+import {ICDCatalog} from '../../catalog/icd.catalog';
+import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
+import {ILoggerService} from '../logging/i.logger.service';
+import {Inject, Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 
 /**
  * This service acts as resolver for a path that contains a `catalog`
@@ -56,9 +56,11 @@ export class CatalogResolver implements Resolve<Catalog> {
    */
   public resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<Catalog> {
 
-    const domain = route.params['catalog'];
-    const version = route.params['version'];
-    const catalog = this.catalogs[domain];
+    this.logger.log(`Catalog Resolver: ${route.url}`);
+
+    let domain = route.params['catalog'];
+    let version = route.params['version'];
+    let catalog = this.catalogs[domain];
 
     // Activate catalog and return it, or redirect to start
     if (catalog) {
@@ -95,7 +97,6 @@ export class CatalogResolver implements Resolve<Catalog> {
       },
         error => this.logger.log(error)
       );
-
     } else {
       this.redirectToStart(route);
     }
