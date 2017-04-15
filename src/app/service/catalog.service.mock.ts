@@ -1,6 +1,6 @@
-import { ICatalogService } from './i.catalog.service';
 import { CatalogConfiguration } from '../catalog/catalog.configuration';
 import { CatalogElement } from '../model/catalog.element';
+import { ICatalogService } from './i.catalog.service';
 
 export class CatalogServiceMock implements ICatalogService {
 
@@ -43,7 +43,7 @@ export class CatalogServiceMock implements ICatalogService {
     return ['de', 'fr', 'it', 'en'];
   }
 
-  public sendAnalytics(elementType: string, version: string, type: string, code: string, query: string): void {
+  public sendAnalytics(version: string, type: string, code: string, query: string): void {
     return;
   }
 

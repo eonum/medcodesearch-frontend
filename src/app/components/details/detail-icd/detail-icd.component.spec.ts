@@ -1,10 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { DetailIcdComponent } from './detail-icd.component';
 import { ConvertCodePipe } from '../../../pipes/convert-code.pipe';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
-import { NullLoggerService } from "../../../service/null.logger.service";
+import { NullLoggerService } from '../../../service/null.logger.service';
+import { DetailIcdComponent } from './detail-icd.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('DetailIcdComponent', () => {
   let component: DetailIcdComponent;

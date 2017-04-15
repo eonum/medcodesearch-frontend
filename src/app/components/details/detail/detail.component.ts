@@ -1,15 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChange, Inject } from '@angular/core';
 import { Catalog } from '../../../catalog/catalog';
-import { CatalogElement } from '../../../model/catalog.element';
-import { ActivatedRoute, Router } from '@angular/router';
 import { SortHelper } from '../../../helper/sort.helper';
-
-
-import 'rxjs/add/observable/merge';
-
-import { environment } from '../../../../environments/environment';
-import { ILoggerService } from "../../../service/i.logger.service";
-import { RememberElementService } from "../../../service/remember.element.service";
+import { CatalogElement } from '../../../model/catalog.element';
+import { ILoggerService } from '../../../service/i.logger.service';
+import { RememberElementService } from '../../../service/remember.element.service';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)

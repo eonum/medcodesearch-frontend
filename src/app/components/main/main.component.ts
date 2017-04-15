@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Catalog } from '../../catalog/catalog';
-import { environment } from '../../../environments/environment';
 import { CatalogElement } from '../../model/catalog.element';
-import { ILoggerService } from "../../service/i.logger.service";
+import { ILoggerService } from '../../service/i.logger.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.

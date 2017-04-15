@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ILoggerService } from './service/i.logger.service';
+import { RememberElementService } from './service/remember.element.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ILoggerService } from "./service/i.logger.service";
-import { RememberElementService } from "./service/remember.element.service";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',

@@ -1,8 +1,8 @@
-import { Injectable, Inject } from '@angular/core';
 import { CatalogElement } from '../model/catalog.element';
 import { ICatalogService } from '../service/i.catalog.service';
+import { ILoggerService } from '../service/i.logger.service';
 import { CatalogConfiguration } from './catalog.configuration';
-import { ILoggerService } from "../service/i.logger.service";
+import { Injectable } from '@angular/core';
 
 /**
  * Class representing a catalog containing medical

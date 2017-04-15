@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DetailComponent } from './detail.component';
-import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
+import { CHOPCatalog } from '../../../catalog/chop.catalog';
+import { ICDCatalog } from '../../../catalog/icd.catalog';
+import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
 import { CatalogElement } from '../../../model/catalog.element';
-import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ModalModule, TooltipModule } from 'ng2-bootstrap';
-import { DetailSwissDrgComponent } from '../detail-swiss-drg/detail-swiss-drg.component';
+import { ConvertCodePipe } from '../../../pipes/convert-code.pipe';
+import { CorrectVersionPipe } from '../../../pipes/correct-version.pipe';
+import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
+import { CatalogServiceMock } from '../../../service/catalog.service.mock';
+import { NullLoggerService } from '../../../service/null.logger.service';
+import { RememberElementService } from '../../../service/remember.element.service';
+import { SearchFormComponent } from '../../search/search-form/search-form.component';
 import { DetailChopComponent } from '../detail-chop/detail-chop.component';
 import { DetailIcdComponent } from '../detail-icd/detail-icd.component';
-import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
-import { CHOPCatalog } from '../../../catalog/chop.catalog';
-import { CatalogServiceMock } from '../../../service/catalog.service.mock';
-import { ICDCatalog } from '../../../catalog/icd.catalog';
-import { SearchFormComponent } from '../../search/search-form/search-form.component';
-import * as TypeMoq from 'typemoq';
-import { ConvertCodePipe } from '../../../pipes/convert-code.pipe';
+import { DetailSwissDrgComponent } from '../detail-swiss-drg/detail-swiss-drg.component';
+import { DetailComponent } from './detail.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CorrectVersionPipe } from '../../../pipes/correct-version.pipe';
-import { NullLoggerService } from "../../../service/null.logger.service";
-import { RememberElementService } from "../../../service/remember.element.service";
-
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ModalModule, TooltipModule } from 'ng2-bootstrap';
+import * as TypeMoq from 'typemoq';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;

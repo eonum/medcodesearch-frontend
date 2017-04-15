@@ -1,7 +1,7 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Catalog } from './catalog/catalog';
 import { Injectable } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
-import { Catalog } from './catalog/catalog';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 /**
  * Replacement for the angular Router in tests.

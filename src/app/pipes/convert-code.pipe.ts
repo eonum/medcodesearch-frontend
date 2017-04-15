@@ -1,8 +1,8 @@
-import { NgZone, Pipe, PipeTransform, Inject } from '@angular/core';
+import { Catalog } from '../catalog/catalog';
+import { ILoggerService } from '../service/i.logger.service';
+import { Inject, NgZone, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Catalog } from '../catalog/catalog';
-import { ILoggerService } from "../service/i.logger.service";
 
 @Pipe({ name: 'convertCode' })
 export class ConvertCodePipe implements PipeTransform {

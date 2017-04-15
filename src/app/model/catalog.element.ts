@@ -1,4 +1,4 @@
-import { Highlight } from "./Highlight";
+import { Highlight } from './Highlight';
 
 /**
  * Class representing an element within a catalog.

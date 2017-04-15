@@ -1,11 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ActivatedRouteStub, RouterStub } from '../../router-stub';
+import { NullLoggerService } from '../../service/null.logger.service';
+import { RememberElementService } from '../../service/remember.element.service';
 import { RememberElementComponent } from './remember-element.component';
-import { TranslateModule } from "@ngx-translate/core";
-import { RememberElementService } from "../../service/remember.element.service";
-import { RouterModule, Router, ActivatedRoute } from "@angular/router";
-import { RouterStub, ActivatedRouteStub } from "../../router-stub";
-import { NullLoggerService } from "../../service/null.logger.service";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('RememberElementComponent', () => {
   let component: RememberElementComponent;

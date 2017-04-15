@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
-import { CatalogElement } from "../model/catalog.element";
-import { RememberedElement } from "../model/remembered.element";
-import { Catalog } from "../catalog/catalog";
+import { CatalogElement } from '../model/catalog.element';
+import { RememberedElement } from '../model/remembered.element';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class RememberElementService {

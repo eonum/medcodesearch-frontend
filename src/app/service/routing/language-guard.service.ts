@@ -1,7 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
+import { ILoggerService } from '../i.logger.service';
+import { Inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ILoggerService } from "../i.logger.service";
 
 /**
  * This is an authentication guard that grants always access,

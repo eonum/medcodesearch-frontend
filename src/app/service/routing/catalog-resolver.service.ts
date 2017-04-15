@@ -1,11 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Catalog } from '../../catalog/catalog';
-import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
 import { CHOPCatalog } from '../../catalog/chop.catalog';
 import { ICDCatalog } from '../../catalog/icd.catalog';
-import { environment } from '../../../environments/environment';
-import { ILoggerService } from "../i.logger.service";
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { ILoggerService } from '../i.logger.service';
+import { Inject, Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 
 /**
  * This service acts as resolver for a path that contains a `catalog`

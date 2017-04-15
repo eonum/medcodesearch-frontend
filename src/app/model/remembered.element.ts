@@ -1,5 +1,4 @@
-import { CatalogElement } from "./catalog.element";
-import { Catalog } from "../catalog/catalog";
+import { CatalogElement } from './catalog.element';
 
 export class RememberedElement {
 

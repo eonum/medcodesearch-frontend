@@ -1,8 +1,8 @@
-import { CatalogElement } from "../model/catalog.element";
-import { RememberElementService } from "./remember.element.service";
-import { RememberedElement } from "../model/remembered.element";
+import { CatalogElement } from '../model/catalog.element';
+import { RememberedElement } from '../model/remembered.element';
+import { RememberElementService } from './remember.element.service';
 
-describe('Remember element service test', () => {
+describe('RememberElementService', () => {
 
   this.createElement = (code: string) => {
     const element = new CatalogElement();

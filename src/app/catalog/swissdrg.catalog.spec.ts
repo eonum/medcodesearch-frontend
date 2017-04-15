@@ -1,9 +1,9 @@
-import { async } from '@angular/core/testing';
-import { SwissDrgCatalog } from './swissdrg.catalog';
-import * as TypeMoq from 'typemoq';
-import { ICatalogService } from '../service/i.catalog.service';
 import { CatalogElement } from '../model/catalog.element';
-import { NullLoggerService } from "../service/null.logger.service";
+import { ICatalogService } from '../service/i.catalog.service';
+import { NullLoggerService } from '../service/null.logger.service';
+import { SwissDrgCatalog } from './swissdrg.catalog';
+import { async } from '@angular/core/testing';
+import * as TypeMoq from 'typemoq';
 
 describe("SwissDrgCatalog", () => {
 

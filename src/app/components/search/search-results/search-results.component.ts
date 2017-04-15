@@ -1,10 +1,8 @@
-import { Component, Input, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CatalogElement } from '../../../model/catalog.element';
 import { Catalog } from '../../../catalog/catalog';
-import { environment } from '../../../../environments/environment';
-import { ILoggerService } from "../../../service/i.logger.service";
-
+import { CatalogElement } from '../../../model/catalog.element';
+import { ILoggerService } from '../../../service/i.logger.service';
+import { Component, Inject, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * Component to display the search results.
