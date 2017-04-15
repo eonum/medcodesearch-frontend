@@ -45,6 +45,7 @@ export class MainComponent implements OnInit {
       params => {
         this.code = params['code'];
         this.type = params['type'];
+
         this.updateView();
       }
     );
@@ -59,6 +60,7 @@ export class MainComponent implements OnInit {
     this.route.data.subscribe(
       data => {
         this.catalog = data.catalog;
+        this.selectedElement = data.catalogElement;
         this.updateView();
       }
     );
@@ -66,34 +68,18 @@ export class MainComponent implements OnInit {
 
   private updateView(): void {
     if (this.catalog) {
-      this.updateDetailView();
       this.updateSearchResultsView();
+      if ( !this.code ){
+        //Navaigate to root element
+        this.router.navigate(this.catalog.getRootElementParams(), {
+          relativeTo: this.route,
+          queryParamsHandling: 'merge'
+        });
+      }
     }
   }
 
-  /**
-   * Load an element of which the details will be displayed.
-   * If a code is provided in the url by the user, the according
-   * element will be displayed.
-   * Otherwise the root element of the current catalog will be
-   * displayed.
-   */
-  private updateDetailView(): void {
-    if (this.code && this.type) {
-      this.catalog.getByCode(this.type, this.code)
-        .then(element => {
-          this.selectedElement = element;
-        })
-        .catch(error => {
-          this.handleError(error);
-        });
-    } else {
-      this.router.navigate(this.catalog.getRootElementParams(), {
-        relativeTo: this.route,
-        queryParamsHandling: 'merge'
-      })
-    }
-  }
+
 
   /**
    * If a search parameter is provided, the search

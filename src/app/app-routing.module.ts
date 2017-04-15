@@ -3,6 +3,7 @@ import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { LanguageGuard } from './service/routing/language-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {CatalogElementResolver} from './service/routing/catalog-element-resolver.service';
 
 const routes: Routes = [
   {
@@ -12,22 +13,24 @@ const routes: Routes = [
       {
         path: ':catalog',
         component: MainComponent,
-        resolve: {
-          catalog: CatalogResolver
-        }
+        resolve: {catalog: CatalogResolver}
       },
       {
         path: ':catalog/:version',
         component: MainComponent,
         resolve: {
           catalog: CatalogResolver
-        }
+        },
+        children: [
+
+        ]
       },
       {
         path: ':catalog/:version/:type/:code',
         component: MainComponent,
         resolve: {
-          catalog: CatalogResolver
+          catalog: CatalogResolver,
+          catalogElement: CatalogElementResolver
         }
       },
       {
@@ -51,7 +54,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [LanguageGuard, CatalogResolver]
+  providers: [LanguageGuard, CatalogResolver, CatalogElementResolver]
 })
 
 

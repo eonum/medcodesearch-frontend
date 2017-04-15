@@ -48,6 +48,7 @@ export class SearchFormComponent implements OnInit {
     private swissDrgCatalog: SwissDrgCatalog,
     private chopCatalog: CHOPCatalog,
     private icdCatalog: ICDCatalog) {
+    this.logger.log('>> SearchComponent constructor');
 
     this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog];
 
@@ -69,7 +70,6 @@ export class SearchFormComponent implements OnInit {
    * Subscribe to route parameter to mark the selected catalog and displaythe query.
    */
   public ngOnInit(): void {
-    this.logger.log('>> MainComponent on init.');
   }
 
   public showChildModal(): void {

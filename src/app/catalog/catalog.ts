@@ -48,9 +48,9 @@ export abstract class Catalog {
    * @param type the type of the {@link CatalogElement} to load
    * @param code the code of the {@link CatalogElement} to load
    */
-  public async getByCode(type: string, code: string): Promise<CatalogElement> {
+  public async getByCode(type: string, code: string, version?:string): Promise<CatalogElement> {
     this.initService();
-    return this.service.getByCode(this.activeVersion, type, code.replace(' ', '_'));
+    return this.service.getByCode(this.activeVersion || version, type, code.replace(' ', '_'));
   }
 
   /**

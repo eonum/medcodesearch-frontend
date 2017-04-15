@@ -81,6 +81,7 @@ export class DetailComponent implements OnInit, OnChanges {
       return;
     }
 
+    console.log(this.selectedElement);
     this.hierarchy = [];
     this.loadHierarchy(this.selectedElement);
     this.loadChildren(this.selectedElement);
