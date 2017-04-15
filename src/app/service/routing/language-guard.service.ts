@@ -31,7 +31,7 @@ export class LanguageGuard implements CanActivate {
    *
    * @param {ActivatedRouteSnapshot} route - contains route params up to the point where this guard gets activated.
    * @returns {boolean} - True, if a valid language parameter is in the route.   */
-  canActivate(route: ActivatedRouteSnapshot) {
+  public canActivate(route: ActivatedRouteSnapshot): boolean {
 
     let language = route.params['language'];
 

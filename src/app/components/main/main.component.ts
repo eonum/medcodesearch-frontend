@@ -38,7 +38,7 @@ export class MainComponent implements OnInit {
   /**
    * Subscribe to route parameter determine if the details view should be displayed
    */
-  ngOnInit() {
+  public ngOnInit(): void {
     this.logger.log('>> MainComponent on init.');
 
     this.route.params.subscribe(
@@ -117,7 +117,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  private handleError(error): void {
+  private handleError(error: any): void {
     this.logger.log(error);
   }
 }

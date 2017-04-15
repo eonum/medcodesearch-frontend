@@ -14,19 +14,19 @@ export class CatalogServiceMock implements ICatalogService {
     { code: 'Content 7', text: 'Description content 7', url: '/url/to/content7', type: 'drgs' }
   ];
 
-  init(config: CatalogConfiguration): void {
+  public init(config: CatalogConfiguration): void {
 
   }
 
-  search(version: string, search: string): Promise<CatalogElement[]> {
+  public search(version: string, search: string): Promise<CatalogElement[]> {
     return Promise.resolve(this.CONTENTS);
   }
 
-  getVersions(language: string): Promise<string[]> {
+  public getVersions(language: string): Promise<string[]> {
     return Promise.resolve(['V1.0', 'V2.0', 'V3.0', 'V4.0']);
   }
 
-  getByCode(version: string, code: string): Promise<CatalogElement> {
+  public getByCode(version: string, code: string): Promise<CatalogElement> {
     if (code === 'P20A') {
       return Promise.resolve(this.CONTENTS[0]);
     }
@@ -46,5 +46,4 @@ export class CatalogServiceMock implements ICatalogService {
   public sendAnalytics(version: string, type: string, code: string, query: string): void {
     return;
   }
-
 }

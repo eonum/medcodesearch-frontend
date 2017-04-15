@@ -75,7 +75,7 @@ export class DetailComponent implements OnInit, OnChanges {
    * @param type the type of the element to display
    * @param code the code of the element to display
    */
-  private updateView() {
+  private updateView(): void {
     if (this.selectedElement === undefined ||
       this.selectedElement === null) {
       return;
@@ -90,7 +90,7 @@ export class DetailComponent implements OnInit, OnChanges {
    * Loads all elements from the currentElement up to the catalog root.
    * @param currentElement the leaf element of which the hierarchy will be loaded
    */
-  private loadHierarchy(currentElement: CatalogElement) {
+  private loadHierarchy(currentElement: CatalogElement): void {
     this.hierarchy.unshift(currentElement);
     const parent = currentElement.parent;
     if (parent !== undefined && parent !== null) {
@@ -107,7 +107,7 @@ export class DetailComponent implements OnInit, OnChanges {
    * Loads the immediate children of the currentElement
    * @param currentElement the element of which the children will be loaded
    */
-  private loadChildren(currentElement: CatalogElement) {
+  private loadChildren(currentElement: CatalogElement): void {
     const children = currentElement.children;
     if (children !== undefined && children !== null && children.length > 0) {
       children.forEach(child => {

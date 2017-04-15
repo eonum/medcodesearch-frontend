@@ -78,7 +78,7 @@ export class SortHelper {
    * @param a the first argument to compare
    * @param b the second argument to compare
    */
-  public static compareAsRomanNumber(a: string, b: string) {
+  public static compareAsRomanNumber(a: string, b: string): number {
     const numA: number = this.convertRomanToNumber(a);
     const numB: number = this.convertRomanToNumber(b);
 
@@ -89,7 +89,7 @@ export class SortHelper {
    * Converts a given roman number into an integer.
    * @param literal the literal to convert
    */
-  public static convertRomanToNumber(literal: string) {
+  public static convertRomanToNumber(literal: string): number {
     let num = 0;
     let currentLiteral: string = literal;
 

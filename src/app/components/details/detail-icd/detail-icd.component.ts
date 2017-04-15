@@ -18,7 +18,7 @@ export class DetailIcdComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
   }
 
 }

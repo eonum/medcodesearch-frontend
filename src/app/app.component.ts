@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class AppComponent implements OnInit {
-  title = 'medCodeSearch';
+  public title = 'medCodeSearch';
 
   // TODO get from language guard or define constants for both.
   public languages = ['de', 'fr', 'it', 'en'];
@@ -29,17 +29,17 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.rememberService.subscribe(() => {
-      this.getRememberedElementsCount();
+      this.setRememberedElementsCount();
     });
 
-    this.getRememberedElementsCount();
+    this.setRememberedElementsCount();
   }
 
-  private getRememberedElementsCount() {
+  private setRememberedElementsCount(): void {
     this.countRememberedElements = this.rememberService.count();
   }
 
-  setLanguage(language: string): void {
+  public setLanguage(language: string): void {
     this.router.navigate(
       [language].concat(this.catalogResolver.getActiveRouteParams())
     ).catch(e => this.logger.log(e));

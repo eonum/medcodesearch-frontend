@@ -17,7 +17,7 @@ export class DetailSwissDrgComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
   }
 
 }

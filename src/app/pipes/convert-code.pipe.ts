@@ -29,7 +29,7 @@ export class ConvertCodePipe implements PipeTransform {
      */
   }
 
-  private wrapCode(match, c1, c2, c3, c4, c5) {
+  private wrapCode(match: any, c1: any, c2: any, c3: any, c4: any, c5: any): string {
     c1 = c1.replace(/\.$/, '');
     let link = '(<span class="link" onclick="window.eonum.searchCode(\'' + c1 + '\')">' + c1 + '</span>';
     if (c4 && c4.length > 2) {
@@ -40,11 +40,11 @@ export class ConvertCodePipe implements PipeTransform {
     return link;
   }
 
-  public searchCode(query) {
+  public searchCode(query: string): void {
     this.ngZone.run(() => this.searchCodeRun(query));
   }
 
-  private searchCodeRun(query) {
+  private searchCodeRun(query: string): void {
     let currentRoute = this.route.root;
     while (currentRoute.children[0] !== undefined) {
       currentRoute = currentRoute.children[0];

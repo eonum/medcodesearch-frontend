@@ -54,7 +54,7 @@ export class CatalogResolver implements Resolve<Catalog> {
    * @param route
    * @param state
    */
-  resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<Catalog> {
+  public resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<Catalog> {
 
     const domain = route.params['catalog'];
     const version = route.params['version'];
@@ -82,11 +82,11 @@ export class CatalogResolver implements Resolve<Catalog> {
     }
   }
 
-  private redirectToStart(route: ActivatedRouteSnapshot) {
+  private redirectToStart(route: ActivatedRouteSnapshot): Promise<boolean> {
     return this.router.navigate([route.params['language']]).catch(e => this.logger.log(e));
   }
 
-  private redirectToDefaultCatalog(route: ActivatedRouteSnapshot) {
+  private redirectToDefaultCatalog(route: ActivatedRouteSnapshot): void {
     const domain = route.params['catalog'];
     const catalog = this.catalogs[domain];
     if (catalog) {
@@ -106,7 +106,7 @@ export class CatalogResolver implements Resolve<Catalog> {
    * Used for redirect to active catalog and version after language change.
    * @returns {string[]}
    */
-  getActiveRouteParams(): string[] {
+  public getActiveRouteParams(): string[] {
     if (!this.activeCatalog) {
       this.logger.log('No active catalog!');
       return [];

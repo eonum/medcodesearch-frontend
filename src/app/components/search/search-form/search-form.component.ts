@@ -32,8 +32,8 @@ import { ModalDirective } from 'ng2-bootstrap';
 export class SearchFormComponent implements OnInit {
 
   // selected values (resolved in main component from route)
-  @Input() query: string;
-  @Input() catalog: Catalog;
+  @Input() public query: string;
+  @Input() public catalog: Catalog;
 
   public catalogs: Catalog[]; // to display catalog selection
   public languages: string[];
@@ -68,7 +68,7 @@ export class SearchFormComponent implements OnInit {
   /**
    * Subscribe to route parameter to mark the selected catalog and displaythe query.
    */
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.logger.log('>> MainComponent on init.');
   }
 

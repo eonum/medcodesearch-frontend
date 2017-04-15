@@ -22,7 +22,7 @@ export class RememberElementComponent implements OnInit {
     private route: ActivatedRoute,
     @Inject('ILoggerService') private logger: ILoggerService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.rememberService.subscribe(() => {
       this.loadRememberedElements();
     });

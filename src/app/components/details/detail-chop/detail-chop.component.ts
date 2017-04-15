@@ -18,7 +18,7 @@ export class DetailChopComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
   }
 
 }
