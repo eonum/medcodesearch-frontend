@@ -47,7 +47,7 @@ export class DetailComponent implements OnInit, OnChanges {
    */
   public children: CatalogElement[] = [];
 
-  public count: number = 0;
+  public count = 0;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -120,13 +120,11 @@ export class DetailComponent implements OnInit, OnChanges {
         }
         if (SortHelper.isRomanNumber(a.code)) {
           return SortHelper.compareAsRomanNumber(a.code, b.code);
-        }
-        else {
+        } else {
           return SortHelper.compareAsLiteral(a.code, b.code);
         }
       });
-    }
-    else {
+    } else {
       this.children = [];
     }
   }

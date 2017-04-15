@@ -5,7 +5,7 @@ import { SwissDrgCatalog } from './swissdrg.catalog';
 import { async } from '@angular/core/testing';
 import * as TypeMoq from 'typemoq';
 
-describe("SwissDrgCatalog", () => {
+describe('SwissDrgCatalog', () => {
 
   let mock: TypeMoq.IMock<ICatalogService>;
 
@@ -71,8 +71,8 @@ describe("SwissDrgCatalog", () => {
 
   it('Should return a list of results', async(() => {
     const catalogs: CatalogElement[] = [
-      { code: "Content 1", text: "Description content 1", url: "/url/to/content1", type: "drgs" },
-      { code: "Content 2", text: "Description content 2", url: "/url/to/content2", type: "drgs" }
+      { code: 'Content 1', text: 'Description content 1', url: '/url/to/content1', type: 'drgs' },
+      { code: 'Content 2', text: 'Description content 2', url: '/url/to/content2', type: 'drgs' }
     ];
 
     mock.setup(x => x.search('V1.0', 'Content')).returns(() => Promise.resolve(catalogs));

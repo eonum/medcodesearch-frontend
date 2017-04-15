@@ -62,14 +62,14 @@ export abstract class Catalog {
     }
 
     this.initService();
-    let languages: string[] = this.service.getLangs();
+    const languages: string[] = this.service.getLangs();
     let germanVersions: Promise<string[]>;
 
-    for (let lang of languages) {
+    for (const lang of languages) {
       const versions = this.service.getVersions(lang);
       versions.then(data => {
         this.versions_lang[lang] = data.reverse();
-        if (lang === "de") {
+        if (lang === 'de') {
           this.activeVersion = data[0];
         }
       })
@@ -77,8 +77,8 @@ export abstract class Catalog {
           this.logger.log(error);
         });
 
-      if (lang == "de") {
-        germanVersions = versions
+      if (lang === 'de') {
+        germanVersions = versions;
       }
     }
     return germanVersions;
@@ -114,16 +114,16 @@ export abstract class Catalog {
 
     if (!this.versions_lang[this.service.getLocale()]) {
       // load versions and then run again
-      return this.getVersions().then(() => this.activateVersion(version))
+      return this.getVersions().then(() => this.activateVersion(version));
     }
 
     if (this.versions_lang[this.service.getLocale()].indexOf(version) > -1) {
-      this.logger.log("valid version " + this.service.getLocale());
+      this.logger.log('valid version ' + this.service.getLocale());
       this.activeVersion = version;
       return Promise.resolve(true);
 
     } else {
-      this.logger.log("invalid version " + this.service.getLocale());
+      this.logger.log('invalid version ' + this.service.getLocale());
       return Promise.resolve(false);
     }
   }
@@ -150,7 +150,7 @@ export abstract class Catalog {
   public getVersionLanguages(version: string): string[] {
     const languages: string[] = this.service.getLangs();
     const validLangs: string[] = [];
-    for (let lang of languages) {
+    for (const lang of languages) {
       if (this.versions_lang[lang].indexOf(version) > -1) {
         validLangs.push(lang);
       }

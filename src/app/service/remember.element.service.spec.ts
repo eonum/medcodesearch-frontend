@@ -10,7 +10,7 @@ describe('RememberElementService', () => {
     element.version = 'V1.0';
     element.type = 'drgs';
     return element;
-  }
+  };
 
   it('Should have no remembered elements initially', () => {
     const rememberService = new RememberElementService();
@@ -34,7 +34,7 @@ describe('RememberElementService', () => {
 
   it('Should increase number of elements accordingly when adding multiple elements', () => {
     const rememberService = new RememberElementService();
-    for (let i: number = 0; i < 50; i++) {
+    for (let i = 0; i < 50; i++) {
       const element = this.createElement(i.toString());
       rememberService.add(element, 'V1.0', 'icd', 'de');
     }
@@ -78,9 +78,9 @@ describe('RememberElementService', () => {
   });
 
   it('Should notify subscriber on adding element', () => {
-    let callBackCalled: boolean = false;
+    let callBackCalled = false;
 
-    let callback = () => {
+    const callback = () => {
       callBackCalled = true;
     };
 
@@ -93,9 +93,9 @@ describe('RememberElementService', () => {
   });
 
   it('Should notify subscriber on removing element', () => {
-    let callBackCalled: boolean = false;
+    let callBackCalled = false;
 
-    let callback = () => {
+    const callback = () => {
       callBackCalled = true;
     };
 

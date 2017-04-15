@@ -31,8 +31,8 @@ describe('MainComponent', () => {
 
   /*Test data*/
 
-  const query: string = 'Some search query';
-  const version: string = 'V4.0';
+  const query = 'Some search query';
+  const version = 'V4.0';
   const searchResults: CatalogElement[] = [
     {
       code: 'Content 1', text: 'Description content 1', url: '/url/to/content1',

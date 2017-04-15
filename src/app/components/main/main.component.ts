@@ -87,8 +87,7 @@ export class MainComponent implements OnInit {
         .catch(error => {
           this.handleError(error);
         });
-    }
-    else if (!this.query) {
+    } else if (!this.query) {
       this.catalog.getRootElement()
         .then(element => {
           this.selectedElement = element;
@@ -113,8 +112,7 @@ export class MainComponent implements OnInit {
         .catch(error => {
           this.handleError(error);
         });
-    }
-    else {
+    } else {
       this.searchResults = null;
     }
   }

@@ -20,7 +20,6 @@ describe('SearchFormComponent', () => {
   let fixture: ComponentFixture<SearchFormComponent>;
   let catalogService: ICatalogService;
   let catalog: Catalog;
-  let query: string;
   let buttons: any;
 
   beforeEach(async(() => {

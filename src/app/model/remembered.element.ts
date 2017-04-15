@@ -8,10 +8,6 @@ export class RememberedElement {
   public type: string;
   public code: string;
 
-  public getId(): string {
-    return `${this.language}_${this.catalog}_${this.version}_${this.type}_${this.code}`;
-  }
-
   public static from(element: CatalogElement, version: string, catalog: string, language: string): RememberedElement {
     const to = new RememberedElement();
     to.language = language;
@@ -21,5 +17,9 @@ export class RememberedElement {
     to.code = element.code;
 
     return to;
+  }
+
+  public getId(): string {
+    return `${this.language}_${this.catalog}_${this.version}_${this.type}_${this.code}`;
   }
 }

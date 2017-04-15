@@ -11,7 +11,7 @@ import * as TypeMoq from 'typemoq';
 
 describe('CatalogResolver', () => {
 
-  let routeMock: TypeMoq.IMock<ActivatedRouteSnapshot>
+  let routeMock: TypeMoq.IMock<ActivatedRouteSnapshot>;
   let routeParams: { catalog: string, version?: string, language: string };
   let fixture;
 
@@ -38,16 +38,11 @@ describe('CatalogResolver', () => {
         catalog: 'swissdrg',
         version: 'V4.0',
         language: 'de'
-      }
+      };
       routeMock.setup(x => x.params).returns(() => routeParams);
 
       service.resolve(routeMock.object).then(
         catalog => expect(catalog.getDomain()).toBe('swissdrg')
-      )
-
+      );
     })));
-
-
-
-
 });

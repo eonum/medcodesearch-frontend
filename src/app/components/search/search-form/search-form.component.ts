@@ -35,10 +35,12 @@ export class SearchFormComponent implements OnInit {
   @Input() query: string;
   @Input() catalog: Catalog;
 
-  catalogs: Catalog[]; // to display catalog selection
-  languages: string[];
-  selectedVersion: string;
-  searchForm = new FormControl();
+  public catalogs: Catalog[]; // to display catalog selection
+  public languages: string[];
+  public selectedVersion: string;
+  public searchForm = new FormControl();
+
+  @ViewChild('childModal') public childModal: ModalDirective;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -62,8 +64,6 @@ export class SearchFormComponent implements OnInit {
         this.search(this.query);
       });
   }
-
-  @ViewChild('childModal') public childModal: ModalDirective;
 
   /**
    * Subscribe to route parameter to mark the selected catalog and displaythe query.

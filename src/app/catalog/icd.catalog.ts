@@ -9,8 +9,8 @@ import { Inject, Injectable } from '@angular/core';
 @Injectable()
 export class ICDCatalog extends Catalog {
 
-  constructor( @Inject("ICatalogService") service: ICatalogService, @Inject('ILoggerService') logger: ILoggerService) {
-    super(service, logger, "ICD", {
+  constructor( @Inject('ICatalogService') service: ICatalogService, @Inject('ILoggerService') logger: ILoggerService) {
+    super(service, logger, 'ICD', {
       searchableTypes: ['icds'],
       retrievableTypes: ['icds', 'icd_groups', 'icd_chapters'],
       versionParam: 'icds',

@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   // TODO get from language guard or define constants for both.
   public languages = ['de', 'fr', 'it', 'en'];
 
-  public countRememberedElements: number = 0;
+  public countRememberedElements = 0;
 
   constructor(public translate: TranslateService,
     @Inject('ILoggerService') private logger: ILoggerService,

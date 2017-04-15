@@ -2,7 +2,7 @@ import { SortHelper } from './sort.helper';
 
 describe('SortHelper', () => {
 
-  let convertToRomanTestData = [
+  const convertToRomanTestData = [
     ['I', 1],
     ['II', 2],
     ['III', 3],
@@ -55,7 +55,7 @@ describe('SortHelper', () => {
     expect(SortHelper.compareAsNumberWithLeadingLetter('A2', 'B10')).toBeLessThan(0);
   });
 
-  let numberWithLeadingLetterTestData = [
+  const numberWithLeadingLetterTestData = [
     ['AB10', true],
     ['A10AA', false],
     ['100', false],
@@ -67,10 +67,10 @@ describe('SortHelper', () => {
   numberWithLeadingLetterTestData.forEach(testCase => {
     it(`Test on number with leading letter of '${testCase[0]}' should return ${testCase[1]}`, () => {
       expect(SortHelper.isNumberWithLeadingLetter(testCase[0] as string)).toBe(testCase[1]);
-    })
+    });
   });
 
-  let normalLiteralsTestData = [
+  const normalLiteralsTestData = [
     ['A', 'A', 0],
     ['A', 'B', -1],
     ['B', 'A', 1]

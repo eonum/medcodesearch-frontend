@@ -13,8 +13,8 @@ export class SortHelper {
    * @param b the second argument to compare
    */
   public static compareAsLiteral(a: string, b: string): number {
-    if (a < b) return -1;
-    if (a > b) return 1;
+    if (a < b) { return -1; }
+    if (a > b) { return 1; } 
     return 0;
   }
 
@@ -54,11 +54,11 @@ export class SortHelper {
     const matchA = regex.exec(a);
     const matchB = regex.exec(b);
 
-    if (matchA[1] < matchB[1]) { return -1 };
-    if (matchA[1] > matchB[1]) { return 1 };
+    if (matchA[1] < matchB[1]) { return -1; }
+    if (matchA[1] > matchB[1]) { return 1; }
 
-    const numA: number = parseInt(matchA[2]);
-    const numB: number = parseInt(matchB[2]);
+    const numA: number = parseInt(matchA[2], 10);
+    const numB: number = parseInt(matchB[2], 10);
 
     return numA - numB;
   }
@@ -79,8 +79,8 @@ export class SortHelper {
    * @param b the second argument to compare
    */
   public static compareAsRomanNumber(a: string, b: string) {
-    let numA: number = this.convertRomanToNumber(a);
-    let numB: number = this.convertRomanToNumber(b);
+    const numA: number = this.convertRomanToNumber(a);
+    const numB: number = this.convertRomanToNumber(b);
 
     return numA - numB;
   }
@@ -90,10 +90,10 @@ export class SortHelper {
    * @param literal the literal to convert
    */
   public static convertRomanToNumber(literal: string) {
-    let num: number = 0;
+    let num = 0;
     let currentLiteral: string = literal;
 
-    let romulans: { [literal: string]: number } = {};
+    const romulans: { [literal: string]: number } = {};
 
     romulans['M'] = 1000;
     romulans['CM'] = 900;
@@ -109,12 +109,14 @@ export class SortHelper {
     romulans['IV'] = 4;
     romulans['I'] = 1;
 
-    for (let key in romulans) {
+    const keys = Object.keys(romulans);
+
+    keys.forEach(key => {
       while (currentLiteral.startsWith(key)) {
         num += romulans[key];
         currentLiteral = currentLiteral.substr(key.length);
       }
-    }
+    });
 
     return num;
   }

@@ -56,21 +56,23 @@ export class CatalogResolver implements Resolve<Catalog> {
    */
   resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<Catalog> {
 
-    let domain = route.params['catalog'];
-    let version = route.params['version'];
-    let catalog = this.catalogs[domain];
+    const domain = route.params['catalog'];
+    const version = route.params['version'];
+    const catalog = this.catalogs[domain];
 
     // Activate catalog and return it, or redirect to start
     if (catalog) {
       if (version) {
         return catalog.activateVersion(version).then(
           (success: boolean) => {
-            if (success) { //valid version
+            if (success) { // valid version
               this.activeCatalog = catalog;
               return catalog;
-            } else this.redirectToStart(route);
+            } else {
+              this.redirectToStart(route);
+            }
           }
-        )
+        );
       } else {
         this.redirectToDefaultCatalog(route);
       }
@@ -85,8 +87,8 @@ export class CatalogResolver implements Resolve<Catalog> {
   }
 
   private redirectToDefaultCatalog(route: ActivatedRouteSnapshot) {
-    let domain = route.params['catalog'];
-    let catalog = this.catalogs[domain];
+    const domain = route.params['catalog'];
+    const catalog = this.catalogs[domain];
     if (catalog) {
       catalog.getVersions().then(versions => {
         this.router.navigate([route.params['language'], route.params['catalog'], versions[0]]).catch(e => this.logger.log(e));
@@ -94,7 +96,9 @@ export class CatalogResolver implements Resolve<Catalog> {
         error => this.logger.log(error)
       );
 
-    } else this.redirectToStart(route);
+    } else {
+      this.redirectToStart(route);
+    }
   }
 
   /**
@@ -110,6 +114,6 @@ export class CatalogResolver implements Resolve<Catalog> {
     return [
       this.activeCatalog.getDomain(),
       this.activeCatalog.getActiveVersion()
-    ]
+    ];
   }
 }
