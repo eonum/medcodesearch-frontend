@@ -1,4 +1,4 @@
-import { ILoggerService } from '../i.logger.service';
+import { ILoggerService } from '../logging/i.logger.service';
 import { Inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';

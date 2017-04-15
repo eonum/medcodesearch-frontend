@@ -3,7 +3,7 @@ import { ICDCatalog } from '../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
 import { RouterStub } from '../../router-stub';
 import { CatalogServiceMock } from '../catalog.service.mock';
-import { NullLoggerService } from '../null.logger.service';
+import { NullLoggerService } from '../logging/null.logger.service';
 import { CatalogResolver } from './catalog-resolver.service';
 import { async, inject, TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';

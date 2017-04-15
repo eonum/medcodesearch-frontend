@@ -1,5 +1,5 @@
 import { Catalog } from '../catalog/catalog';
-import { ILoggerService } from '../service/i.logger.service';
+import { ILoggerService } from '../service/logging/i.logger.service';
 import { Inject, NgZone, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';

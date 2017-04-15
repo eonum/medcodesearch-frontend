@@ -1,18 +1,18 @@
 import { Catalog } from '../../catalog/catalog';
 import { CatalogElement } from '../../model/catalog.element';
-import { ILoggerService } from '../../service/i.logger.service';
+import { ILoggerService } from '../../service/logging/i.logger.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 /**
- * Container for the {@link SearchFormComponent} and {@link SearchResultsComponent}.
- * The component is assigned to the route `<catalog>/<version>/` and takes an
- * optional `query` parameter.
- *
+ * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
+ * and {@link DetailComponent}.
  * A catalog is resolved by the {@link CatalogResolver} and then passed as input
  * to the {@link SearchFormComponent}. Each time the `query` or `catalog` in the
  * Routers params or data changes, the `searchResults` that are bound as Input
  * to the {@link SearchResultsComponent} are updated with new search results.
+ * If a code is selected, the respective {@link CatalogElement} is loaded and
+ * displayed by the {@link DetailComponent}.
  */
 @Component({
   selector: 'app-main',
@@ -20,7 +20,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['main.component.css'],
 
 })
-
 export class MainComponent implements OnInit {
 
   public query = '';
@@ -72,6 +71,13 @@ export class MainComponent implements OnInit {
     }
   }
 
+  /**
+   * Load an element of which the details will be displayed.
+   * If a code is provided in the url by the user, the according
+   * element will be displayed.
+   * Otherwise the root element of the current catalog will be
+   * displayed.
+   */
   private updateDetailView(): void {
     if (this.code && this.type) {
       this.catalog.getByCode(this.type, this.code)
@@ -93,6 +99,11 @@ export class MainComponent implements OnInit {
     }
   }
 
+  /**
+   * If a search parameter is provided, the search
+   * results will be displayed.
+   * Otherwise no search results will be displayed.
+   */
   private updateSearchResultsView(): void {
     if (this.query) {
       this.catalog.search(this.catalog.getActiveVersion(), this.query)

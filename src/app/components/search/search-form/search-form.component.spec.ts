@@ -6,7 +6,7 @@ import { CorrectVersionPipe } from '../../../pipes/correct-version.pipe';
 import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
 import { CatalogServiceMock } from '../../../service/catalog.service.mock';
 import { ICatalogService } from '../../../service/i.catalog.service';
-import { NullLoggerService } from '../../../service/null.logger.service';
+import { NullLoggerService } from '../../../service/logging/null.logger.service';
 import { SearchFormComponent } from './search-form.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';

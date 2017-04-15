@@ -1,5 +1,5 @@
 import { RememberedElement } from '../../model/remembered.element';
-import { ILoggerService } from '../../service/i.logger.service';
+import { ILoggerService } from '../../service/logging/i.logger.service';
 import { RememberElementService } from '../../service/remember.element.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';

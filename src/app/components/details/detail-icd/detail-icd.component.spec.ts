@@ -1,6 +1,6 @@
 import { ConvertCodePipe } from '../../../pipes/convert-code.pipe';
 import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
-import { NullLoggerService } from '../../../service/null.logger.service';
+import { NullLoggerService } from '../../../service/logging/null.logger.service';
 import { DetailIcdComponent } from './detail-icd.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';

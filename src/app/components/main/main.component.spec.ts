@@ -6,7 +6,7 @@ import { ConvertCodePipe } from '../../pipes/convert-code.pipe';
 import { CorrectVersionPipe } from '../../pipes/correct-version.pipe';
 import { ActivatedRouteStub, RouterStub } from '../../router-stub';
 import { CatalogServiceMock } from '../../service/catalog.service.mock';
-import { NullLoggerService } from '../../service/null.logger.service';
+import { NullLoggerService } from '../../service/logging/null.logger.service';
 import { DetailChopComponent } from '../details/detail-chop/detail-chop.component';
 import { DetailIcdComponent } from '../details/detail-icd/detail-icd.component';
 import { DetailSwissDrgComponent } from '../details/detail-swiss-drg/detail-swiss-drg.component';

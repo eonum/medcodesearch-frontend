@@ -1,5 +1,5 @@
 import { ActivatedRouteStub, RouterStub } from '../../router-stub';
-import { NullLoggerService } from '../../service/null.logger.service';
+import { NullLoggerService } from '../../service/logging/null.logger.service';
 import { RememberElementService } from '../../service/remember.element.service';
 import { RememberElementComponent } from './remember-element.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';

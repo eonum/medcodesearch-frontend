@@ -1,6 +1,6 @@
 import { Catalog } from '../../../catalog/catalog';
 import { CatalogElement } from '../../../model/catalog.element';
-import { ILoggerService } from '../../../service/i.logger.service';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
 import { Component, Inject, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 

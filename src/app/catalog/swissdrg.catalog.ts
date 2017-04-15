@@ -1,5 +1,5 @@
 import { ICatalogService } from '../service/i.catalog.service';
-import { ILoggerService } from '../service/i.logger.service';
+import { ILoggerService } from '../service/logging/i.logger.service';
 import { Catalog } from './catalog';
 import { Inject, Injectable } from '@angular/core';
 

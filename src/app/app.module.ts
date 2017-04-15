@@ -14,7 +14,7 @@ import { SearchResultsComponent } from './components/search/search-results/searc
 import { ConvertCodePipe } from './pipes/convert-code.pipe';
 import { CorrectVersionPipe } from './pipes/correct-version.pipe';
 import { CatalogService } from './service/catalog.service';
-import { DevLoggerService } from './service/dev.logger.service';
+import { ConsoleLoggerService } from './service/logging/console.logger.service';
 import { RememberElementService } from './service/remember.element.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { NgModule } from '@angular/core';
@@ -68,7 +68,7 @@ export function HttpLoaderFactory(http: Http) {
   ],
   providers: [
     { provide: 'ICatalogService', useClass: CatalogService },
-    { provide: 'ILoggerService', useClass: DevLoggerService },
+    { provide: 'ILoggerService', useClass: ConsoleLoggerService },
     RememberElementService,
     SwissDrgCatalog,
     CHOPCatalog,

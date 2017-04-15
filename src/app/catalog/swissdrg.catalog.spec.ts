@@ -1,6 +1,6 @@
 import { CatalogElement } from '../model/catalog.element';
 import { ICatalogService } from '../service/i.catalog.service';
-import { NullLoggerService } from '../service/null.logger.service';
+import { NullLoggerService } from '../service/logging/null.logger.service';
 import { SwissDrgCatalog } from './swissdrg.catalog';
 import { async } from '@angular/core/testing';
 import * as TypeMoq from 'typemoq';

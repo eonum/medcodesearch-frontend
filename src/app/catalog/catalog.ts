@@ -1,6 +1,6 @@
 import { CatalogElement } from '../model/catalog.element';
 import { ICatalogService } from '../service/i.catalog.service';
-import { ILoggerService } from '../service/i.logger.service';
+import { ILoggerService } from '../service/logging/i.logger.service';
 import { CatalogConfiguration } from './catalog.configuration';
 import { Injectable } from '@angular/core';
 

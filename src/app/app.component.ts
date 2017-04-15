@@ -1,4 +1,4 @@
-import { ILoggerService } from './service/i.logger.service';
+import { ILoggerService } from './service/logging/i.logger.service';
 import { RememberElementService } from './service/remember.element.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { Component, Inject, OnInit } from '@angular/core';

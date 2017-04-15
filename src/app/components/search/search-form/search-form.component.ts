@@ -4,7 +4,7 @@ import { Catalog } from '../../../catalog/catalog';
 import { CHOPCatalog } from '../../../catalog/chop.catalog';
 import { ICDCatalog } from '../../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
-import { ILoggerService } from '../../../service/i.logger.service';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
