@@ -40,8 +40,8 @@ export class RememberElementComponent implements OnInit {
    */
   private openCode(element: RememberedElement): void {
     this.router.navigate(
-            [element.language, element.catalog, element.version, element.type, element.code],
-            { queryParamsHandling: 'merge' })
+      [element.language, element.catalog, element.version, element.type, element.code],
+      { queryParamsHandling: 'merge' })
       .catch(error => this.logger.log(error.message));
   }
 
