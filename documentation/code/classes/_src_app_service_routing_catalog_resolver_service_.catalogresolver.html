@@ -72,7 +72,7 @@
 					<div class="lead">
 						<p>This service acts as resolver for a path that contains a <code>catalog</code>
 							and <code>version</code> parameter.
-							It gives the <a href="_src_app_components_search_main_search_main_component_.searchmaincomponent.html">SearchMainComponent</a> access to the <a href="_src_app_catalog_catalog_.catalog.html">Catalog</a>
+							It gives the <a href="_src_app_components_main_main_component_.maincomponent.html">MainComponent</a> access to the <a href="_src_app_catalog_catalog_.catalog.html">Catalog</a>
 						that corresponds to the route, and saves it for global usage.</p>
 					</div>
 					<dl class="tsd-comment-tags">
@@ -114,6 +114,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#catalogs" class="tsd-kind-icon">catalogs</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#chopcatalog" class="tsd-kind-icon">chop<wbr>Catalog</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#icdcatalog" class="tsd-kind-icon">icd<wbr>Catalog</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#logger" class="tsd-kind-icon">logger</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#router" class="tsd-kind-icon">router</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#swissdrgcatalog" class="tsd-kind-icon">swiss<wbr>Drg<wbr>Catalog</a></li>
 							</ul>
@@ -136,13 +137,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Catalog<wbr>Resolver<span class="tsd-signature-symbol">(</span>router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, swissDrgCatalog<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_swissdrg_catalog_.swissdrgcatalog.html" class="tsd-signature-type">SwissDrgCatalog</a>, chopCatalog<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_chop_catalog_.chopcatalog.html" class="tsd-signature-type">CHOPCatalog</a>, icdCatalog<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_icd_catalog_.icdcatalog.html" class="tsd-signature-type">ICDCatalog</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html" class="tsd-signature-type">CatalogResolver</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Catalog<wbr>Resolver<span class="tsd-signature-symbol">(</span>router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, swissDrgCatalog<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_swissdrg_catalog_.swissdrgcatalog.html" class="tsd-signature-type">SwissDrgCatalog</a>, chopCatalog<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_chop_catalog_.chopcatalog.html" class="tsd-signature-type">CHOPCatalog</a>, icdCatalog<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_icd_catalog_.icdcatalog.html" class="tsd-signature-type">ICDCatalog</a>, logger<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html" class="tsd-signature-type">CatalogResolver</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L27">src/app/service/routing/catalog-resolver.service.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L27">src/app/service/routing/catalog-resolver.service.ts:27</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -168,6 +169,9 @@
 										</div>
 									</div>
 								</li>
+								<li>
+									<h5>logger: <a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html" class="tsd-signature-type">CatalogResolver</a></h4>
 						</li>
@@ -182,7 +186,7 @@
 					<div class="tsd-signature tsd-kind-icon">active<wbr>Catalog<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_catalog_.catalog.html" class="tsd-signature-type">Catalog</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L27">src/app/service/routing/catalog-resolver.service.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L27">src/app/service/routing/catalog-resolver.service.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -197,7 +201,7 @@
 					<div class="tsd-signature tsd-kind-icon">catalogs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L24">src/app/service/routing/catalog-resolver.service.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L24">src/app/service/routing/catalog-resolver.service.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -220,7 +224,7 @@
 					<div class="tsd-signature tsd-kind-icon">chop<wbr>Catalog<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_chop_catalog_.chopcatalog.html" class="tsd-signature-type">CHOPCatalog</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L39">src/app/service/routing/catalog-resolver.service.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L39">src/app/service/routing/catalog-resolver.service.ts:39</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -230,7 +234,7 @@
 					<div class="tsd-signature tsd-kind-icon">icd<wbr>Catalog<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_icd_catalog_.icdcatalog.html" class="tsd-signature-type">ICDCatalog</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L40">src/app/service/routing/catalog-resolver.service.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L40">src/app/service/routing/catalog-resolver.service.ts:40</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -239,12 +243,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="logger" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> logger</h3>
+					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L41">src/app/service/routing/catalog-resolver.service.ts:41</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="router" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> router</h3>
 					<div class="tsd-signature tsd-kind-icon">router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Router</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L37">src/app/service/routing/catalog-resolver.service.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L37">src/app/service/routing/catalog-resolver.service.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -254,7 +268,7 @@
 					<div class="tsd-signature tsd-kind-icon">swiss<wbr>Drg<wbr>Catalog<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_swissdrg_catalog_.swissdrgcatalog.html" class="tsd-signature-type">SwissDrgCatalog</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L38">src/app/service/routing/catalog-resolver.service.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L38">src/app/service/routing/catalog-resolver.service.ts:38</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -271,7 +285,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L100">src/app/service/routing/catalog-resolver.service.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L109">src/app/service/routing/catalog-resolver.service.ts:109</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -294,7 +308,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L82">src/app/service/routing/catalog-resolver.service.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L89">src/app/service/routing/catalog-resolver.service.ts:89</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -317,7 +331,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L78">src/app/service/routing/catalog-resolver.service.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L85">src/app/service/routing/catalog-resolver.service.ts:85</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -340,14 +354,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/service/routing/catalog-resolver.service.ts#L56">src/app/service/routing/catalog-resolver.service.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L57">src/app/service/routing/catalog-resolver.service.ts:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Try to resolve <code>catalog</code> and <code>version</code> parameters from the route to a catalog.
 										On success, update the <code>activeCatalog</code> for global usage and return the
-									catalog for the search-main component. Else, redirect to start.</p>
+									catalog for the main component. Else, redirect to start.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -399,6 +413,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#icdcatalog" class="tsd-kind-icon">icd<wbr>Catalog</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#logger" class="tsd-kind-icon">logger</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#router" class="tsd-kind-icon">router</a>
