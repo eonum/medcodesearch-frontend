@@ -22,8 +22,4 @@ export class RememberedElement {
 
     return to;
   }
-
-  public static getKeyFor(element: CatalogElement, version: string, catalog: string, language: string): string {
-    return `${language}_${catalog}_${version}_${element.type}_${element.code}`;
-  }
 }

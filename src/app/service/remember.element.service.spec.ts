@@ -44,10 +44,10 @@ describe('RememberElementService', () => {
   it('Should decrease number of elements when removing an element', () => {
     const rememberService = new RememberElementService();
     const element = this.createElement('1234');
-    const key = RememberedElement.getKeyFor(element, 'V1.0', 'icd', 'de');
+    const createdElement = RememberedElement.from(element, 'V1.0', 'icd', 'de');
     rememberService.add(element, 'V1.0', 'icd', 'de');
 
-    rememberService.remove(key);
+    rememberService.remove(createdElement);
 
     expect(rememberService.count()).toBe(0);
   });
@@ -57,14 +57,14 @@ describe('RememberElementService', () => {
     const element = this.createElement('1234');
     rememberService.add(element, 'V1.0', 'icd', 'de');
 
-    rememberService.remove('not_a_key');
+    rememberService.remove(new RememberedElement());
 
     expect(rememberService.count()).toBe(1);
   });
 
   it('Should not decrease number of elements when removing an element from empty list', () => {
     const rememberService = new RememberElementService();
-    rememberService.remove('1234');
+    rememberService.remove(new RememberedElement());
     expect(rememberService.count()).toBe(0);
   });
 
@@ -102,11 +102,11 @@ describe('RememberElementService', () => {
     const rememberService = new RememberElementService();
 
     const element = this.createElement('1234');
-    const key = RememberedElement.getKeyFor(element, 'V1.0', 'icd', 'de');
+    const createdElement = RememberedElement.from(element, 'V1.0', 'icd', 'de');
     rememberService.add(element, 'V1.0', 'icd', 'de');
 
     rememberService.subscribe(callback);
-    rememberService.remove(key);
+    rememberService.remove(createdElement);
 
     expect(callBackCalled).toBe(true);
   });
