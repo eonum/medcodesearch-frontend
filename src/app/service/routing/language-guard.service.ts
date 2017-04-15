@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ILoggerService } from "../i.logger.service";
 
@@ -18,8 +18,8 @@ export class LanguageGuard implements CanActivate {
   private languages = ['de', 'fr', 'it', 'en'];
 
   constructor(private translate: TranslateService,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService) {
     translate.setDefaultLang(this.DEFAULT_LANGUAGE);
   }
 

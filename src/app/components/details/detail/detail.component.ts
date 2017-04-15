@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange, Inject } from '@angular/core';
-import {Catalog} from '../../../catalog/catalog';
-import {CatalogElement} from '../../../model/catalog.element';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SortHelper} from '../../../helper/sort.helper';
+import { Catalog } from '../../../catalog/catalog';
+import { CatalogElement } from '../../../model/catalog.element';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SortHelper } from '../../../helper/sort.helper';
 
 
 import 'rxjs/add/observable/merge';
@@ -55,16 +55,16 @@ export class DetailComponent implements OnInit, OnChanges {
   public count: number = 0;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private rememberService: RememberElementService,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private router: Router,
+    private rememberService: RememberElementService,
+    @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   public ngOnInit(): void {
     this.logger.log('>> DetailComponent on init.');
   }
 
-  public ngOnChanges(changes: {[propKey: string]: SimpleChange}): void {
+  public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
     this.updateView();
   }
 
@@ -81,14 +81,14 @@ export class DetailComponent implements OnInit, OnChanges {
    * @param code the code of the element to display
    */
   private updateView() {
-      if (this.selectedElement === undefined ||
-      this.selectedElement === null){
-        return;
-      }
+    if (this.selectedElement === undefined ||
+      this.selectedElement === null) {
+      return;
+    }
 
-      this.hierarchy = [];
-      this.loadHierarchy(this.selectedElement);
-      this.loadChildren(this.selectedElement);
+    this.hierarchy = [];
+    this.loadHierarchy(this.selectedElement);
+    this.loadChildren(this.selectedElement);
   }
 
   /**
@@ -169,7 +169,7 @@ export class DetailComponent implements OnInit, OnChanges {
     const versionRouteParam = this.route.snapshot.params['version'];
 
     this.router.navigate(
-      [ catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
+      [catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
         queryParamsHandling: 'merge',
         relativeTo: this.route.parent
       }).catch(error => this.logger.log(error.message));

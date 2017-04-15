@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {LanguageGuard} from './service/routing/language-guard.service';
-import {CatalogResolver} from './service/routing/catalog-resolver.service';
-import {MainComponent} from './components/main/main.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LanguageGuard } from './service/routing/language-guard.service';
+import { CatalogResolver } from './service/routing/catalog-resolver.service';
+import { MainComponent } from './components/main/main.component';
 
 const routes: Routes = [
   {

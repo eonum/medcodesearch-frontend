@@ -1,10 +1,10 @@
-import {Http} from '@angular/http';
-import {TranslateService} from '@ngx-translate/core';
+import { Http } from '@angular/http';
+import { TranslateService } from '@ngx-translate/core';
 import { Injectable, Inject } from '@angular/core';
-import {CatalogElement} from '../model/catalog.element';
-import {ICatalogService} from './i.catalog.service';
+import { CatalogElement } from '../model/catalog.element';
+import { ICatalogService } from './i.catalog.service';
 import 'rxjs/add/operator/toPromise';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { CatalogConfiguration } from '../catalog/catalog.configuration';
 import { ILoggerService } from "./i.logger.service";
 
@@ -15,9 +15,9 @@ export class CatalogService implements ICatalogService {
 
   private config: CatalogConfiguration;
 
-  public constructor(private http: Http, 
-                     private translate: TranslateService,
-                     @Inject('ILoggerService') private logger: ILoggerService) {
+  public constructor(private http: Http,
+    private translate: TranslateService,
+    @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   /**
@@ -79,7 +79,7 @@ export class CatalogService implements ICatalogService {
    * @param code the code of the element to send analytics for
    * @param query the query which was used before retrieving this element
    */
-  public sendAnalytics(version: string, type: string, code:string, query:string): void {
+  public sendAnalytics(version: string, type: string, code: string, query: string): void {
 
     this.getSingleElementForTypeByCode(type, version, code, query)
       .then(result => {
@@ -134,8 +134,8 @@ export class CatalogService implements ICatalogService {
   private async getSingleElementForTypeByCode(elementType: string, version: string, code: string, query?: string): Promise<CatalogElement> {
     const locale: string = this.getLocale();
     let url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
-    
-    if (query){
+
+    if (query) {
       url += `&query=${query}`;
     }
 

@@ -13,7 +13,7 @@ describe('RememberElementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RememberElementComponent ],
+      declarations: [RememberElementComponent],
       imports: [TranslateModule.forRoot(), RouterModule],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
@@ -22,7 +22,7 @@ describe('RememberElementComponent', () => {
         RememberElementService
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

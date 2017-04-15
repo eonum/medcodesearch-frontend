@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import {CatalogElement} from '../model/catalog.element';
-import {ICatalogService} from '../service/i.catalog.service';
+import { CatalogElement } from '../model/catalog.element';
+import { ICatalogService } from '../service/i.catalog.service';
 import { CatalogConfiguration } from './catalog.configuration';
 import { ILoggerService } from "../service/i.logger.service";
 
@@ -27,9 +27,9 @@ export abstract class Catalog {
    * @param elements - elements within a catalog
    */
   public constructor(private service: ICatalogService,
-                     private logger: ILoggerService,
-                     public name: string,
-                     protected config: CatalogConfiguration) {
+    private logger: ILoggerService,
+    public name: string,
+    protected config: CatalogConfiguration) {
     this.versions_lang = [];
   }
 
@@ -159,11 +159,11 @@ export abstract class Catalog {
     return validLangs;
   }
 
-	/**
-	* Sends an analytic notification to eonum
-	*
-	*/
+  /**
+  * Sends an analytic notification to eonum
+  *
+  */
   public sendAnalytics(type: string, code: string, query: string): void {
-	  this.service.sendAnalytics(this.activeVersion, type, code, query);
+    this.service.sendAnalytics(this.activeVersion, type, code, query);
   }
 }

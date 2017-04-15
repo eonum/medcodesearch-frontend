@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {CatalogResolver} from './service/routing/catalog-resolver.service';
-import {TranslateService} from '@ngx-translate/core';
+import { CatalogResolver } from './service/routing/catalog-resolver.service';
+import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ILoggerService } from "./service/i.logger.service";
 import { RememberElementService } from "./service/remember.element.service";
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     this.getRememberedElementsCount();
   }
 
-  private getRememberedElementsCount(){
+  private getRememberedElementsCount() {
     this.countRememberedElements = this.rememberService.count();
   }
 

@@ -1,5 +1,5 @@
-import {CatalogElement} from '../model/catalog.element';
-import {CatalogConfiguration} from '../catalog/catalog.configuration';
+import { CatalogElement } from '../model/catalog.element';
+import { CatalogConfiguration } from '../catalog/catalog.configuration';
 
 /**
  * Interface for a catalog data source

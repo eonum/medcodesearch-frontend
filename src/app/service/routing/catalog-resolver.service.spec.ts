@@ -21,7 +21,7 @@ describe('CatalogResolver', () => {
       providers: [CatalogResolver, { provide: Router, useClass: RouterStub },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
-        {provide: 'ILoggerService', useClass: NullLoggerService}]
+        { provide: 'ILoggerService', useClass: NullLoggerService }]
     });
 
     routeMock = TypeMoq.Mock.ofType<ActivatedRouteSnapshot>();

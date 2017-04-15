@@ -6,54 +6,54 @@ import { Catalog } from "../catalog/catalog";
 @Injectable()
 export class RememberElementService {
 
-    private rememberedElements: {[key: string]: RememberedElement};
-    private numberOfElements: number;
+  private rememberedElements: { [key: string]: RememberedElement };
+  private numberOfElements: number;
 
-    private subscribers: (() => void)[];
+  private subscribers: (() => void)[];
 
-    public constructor(){
-        this.rememberedElements = {};
-        this.numberOfElements = 0;
-        this.subscribers = [];
+  public constructor() {
+    this.rememberedElements = {};
+    this.numberOfElements = 0;
+    this.subscribers = [];
+  }
+
+  public count(): number {
+    return this.numberOfElements;
+  }
+
+  public add(element: CatalogElement, version: string, catalog: string, language: string): void {
+    const elementToStore = RememberedElement.from(element, version, catalog, language);
+    if (!this.rememberedElements[elementToStore.getId()]) {
+      this.rememberedElements[elementToStore.getId()] = elementToStore;
+      this.numberOfElements++;
+      this.notify();
     }
+  }
 
-    public count(): number {
-        return this.numberOfElements;
+  public remove(id: string): void {
+    if (this.rememberedElements[id]) {
+      delete this.rememberedElements[id];
+      this.numberOfElements--;
+      this.notify();
     }
+  }
 
-    public add(element: CatalogElement, version:string, catalog: string, language: string): void {
-        const elementToStore = RememberedElement.from(element, version, catalog, language);
-        if (!this.rememberedElements[elementToStore.getId()]){
-            this.rememberedElements[elementToStore.getId()] = elementToStore; 
-            this.numberOfElements++;
-            this.notify();
-        }
-    }
+  public getRememberedElements(): RememberedElement[] {
+    const elements = [];
+    const keys = Object.keys(this.rememberedElements);
+    keys.forEach(key => {
+      elements.push(this.rememberedElements[key]);
+    });
+    return elements;
+  }
 
-    public remove(id: string): void {
-        if (this.rememberedElements[id]){
-            delete this.rememberedElements[id];
-            this.numberOfElements--;
-            this.notify();
-        }
-    }
+  public subscribe(callback: () => void): void {
+    this.subscribers.push(callback);
+  }
 
-    public getRememberedElements(): RememberedElement[] {
-        const elements = [];
-        const keys = Object.keys(this.rememberedElements);
-        keys.forEach(key => {
-            elements.push(this.rememberedElements[key]);
-        });
-        return elements;
-    }
-
-    public subscribe(callback: () => void): void {
-        this.subscribers.push(callback);
-    }
-
-    private notify(): void {
-        this.subscribers.forEach(callback => {
-            callback();
-        });
-    }
+  private notify(): void {
+    this.subscribers.forEach(callback => {
+      callback();
+    });
+  }
 }

@@ -4,9 +4,9 @@ import { ILoggerService } from "./i.logger.service";
 
 @Injectable()
 export class DevLoggerService implements ILoggerService {
-    public log(message: string): void {
-        if (environment.dev){
-            console.log(message);
-        }
+  public log(message: string): void {
+    if (environment.dev) {
+      console.log(message);
     }
+  }
 }

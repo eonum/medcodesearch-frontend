@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Catalog} from '../../catalog/catalog';
-import {environment} from '../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Catalog } from '../../catalog/catalog';
+import { environment } from '../../../environments/environment';
 import { CatalogElement } from '../../model/catalog.element';
 import { ILoggerService } from "../../service/i.logger.service";
 
@@ -34,8 +34,8 @@ export class MainComponent implements OnInit {
   private type: string;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService) {
   }
   /**
    * Subscribe to route parameter determine if the details view should be displayed
@@ -67,21 +67,21 @@ export class MainComponent implements OnInit {
   }
 
   private updateView(): void {
-    if (this.catalog){
+    if (this.catalog) {
       this.updateDetailView();
       this.updateSearchResultsView();
     }
   }
 
   private updateDetailView(): void {
-    if (this.code && this.type){
-        this.catalog.getByCode(this.type, this.code)
-          .then(element => {
-            this.selectedElement = element;
-          })
-          .catch(error => {
-            this.handleError(error);
-          });
+    if (this.code && this.type) {
+      this.catalog.getByCode(this.type, this.code)
+        .then(element => {
+          this.selectedElement = element;
+        })
+        .catch(error => {
+          this.handleError(error);
+        });
     }
     else if (!this.query) {
       this.catalog.getRootElement()
@@ -95,14 +95,14 @@ export class MainComponent implements OnInit {
   }
 
   private updateSearchResultsView(): void {
-    if (this.query){
-        this.catalog.search(this.catalog.getActiveVersion(), this.query)
-          .then(results => {
-            this.searchResults = results;
-          })
-          .catch(error => {
-            this.handleError(error);
-          });
+    if (this.query) {
+      this.catalog.search(this.catalog.getActiveVersion(), this.query)
+        .then(results => {
+          this.searchResults = results;
+        })
+        .catch(error => {
+          this.handleError(error);
+        });
     }
     else {
       this.searchResults = null;

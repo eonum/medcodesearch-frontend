@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
-import {Catalog} from '../../catalog/catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {ICDCatalog} from '../../catalog/icd.catalog';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { Catalog } from '../../catalog/catalog';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { ICDCatalog } from '../../catalog/icd.catalog';
 import { environment } from '../../../environments/environment';
 import { ILoggerService } from "../i.logger.service";
 

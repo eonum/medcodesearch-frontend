@@ -1,6 +1,6 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {DetailSwissDrgComponent} from './detail-swiss-drg.component';
+import { DetailSwissDrgComponent } from './detail-swiss-drg.component';
 
 describe('DetailSwissDrgComponent', () => {
   let component: DetailSwissDrgComponent;

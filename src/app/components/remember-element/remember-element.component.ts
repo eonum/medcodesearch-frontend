@@ -14,9 +14,9 @@ export class RememberElementComponent implements OnInit {
   public rememberedElements: RememberedElement[];
 
   constructor(private rememberService: RememberElementService,
-              private router: Router,
-              private route: ActivatedRoute,
-              @Inject('ILoggerService') private logger: ILoggerService) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    @Inject('ILoggerService') private logger: ILoggerService) { }
 
   ngOnInit() {
     this.rememberService.subscribe(() => {
@@ -30,8 +30,8 @@ export class RememberElementComponent implements OnInit {
   }
 
   private openCode(element: RememberedElement): void {
-      this.router.navigate([element.language, element.catalog, element.version, element.type, element.code])
-                 .catch(error => this.logger.log(error.message));
+    this.router.navigate([element.language, element.catalog, element.version, element.type, element.code])
+      .catch(error => this.logger.log(error.message));
   }
 
   private removeElement(code: string): void {
