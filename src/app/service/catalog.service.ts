@@ -136,7 +136,7 @@ export class CatalogService implements ICatalogService {
       url += `&query=${query}`;
     }
 
-    this.logger.log(url);
+    this.logger.http(url);
 
     return this.http.get(url).toPromise()
       .then(result => {

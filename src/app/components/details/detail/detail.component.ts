@@ -22,7 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./detail.component.css']
 })
 
-export class DetailComponent implements OnInit, OnChanges {
+export class DetailComponent implements OnChanges {
 
   /**
    * The active catalog, resolved from the activated route.
@@ -55,11 +55,9 @@ export class DetailComponent implements OnInit, OnChanges {
     @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
-  public ngOnInit(): void {
-    this.logger.log('>> DetailComponent on init.');
-  }
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
+    this.logger.log(`[DetailComponent] on Changes: ${this.selectedElement.code}.`)
     this.updateView();
   }
 
@@ -76,58 +74,22 @@ export class DetailComponent implements OnInit, OnChanges {
    * @param code the code of the element to display
    */
   private updateView(): void {
+
     if (this.selectedElement === undefined ||
       this.selectedElement === null) {
       return;
     }
 
-    console.log(this.selectedElement);
     this.hierarchy = [];
-    this.loadHierarchy(this.selectedElement);
-    this.loadChildren(this.selectedElement);
-  }
 
-  /**
-   * Loads all elements from the currentElement up to the catalog root.
-   * @param currentElement the leaf element of which the hierarchy will be loaded
-   */
-  private loadHierarchy(currentElement: CatalogElement): void {
-    this.hierarchy.unshift(currentElement);
-    const parent = currentElement.parent;
-    if (parent !== undefined && parent !== null) {
-      const code: string = this.extractCodeFromUrl(parent.url);
-      const type: string = this.extractTypeFromUrl(parent.url);
-      this.catalog.getByCode(type, code).then(element => {
-        element.url = parent.url;
-        this.loadHierarchy(element);
-      }).catch(error => this.logger.log(error));
+    let tmp = this.selectedElement;
+    while (tmp){
+      this.hierarchy.unshift(tmp);
+      tmp = tmp.parent;
+
     }
-  }
+    this.children = this.selectedElement.children;
 
-  /**
-   * Loads the immediate children of the currentElement
-   * @param currentElement the element of which the children will be loaded
-   */
-  private loadChildren(currentElement: CatalogElement): void {
-    const children = currentElement.children;
-    if (children !== undefined && children !== null && children.length > 0) {
-      children.forEach(child => {
-        child.type = this.extractTypeFromUrl(child.url);
-      });
-
-      this.children = children.sort((a: CatalogElement, b: CatalogElement) => {
-        if (SortHelper.isNumberWithLeadingLetter(a.code)) {
-          return SortHelper.compareAsNumberWithLeadingLetter(a.code, b.code);
-        }
-        if (SortHelper.isRomanNumber(a.code)) {
-          return SortHelper.compareAsRomanNumber(a.code, b.code);
-        } else {
-          return SortHelper.compareAsLiteral(a.code, b.code);
-        }
-      });
-    } else {
-      this.children = [];
-    }
   }
 
   /**
@@ -163,7 +125,7 @@ export class DetailComponent implements OnInit, OnChanges {
     const versionRouteParam = this.route.snapshot.params['version'];
 
     this.router.navigate(
-      [catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
+      [catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url) || element.code], {
         queryParamsHandling: 'merge',
         relativeTo: this.route.parent
       }).catch(error => this.logger.log(error.message));

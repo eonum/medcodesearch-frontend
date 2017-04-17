@@ -12,24 +12,33 @@ export class ConsoleLoggerService implements ILoggerService {
   private logStyle = 'background: #f2ebf0; color: #0D0D0F';
   private errorStyle = 'background: #F2552C; color: white; font-size:12pt;';
   private httpStyle = 'background: white; color: #00477e; font-size:10pt;';
+
+  private now():string {
+    const currentdate = new Date();
+    return currentdate.getHours() + ':' +currentdate.getMinutes() + ':' + currentdate.getSeconds();
+  }
   /**
    * Logs the specified message to the console.
    * @param message the message to log
    */
   public log(message: string): void {
+    this.toConsole(message, 'LOG', this.logStyle);
+  }
+
+  private toConsole(msg: string, prefix:string, style:string){
     if (environment.dev) {
-      console.log(`LOG: %c ${message}`, this.logStyle);
+      console.log(`${this.now()} ${prefix}: %c ${msg}`, style || style);
     }
   }
+
+
 
   /**
    * Logs the specified message  to the console.
    * @param message the message to log
    */
   public error(message: string): void {
-    if (environment.dev) {
-      console.log(`ERROR: %c ${message}`, this.errorStyle);
-    }
+    this.toConsole(message, 'ERR', this.errorStyle);
   }
 
   /**
@@ -37,9 +46,7 @@ export class ConsoleLoggerService implements ILoggerService {
    * @param message the message to log
    */
   public http(message: string): void {
-    if (environment.dev) {
-      console.log(`GET: %c ${message}`, this.httpStyle);
-    }
+    this.toConsole(message, 'GET', this.httpStyle);
   }
 
 
