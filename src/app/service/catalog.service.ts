@@ -1,11 +1,12 @@
-import { Http } from "@angular/http";
-import { TranslateService } from "@ngx-translate/core";
-import { Injectable } from "@angular/core";
-import { CatalogElement } from "../model/catalog.element";
-import { ICatalogService } from "./i.catalog.service";
+import {Http} from '@angular/http';
+import {TranslateService} from '@ngx-translate/core';
+import { Injectable, Inject } from '@angular/core';
+import {CatalogElement} from '../model/catalog.element';
+import {ICatalogService} from './i.catalog.service';
 import 'rxjs/add/operator/toPromise';
-import { environment } from '../../environments/environment';
-import { CatalogConfiguration } from "../catalog/catalog.configuration";
+import {environment} from '../../environments/environment';
+import { CatalogConfiguration } from '../catalog/catalog.configuration';
+import { ILoggerService } from "./i.logger.service";
 
 @Injectable()
 export class CatalogService implements ICatalogService {
@@ -14,7 +15,10 @@ export class CatalogService implements ICatalogService {
 
   private config: CatalogConfiguration;
 
-  public constructor(private http: Http, private translate: TranslateService) { }
+  public constructor(private http: Http, 
+                     private translate: TranslateService,
+                     @Inject('ILoggerService') private logger: ILoggerService) {
+  }
 
   /**
    * Initializes the service with catalog specific parameters.
@@ -29,11 +33,12 @@ export class CatalogService implements ICatalogService {
   }
 
   public getLocale(): string {
-    if (environment.dev && !this.translate.currentLang) {
-      console.log("%c No currentLanguage set", "color:red")
+    if (!this.translate.currentLang) {
+      this.logger.log("No currentLanguage set")
     }
     return this.translate.currentLang;
   }
+
   public getLangs(): string[] {
     return this.translate.getLangs();
   }
@@ -59,23 +64,46 @@ export class CatalogService implements ICatalogService {
         results = results.concat(webResults);
       }
       catch (e) {
-        console.log(e);
+        this.logger.log(e);
       }
     }
     return Promise.resolve(results);
   }
 
   /**
-   * Get all versions supported by the catalog
+   * Send information about how the user found the selected code
+   * to the eonum API.
+   * 
+   * @param version the version of the catalog to use
+   * @param type the type of the element to send analytics for
+   * @param code the code of the element to send analytics for
+   * @param query the query which was used before retrieving this element
    */
+  public sendAnalytics(version: string, type: string, code:string, query:string): void {
 
+    this.getSingleElementForTypeByCode(type, version, code, query)
+      .then(result => {
+        this.logger.log('Successfully sent Analytics.');
+      })
+      .catch(error => {
+        this.logger.log('ERROR - Could not send analytics. Error: ' + error);
+      });
+  }
+
+  /**
+   * Get all versions supported by the catalog in the specified language
+   * 
+   * @param lang the language to get the supported versions for
+   */
   public getVersions(lang: string): Promise<string[]> {
     let url: string = `${this.baseUrl}${lang}/${this.config.versionParam}/versions`;
 
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as string[])
-      .catch(reason => { throw new Error(reason) });
+      .catch(reason => {
+        throw new Error(reason);
+      });
   }
 
   /**
@@ -97,25 +125,34 @@ export class CatalogService implements ICatalogService {
       }
     }
     catch (error) {
-      console.log(error);
+      this.logger.log(error);
     }
 
     throw new Error("Not found");
   }
 
-  private async getSingleElementForTypeByCode(elementType: string, version: string, code: string): Promise<CatalogElement> {
+  private async getSingleElementForTypeByCode(elementType: string, version: string, code: string, query?: string): Promise<CatalogElement> {
     const locale: string = this.getLocale();
-    const url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
-    if (environment.dev) console.log(url);
+    let url: string = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
+    
+    if (query){
+      url += `&query=${query}`;
+    }
+
+    this.logger.log(url);
 
     return this.http.get(url).toPromise()
-      .then(result => { return result.json() as CatalogElement })
-      .catch(reason => { throw new Error(reason) });
+      .then(result => {
+        return result.json() as CatalogElement
+      })
+      .catch(reason => {
+        throw new Error(reason)
+      });
   }
 
   private async getSearchForType(elementType: string, version: string, query: string): Promise<CatalogElement[]> {
     let url: string = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
-    if (environment.dev) console.log(url);
+    this.logger.log(url);
 
     return this.http.get(url).toPromise()
       .then(result => {

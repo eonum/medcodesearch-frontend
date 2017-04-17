@@ -1,9 +1,9 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
-@Pipe({name: 'correctVersion'})
+@Pipe({ name: 'correctVersion' })
 export class CorrectVersionPipe implements PipeTransform {
 
-  constructor() {}
+  constructor() { }
 
   public transform(s: string): string {
     if (s && typeof s === 'string') {

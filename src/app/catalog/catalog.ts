@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { CatalogElement } from '../model/catalog.element';
-import { ICatalogService } from '../service/i.catalog.service';
-import { environment } from '../../environments/environment';
-import { CatalogConfiguration } from "./catalog.configuration";
+import { Injectable, Inject } from '@angular/core';
+import {CatalogElement} from '../model/catalog.element';
+import {ICatalogService} from '../service/i.catalog.service';
+import { CatalogConfiguration } from './catalog.configuration';
+import { ILoggerService } from "../service/i.logger.service";
 
 /**
  * Class representing a catalog containing medical
@@ -27,8 +27,9 @@ export abstract class Catalog {
    * @param elements - elements within a catalog
    */
   public constructor(private service: ICatalogService,
-    public name: string,
-    protected config: CatalogConfiguration) {
+                     private logger: ILoggerService,
+                     public name: string,
+                     protected config: CatalogConfiguration) {
     this.versions_lang = [];
   }
 
@@ -73,15 +74,29 @@ export abstract class Catalog {
         }
       })
         .catch(error => {
-          console.log(error)
+          this.logger.log(error);
         });
 
       if (lang == "de") {
         germanVersions = versions
-      };
-
+      }
     }
     return germanVersions;
+  }
+
+  public getRootElement(): Promise<CatalogElement> {
+    const rootElementType: string = this.getRootElementType();
+    const rootElementCode: string = this.getRootElementCode();
+
+    return this.getByCode(rootElementType, rootElementCode);
+  }
+
+  protected getRootElementType(): string {
+    return this.config.rootElementType;
+  }
+
+  protected getRootElementCode(): string {
+    return this.activeVersion;
   }
 
   private initService(): void {
@@ -103,12 +118,12 @@ export abstract class Catalog {
     }
 
     if (this.versions_lang[this.service.getLocale()].indexOf(version) > -1) {
-      console.log("valid version " + this.service.getLocale());
+      this.logger.log("valid version " + this.service.getLocale());
       this.activeVersion = version;
       return Promise.resolve(true);
 
     } else {
-      console.log("invalid version " + this.service.getLocale());
+      this.logger.log("invalid version " + this.service.getLocale());
       return Promise.resolve(false);
     }
   }
@@ -142,5 +157,13 @@ export abstract class Catalog {
 
     }
     return validLangs;
+  }
+
+	/**
+	* Sends an analytic notification to eonum
+	*
+	*/
+  public sendAnalytics(type: string, code: string, query: string): void {
+	  this.service.sendAnalytics(this.activeVersion, type, code, query);
   }
 }

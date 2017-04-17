@@ -1,0 +1,24 @@
+<div class="box" *ngIf="searchResults">
+
+<dl *ngIf="searchResults">
+    <p *ngFor="let result of searchResults"
+       (click)="openCode(result.type, result.code)"
+       class="search-result" [class.active]="result.code===selectedCode">
+        <dt>
+          <span class="link" >{{result.code}}</span>
+          <!--<a [routerLink]="['./', result.type, result.code]">{{result.code}}</a>-->
+        </dt>
+      <ng-template [ngIf]="result.highlight.text != undefined">
+            <dd [innerHtml]="result.highlight.text[0]"></dd>
+      </ng-template>
+      <ng-template [ngIf]="result.highlight.text == undefined">
+            <dd [innerHtml]="result.text"></dd>
+      </ng-template>
+    </p>
+  <p *ngIf="searchResults.length==0">
+    {{ 'LBL_NO_RESULTS' | translate }}
+  </p>
+</dl>
+
+
+</div>
