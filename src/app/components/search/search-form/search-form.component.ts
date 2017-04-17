@@ -105,6 +105,7 @@ export class SearchFormComponent implements OnInit {
    * Update based on search
    */
   public search(query: string): void {
+
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: query.length > 0 ? { query: query } : null

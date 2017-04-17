@@ -3,6 +3,7 @@ import {CatalogElement} from '../../model/catalog.element';
 import {ILoggerService} from '../../service/logging/i.logger.service';
 import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CatalogSearchService} from '../../service/routing/catalog-search.service';
 
 /**
  * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
@@ -30,22 +31,29 @@ export class MainComponent implements OnInit {
 
   private code: string;
   private type: string;
+  private language: string;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    @Inject('ILoggerService') private logger: ILoggerService) {
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private searchService: CatalogSearchService) {
   }
+
   /**
    * Subscribe to route parameter determine if the details view should be displayed
    */
   public ngOnInit(): void {
-    this.logger.log('>> MainComponent on init.');
+    this.logger.log('[MainComponent] on init.');
+
+    this.searchService.subscribe((results: CatalogElement[]) =>
+      this.searchResults = results);
 
     this.route.params.subscribe(
       params => {
         this.code = params['code'];
         this.type = params['type'];
 
+        this.language = params['language'];
         this.updateView();
       }
     );
@@ -69,8 +77,8 @@ export class MainComponent implements OnInit {
   private updateView(): void {
     if (this.catalog) {
       this.updateSearchResultsView();
-      if ( !this.code ){
-        //Navaigate to root element
+      if (!this.code) {
+        // Navaigate to root element
         this.router.navigate(this.catalog.getRootElementParams(), {
           relativeTo: this.route,
           queryParamsHandling: 'merge'
@@ -80,7 +88,6 @@ export class MainComponent implements OnInit {
   }
 
 
-
   /**
    * If a search parameter is provided, the search
    * results will be displayed.
@@ -88,16 +95,13 @@ export class MainComponent implements OnInit {
    */
   private updateSearchResultsView(): void {
     if (this.query) {
-      this.catalog.search(this.catalog.getActiveVersion(), this.query)
-        .then(results => {
-          this.searchResults = results;
-        })
-        .catch(error => {
-          this.handleError(error);
-        });
-    } else {
+      this.searchService.search(this.language, this.catalog.getActiveVersion(),
+        this.catalog.getDomain(), this.query);
+    }else {
       this.searchResults = null;
     }
+
+
   }
 
   private handleError(error: any): void {

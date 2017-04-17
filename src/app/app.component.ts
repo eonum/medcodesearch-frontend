@@ -1,9 +1,10 @@
-import { ILoggerService } from './service/logging/i.logger.service';
-import { RememberElementService } from './service/remember.element.service';
-import { CatalogResolver } from './service/routing/catalog-resolver.service';
-import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import {ILoggerService} from './service/logging/i.logger.service';
+import {RememberElementService} from './service/remember.element.service';
+import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {CatalogSearchService} from './service/routing/catalog-search.service';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +21,10 @@ export class AppComponent implements OnInit {
   public countRememberedElements = 0;
 
   constructor(public translate: TranslateService,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private catalogResolver: CatalogResolver,
-    private router: Router,
-    private rememberService: RememberElementService) {
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private catalogResolver: CatalogResolver,
+              private router: Router,
+              private rememberService: RememberElementService) {
     translate.addLangs(this.languages);
   }
 

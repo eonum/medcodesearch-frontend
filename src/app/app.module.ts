@@ -25,6 +25,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BsDropdownModule, CollapseModule, ModalModule, PopoverModule, TooltipModule } from 'ng2-bootstrap';
 import {CatalogElementResolver} from './service/routing/catalog-element-resolver.service';
+import {CatalogSearchService} from './service/routing/catalog-search.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
@@ -75,7 +76,7 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
     CHOPCatalog,
     ICDCatalog,
     CatalogResolver,
-
+    CatalogSearchService
   ],
   bootstrap: [AppComponent]
 })
