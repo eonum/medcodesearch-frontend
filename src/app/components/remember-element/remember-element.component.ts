@@ -35,12 +35,12 @@ export class RememberElementComponent implements OnInit {
 
   /**
    * Redirects to the details of the specified element.
-   * 
+   *
    * @param element the element to display
    */
   private openCode(element: RememberedElement): void {
     this.router.navigate(
-      [element.language, element.catalog, element.version, element.type, element.code],
+      [ element.catalog, element.version, element.type, element.code],
       { queryParamsHandling: 'merge' })
       .catch(error => this.logger.log(error.message));
   }
@@ -48,7 +48,7 @@ export class RememberElementComponent implements OnInit {
   /**
    * Removes a specific element from the list of
    * marked elements.
-   * 
+   *
    * @param element the element to remove
    */
   private removeElement(element: RememberedElement): void {

@@ -71,7 +71,7 @@ export class CatalogService implements ICatalogService {
   /**
    * Send information about how the user found the selected code
    * to the eonum API.
-   * 
+   *
    * @param version the version of the catalog to use
    * @param type the type of the element to send analytics for
    * @param code the code of the element to send analytics for
@@ -90,7 +90,7 @@ export class CatalogService implements ICatalogService {
 
   /**
    * Get all versions supported by the catalog in the specified language
-   * 
+   *
    * @param lang the language to get the supported versions for
    */
   public getVersions(lang: string): Promise<string[]> {
@@ -149,7 +149,7 @@ export class CatalogService implements ICatalogService {
 
   private async getSearchForType(elementType: string, version: string, query: string): Promise<CatalogElement[]> {
     const url = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
-    this.logger.log(url);
+    this.logger.http(url);
 
     return this.http.get(url).toPromise()
       .then(result => {
