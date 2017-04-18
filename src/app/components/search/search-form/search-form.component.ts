@@ -1,14 +1,14 @@
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { Catalog } from '../../../catalog/catalog';
-import { CHOPCatalog } from '../../../catalog/chop.catalog';
-import { ICDCatalog } from '../../../catalog/icd.catalog';
-import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
-import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ModalDirective } from 'ng2-bootstrap';
+import {Catalog} from '../../../catalog/catalog';
+import {CHOPCatalog} from '../../../catalog/chop.catalog';
+import {ICDCatalog} from '../../../catalog/icd.catalog';
+import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
+import {ILoggerService} from '../../../service/logging/i.logger.service';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ModalDirective} from 'ng2-bootstrap';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -32,8 +32,8 @@ import { ModalDirective } from 'ng2-bootstrap';
 export class SearchFormComponent implements OnInit {
 
   // selected values (resolved in main component from route)
-  @Input() public query: string;
-  @Input() public catalog: Catalog;
+  public query: string;
+  public catalog: string;
 
   public catalogs: Catalog[]; // to display catalog selection
   public languages: string[];
@@ -43,11 +43,11 @@ export class SearchFormComponent implements OnInit {
   @ViewChild('childModal') public childModal: ModalDirective;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private swissDrgCatalog: SwissDrgCatalog,
-    private chopCatalog: CHOPCatalog,
-    private icdCatalog: ICDCatalog) {
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private swissDrgCatalog: SwissDrgCatalog,
+              private chopCatalog: CHOPCatalog,
+              private icdCatalog: ICDCatalog) {
 
     this.logger.log('[SearchComponent] constructor');
 
@@ -71,6 +71,12 @@ export class SearchFormComponent implements OnInit {
    * Subscribe to route parameter to mark the selected catalog and displaythe query.
    */
   public ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.catalog = params['catalog'];
+    });
+    this.route.queryParams.subscribe((params: Params) => {
+      this.query = params['query'];
+    });
   }
 
   public showChildModal(): void {
@@ -83,7 +89,7 @@ export class SearchFormComponent implements OnInit {
 
   public changeLanguage(language: string): void {
     this.childModal.hide();
-    this.router.navigate([language, this.catalog.getDomain(), this.selectedVersion]
+    this.router.navigate([language, this.catalog, this.selectedVersion]
     ).catch(error => this.logger.error(error));
   }
 
@@ -94,11 +100,11 @@ export class SearchFormComponent implements OnInit {
     version = version || catalog.getActiveVersion();
     if (!catalog.hasVersionInCurrentLanguage(version)) {
       this.languages = catalog.getVersionLanguages(version);
-      this.catalog = catalog;
+      this.catalog = catalog.getDomain();
       this.selectedVersion = version;
       this.childModal.show();
     } else {
-      this.redirect(catalog, version, this.query);
+      this.redirect(catalog.getDomain(), version, this.query);
     }
   }
 
@@ -109,7 +115,7 @@ export class SearchFormComponent implements OnInit {
 
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: query.length > 0 ? { query: query } : null
+      queryParams: query.length > 0 ? {query: query} : null
     }).catch(error => this.logger.error(error));
   }
 
@@ -119,9 +125,9 @@ export class SearchFormComponent implements OnInit {
    * @param version
    * @param query
    */
-  private redirect(catalog: Catalog, version: string, query: string): void {
+  private redirect(catalog: string, version: string, query: string): void {
 
-    const params = [catalog.getDomain(), version];
+    const params = [catalog, version];
 
     this.router.navigate(params, {
       relativeTo: this.route.parent,
