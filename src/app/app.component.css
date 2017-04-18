@@ -2,7 +2,7 @@
   float: right;
   padding: 0;
   list-style: none;
-  margin: 14px 6px 0 0;
+  margin: 25px 6px 0 0;
 }
 
 .language-select li {
@@ -15,11 +15,17 @@
 }
 
 .language-select .active {
-  color: black;
-  text-decoration: underline;
+  color: #24add3;
 }
 
 .navbar {
-background-color: rgba(255,255,255,0.6);
+background-color: rgba(255,255,255,1.0);
 
+}
+
+.navbar-static-top {
+  height: 50px;
+}
+.navbar-fixed-bottom{
+  height:50px;
 }
