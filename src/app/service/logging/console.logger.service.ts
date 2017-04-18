@@ -9,7 +9,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class ConsoleLoggerService implements ILoggerService {
 
-  private logStyle = 'background: #f2ebf0; color: #0D0D0F';
+  private defaultStyle = 'background: #f2ebf0; color: #0D0C0E';
   private errorStyle = 'background: #F2552C; color: white; font-size:12pt;';
   private httpStyle = 'background: #00CED1; color: #00477e; font-size:10pt;';
   private lifecycleStyle = 'background: brown; color: snow';
@@ -20,15 +20,15 @@ export class ConsoleLoggerService implements ILoggerService {
    * @param message the message to log
    */
   public log(message: string, obj?: any): void {
-    this.toConsole(message, 'INFO', '', obj);
+    this.toConsole(message, 'INFO', this.defaultStyle, obj);
   }
 
   private toConsole(msg: string, prefix: string, style: string, obj?: any): void {
     if (environment.dev) {
       if (obj) {
-        console.log(`${prefix}:%c ${msg}`, style || style, obj);
+        console.log(`${prefix}: %c${msg}`, style || style, obj);
       } else {
-        console.log(`${prefix}:%c ${msg}`, style || style);
+        console.log(`${prefix}: %c${msg}`, style || style);
       }
     }
   }

@@ -28,8 +28,8 @@ export class DetailComponent implements OnChanges {
    * The active catalog, resolved from the activated route.
    * Serves as input for the search-form component.
    * */
-  @Input()
-  public catalog: Catalog;
+
+  public catalog: string;
 
   /**
    * The current element for which the details are displayed
@@ -53,12 +53,15 @@ export class DetailComponent implements OnChanges {
     private router: Router,
     private rememberService: RememberElementService,
     @Inject('ILoggerService') private logger: ILoggerService) {
+    this.logger.log('[DetailComponent] constructor')
   }
 
 
   public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
-    this.logger.log(`[DetailComponent] on Changes: ${this.selectedElement.code}.`)
-    this.updateView();
+    this.logger.log(`[DetailComponent] on Changes: ${this.selectedElement.code}.`);
+    this.catalog= this.route.snapshot.params['catalog'];
+    this.setHierarchy();
+    this.children = this.selectedElement.children;
   }
 
   public rememberCode(element: CatalogElement): void {
@@ -69,27 +72,15 @@ export class DetailComponent implements OnChanges {
   }
 
   /**
-   * Load all data which shall be displayed
-   * @param type the type of the element to display
-   * @param code the code of the element to display
+   * Set the hierarchy for the selected element.
    */
-  private updateView(): void {
-
-    if (this.selectedElement === undefined ||
-      this.selectedElement === null) {
-      return;
-    }
-
+  private setHierarchy(): void {
     this.hierarchy = [];
-
     let tmp = this.selectedElement;
     while (tmp){
       this.hierarchy.unshift(tmp);
       tmp = tmp.parent;
-
     }
-    this.children = this.selectedElement.children;
-
   }
 
   /**
@@ -128,18 +119,7 @@ export class DetailComponent implements OnChanges {
       [catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url) || element.code], {
         queryParamsHandling: 'merge',
         relativeTo: this.route.parent
-      }).catch(error => this.logger.log(error.message));
+      }).catch(error => this.logger.error(error.message));
   }
 
-  /**
-   * Navigates back to the original search.
-   */
-  public toSearch(): void {
-    this.router.navigate(
-      [this.catalog.getDomain(), this.catalog.getActiveVersion()], {
-        relativeTo: this.route.parent,
-        queryParamsHandling: 'merge'
-      }
-    ).catch(error => this.logger.log(error));
-  }
 }

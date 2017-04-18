@@ -18,10 +18,10 @@
     <h3>{{selectedElement.code}}</h3>
     <p>{{selectedElement.text}}</p>
 
-    <app-detail-swiss-drg *ngIf="catalog.name === 'SwissDRG'" [selectedElement]="selectedElement" >
+    <app-detail-swiss-drg *ngIf="catalog === 'swissdrg'" [selectedElement]="selectedElement" >
     </app-detail-swiss-drg>
-    <app-detail-chop *ngIf="catalog.name === 'CHOP'" [selectedElement]="selectedElement" ></app-detail-chop>
-    <app-detail-icd *ngIf="catalog.name === 'ICD'" [selectedElement]="selectedElement" ></app-detail-icd>
+    <app-detail-chop *ngIf="catalog === 'chops'" [selectedElement]="selectedElement" ></app-detail-chop>
+    <app-detail-icd *ngIf="catalog === 'icds'" [selectedElement]="selectedElement" ></app-detail-icd>
 
   <ng-template [ngIf]="children?.length > 0">
         <h4>{{'LBL_CHILDREN' | translate}}</h4>
