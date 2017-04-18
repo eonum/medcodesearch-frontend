@@ -48,7 +48,8 @@ export class SearchFormComponent implements OnInit {
     private swissDrgCatalog: SwissDrgCatalog,
     private chopCatalog: CHOPCatalog,
     private icdCatalog: ICDCatalog) {
-    this.logger.log('>> SearchComponent constructor');
+
+    this.logger.log('[SearchComponent] constructor');
 
     this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog];
 
@@ -83,7 +84,7 @@ export class SearchFormComponent implements OnInit {
   public changeLanguage(language: string): void {
     this.childModal.hide();
     this.router.navigate([language, this.catalog.getDomain(), this.selectedVersion]
-    ).catch(error => this.logger.log(error));
+    ).catch(error => this.logger.error(error));
   }
 
   /**
@@ -109,11 +110,11 @@ export class SearchFormComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: query.length > 0 ? { query: query } : null
-    }).catch(error => this.logger.log(error));
+    }).catch(error => this.logger.error(error));
   }
 
   /**
-   * Do the search or catalog selection by redirecting with the given parameters.
+   * Do the catalog selection by redirecting with the given parameters.
    * @param catalog
    * @param version
    * @param query
@@ -125,7 +126,7 @@ export class SearchFormComponent implements OnInit {
     this.router.navigate(params, {
       relativeTo: this.route.parent,
       queryParamsHandling: 'merge'
-    }).catch(error => this.logger.log(error));
+    }).catch(error => this.logger.error(error));
   }
 
 }

@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
   public catalog: Catalog;
 
   public selectedElement: CatalogElement;
-  public searchResults: CatalogElement[];
+  public searchResults: CatalogElement[] = [];
 
   private code: string;
   private type: string;
@@ -95,16 +95,13 @@ export class MainComponent implements OnInit {
    */
   private updateSearchResultsView(): void {
     if (this.query) {
-      this.searchService.search(this.language, this.catalog.getActiveVersion(),
-        this.catalog.getDomain(), this.query);
-    }else {
+      this.searchService.search(
+        this.language, this.catalog.getActiveVersion(), this.catalog.getDomain(), this.query);
+    } else {
       this.searchResults = null;
     }
 
 
   }
 
-  private handleError(error: any): void {
-    this.logger.log(error);
-  }
 }

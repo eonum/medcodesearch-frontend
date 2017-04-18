@@ -47,9 +47,12 @@ export class CatalogSearchService {
     this.catalogs[chopCatalog.getDomain()] = chopCatalog;
     this.catalogs[icdCatalog.getDomain()] = icdCatalog;
 
-    this.searchResults = new BehaviorSubject([]);
+    this.searchResults = new BehaviorSubject([]); // fires always latest value on new subscription
+
     this.requests = new Subject();
 
+    /*Perform search when a new (distinct) search request is fired and
+    * use switch map to push always only the newest result to the search results.*/
     this.requests.asObservable()
       .distinctUntilChanged(this.requestsEqual)
       .switchMap((request: SearchRequest) =>
@@ -69,6 +72,5 @@ export class CatalogSearchService {
   public search(language: string, version: string, domain: string, query: string) {
     this.requests.next({language, version, domain, query} as SearchRequest);
   }
-
 
 }

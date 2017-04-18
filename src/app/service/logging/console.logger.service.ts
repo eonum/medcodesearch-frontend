@@ -1,6 +1,6 @@
-import { environment } from '../../../environments/environment';
-import { ILoggerService } from './i.logger.service';
-import { Injectable } from '@angular/core';
+import {environment} from '../../../environments/environment';
+import {ILoggerService} from './i.logger.service';
+import {Injectable} from '@angular/core';
 
 /**
  * Implementation for {@link ILoggerService} which logs
@@ -11,34 +11,34 @@ export class ConsoleLoggerService implements ILoggerService {
 
   private logStyle = 'background: #f2ebf0; color: #0D0D0F';
   private errorStyle = 'background: #F2552C; color: white; font-size:12pt;';
-  private httpStyle = 'background: white; color: #00477e; font-size:10pt;';
+  private httpStyle = 'background: #00CED1; color: #00477e; font-size:10pt;';
+  private lifecycleStyle = 'background: brown; color: snow';
 
-  private now():string {
-    const currentdate = new Date();
-    return currentdate.getHours() + ':' +currentdate.getMinutes() + ':' + currentdate.getSeconds();
-  }
+
   /**
    * Logs the specified message to the console.
    * @param message the message to log
    */
-  public log(message: string): void {
-    this.toConsole(message, 'LOG', this.logStyle);
+  public log(message: string, obj?: any): void {
+    this.toConsole(message, 'INFO', '', obj);
   }
 
-  private toConsole(msg: string, prefix:string, style:string){
+  private toConsole(msg: string, prefix: string, style: string, obj?: any): void {
     if (environment.dev) {
-      console.log(`${this.now()} ${prefix}: %c ${msg}`, style || style);
+      if (obj) {
+        console.log(`${prefix}:%c ${msg}`, style || style, obj);
+      } else {
+        console.log(`${prefix}:%c ${msg}`, style || style);
+      }
     }
   }
-
-
 
   /**
    * Logs the specified message  to the console.
    * @param message the message to log
    */
-  public error(message: string): void {
-    this.toConsole(message, 'ERR', this.errorStyle);
+  public error(message: string, obj?: any): void {
+    this.toConsole(message, 'ERR', this.errorStyle, obj);
   }
 
   /**

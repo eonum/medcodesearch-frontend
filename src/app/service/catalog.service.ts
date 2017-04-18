@@ -1,11 +1,11 @@
 import 'rxjs/add/operator/toPromise';
-import { CatalogConfiguration } from '../catalog/catalog.configuration';
-import { CatalogElement } from '../model/catalog.element';
-import { ICatalogService } from './i.catalog.service';
-import { ILoggerService } from './logging/i.logger.service';
-import { Inject, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { TranslateService } from '@ngx-translate/core';
+import {CatalogConfiguration} from '../catalog/catalog.configuration';
+import {CatalogElement} from '../model/catalog.element';
+import {ICatalogService} from './i.catalog.service';
+import {ILoggerService} from './logging/i.logger.service';
+import {Inject, Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
 export class CatalogService implements ICatalogService {
@@ -15,8 +15,8 @@ export class CatalogService implements ICatalogService {
   private config: CatalogConfiguration;
 
   public constructor(private http: Http,
-    private translate: TranslateService,
-    @Inject('ILoggerService') private logger: ILoggerService) {
+                     private translate: TranslateService,
+                     @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   /**
@@ -62,7 +62,7 @@ export class CatalogService implements ICatalogService {
         const webResults = await this.getSearchForType(type, version, query);
         results = results.concat(webResults);
       } catch (e) {
-        this.logger.log(e);
+        this.logger.error(e);
       }
     }
     return Promise.resolve(results);
@@ -84,7 +84,7 @@ export class CatalogService implements ICatalogService {
         this.logger.log('Successfully sent Analytics.');
       })
       .catch(error => {
-        this.logger.log('ERROR - Could not send analytics. Error: ' + error);
+        this.logger.error('Could not send analytics. Error: ' + error);
       });
   }
 

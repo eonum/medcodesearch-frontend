@@ -46,13 +46,14 @@ export class SearchResultsComponent {
   private redirectToCode(type: string, code: string): void {
     const language = this.route.snapshot.params['language'];
     this.router.navigate(
-      [language, this.catalog.getDomain(), this.catalog.getActiveVersion(), type, code], {
-        queryParamsHandling: 'merge'
+      [this.catalog.getDomain(), this.catalog.getActiveVersion(), type, code], {
+        queryParamsHandling: 'merge',
+        relativeTo: this.route.parent
       }
     ).catch(error => this.handleError(error.message));
   }
 
   private handleError(error: any): void {
-    this.logger.log(error);
+    this.logger.error(error);
   }
 }
