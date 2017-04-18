@@ -1,10 +1,8 @@
-import { Catalog } from '../../../catalog/catalog';
-import { SortHelper } from '../../../helper/sort.helper';
-import { CatalogElement } from '../../../model/catalog.element';
-import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { RememberElementService } from '../../../service/remember.element.service';
-import { Component, Inject, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {CatalogElement} from '../../../model/catalog.element';
+import {ILoggerService} from '../../../service/logging/i.logger.service';
+import {RememberElementService} from '../../../service/remember.element.service';
+import {Component, Inject, Input, OnChanges, SimpleChange} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -22,7 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./detail.component.css']
 })
 
-export class DetailComponent implements OnChanges {
+export class DetailComponent {
 
   /**
    * The active catalog, resolved from the activated route.
@@ -34,7 +32,7 @@ export class DetailComponent implements OnChanges {
   /**
    * The current element for which the details are displayed
    */
-  @Input()
+
   public selectedElement: CatalogElement;
 
   /**
@@ -50,25 +48,33 @@ export class DetailComponent implements OnChanges {
   public count = 0;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    private rememberService: RememberElementService,
-    @Inject('ILoggerService') private logger: ILoggerService) {
-    this.logger.log('[DetailComponent] constructor')
+              private router: Router,
+              private rememberService: RememberElementService,
+              @Inject('ILoggerService') private logger: ILoggerService) {
+    this.logger.log('[DetailComponent] constructor');
+    this.route.data.subscribe(
+      data => {
+        this.selectedElement = data.catalogElement;
+        this.logger.log('[DetailComponent]', this.selectedElement);
+        this.updateView()
+      }
+    );
   }
 
 
-  public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
+  public updateView(): void {
     this.logger.log(`[DetailComponent] on Changes: ${this.selectedElement.code}.`);
-    this.catalog= this.route.snapshot.params['catalog'];
+    this.catalog = this.route.snapshot.params['catalog'];
     this.setHierarchy();
     this.children = this.selectedElement.children;
   }
 
   public rememberCode(element: CatalogElement): void {
-    const language: string = this.route.snapshot.params['language'];
-    const catalog: string = this.route.snapshot.params['catalog'];
-    const version: string = this.route.snapshot.params['version'];
+    const language: string = this.route.parent.snapshot.params['language'];
+    const catalog: string = this.route.parent.snapshot.params['catalog'];
+    const version: string = this.route.parent.snapshot.params['version'];
     this.rememberService.add(element, version, catalog, language);
+    console.log(this.rememberService)
   }
 
   /**
@@ -77,7 +83,7 @@ export class DetailComponent implements OnChanges {
   private setHierarchy(): void {
     this.hierarchy = [];
     let tmp = this.selectedElement;
-    while (tmp){
+    while (tmp) {
       this.hierarchy.unshift(tmp);
       tmp = tmp.parent;
     }
@@ -116,7 +122,7 @@ export class DetailComponent implements OnChanges {
     const versionRouteParam = this.route.snapshot.params['version'];
 
     this.router.navigate(
-      [catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url) || element.code], {
+      [element.type, this.extractCodeFromUrl(element.url) || element.code], {
         queryParamsHandling: 'merge',
         relativeTo: this.route.parent
       }).catch(error => this.logger.error(error.message));

@@ -7,8 +7,8 @@
       <app-search-results [catalog]="catalog" [searchResults]="searchResults"></app-search-results>
     </div>
 
-    <div id="detail-component" *ngIf="selectedElement" [class.col-sm-6]="query">
-      <app-detail-component [selectedElement]="selectedElement"></app-detail-component>
+    <div id="detail-component" [class.col-sm-6]="query">
+      <router-outlet ></router-outlet>
     </div>
 
   </div>

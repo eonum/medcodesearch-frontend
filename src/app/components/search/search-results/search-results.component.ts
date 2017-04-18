@@ -46,7 +46,7 @@ export class SearchResultsComponent {
   private redirectToCode(type: string, code: string): void {
 
     this.router.navigate(
-      ['../..', type, code], {
+      [ type, code], {
         queryParamsHandling: 'merge',
         relativeTo: this.route
       }

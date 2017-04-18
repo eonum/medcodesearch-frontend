@@ -197,13 +197,12 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
   public resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<CatalogElement> {
 
 
-    const catalog = route.params['catalog'];
-    const version = route.params['version'];
-    const language = route.params['language'];
+    const catalog = route.parent.params['catalog'];
+    const version = route.parent.params['version'];
+    const language = route.parent.params['language'];
+
     const type = route.params['type'];
     const code = route.params['code'];
-
-    this.logger.log(`[CatalogElementResolver]: ${state.url}`);
 
     const cache = this.catalogCache[language][version] ||
       this.createCache(language, version, catalog);
