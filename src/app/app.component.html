@@ -1,7 +1,7 @@
-<nav class="navbar navbar-default navbar-static-top">
+
   <div class="container">
-    <a id="title" class="navbar-brand" href="https://eonum.github.io/medcodelogic-frontend/"><img style="max-width:200px; margin-top: -7px;"
-             src="assets/codematch_big.png"></a>
+    <a id="title" href="https://eonum.github.io/medcodelogic-frontend/">
+      <img src="assets/codematch_origin.png"></a>
     <ul href="#" class="language-select">
       <li *ngFor="let language of languages">
         <a href="javascript:void(0)"
@@ -10,9 +10,8 @@
       </li>
     </ul>
   </div>
-</nav>
 
-<div class="container" style="margin-bottom: 60px;">
+<div class="container" style="margin-bottom: 60px; margin-top: 10px;">
   <router-outlet></router-outlet>
 </div>
 

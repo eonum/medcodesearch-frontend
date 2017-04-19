@@ -1,7 +1,6 @@
 
 .search-result {
   cursor: pointer;
-  border-radius: 0.5em;
   padding: 0.5em;
 }
 
@@ -11,4 +10,7 @@
 
 .active {
   background-color: rgb(245,245,245);
+}
+p{
+ box-shadow: 1px 1px 4px -1px rgba(89,89,89,0.5);
 }
