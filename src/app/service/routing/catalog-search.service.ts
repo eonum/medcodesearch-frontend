@@ -8,8 +8,8 @@ import {ActivatedRoute} from '@angular/router';
 import {CatalogElement} from '../../model/catalog.element';
 import {BehaviorSubject, Subject} from 'rxjs';
 
-class SearchRequest {
-  public domain: string;
+export class SearchRequest {
+  public catalog: string;
   public version: string;
   public language: string;
   public query: string;
@@ -56,21 +56,25 @@ export class CatalogSearchService {
     this.requests.asObservable()
       .distinctUntilChanged(this.requestsEqual)
       .switchMap((request: SearchRequest) =>
-        this.catalogs[request.domain].search(request.version, request.query)
+        this.catalogs[request.catalog].search(request.version, request.query)
       )
       .subscribe((results: CatalogElement[]) => this.searchResults.next(results));
   }
 
   /**
-   * Subscribe with the given funtion to the search Results.
+   * Subscribe with the given function to the search Results.
    * @param f
    */
   public subscribe(f: (_: CatalogElement[]) => void): void {
     this.searchResults.asObservable().subscribe(f);
   }
 
-  public search(language: string, version: string, domain: string, query: string) {
-    this.requests.next({language, version, domain, query} as SearchRequest);
+  public search(language: string, version: string, catalog: string, query: string) {
+    this.requests.next({language, version, catalog, query} as SearchRequest);
   }
 
+  public sendAnalytics( searchRequest: SearchRequest, type: string, code: string) {
+    const catalog = this.catalogs[searchRequest.catalog].sendAnalytics(
+      type, code, searchRequest.query, searchRequest.version);
+  }
 }

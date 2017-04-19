@@ -27,9 +27,9 @@ export abstract class Catalog {
    * @param elements - elements within a catalog
    */
   public constructor(private service: ICatalogService,
-    private logger: ILoggerService,
-    public name: string,
-    protected config: CatalogConfiguration) {
+                     private logger: ILoggerService,
+                     public name: string,
+                     protected config: CatalogConfiguration) {
     this.versions = [];
   }
 
@@ -48,40 +48,30 @@ export abstract class Catalog {
    * @param type the type of the {@link CatalogElement} to load
    * @param code the code of the {@link CatalogElement} to load
    */
-  public async getByCode(type: string, code: string, version?:string, language?:string): Promise<CatalogElement> {
+  public async getByCode(type: string, code: string, version?: string, language?: string): Promise<CatalogElement> {
     this.initService();
-    return this.service.getByCode(this.activeVersion || version, type, code.replace(' ', '_'),language);
+    return this.service.getByCode(this.activeVersion || version, type, code.replace(' ', '_'), language);
   }
 
   /**
    * Get and save the versions this catalog can have.
    */
-  public getVersions(): Promise<string[]> {
-    if (this.versions[this.service.getLocale()]) {
-      return Promise.resolve(this.versions[this.service.getLocale()]);
-    }
+  public async getVersions(): Promise<string[]> {
 
     this.initService();
     const languages: string[] = this.service.getLangs();
-    let germanVersions: Promise<string[]>;
+    let germanVersions: string[];
 
     for (const lang of languages) {
-      const versions = this.service.getVersions(lang);
-      versions.then(data => {
-        this.versions[lang] = data.reverse();
-        if (lang === 'de') {
-          this.activeVersion = data[0];
-        }
-      })
-        .catch(error => {
-          this.logger.log(error);
-        });
-
+      const _versions = await this.getOrLoadVersions(lang);
+      this.versions[lang] = _versions;
       if (lang === 'de') {
-        germanVersions = versions;
+        this.activeVersion = _versions[0];
+        germanVersions = _versions;
       }
     }
-    return germanVersions;
+
+    return Promise.resolve(germanVersions);
   }
 
   public getRootElement(): Promise<CatalogElement> {
@@ -122,7 +112,7 @@ export abstract class Catalog {
   public async activateVersion(version: string, lang?: string): Promise<boolean> {
 
     lang = lang || this.service.getLocale();
-    
+
     if (!this.versions[lang]) {
       // load versions and then run again
       return this.loadVersions(lang).then(() => this.activateVersion(version));
@@ -158,6 +148,14 @@ export abstract class Catalog {
     return false;
   }
 
+  private async getOrLoadVersions(lang: string): Promise<string[]> {
+    if (this.versions[lang]) {
+      return Promise.resolve(this.versions[lang])
+    } else {
+      return this.loadVersions(lang);
+    }
+  }
+
   public getVersionLanguages(version: string): string[] {
     const languages: string[] = this.service.getLangs();
     const validLangs: string[] = [];
@@ -171,14 +169,14 @@ export abstract class Catalog {
   }
 
   /**
-  * Sends an analytic notification to eonum
-  *
-  */
-  public sendAnalytics(type: string, code: string, query: string): void {
-    this.service.sendAnalytics(this.activeVersion, type, code, query);
+   * Sends an analytic notification to eonum
+   *
+   */
+  public sendAnalytics(type: string, code: string, query: string, version?: string): void {
+    this.service.sendAnalytics(version || this.activeVersion, type, code, query);
   }
 
-  private async loadVersions(lang: string): Promise<string[]>  {
+  private async loadVersions(lang: string): Promise<string[]> {
 
     this.initService();
     const versions = await this.service.getVersions(lang);

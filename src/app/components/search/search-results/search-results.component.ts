@@ -3,7 +3,7 @@ import {CatalogElement} from '../../../model/catalog.element';
 import {ILoggerService} from '../../../service/logging/i.logger.service';
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CatalogSearchService} from '../../../service/routing/catalog-search.service';
+import {CatalogSearchService, SearchRequest} from '../../../service/routing/catalog-search.service';
 
 /**
  * Component to display the search results.
@@ -16,9 +16,8 @@ import {CatalogSearchService} from '../../../service/routing/catalog-search.serv
 })
 
 
-export class SearchResultsComponent implements OnInit{
+export class SearchResultsComponent implements OnInit {
 
-  @Input() public catalog: Catalog = null;
   public searchResults: CatalogElement[];
 
   public selectedCode: string;
@@ -47,17 +46,18 @@ export class SearchResultsComponent implements OnInit{
   }
 
   private sendAnalytics(type: string, code: string): void {
-    const query = this.route.snapshot.queryParams['query'];
 
-    if (query) {
-      this.catalog.sendAnalytics(type, code, query);
-    }
+    const searchRequest: SearchRequest = Object.assign({},
+      this.route.snapshot.params,
+      this.route.snapshot.queryParams) as SearchRequest;
+
+    this.searchService.sendAnalytics(searchRequest, type, code);
   }
 
 
   private redirectToCode(type: string, code: string): void {
 
-    this.router.navigate( [type, code], {
+    this.router.navigate([type, code], {
         queryParamsHandling: 'merge',
         relativeTo: this.route
       }
