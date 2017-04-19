@@ -1,8 +1,8 @@
 import {CatalogElement} from '../../../model/catalog.element';
 import {ILoggerService} from '../../../service/logging/i.logger.service';
 import {RememberElementService} from '../../../service/remember.element.service';
-import {Component, Inject, Input, OnChanges, SimpleChange} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, Inject} from '@angular/core';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -51,19 +51,16 @@ export class DetailComponent {
               private router: Router,
               private rememberService: RememberElementService,
               @Inject('ILoggerService') private logger: ILoggerService) {
-    this.logger.log('[DetailComponent] constructor');
-    this.route.data.subscribe(
-      data => {
+
+    this.route.data.subscribe((data: Data) => {
         this.selectedElement = data.catalogElement;
-        this.logger.log('[DetailComponent]', this.selectedElement);
-        this.updateView()
+        this.updateView();
       }
     );
   }
 
 
   public updateView(): void {
-    this.logger.log(`[DetailComponent] on Changes: ${this.selectedElement.code}.`);
     this.catalog = this.route.snapshot.params['catalog'];
     this.setHierarchy();
     this.children = this.selectedElement.children;
@@ -74,7 +71,6 @@ export class DetailComponent {
     const catalog: string = this.route.parent.snapshot.params['catalog'];
     const version: string = this.route.parent.snapshot.params['version'];
     this.rememberService.add(element, version, catalog, language);
-    console.log(this.rememberService)
   }
 
   /**

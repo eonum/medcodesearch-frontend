@@ -1,8 +1,9 @@
-import { Catalog } from '../../../catalog/catalog';
-import { CatalogElement } from '../../../model/catalog.element';
-import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { Component, Inject, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Catalog} from '../../../catalog/catalog';
+import {CatalogElement} from '../../../model/catalog.element';
+import {ILoggerService} from '../../../service/logging/i.logger.service';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CatalogSearchService} from '../../../service/routing/catalog-search.service';
 
 /**
  * Component to display the search results.
@@ -15,20 +16,31 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 
-export class SearchResultsComponent {
+export class SearchResultsComponent implements OnInit{
 
   @Input() public catalog: Catalog = null;
-  @Input() public searchResults: CatalogElement[];
+  public searchResults: CatalogElement[];
 
   public selectedCode: string;
 
   public constructor(private route: ActivatedRoute,
-    private router: Router,
-    @Inject('ILoggerService') private logger: ILoggerService) {
+                     private router: Router,
+                     @Inject('ILoggerService') private logger: ILoggerService,
+                     private searchService: CatalogSearchService) {
+  }
+
+  /**
+   * Subscribe to route parameter determine if the details view should be displayed
+   */
+  public ngOnInit(): void {
+
+    this.searchService.subscribe(
+      (results: CatalogElement[]) => this.searchResults = results
+    );
   }
 
   public openCode(type: string, code: string): void {
-    this.selectedCode = code;
+    this.selectedCode = code; // mark for template
 
     this.sendAnalytics(type, code);
     this.redirectToCode(type, code);
@@ -45,15 +57,11 @@ export class SearchResultsComponent {
 
   private redirectToCode(type: string, code: string): void {
 
-    this.router.navigate(
-      [ type, code], {
+    this.router.navigate( [type, code], {
         queryParamsHandling: 'merge',
         relativeTo: this.route
       }
-    ).catch(error => this.handleError(error.message));
+    ).catch(error => this.logger.error(error));
   }
 
-  private handleError(error: any): void {
-    this.logger.error(error);
-  }
 }

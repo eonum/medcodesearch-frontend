@@ -27,7 +27,6 @@ export class MainComponent implements OnInit {
   public catalog: Catalog;
 
   public selectedElement: CatalogElement;
-  public searchResults: CatalogElement[] = null;
 
   private code: string;
   private type: string;
@@ -45,8 +44,7 @@ export class MainComponent implements OnInit {
   public ngOnInit(): void {
     this.logger.log('[MainComponent] on init.');
 
-    this.searchService.subscribe((results: CatalogElement[]) =>
-      this.searchResults = results);
+
 
     this.route.params.subscribe(
       params => {
@@ -97,8 +95,6 @@ export class MainComponent implements OnInit {
     if (this.query) {
       this.searchService.search(
         this.language, this.catalog.getActiveVersion(), this.catalog.getDomain(), this.query);
-    } else {
-      this.searchResults = null;
     }
 
 

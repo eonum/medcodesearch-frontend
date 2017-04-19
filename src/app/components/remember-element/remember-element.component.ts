@@ -39,10 +39,11 @@ export class RememberElementComponent implements OnInit {
    * @param element the element to display
    */
   private openCode(element: RememberedElement): void {
+    console.log(this.route)
     this.router.navigate(
-      [ element.catalog, element.version, element.type, element.code],
+      [ element.language, element.catalog, element.version, element.type, element.code],
       { queryParamsHandling: 'merge' })
-      .catch(error => this.logger.log(error.message));
+      .catch(error => this.logger.error(error.message));
   }
 
   /**

@@ -13,7 +13,7 @@ import {Injectable} from '@angular/core';
 export abstract class Catalog {
 
   /**Cache for the versions*/
-  protected versions_lang: string[];
+  protected versions: string[];
 
   /**To access the selected catalog globally*/
   protected activeVersion: string;
@@ -30,7 +30,7 @@ export abstract class Catalog {
     private logger: ILoggerService,
     public name: string,
     protected config: CatalogConfiguration) {
-    this.versions_lang = [];
+    this.versions = [];
   }
 
   /**
@@ -57,8 +57,8 @@ export abstract class Catalog {
    * Get and save the versions this catalog can have.
    */
   public getVersions(): Promise<string[]> {
-    if (this.versions_lang[this.service.getLocale()]) {
-      return Promise.resolve(this.versions_lang[this.service.getLocale()]);
+    if (this.versions[this.service.getLocale()]) {
+      return Promise.resolve(this.versions[this.service.getLocale()]);
     }
 
     this.initService();
@@ -68,7 +68,7 @@ export abstract class Catalog {
     for (const lang of languages) {
       const versions = this.service.getVersions(lang);
       versions.then(data => {
-        this.versions_lang[lang] = data.reverse();
+        this.versions[lang] = data.reverse();
         if (lang === 'de') {
           this.activeVersion = data[0];
         }
@@ -119,14 +119,16 @@ export abstract class Catalog {
    * @param version
    * @returns {boolean} True if the active version was updated.
    */
-  public async activateVersion(version: string): Promise<boolean> {
+  public async activateVersion(version: string, lang?: string): Promise<boolean> {
 
-    if (!this.versions_lang[this.service.getLocale()]) {
+    lang = lang || this.service.getLocale();
+    
+    if (!this.versions[lang]) {
       // load versions and then run again
-      return this.getVersions().then(() => this.activateVersion(version));
+      return this.loadVersions(lang).then(() => this.activateVersion(version));
     }
 
-    if (this.versions_lang[this.service.getLocale()].indexOf(version) > -1) {
+    if (this.versions[lang].indexOf(version) > -1) {
       this.logger.log('valid version ' + this.service.getLocale());
       this.activeVersion = version;
       return Promise.resolve(true);
@@ -150,8 +152,8 @@ export abstract class Catalog {
   }
 
   public hasVersionInCurrentLanguage(version: string): boolean {
-    if (this.versions_lang[this.service.getLocale()]) {
-      return this.versions_lang[this.service.getLocale()].indexOf(version) > -1;
+    if (this.versions[this.service.getLocale()]) {
+      return this.versions[this.service.getLocale()].indexOf(version) > -1;
     }
     return false;
   }
@@ -160,7 +162,7 @@ export abstract class Catalog {
     const languages: string[] = this.service.getLangs();
     const validLangs: string[] = [];
     for (const lang of languages) {
-      if (this.versions_lang[lang].indexOf(version) > -1) {
+      if (this.versions[lang].indexOf(version) > -1) {
         validLangs.push(lang);
       }
 
@@ -174,5 +176,13 @@ export abstract class Catalog {
   */
   public sendAnalytics(type: string, code: string, query: string): void {
     this.service.sendAnalytics(this.activeVersion, type, code, query);
+  }
+
+  private async loadVersions(lang: string): Promise<string[]>  {
+
+    this.initService();
+    const versions = await this.service.getVersions(lang);
+    this.versions[lang] = versions.reverse();
+    return this.versions[lang];
   }
 }
