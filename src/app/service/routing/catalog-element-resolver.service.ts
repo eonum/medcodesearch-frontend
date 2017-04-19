@@ -45,8 +45,7 @@ class CatalogElementCache {
       this.cache[type] = {};
     }
 
-    // TODO put language argument in getByCode
-    const element = await this.catalog.getByCode(type, code, this.version);
+    const element = await this.catalog.getByCode(type, code, this.version, this.language);
     this.cache[type][code] = element;
 
     await this.loadParents(element);

@@ -114,9 +114,9 @@ export class CatalogService implements ICatalogService {
    * @param type the type of the element
    * @param code the code to search for
    */
-  public async getByCode(version: string, type: string, code: string): Promise<CatalogElement> {
+  public async getByCode(version: string, type: string, code: string, language?: string): Promise<CatalogElement> {
     try {
-      const webResult: CatalogElement = await this.getSingleElementForTypeByCode(type, version, code);
+      const webResult: CatalogElement = await this.getSingleElementForTypeByCode(type, version, code, null, language);
       if (webResult !== undefined && webResult !== null) {
         webResult.type = type;
         return webResult;
@@ -128,8 +128,8 @@ export class CatalogService implements ICatalogService {
     throw new Error('Not found');
   }
 
-  private async getSingleElementForTypeByCode(elementType: string, version: string, code: string, query?: string): Promise<CatalogElement> {
-    const locale: string = this.getLocale();
+  private async getSingleElementForTypeByCode(elementType: string, version: string, code: string, query?: string, language?: string): Promise<CatalogElement> {
+    const locale: string = language || this.getLocale();
     let url = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
 
     if (query) {

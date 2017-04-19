@@ -26,7 +26,7 @@ export class CatalogServiceMock implements ICatalogService {
     return Promise.resolve(['V1.0', 'V2.0', 'V3.0', 'V4.0']);
   }
 
-  public getByCode(version: string, code: string): Promise<CatalogElement> {
+  public getByCode(version: string, code: string, language?: string): Promise<CatalogElement> {
     if (code === 'P20A') {
       return Promise.resolve(this.CONTENTS[0]);
     }
