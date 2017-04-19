@@ -50,7 +50,7 @@ export abstract class Catalog {
    */
   public async getByCode(type: string, code: string, version?:string, language?:string): Promise<CatalogElement> {
     this.initService();
-    return this.service.getByCode(this.activeVersion || version, type, code.replace(' ', '_'), language);
+    return this.service.getByCode(this.activeVersion || version, type, code.replace(' ', '_'),language);
   }
 
   /**

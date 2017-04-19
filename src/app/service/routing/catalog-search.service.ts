@@ -47,7 +47,7 @@ export class CatalogSearchService {
     this.catalogs[chopCatalog.getDomain()] = chopCatalog;
     this.catalogs[icdCatalog.getDomain()] = icdCatalog;
 
-    this.searchResults = new BehaviorSubject([]); // fires always latest value on new subscription
+    this.searchResults = new BehaviorSubject(null); // fires always latest value on new subscription
 
     this.requests = new Subject();
 

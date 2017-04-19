@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
   public catalog: Catalog;
 
   public selectedElement: CatalogElement;
-  public searchResults: CatalogElement[] = [];
+  public searchResults: CatalogElement[] = null;
 
   private code: string;
   private type: string;
