@@ -1,7 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
+import { ILoggerService } from '../logging/i.logger.service';
+import { Inject, Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ILoggerService } from "../i.logger.service";
 
 /**
  * This is an authentication guard that grants always access,
@@ -18,8 +18,8 @@ export class LanguageGuard implements CanActivate {
   private languages = ['de', 'fr', 'it', 'en'];
 
   constructor(private translate: TranslateService,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService) {
     translate.setDefaultLang(this.DEFAULT_LANGUAGE);
   }
 
@@ -31,7 +31,7 @@ export class LanguageGuard implements CanActivate {
    *
    * @param {ActivatedRouteSnapshot} route - contains route params up to the point where this guard gets activated.
    * @returns {boolean} - True, if a valid language parameter is in the route.   */
-  canActivate(route: ActivatedRouteSnapshot) {
+  public canActivate(route: ActivatedRouteSnapshot): boolean {
 
     let language = route.params['language'];
 

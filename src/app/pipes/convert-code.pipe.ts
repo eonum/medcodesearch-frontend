@@ -1,17 +1,17 @@
-import { NgZone, Pipe, PipeTransform, Inject } from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
 import { Catalog } from '../catalog/catalog';
-import { ILoggerService } from "../service/i.logger.service";
+import { ILoggerService } from '../service/logging/i.logger.service';
+import { Inject, NgZone, Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Pipe({ name: 'convertCode' })
 export class ConvertCodePipe implements PipeTransform {
 
   constructor(private sanitizer: DomSanitizer,
-              private ngZone: NgZone, 
-              private route: ActivatedRoute, 
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private ngZone: NgZone,
+    private route: ActivatedRoute,
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService) {
     window['eonum'] = window['eonum'] || {};
     window['eonum'].searchCode = this.searchCode.bind(this);
   }
@@ -29,7 +29,7 @@ export class ConvertCodePipe implements PipeTransform {
      */
   }
 
-  private wrapCode(match, c1, c2, c3, c4, c5) {
+  private wrapCode(match: any, c1: any, c2: any, c3: any, c4: any, c5: any): string {
     c1 = c1.replace(/\.$/, '');
     let link = '(<span class="link" onclick="window.eonum.searchCode(\'' + c1 + '\')">' + c1 + '</span>';
     if (c4 && c4.length > 2) {
@@ -40,11 +40,11 @@ export class ConvertCodePipe implements PipeTransform {
     return link;
   }
 
-  public searchCode(query) {
+  public searchCode(query: string): void {
     this.ngZone.run(() => this.searchCodeRun(query));
   }
 
-  private searchCodeRun(query) {
+  private searchCodeRun(query: string): void {
     let currentRoute = this.route.root;
     while (currentRoute.children[0] !== undefined) {
       currentRoute = currentRoute.children[0];

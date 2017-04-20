@@ -1,18 +1,17 @@
-import { TestBed, inject, async } from '@angular/core/testing';
-
-import { CatalogResolver } from './catalog-resolver.service';
-import { RouterStub, ActivatedRouteStub } from '../../router-stub';
-import { Router, ActivatedRouteSnapshot } from '@angular/router';
-import { ICDCatalog } from '../../catalog/icd.catalog';
 import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { ICDCatalog } from '../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { RouterStub } from '../../router-stub';
 import { CatalogServiceMock } from '../catalog.service.mock';
-import * as TypeMoq from "typemoq";
-import { NullLoggerService } from "../null.logger.service";
+import { NullLoggerService } from '../logging/null.logger.service';
+import { CatalogResolver } from './catalog-resolver.service';
+import { async, inject, TestBed } from '@angular/core/testing';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import * as TypeMoq from 'typemoq';
 
 describe('CatalogResolver', () => {
 
-  let routeMock: TypeMoq.IMock<ActivatedRouteSnapshot>
+  let routeMock: TypeMoq.IMock<ActivatedRouteSnapshot>;
   let routeParams: { catalog: string, version?: string, language: string };
   let fixture;
 
@@ -21,7 +20,7 @@ describe('CatalogResolver', () => {
       providers: [CatalogResolver, { provide: Router, useClass: RouterStub },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
-        {provide: 'ILoggerService', useClass: NullLoggerService}]
+        { provide: 'ILoggerService', useClass: NullLoggerService }]
     });
 
     routeMock = TypeMoq.Mock.ofType<ActivatedRouteSnapshot>();
@@ -39,16 +38,11 @@ describe('CatalogResolver', () => {
         catalog: 'swissdrg',
         version: 'V4.0',
         language: 'de'
-      }
+      };
       routeMock.setup(x => x.params).returns(() => routeParams);
 
       service.resolve(routeMock.object).then(
         catalog => expect(catalog.getDomain()).toBe('swissdrg')
-      )
-
+      );
     })));
-
-
-
-
 });

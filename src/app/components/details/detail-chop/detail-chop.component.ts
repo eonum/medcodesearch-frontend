@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CatalogElement} from '../../../model/catalog.element';
+import { CatalogElement } from '../../../model/catalog.element';
+import { Component, Input, OnInit } from '@angular/core';
 
 /**
  * Component to display custom details of an element
@@ -18,7 +18,7 @@ export class DetailChopComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
   }
 
 }

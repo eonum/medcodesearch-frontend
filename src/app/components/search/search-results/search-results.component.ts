@@ -1,10 +1,8 @@
-import { Component, Input, Inject } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CatalogElement} from '../../../model/catalog.element';
-import {Catalog} from '../../../catalog/catalog';
-import { environment } from '../../../../environments/environment';
-import { ILoggerService } from "../../../service/i.logger.service";
-
+import { Catalog } from '../../../catalog/catalog';
+import { CatalogElement } from '../../../model/catalog.element';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
+import { Component, Inject, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * Component to display the search results.
@@ -19,18 +17,17 @@ import { ILoggerService } from "../../../service/i.logger.service";
 
 export class SearchResultsComponent {
 
-  @Input() catalog: Catalog = null;
-  @Input() searchResults: CatalogElement[];
+  @Input() public catalog: Catalog = null;
+  @Input() public searchResults: CatalogElement[];
 
-  selectedCode: string;
-
+  public selectedCode: string;
 
   public constructor(private route: ActivatedRoute,
-                     private router: Router,
-                     @Inject('ILoggerService') private logger: ILoggerService) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
-  public openCode(type, code) {
+  public openCode(type: string, code: string): void {
     this.selectedCode = code;
 
     this.sendAnalytics(type, code);
@@ -55,7 +52,7 @@ export class SearchResultsComponent {
     ).catch(error => this.handleError(error.message));
   }
 
-  private handleError(error): void {
+  private handleError(error: any): void {
     this.logger.log(error);
   }
 }

@@ -1,27 +1,25 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {MainComponent} from './main.component';
-import {SearchFormComponent} from '../search/search-form/search-form.component';
-import {SearchResultsComponent} from '../search/search-results/search-results.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {ActivatedRouteStub, RouterStub} from '../../router-stub';
-import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import {CatalogServiceMock} from '../../service/catalog.service.mock';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import * as TypeMoq from 'typemoq';
-import {ICatalogService} from '../../service/i.catalog.service';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {CatalogElement} from '../../model/catalog.element';
-import {ModalModule, TooltipModule} from 'ng2-bootstrap';
-import {DetailComponent} from '../details/detail/detail.component';
-import {DetailSwissDrgComponent} from '../details/detail-swiss-drg/detail-swiss-drg.component';
-import {DetailIcdComponent} from '../details/detail-icd/detail-icd.component';
-import {DetailChopComponent} from '../details/detail-chop/detail-chop.component';
-import {ConvertCodePipe} from '../../pipes/convert-code.pipe';
-import {CorrectVersionPipe} from '../../pipes/correct-version.pipe';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { ICDCatalog } from '../../catalog/icd.catalog';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { CatalogElement } from '../../model/catalog.element';
+import { ConvertCodePipe } from '../../pipes/convert-code.pipe';
+import { CorrectVersionPipe } from '../../pipes/correct-version.pipe';
+import { ActivatedRouteStub, RouterStub } from '../../router-stub';
+import { CatalogServiceMock } from '../../service/catalog.service.mock';
+import { NullLoggerService } from '../../service/logging/null.logger.service';
+import { DetailChopComponent } from '../details/detail-chop/detail-chop.component';
+import { DetailIcdComponent } from '../details/detail-icd/detail-icd.component';
+import { DetailSwissDrgComponent } from '../details/detail-swiss-drg/detail-swiss-drg.component';
+import { DetailComponent } from '../details/detail/detail.component';
+import { SearchFormComponent } from '../search/search-form/search-form.component';
+import { SearchResultsComponent } from '../search/search-results/search-results.component';
+import { MainComponent } from './main.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NullLoggerService } from "../../service/null.logger.service";
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ModalModule, TooltipModule } from 'ng2-bootstrap';
+import * as TypeMoq from 'typemoq';
 
 describe('MainComponent', () => {
 
@@ -33,16 +31,16 @@ describe('MainComponent', () => {
 
   /*Test data*/
 
-  const query: string = 'Some search query';
-  const version: string = 'V4.0';
+  const query = 'Some search query';
+  const version = 'V4.0';
   const searchResults: CatalogElement[] = [
     {
       code: 'Content 1', text: 'Description content 1', url: '/url/to/content1',
-      highlight: {text: ['content'], relevantCodes: []}, type: 'drg'
+      highlight: { text: ['content'], relevantCodes: [] }, type: 'drg'
     },
     {
       code: 'Content 2', text: 'Description content 2', url: '/url/to/content2',
-      highlight: {text: ['2'], relevantCodes: []}, type: 'drg'
+      highlight: { text: ['2'], relevantCodes: [] }, type: 'drg'
     },
   ];
 
@@ -67,11 +65,11 @@ describe('MainComponent', () => {
         TooltipModule.forRoot(),
       ],
       providers: [
-        {provide: ActivatedRoute, useClass: ActivatedRouteStub},
-        {provide: Router, useClass: RouterStub},
+        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+        { provide: Router, useClass: RouterStub },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        {provide: 'ICatalogService', useClass: CatalogServiceMock},
-        {provide: 'ILoggerService', useClass: NullLoggerService}
+        { provide: 'ICatalogService', useClass: CatalogServiceMock },
+        { provide: 'ILoggerService', useClass: NullLoggerService }
       ]
     })
       .compileComponents();

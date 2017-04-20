@@ -1,12 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CatalogElement} from '../../../model/catalog.element';
+import { CatalogElement } from '../../../model/catalog.element';
+import { Component, Input, OnInit } from '@angular/core';
 
 /**
-   * Component to display custom details of an element
-   * within the {@link SwissDrgCatalog}.
-   * Receives the `selectedElement` from the {@link DetailComponent}.
-   */
-
+ * Component to display custom details of an element
+ * within the {@link SwissDrgCatalog}.
+ * Receives the `selectedElement` from the {@link DetailComponent}.
+ */
 @Component({
   selector: 'app-detail-swiss-drg',
   templateUrl: './detail-swiss-drg.component.html',
@@ -18,7 +17,7 @@ export class DetailSwissDrgComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
   }
 
 }

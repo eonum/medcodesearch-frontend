@@ -83,13 +83,13 @@
 						<span class="target">Catalog</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="_src_app_catalog_swissdrg_catalog_.swissdrgcatalog.html" class="tsd-signature-type">SwissDrgCatalog</a>
-							</li>
-							<li>
 								<a href="_src_app_catalog_chop_catalog_.chopcatalog.html" class="tsd-signature-type">CHOPCatalog</a>
 							</li>
 							<li>
 								<a href="_src_app_catalog_icd_catalog_.icdcatalog.html" class="tsd-signature-type">ICDCatalog</a>
+							</li>
+							<li>
+								<a href="_src_app_catalog_swissdrg_catalog_.swissdrgcatalog.html" class="tsd-signature-type">SwissDrgCatalog</a>
 							</li>
 						</ul>
 					</li>
@@ -110,6 +110,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_src_app_catalog_catalog_.catalog.html#activeversion" class="tsd-kind-icon">active<wbr>Version</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_src_app_catalog_catalog_.catalog.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_catalog_catalog_.catalog.html#logger" class="tsd-kind-icon">logger</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_catalog_catalog_.catalog.html#service" class="tsd-kind-icon">service</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_src_app_catalog_catalog_.catalog.html#versions_lang" class="tsd-kind-icon">versions_<wbr>lang</a></li>
@@ -123,11 +124,15 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#getbycode" class="tsd-kind-icon">get<wbr>ByCode</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#getdomain" class="tsd-kind-icon">get<wbr>Domain</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#getname" class="tsd-kind-icon">get<wbr>Name</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#getrootelement" class="tsd-kind-icon">get<wbr>Root<wbr>Element</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="_src_app_catalog_catalog_.catalog.html#getrootelementcode" class="tsd-kind-icon">get<wbr>Root<wbr>Element<wbr>Code</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="_src_app_catalog_catalog_.catalog.html#getrootelementtype" class="tsd-kind-icon">get<wbr>Root<wbr>Element<wbr>Type</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#getversionlanguages" class="tsd-kind-icon">get<wbr>Version<wbr>Languages</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#getversions" class="tsd-kind-icon">get<wbr>Versions</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#hasversionincurrentlanguage" class="tsd-kind-icon">has<wbr>Version<wbr>InCurrent<wbr>Language</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_catalog_catalog_.catalog.html#initservice" class="tsd-kind-icon">init<wbr>Service</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#search" class="tsd-kind-icon">search</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_catalog_catalog_.catalog.html#sendanalytics" class="tsd-kind-icon">send<wbr>Analytics</a></li>
 							</ul>
 						</section>
 					</div>
@@ -139,13 +144,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Catalog<span class="tsd-signature-symbol">(</span>service<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_app_service_i_catalog_service_.icatalogservice.html" class="tsd-signature-type">ICatalogService</a>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, config<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_catalog_configuration_.catalogconfiguration.html" class="tsd-signature-type">CatalogConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_catalog_.catalog.html" class="tsd-signature-type">Catalog</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Catalog<span class="tsd-signature-symbol">(</span>service<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_app_service_i_catalog_service_.icatalogservice.html" class="tsd-signature-type">ICatalogService</a>, logger<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, config<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_catalog_configuration_.catalogconfiguration.html" class="tsd-signature-type">CatalogConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_catalog_.catalog.html" class="tsd-signature-type">Catalog</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L19">src/app/catalog/catalog.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L19">src/app/catalog/catalog.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -162,6 +167,9 @@
 											<p>the service to access the catalog data (interface to search.eonum api)</p>
 										</div>
 									</div>
+								</li>
+								<li>
+									<h5>logger: <a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a></h5>
 								</li>
 								<li>
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
@@ -188,7 +196,7 @@
 					<div class="tsd-signature tsd-kind-icon">active<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L19">src/app/catalog/catalog.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L19">src/app/catalog/catalog.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -203,7 +211,17 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_catalog_configuration_.catalogconfiguration.html" class="tsd-signature-type">CatalogConfiguration</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L31">src/app/catalog/catalog.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L32">src/app/catalog/catalog.ts:32</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="logger" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> logger</h3>
+					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L30">src/app/catalog/catalog.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -213,7 +231,7 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L30">src/app/catalog/catalog.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L31">src/app/catalog/catalog.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -228,7 +246,7 @@
 					<div class="tsd-signature tsd-kind-icon">service<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_src_app_service_i_catalog_service_.icatalogservice.html" class="tsd-signature-type">ICatalogService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L29">src/app/catalog/catalog.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L29">src/app/catalog/catalog.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -243,7 +261,7 @@
 					<div class="tsd-signature tsd-kind-icon">versions_<wbr>lang<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L16">src/app/catalog/catalog.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L16">src/app/catalog/catalog.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -265,7 +283,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L98">src/app/catalog/catalog.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L113">src/app/catalog/catalog.ts:113</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -295,7 +313,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L116">src/app/catalog/catalog.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L131">src/app/catalog/catalog.ts:131</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -312,7 +330,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L50">src/app/catalog/catalog.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L51">src/app/catalog/catalog.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -349,7 +367,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L124">src/app/catalog/catalog.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L139">src/app/catalog/catalog.ts:139</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -366,7 +384,58 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L120">src/app/catalog/catalog.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L135">src/app/catalog/catalog.ts:135</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getrootelement" class="tsd-anchor"></a>
+					<h3>get<wbr>Root<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Root<wbr>Element<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L87">src/app/catalog/catalog.ts:87</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="getrootelementcode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>Root<wbr>Element<wbr>Code</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Root<wbr>Element<wbr>Code<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L98">src/app/catalog/catalog.ts:98</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="getrootelementtype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>Root<wbr>Element<wbr>Type</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Root<wbr>Element<wbr>Type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L94">src/app/catalog/catalog.ts:94</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -383,7 +452,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L135">src/app/catalog/catalog.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L150">src/app/catalog/catalog.ts:150</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -406,7 +475,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L58">src/app/catalog/catalog.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L59">src/app/catalog/catalog.ts:59</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -428,7 +497,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L128">src/app/catalog/catalog.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L143">src/app/catalog/catalog.ts:143</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -451,7 +520,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L87">src/app/catalog/catalog.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L102">src/app/catalog/catalog.ts:102</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -468,7 +537,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a6d5805/src/app/catalog/catalog.ts#L40">src/app/catalog/catalog.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L41">src/app/catalog/catalog.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -492,6 +561,40 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sendanalytics" class="tsd-anchor"></a>
+					<h3>send<wbr>Analytics</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Analytics<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, query<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/catalog/catalog.ts#L166">src/app/catalog/catalog.ts:166</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sends an analytic notification to eonum</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>code: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>query: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -524,6 +627,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 								<a href="_src_app_catalog_catalog_.catalog.html#config" class="tsd-kind-icon">config</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_src_app_catalog_catalog_.catalog.html#logger" class="tsd-kind-icon">logger</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_src_app_catalog_catalog_.catalog.html#name" class="tsd-kind-icon">name</a>
 							</li>
@@ -549,6 +655,15 @@
 								<a href="_src_app_catalog_catalog_.catalog.html#getname" class="tsd-kind-icon">get<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_app_catalog_catalog_.catalog.html#getrootelement" class="tsd-kind-icon">get<wbr>Root<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="_src_app_catalog_catalog_.catalog.html#getrootelementcode" class="tsd-kind-icon">get<wbr>Root<wbr>Element<wbr>Code</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="_src_app_catalog_catalog_.catalog.html#getrootelementtype" class="tsd-kind-icon">get<wbr>Root<wbr>Element<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_src_app_catalog_catalog_.catalog.html#getversionlanguages" class="tsd-kind-icon">get<wbr>Version<wbr>Languages</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -562,6 +677,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_src_app_catalog_catalog_.catalog.html#search" class="tsd-kind-icon">search</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_app_catalog_catalog_.catalog.html#sendanalytics" class="tsd-kind-icon">send<wbr>Analytics</a>
 							</li>
 						</ul>
 					</li>

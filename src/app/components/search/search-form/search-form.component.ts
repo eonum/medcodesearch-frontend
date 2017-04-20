@@ -1,16 +1,14 @@
-import { Component, Input, OnInit, ViewChild, Inject } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ModalDirective} from 'ng2-bootstrap';
-import {FormControl} from '@angular/forms';
-import {environment} from '../../../../environments/environment';
-import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-
-import {Catalog} from '../../../catalog/catalog';
-import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
-import {CHOPCatalog} from '../../../catalog/chop.catalog';
+import 'rxjs/add/operator/distinctUntilChanged';
+import { Catalog } from '../../../catalog/catalog';
+import { CHOPCatalog } from '../../../catalog/chop.catalog';
 import { ICDCatalog } from '../../../catalog/icd.catalog';
-import { ILoggerService } from "../../../service/i.logger.service";
+import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalDirective } from 'ng2-bootstrap';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -34,13 +32,15 @@ import { ILoggerService } from "../../../service/i.logger.service";
 export class SearchFormComponent implements OnInit {
 
   // selected values (resolved in main component from route)
-  @Input() query: string;
-  @Input() catalog: Catalog;
+  @Input() public query: string;
+  @Input() public catalog: Catalog;
 
-  catalogs: Catalog[]; // to display catalog selection
-  languages: string[];
-  selectedVersion: string;
-  searchForm = new FormControl();
+  public catalogs: Catalog[]; // to display catalog selection
+  public languages: string[];
+  public selectedVersion: string;
+  public searchForm = new FormControl();
+
+  @ViewChild('childModal') public childModal: ModalDirective;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -65,12 +65,10 @@ export class SearchFormComponent implements OnInit {
       });
   }
 
-  @ViewChild('childModal') public childModal: ModalDirective;
-
   /**
    * Subscribe to route parameter to mark the selected catalog and displaythe query.
    */
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.logger.log('>> MainComponent on init.');
   }
 

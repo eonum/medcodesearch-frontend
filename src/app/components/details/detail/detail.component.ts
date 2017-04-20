@@ -1,14 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChange, Inject } from '@angular/core';
-import {Catalog} from '../../../catalog/catalog';
-import {CatalogElement} from '../../../model/catalog.element';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SortHelper} from '../../../helper/sort.helper';
-
-
-import 'rxjs/add/observable/merge';
-
-import { environment } from '../../../../environments/environment';
-import { ILoggerService } from "../../../service/i.logger.service";
+import { Catalog } from '../../../catalog/catalog';
+import { SortHelper } from '../../../helper/sort.helper';
+import { CatalogElement } from '../../../model/catalog.element';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
+import { RememberElementService } from '../../../service/remember.element.service';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -51,17 +47,27 @@ export class DetailComponent implements OnInit, OnChanges {
    */
   public children: CatalogElement[] = [];
 
+  public count = 0;
+
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private router: Router,
+    private rememberService: RememberElementService,
+    @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.logger.log('>> DetailComponent on init.');
   }
 
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+  public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {
     this.updateView();
+  }
+
+  public rememberCode(element: CatalogElement): void {
+    const language: string = this.route.snapshot.params['language'];
+    const catalog: string = this.route.snapshot.params['catalog'];
+    const version: string = this.route.snapshot.params['version'];
+    this.rememberService.add(element, version, catalog, language);
   }
 
   /**
@@ -69,22 +75,22 @@ export class DetailComponent implements OnInit, OnChanges {
    * @param type the type of the element to display
    * @param code the code of the element to display
    */
-  private updateView() {
-      if (this.selectedElement === undefined ||
-      this.selectedElement === null){
-        return;
-      }
+  private updateView(): void {
+    if (this.selectedElement === undefined ||
+      this.selectedElement === null) {
+      return;
+    }
 
-      this.hierarchy = [];
-      this.loadHierarchy(this.selectedElement);
-      this.loadChildren(this.selectedElement);
+    this.hierarchy = [];
+    this.loadHierarchy(this.selectedElement);
+    this.loadChildren(this.selectedElement);
   }
 
   /**
    * Loads all elements from the currentElement up to the catalog root.
    * @param currentElement the leaf element of which the hierarchy will be loaded
    */
-  private loadHierarchy(currentElement: CatalogElement) {
+  private loadHierarchy(currentElement: CatalogElement): void {
     this.hierarchy.unshift(currentElement);
     const parent = currentElement.parent;
     if (parent !== undefined && parent !== null) {
@@ -101,7 +107,7 @@ export class DetailComponent implements OnInit, OnChanges {
    * Loads the immediate children of the currentElement
    * @param currentElement the element of which the children will be loaded
    */
-  private loadChildren(currentElement: CatalogElement) {
+  private loadChildren(currentElement: CatalogElement): void {
     const children = currentElement.children;
     if (children !== undefined && children !== null && children.length > 0) {
       children.forEach(child => {
@@ -114,13 +120,11 @@ export class DetailComponent implements OnInit, OnChanges {
         }
         if (SortHelper.isRomanNumber(a.code)) {
           return SortHelper.compareAsRomanNumber(a.code, b.code);
-        }
-        else {
+        } else {
           return SortHelper.compareAsLiteral(a.code, b.code);
         }
       });
-    }
-    else {
+    } else {
       this.children = [];
     }
   }
@@ -158,7 +162,7 @@ export class DetailComponent implements OnInit, OnChanges {
     const versionRouteParam = this.route.snapshot.params['version'];
 
     this.router.navigate(
-      [ catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
+      [catalogRouteParam, versionRouteParam, element.type, this.extractCodeFromUrl(element.url)], {
         queryParamsHandling: 'merge',
         relativeTo: this.route.parent
       }).catch(error => this.logger.log(error.message));

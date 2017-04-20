@@ -1,8 +1,10 @@
-import { Component, Inject } from '@angular/core';
-import {CatalogResolver} from './service/routing/catalog-resolver.service';
-import {TranslateService} from '@ngx-translate/core';
+import { RememberedElement } from './model/remembered.element';
+import { ILoggerService } from './service/logging/i.logger.service';
+import { RememberElementService } from './service/remember.element.service';
+import { CatalogResolver } from './service/routing/catalog-resolver.service';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ILoggerService } from "./service/i.logger.service";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +12,29 @@ import { ILoggerService } from "./service/i.logger.service";
   styleUrls: ['app.component.css']
 })
 
-export class AppComponent {
-  title = 'medCodeSearch';
+export class AppComponent implements OnInit {
+  public title = 'medCodeSearch';
 
   // TODO get from language guard or define constants for both.
   public languages = ['de', 'fr', 'it', 'en'];
 
+  public countRememberedElements = 0;
+
   constructor(public translate: TranslateService,
     @Inject('ILoggerService') private logger: ILoggerService,
     private catalogResolver: CatalogResolver,
-    private router: Router) {
-
+    private router: Router,
+    private rememberService: RememberElementService) {
     translate.addLangs(this.languages);
   }
 
-  setLanguage(language: string): void {
+  public ngOnInit(): void {
+    this.rememberService.getRememberedElements().subscribe((elements: RememberedElement[]) => {
+      this.countRememberedElements = elements.length;
+    });
+  }
+
+  public setLanguage(language: string): void {
     this.router.navigate(
       [language].concat(this.catalogResolver.getActiveRouteParams())
     ).catch(e => this.logger.log(e));

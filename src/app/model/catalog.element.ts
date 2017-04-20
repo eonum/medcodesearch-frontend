@@ -1,17 +1,17 @@
-import { Highlight } from "./Highlight";
+import { Highlight } from './Highlight';
 
 /**
  * Class representing an element within a catalog.
  * Contains information about medical treatments and
  * diagnosis.
  */
-export abstract class CatalogElement {
-  code: string;
-  text: string;
-  type: string;
-  highlight?: Highlight;
-  version?: string;
-  url: string;
-  parent?: CatalogElement;
-  children?: CatalogElement[];
+export class CatalogElement {
+  public code: string;
+  public text: string;
+  public type: string;
+  public highlight?: Highlight;
+  public version?: string;
+  public url: string;
+  public parent?: CatalogElement;
+  public children?: CatalogElement[];
 }

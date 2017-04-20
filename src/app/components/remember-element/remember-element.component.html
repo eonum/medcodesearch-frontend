@@ -1,0 +1,11 @@
+<table class="table" *ngIf="rememberedElements?.length > 0">
+  <tr *ngFor="let element of rememberedElements">
+    <td>
+      <a (click)="openCode(element)">{{element.code}}</a>
+    </td>
+    <td>
+      <a class="glyphicon glyphicon-remove" (click)="removeElement(element)"></a>
+    </td>
+  </tr>
+</table>
+<span *ngIf="rememberedElements?.length === 0">{{'LBL_REMEMBER_NOELEMENTS' | translate}}</span>

@@ -1,28 +1,25 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {SearchFormComponent} from './search-form.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {By} from '@angular/platform-browser';
-import {ModalModule} from 'ng2-bootstrap';
-import {ICatalogService} from '../../../service/i.catalog.service';
-import {Catalog} from '../../../catalog/catalog';
-import {ActivatedRouteStub, RouterStub} from '../../../router-stub';
-import {ICDCatalog} from '../../../catalog/icd.catalog';
-import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
-import {CHOPCatalog} from '../../../catalog/chop.catalog';
-import {CatalogServiceMock} from '../../../service/catalog.service.mock';
-import {ReactiveFormsModule} from '@angular/forms';
+import { Catalog } from '../../../catalog/catalog';
+import { CHOPCatalog } from '../../../catalog/chop.catalog';
+import { ICDCatalog } from '../../../catalog/icd.catalog';
+import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
 import { CorrectVersionPipe } from '../../../pipes/correct-version.pipe';
-import { NullLoggerService } from "../../../service/null.logger.service";
-
+import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
+import { CatalogServiceMock } from '../../../service/catalog.service.mock';
+import { ICatalogService } from '../../../service/i.catalog.service';
+import { NullLoggerService } from '../../../service/logging/null.logger.service';
+import { SearchFormComponent } from './search-form.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ModalModule } from 'ng2-bootstrap';
 
 describe('SearchFormComponent', () => {
   let component: SearchFormComponent;
   let fixture: ComponentFixture<SearchFormComponent>;
   let catalogService: ICatalogService;
   let catalog: Catalog;
-  let query: string;
   let buttons: any;
 
   beforeEach(async(() => {
@@ -35,11 +32,11 @@ describe('SearchFormComponent', () => {
       declarations: [SearchFormComponent, CorrectVersionPipe
       ],
       providers: [
-        {provide: ActivatedRoute, useClass: ActivatedRouteStub},
-        {provide: Router, useClass: RouterStub},
+        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+        { provide: Router, useClass: RouterStub },
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
-        {provide: 'ICatalogService', useClass: CatalogServiceMock},
-        {provide: 'ILoggerService', useClass: NullLoggerService}
+        { provide: 'ICatalogService', useClass: CatalogServiceMock },
+        { provide: 'ILoggerService', useClass: NullLoggerService }
       ]
     })
       .compileComponents();
