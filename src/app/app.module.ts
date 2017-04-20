@@ -1,3 +1,4 @@
+import { DefaultCatalogElementCache } from './caching/default.catalog.element.cache';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CHOPCatalog } from './catalog/chop.catalog';
@@ -71,6 +72,7 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
   providers: [
     { provide: 'ICatalogService', useClass: CatalogService },
     { provide: 'ILoggerService', useClass: ConsoleLoggerService },
+    { provide: 'ICatalogElementCache', useClass: DefaultCatalogElementCache },
     RememberElementService,
     SwissDrgCatalog,
     CHOPCatalog,

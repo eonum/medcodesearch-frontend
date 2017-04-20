@@ -1,57 +1,75 @@
-import {Catalog} from '../../catalog/catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {ILoggerService} from '../logging/i.logger.service';
-import {Inject, Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
-import {CatalogElement} from '../../model/catalog.element';
-import {SortHelper} from '../../helper/sort.helper';
+import { ICatalogElementCache } from '../../caching/i.catalog.element.cache';
+import { Catalog } from '../../catalog/catalog';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { ICDCatalog } from '../../catalog/icd.catalog';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { ILoggerService } from '../logging/i.logger.service';
+import { Inject, Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { CatalogElement } from '../../model/catalog.element';
+import { SortHelper } from '../../helper/sort.helper';
 
-/**
- * Cache structure to store and lookup {@link CatalogElement}'s by their type and code.
- */
-interface Cache { [type: string]: { [code: string]: CatalogElement }; }
+@Injectable()
+export class CatalogElementResolver implements Resolve<CatalogElement> {
 
-/**
- * Manager for storing CatalogElements of a given {@link Catalog}, version and language.
- * When an element is loaded from the Catalog, all parent elements are loaded also.
- */
-class CatalogElementCache {
-
-  private cache: Cache = {};
+  /**Domain to catalog map for all available catalogs.*/
+  private catalogs: { [domain: string]: Catalog };
 
   /**
+   * Constructor for class CatalogResolver.
    *
-   * @param catalog
-   * @param version
-   * @param language
+   * @param router
+   * @param swissDrgCatalog
+   * @param chopCatalog
+   * @param icdCatalog
    */
-  constructor(private catalog: Catalog,
-              private version: string,
-              private language: string) {
+  constructor(private router: Router,
+              private swissDrgCatalog: SwissDrgCatalog,
+              private chopCatalog: CHOPCatalog,
+              private icdCatalog: ICDCatalog,
+              @Inject('ILoggerService') private logger: ILoggerService,
+              @Inject('ICatalogElementCache') private elementCache: ICatalogElementCache) {
+    this.initCatalogMap();
+    this.initElementCache();
+  }
+
+  private initCatalogMap(): void {
+    this.catalogs = {};
+    this.catalogs[this.swissDrgCatalog.getDomain()] = this.swissDrgCatalog;
+    this.catalogs[this.chopCatalog.getDomain()] = this.chopCatalog;
+    this.catalogs[this.icdCatalog.getDomain()] = this.icdCatalog;
+  }
+
+  private initElementCache(): void {
+    const catalogList = [this.swissDrgCatalog, this.chopCatalog, this.icdCatalog];
+    const languages = ['de', 'fr', 'it', 'en'];
+
+    languages.forEach(language => {
+      this.elementCache[language] = {};
+      catalogList.forEach(catalog => {
+        this.elementCache[language][catalog.getDomain()] = {};
+      });
+    });
   }
 
   /**
-   * Load the element and it's parents from the API and save them in the cache.
+   * Load the CatalogElement for the route from the API or from a {@link CatalogElementCache}.
    *
-   * @param type
-   * @param code
-   * @returns {Promise<CatalogElement>}
+   * @param route
+   * @param state
    */
-  private async loadElement(type: string, code: string): Promise<CatalogElement> {
+  public async resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<CatalogElement> {
 
-    if (!this.cache[type]) {
-      this.cache[type] = {};
-    }
+    const catalog = route.parent.params['catalog'];
+    const version = route.parent.params['version'];
+    const language = route.parent.params['language'];
 
-    const element = await this.catalog.getByCode(type, code, this.version, this.language);
-    this.cache[type][code] = element;
+    const type = route.params['type'];
+    const code = route.params['code'];
 
-    await this.loadParents(element);
-    this.sortChildren(element);
+    const currentCatalog = this.catalogs[catalog];
 
-    return Promise.resolve(element);
+    return await this.getElement(language, catalog, version, type, code);    
   }
 
   /**
@@ -60,13 +78,23 @@ class CatalogElementCache {
    * @param code
    * @returns {Promise<CatalogElement>}
    */
-  public async getElement(type: string, code: string): Promise<CatalogElement> {
+  public async getElement(language: string, catalog: string, version: string, type: string, code: string): Promise<CatalogElement> {
+    
+    const currentCatalog: Catalog = this.catalogs[catalog];
 
-    if (this.cache[type] && this.cache[type][code]) {
-      return Promise.resolve(this.cache[type][code]);
+    let element: CatalogElement = this.elementCache.getElement(language, catalog, version, type, code);
+
+    if (element === null){
+      element = await currentCatalog.getByCode(type, code, version, language);
+      this.elementCache.addElement(language, catalog, version, type, code, element);
+
+      await this.loadParents(language, catalog, version, element);
+      this.sortChildren(element);
+
+      return Promise.resolve(element);
     }
 
-    return this.loadElement(type, code);
+    return Promise.resolve(element);
   }
 
   /**
@@ -74,17 +102,19 @@ class CatalogElementCache {
    * in the cache.
    * @param currentElement the leaf element of which the hierarchy will be loaded
    */
-  private async loadParents(element: CatalogElement): Promise<CatalogElement> {
+  private async loadParents(language: string, catalog: string, version: string, element: CatalogElement): Promise<CatalogElement> {
 
     let parent = element.parent;
 
     if (parent) {
+      // Keep parent url because eonum API doesn't return the url
+      // when the details of an element are loaded from the API
       const parentUrl = parent.url;
 
       const code: string = this.extractCodeFromUrl(parentUrl);
       const type: string = this.extractTypeFromUrl(parentUrl);
 
-      parent = await this.getElement(type, code);
+      parent = await this.getElement(language, catalog, version, type, code);
       parent.url = parentUrl;
       element.parent = parent;
     }
@@ -105,8 +135,7 @@ class CatalogElementCache {
       element.children = children.sort((a: CatalogElement, b: CatalogElement) => {
         if (SortHelper.isNumberWithLeadingLetter(a.code)) {
           return SortHelper.compareAsNumberWithLeadingLetter(a.code, b.code);
-        }
-        if (SortHelper.isRomanNumber(a.code)) {
+        } else if (SortHelper.isRomanNumber(a.code)) {
           return SortHelper.compareAsRomanNumber(a.code, b.code);
         } else {
           return SortHelper.compareAsLiteral(a.code, b.code);
@@ -136,78 +165,4 @@ class CatalogElementCache {
     }
     return '';
   }
-
-}
-
-
-@Injectable()
-export class CatalogElementResolver implements Resolve<CatalogElement> {
-
-  /**Domain to catalog map for all available catalogs.*/
-  private catalogs: { [domain: string]: Catalog };
-
-  private catalogCache: {[language: string]: { [version: string]: CatalogElementCache } };
-
-  /**
-   * Create a new cache for this language and catalog version.
-   *
-   * @param language
-   * @param version
-   * @param catalog
-   * @returns {CatalogElementCache}
-   */
-  private createCache(language: string, version: string, catalog: string): CatalogElementCache {
-    const cache = new CatalogElementCache(this.catalogs[catalog], version, language);
-    this.catalogCache[language][version] = cache;
-    return cache;
-  }
-
-
-  /**
-   * Constructor for class CatalogResolver.
-   *
-   * @param router
-   * @param swissDrgCatalog
-   * @param chopCatalog
-   * @param icdCatalog
-   */
-  constructor(private router: Router,
-              private swissDrgCatalog: SwissDrgCatalog,
-              private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog,
-              @Inject('ILoggerService') private logger: ILoggerService) {
-
-    this.catalogs = {};
-    this.catalogs[swissDrgCatalog.getDomain()] = swissDrgCatalog;
-    this.catalogs[chopCatalog.getDomain()] = chopCatalog;
-    this.catalogs[icdCatalog.getDomain()] = icdCatalog;
-
-    // TODO put languages as constants somewhere
-    this.catalogCache =  {'de': {}, 'fr': {}, 'it': {}, 'en': {}};
-
-  }
-
-  /**
-   * Load the CatalogElement for the route from the API or from a {@link CatalogElementCache}.
-   *
-   * @param route
-   * @param state
-   */
-  public resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<CatalogElement> {
-
-
-    const catalog = route.parent.params['catalog'];
-    const version = route.parent.params['version'];
-    const language = route.parent.params['language'];
-
-    const type = route.params['type'];
-    const code = route.params['code'];
-
-    const cache = this.catalogCache[language][version] ||
-      this.createCache(language, version, catalog);
-
-    return cache.getElement(type, code);
-  }
-
-
 }
