@@ -4,6 +4,7 @@ import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
 import { ICDCatalog } from '../../catalog/icd.catalog';
 import { CHOPCatalog } from '../../catalog/chop.catalog';
 import { Catalog } from '../../catalog/catalog';
+import { TranslateService } from '@ngx-translate/core';
 import { ModalDirective, ModalModule } from 'ng2-bootstrap';
 
 /**
@@ -36,7 +37,7 @@ export class SearchFormComponent {
   selectedCatalog: Catalog;
   selectedVersion: string;
 
-  constructor(private route: ActivatedRoute,
+  constructor(public translate: TranslateService,private route: ActivatedRoute,
     private router: Router,
     private swissDrgCatalog: SwissDrgCatalog,
     private chopCatalog: CHOPCatalog,

@@ -24,7 +24,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-right" dropdownMenu role="menu" aria-labelledby="split-button">
                 <li *ngFor="let version of cat.versions_lang['de'] "
-                    [ngClass]="{'active': cat.activeVersion === version}" role="menuitem"
+                    [ngClass]="{'active': cat.activeVersion === version, 'disabled': cat.versions_lang[translate.currentLang].indexOf(version)===-1}" role="menuitem"
                     (click)="updateCatalog(cat, version)">
                   <a class="dropdown-item" href="javascript:void(0)">{{version}}</a>
                 </li>
