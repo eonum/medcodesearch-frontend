@@ -1,10 +1,10 @@
-import {ILoggerService} from './service/logging/i.logger.service';
-import {RememberElementService} from './service/remember.element.service';
-import {CatalogResolver} from './service/routing/catalog-resolver.service';
-import {Component, Inject, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {CatalogSearchService} from './service/routing/catalog-search.service';
+import { RememberedElement } from './model/remembered.element';
+import { ILoggerService } from './service/logging/i.logger.service';
+import { RememberElementService } from './service/remember.element.service';
+import { CatalogResolver } from './service/routing/catalog-resolver.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -29,15 +29,9 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.rememberService.subscribe(() => {
-      this.setRememberedElementsCount();
+    this.rememberService.getRememberedElements().subscribe((elements: RememberedElement[]) => {
+      this.countRememberedElements = elements.length;
     });
-
-    this.setRememberedElementsCount();
-  }
-
-  private setRememberedElementsCount(): void {
-    this.countRememberedElements = this.rememberService.count();
   }
 
   public setLanguage(language: string): void {
