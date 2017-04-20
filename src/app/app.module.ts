@@ -1,3 +1,4 @@
+import { DefaultCatalogElementCache } from './caching/default.catalog.element.cache';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CHOPCatalog } from './catalog/chop.catalog';
@@ -24,8 +25,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BsDropdownModule, CollapseModule, ModalModule, PopoverModule, TooltipModule } from 'ng2-bootstrap';
-import {CatalogElementResolver} from './service/routing/catalog-element-resolver.service';
-import {CatalogSearchService} from './service/routing/catalog-search.service';
+import { CatalogElementResolver } from './service/routing/catalog-element-resolver.service';
+import { CatalogSearchService } from './service/routing/catalog-search.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
@@ -71,6 +72,7 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
   providers: [
     { provide: 'ICatalogService', useClass: CatalogService },
     { provide: 'ILoggerService', useClass: ConsoleLoggerService },
+    { provide: 'ICatalogElementCache', useClass: DefaultCatalogElementCache },
     RememberElementService,
     SwissDrgCatalog,
     CHOPCatalog,

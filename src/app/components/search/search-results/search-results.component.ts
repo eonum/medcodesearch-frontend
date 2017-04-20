@@ -33,14 +33,13 @@ export class SearchResultsComponent implements OnInit {
    * Subscribe to route parameter determine if the details view should be displayed
    */
   public ngOnInit(): void {
-    console.log('SearchResultComponent')
+
     this.searchService.subscribe(
       (results: CatalogElement[]) => this.searchResults = results
     );
 
     this.route.queryParams.subscribe(val => console.log(val))
 
-    console.log(this.route)
     Observable.combineLatest(
       this.route.params, this.route.queryParams,
       (params, queryParams) => Object.assign({}, params, queryParams) as SearchRequest

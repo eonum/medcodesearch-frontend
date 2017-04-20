@@ -1,6 +1,6 @@
-import {environment} from '../../../environments/environment';
-import {ILoggerService} from './i.logger.service';
-import {Injectable} from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { ILoggerService } from './i.logger.service';
+import { Injectable } from '@angular/core';
 
 /**
  * Implementation for {@link ILoggerService} which logs

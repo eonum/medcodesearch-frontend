@@ -1,12 +1,12 @@
-import {Catalog} from '../../catalog/catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {ILoggerService} from '../logging/i.logger.service';
-import {Inject, Injectable} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
-import {CatalogElement} from '../../model/catalog.element';
-import {BehaviorSubject, Subject} from 'rxjs';
+import { Catalog } from '../../catalog/catalog';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { ICDCatalog } from '../../catalog/icd.catalog';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { ILoggerService } from '../logging/i.logger.service';
+import { Inject, Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CatalogElement } from '../../model/catalog.element';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 export class SearchRequest {
   public catalog: string;
@@ -52,9 +52,7 @@ export class CatalogSearchService {
     this.requests = new Subject();
 
     /*Perform search when a new (distinct) search request is fired and
-     * use switch map to push always only the newest result to the search results.*/
-
-
+    * use switch map to push always only the newest result to the search results.*/
     this.requests.asObservable()
       .distinctUntilChanged(this.requestsEqual)
       .switchMap((request: SearchRequest) => this.doSearch(request) )
@@ -91,5 +89,4 @@ export class CatalogSearchService {
     const catalog = this.catalogs[searchRequest.catalog].sendAnalytics(
       type, code, searchRequest.query, searchRequest.version);
   }
-
 }

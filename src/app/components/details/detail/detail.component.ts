@@ -1,8 +1,8 @@
-import {CatalogElement} from '../../../model/catalog.element';
-import {ILoggerService} from '../../../service/logging/i.logger.service';
-import {RememberElementService} from '../../../service/remember.element.service';
-import {Component, Inject} from '@angular/core';
-import {ActivatedRoute, Data, Router} from '@angular/router';
+import { CatalogElement } from '../../../model/catalog.element';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
+import { RememberElementService } from '../../../service/remember.element.service';
+import { Component, Inject } from '@angular/core';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -48,14 +48,14 @@ export class DetailComponent {
   public count = 0;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private rememberService: RememberElementService,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private router: Router,
+    private rememberService: RememberElementService,
+    @Inject('ILoggerService') private logger: ILoggerService) {
 
     this.route.data.subscribe((data: Data) => {
-        this.selectedElement = data.catalogElement;
-        this.updateView();
-      }
+      this.selectedElement = data.catalogElement;
+      this.updateView();
+    }
     );
   }
 

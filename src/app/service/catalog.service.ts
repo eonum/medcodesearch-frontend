@@ -1,11 +1,11 @@
 import 'rxjs/add/operator/toPromise';
-import {CatalogConfiguration} from '../catalog/catalog.configuration';
-import {CatalogElement} from '../model/catalog.element';
-import {ICatalogService} from './i.catalog.service';
-import {ILoggerService} from './logging/i.logger.service';
-import {Inject, Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {TranslateService} from '@ngx-translate/core';
+import { CatalogConfiguration } from '../catalog/catalog.configuration';
+import { CatalogElement } from '../model/catalog.element';
+import { ICatalogService } from './i.catalog.service';
+import { ILoggerService } from './logging/i.logger.service';
+import { Inject, Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class CatalogService implements ICatalogService {
@@ -15,8 +15,8 @@ export class CatalogService implements ICatalogService {
   private config: CatalogConfiguration;
 
   public constructor(private http: Http,
-                     private translate: TranslateService,
-                     @Inject('ILoggerService') private logger: ILoggerService) {
+    private translate: TranslateService,
+    @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   /**

@@ -1,14 +1,14 @@
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {Catalog} from '../../../catalog/catalog';
-import {CHOPCatalog} from '../../../catalog/chop.catalog';
-import {ICDCatalog} from '../../../catalog/icd.catalog';
-import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
-import {ILoggerService} from '../../../service/logging/i.logger.service';
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {ModalDirective} from 'ng2-bootstrap';
+import { Catalog } from '../../../catalog/catalog';
+import { CHOPCatalog } from '../../../catalog/chop.catalog';
+import { ICDCatalog } from '../../../catalog/icd.catalog';
+import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ModalDirective } from 'ng2-bootstrap';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -43,11 +43,11 @@ export class SearchFormComponent implements OnInit {
   @ViewChild('childModal') public childModal: ModalDirective;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService,
-              private swissDrgCatalog: SwissDrgCatalog,
-              private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService,
+    private swissDrgCatalog: SwissDrgCatalog,
+    private chopCatalog: CHOPCatalog,
+    private icdCatalog: ICDCatalog) {
 
     this.logger.log('[SearchComponent] constructor');
 
@@ -115,7 +115,7 @@ export class SearchFormComponent implements OnInit {
 
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: query.length > 0 ? {query: query} : null
+      queryParams: query.length > 0 ? { query: query } : null
     }).catch(error => this.logger.error(error));
   }
 
