@@ -2,8 +2,9 @@ import {Catalog} from '../../catalog/catalog';
 import {CatalogElement} from '../../model/catalog.element';
 import {ILoggerService} from '../../service/logging/i.logger.service';
 import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CatalogSearchService} from '../../service/routing/catalog-search.service';
+import {catalogConfigurations} from '../../catalog/catalog.configuration';
 
 /**
  * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
@@ -24,13 +25,7 @@ import {CatalogSearchService} from '../../service/routing/catalog-search.service
 export class MainComponent implements OnInit {
 
   public query = '';
-  public catalog: Catalog;
-
   public selectedElement: CatalogElement;
-
-  private code: string;
-  private type: string;
-  private language: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -39,65 +34,42 @@ export class MainComponent implements OnInit {
   }
 
   /**
-   * Subscribe to route parameter determine if the details view should be displayed
+   * Subscribe to the DetailComponents route params to check,
+   * if a redirect to the root element is necessary.
    */
   public ngOnInit(): void {
-    this.logger.log('[MainComponent] on init.');
 
-
-
-    this.route.params.subscribe(
-      params => {
-        this.code = params['code'];
-        this.type = params['type'];
-
-        this.language = params['language'];
-        this.updateView();
-      }
-    );
-
-    this.route.queryParams.subscribe(
-      params => {
-        this.query = params['query'];
-        this.updateView();
-      }
-    );
-
-    this.route.data.subscribe(
-      data => {
-        this.catalog = data.catalog;
-        this.selectedElement = data.catalogElement;
-        this.updateView();
-      }
-    );
-  }
-
-  private updateView(): void {
-    if (this.catalog) {
-      this.updateSearchResultsView();
-      if (!this.code) {
-        // Navaigate to root element
-        this.router.navigate(this.catalog.getRootElementParams(), {
-          relativeTo: this.route,
-          queryParamsHandling: 'merge'
-        });
-      }
+    if (!this.route.snapshot.params['version']) {
+      // redirect from CatalogResolver to a version.
+      return;
     }
+    this.route.queryParams.subscribe((params: Params) => this.query = params['query']);
+
+    this.route.params.subscribe((params: Params) => {
+
+      if (!this.route.firstChild) {
+        const catalog = this.route.snapshot.params['catalog'];
+        const version = this.route.snapshot.params['version'];
+
+        // TODO use name as param :catalog
+        let config;
+        for (const name in catalogConfigurations) {
+          if (name.toLowerCase() === catalog) {
+            config = catalogConfigurations[name];
+          }
+        }
+
+        const rootElement = config.rootElement;
+
+        this.router.navigate(
+          [rootElement.type, rootElement.code || version], {
+            relativeTo: this.route,
+            queryParamsHandling: 'merge'
+          });
+      }
+    });
+
   }
 
-
-  /**
-   * If a search parameter is provided, the search
-   * results will be displayed.
-   * Otherwise no search results will be displayed.
-   */
-  private updateSearchResultsView(): void {
-    if (this.query) {
-      this.searchService.search(
-        this.language, this.catalog.getActiveVersion(), this.catalog.getDomain(), this.query);
-    }
-
-
-  }
 
 }

@@ -38,7 +38,13 @@ export class ConsoleLoggerService implements ILoggerService {
    * @param message the message to log
    */
   public error(message: string, obj?: any): void {
-    this.toConsole(message, 'ERR', this.errorStyle, obj);
+    if (environment.dev) {
+      if (obj) {
+        console.error(message, obj);
+      } else {
+        console.error(message);
+      }
+    }
   }
 
   /**

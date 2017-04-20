@@ -2,6 +2,7 @@ import { ICatalogService } from '../service/i.catalog.service';
 import { ILoggerService } from '../service/logging/i.logger.service';
 import { Catalog } from './catalog';
 import { Inject, Injectable } from '@angular/core';
+import {catalogConfigurations} from './catalog.configuration';
 
 /**
  * Concrete implementation of catalog class for the SwissDRG catalog.
@@ -10,12 +11,7 @@ import { Inject, Injectable } from '@angular/core';
 export class SwissDrgCatalog extends Catalog {
 
   constructor( @Inject('ICatalogService') service: ICatalogService, @Inject('ILoggerService') logger: ILoggerService) {
-    super(service, logger, 'SwissDRG', {
-      searchableTypes: ['drgs'],
-      retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
-      versionParam: 'drgs',
-      rootElementType: 'mdcs'
-    });
+    super(service, logger, 'SwissDRG', catalogConfigurations['SwissDRG']);
   }
 
   protected getRootElementCode(): string {

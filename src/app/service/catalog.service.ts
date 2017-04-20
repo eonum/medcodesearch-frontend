@@ -99,9 +99,7 @@ export class CatalogService implements ICatalogService {
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as string[])
-      .catch(reason => {
-        throw new Error(reason);
-      });
+      .catch(reason => this.logger.error(reason.toString()));
   }
 
   /**

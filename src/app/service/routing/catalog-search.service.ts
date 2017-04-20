@@ -4,7 +4,7 @@ import {ICDCatalog} from '../../catalog/icd.catalog';
 import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {ILoggerService} from '../logging/i.logger.service';
 import {Inject, Injectable} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
 import {CatalogElement} from '../../model/catalog.element';
 import {BehaviorSubject, Subject} from 'rxjs';
 
@@ -52,13 +52,26 @@ export class CatalogSearchService {
     this.requests = new Subject();
 
     /*Perform search when a new (distinct) search request is fired and
-    * use switch map to push always only the newest result to the search results.*/
+     * use switch map to push always only the newest result to the search results.*/
+
+
     this.requests.asObservable()
       .distinctUntilChanged(this.requestsEqual)
-      .switchMap((request: SearchRequest) =>
-        this.catalogs[request.catalog].search(request.version, request.query)
-      )
-      .subscribe((results: CatalogElement[]) => this.searchResults.next(results));
+      .switchMap((request: SearchRequest) => this.doSearch(request) )
+      .subscribe(
+        (results: CatalogElement[]) => this.searchResults.next(results),
+        error => this.logger.error('[CatalogSearchService]', error));
+  }
+
+  private doSearch(searchRequest: SearchRequest): Promise<CatalogElement[]> {
+
+    if (searchRequest.catalog) {
+      this.searchResults.next(null); // remove displayed search results
+      return this.catalogs[searchRequest.catalog].search(
+        searchRequest.version, searchRequest.query);
+    }
+    console.warn('No catalog in search request', searchRequest);
+    return null;
   }
 
   /**
@@ -69,12 +82,14 @@ export class CatalogSearchService {
     this.searchResults.asObservable().subscribe(f);
   }
 
-  public search(language: string, version: string, catalog: string, query: string) {
-    this.requests.next({language, version, catalog, query} as SearchRequest);
+  public search(searchRequest: SearchRequest) {
+    console.log('search: ', searchRequest)
+    this.requests.next(searchRequest);
   }
 
-  public sendAnalytics( searchRequest: SearchRequest, type: string, code: string) {
+  public sendAnalytics(searchRequest: SearchRequest, type: string, code: string) {
     const catalog = this.catalogs[searchRequest.catalog].sendAnalytics(
       type, code, searchRequest.query, searchRequest.version);
   }
+
 }

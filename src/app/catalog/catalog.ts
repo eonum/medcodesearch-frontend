@@ -50,7 +50,7 @@ export abstract class Catalog {
    */
   public async getByCode(type: string, code: string, version?: string, language?: string): Promise<CatalogElement> {
     this.initService();
-    return this.service.getByCode(this.activeVersion || version, type, code.replace(' ', '_'), language);
+    return this.service.getByCode( version || this.activeVersion, type, code.replace(' ', '_'), language);
   }
 
   /**
@@ -90,8 +90,8 @@ export abstract class Catalog {
     return [this.getRootElementType(), this.getRootElementCode()];
   }
 
-  protected getRootElementType(): string {
-    return this.config.rootElementType;
+  public getRootElementType(): string {
+    return this.config.rootElement.type;
   }
 
   protected getRootElementCode(): string {
@@ -148,9 +148,9 @@ export abstract class Catalog {
     return false;
   }
 
-  private async getOrLoadVersions(lang: string): Promise<string[]> {
+  public async getOrLoadVersions(lang: string): Promise<string[]> {
     if (this.versions[lang]) {
-      return Promise.resolve(this.versions[lang])
+      return Promise.resolve(this.versions[lang]);
     } else {
       return this.loadVersions(lang);
     }
@@ -180,6 +180,10 @@ export abstract class Catalog {
 
     this.initService();
     const versions = await this.service.getVersions(lang);
+    if (!versions) {
+      this.logger.error(`[Catalog] could not load versions from API. Catalog: ${this.name}, language: ${lang}`);
+      return null;
+    }
     this.versions[lang] = versions.reverse();
     return this.versions[lang];
   }

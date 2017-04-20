@@ -4,6 +4,7 @@ import {ILoggerService} from '../../../service/logging/i.logger.service';
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CatalogSearchService, SearchRequest} from '../../../service/routing/catalog-search.service';
+import {Observable} from 'rxjs';
 
 /**
  * Component to display the search results.
@@ -32,10 +33,19 @@ export class SearchResultsComponent implements OnInit {
    * Subscribe to route parameter determine if the details view should be displayed
    */
   public ngOnInit(): void {
-
+    console.log('SearchResultComponent')
     this.searchService.subscribe(
       (results: CatalogElement[]) => this.searchResults = results
     );
+
+    this.route.queryParams.subscribe(val => console.log(val))
+
+    console.log(this.route)
+    Observable.combineLatest(
+      this.route.params, this.route.queryParams,
+      (params, queryParams) => Object.assign({}, params, queryParams) as SearchRequest
+    ).subscribe(request => this.searchService.search(request));
+
   }
 
   public openCode(type: string, code: string): void {
