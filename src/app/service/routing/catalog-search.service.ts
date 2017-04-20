@@ -1,12 +1,12 @@
-import {Catalog} from '../../catalog/catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {ILoggerService} from '../logging/i.logger.service';
-import {Inject, Injectable} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {CatalogElement} from '../../model/catalog.element';
-import {BehaviorSubject, Subject} from 'rxjs';
+import { Catalog } from '../../catalog/catalog';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { ICDCatalog } from '../../catalog/icd.catalog';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { ILoggerService } from '../logging/i.logger.service';
+import { Inject, Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CatalogElement } from '../../model/catalog.element';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 export class SearchRequest {
   public catalog: string;
@@ -37,10 +37,10 @@ export class CatalogSearchService {
    * @param icdCatalog
    */
   constructor(private route: ActivatedRoute,
-              private swissDrgCatalog: SwissDrgCatalog,
-              private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private swissDrgCatalog: SwissDrgCatalog,
+    private chopCatalog: CHOPCatalog,
+    private icdCatalog: ICDCatalog,
+    @Inject('ILoggerService') private logger: ILoggerService) {
 
     this.catalogs = {};
     this.catalogs[swissDrgCatalog.getDomain()] = swissDrgCatalog;
@@ -70,10 +70,10 @@ export class CatalogSearchService {
   }
 
   public search(language: string, version: string, catalog: string, query: string) {
-    this.requests.next({language, version, catalog, query} as SearchRequest);
+    this.requests.next({ language, version, catalog, query } as SearchRequest);
   }
 
-  public sendAnalytics( searchRequest: SearchRequest, type: string, code: string) {
+  public sendAnalytics(searchRequest: SearchRequest, type: string, code: string) {
     const catalog = this.catalogs[searchRequest.catalog].sendAnalytics(
       type, code, searchRequest.query, searchRequest.version);
   }

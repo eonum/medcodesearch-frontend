@@ -24,11 +24,11 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
    * @param icdCatalog
    */
   constructor(private router: Router,
-              private swissDrgCatalog: SwissDrgCatalog,
-              private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog,
-              @Inject('ILoggerService') private logger: ILoggerService,
-              @Inject('ICatalogElementCache') private elementCache: ICatalogElementCache) {
+    private swissDrgCatalog: SwissDrgCatalog,
+    private chopCatalog: CHOPCatalog,
+    private icdCatalog: ICDCatalog,
+    @Inject('ILoggerService') private logger: ILoggerService,
+    @Inject('ICatalogElementCache') private elementCache: ICatalogElementCache) {
     this.initCatalogMap();
     this.initElementCache();
   }
@@ -69,7 +69,7 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
 
     const currentCatalog = this.catalogs[catalog];
 
-    return await this.getElement(language, catalog, version, type, code);    
+    return await this.getElement(language, catalog, version, type, code);
   }
 
   /**
@@ -79,12 +79,12 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
    * @returns {Promise<CatalogElement>}
    */
   public async getElement(language: string, catalog: string, version: string, type: string, code: string): Promise<CatalogElement> {
-    
+
     const currentCatalog: Catalog = this.catalogs[catalog];
 
     let element: CatalogElement = this.elementCache.getElement(language, catalog, version, type, code);
 
-    if (element === null){
+    if (element === null) {
       element = await currentCatalog.getByCode(type, code, version, language);
       this.elementCache.addElement(language, catalog, version, type, code, element);
 

@@ -3,8 +3,8 @@ import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { LanguageGuard } from './service/routing/language-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {CatalogElementResolver} from './service/routing/catalog-element-resolver.service';
-import {DetailComponent} from './components/details/detail/detail.component';
+import { CatalogElementResolver } from './service/routing/catalog-element-resolver.service';
+import { DetailComponent } from './components/details/detail/detail.component';
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
       {
         path: ':catalog',
         component: MainComponent,
-        resolve: {catalog: CatalogResolver}
+        resolve: { catalog: CatalogResolver }
       },
       {
         path: ':catalog/:version',

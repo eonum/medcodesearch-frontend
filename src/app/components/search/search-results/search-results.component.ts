@@ -1,9 +1,9 @@
-import {Catalog} from '../../../catalog/catalog';
-import {CatalogElement} from '../../../model/catalog.element';
-import {ILoggerService} from '../../../service/logging/i.logger.service';
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CatalogSearchService, SearchRequest} from '../../../service/routing/catalog-search.service';
+import { Catalog } from '../../../catalog/catalog';
+import { CatalogElement } from '../../../model/catalog.element';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CatalogSearchService, SearchRequest } from '../../../service/routing/catalog-search.service';
 
 /**
  * Component to display the search results.
@@ -23,9 +23,9 @@ export class SearchResultsComponent implements OnInit {
   public selectedCode: string;
 
   public constructor(private route: ActivatedRoute,
-                     private router: Router,
-                     @Inject('ILoggerService') private logger: ILoggerService,
-                     private searchService: CatalogSearchService) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService,
+    private searchService: CatalogSearchService) {
   }
 
   /**
@@ -58,9 +58,9 @@ export class SearchResultsComponent implements OnInit {
   private redirectToCode(type: string, code: string): void {
 
     this.router.navigate([type, code], {
-        queryParamsHandling: 'merge',
-        relativeTo: this.route
-      }
+      queryParamsHandling: 'merge',
+      relativeTo: this.route
+    }
     ).catch(error => this.logger.error(error));
   }
 

@@ -41,7 +41,7 @@ export class RememberElementComponent implements OnInit {
   private openCode(element: RememberedElement): void {
     console.log(this.route)
     this.router.navigate(
-      [ element.language, element.catalog, element.version, element.type, element.code],
+      [element.language, element.catalog, element.version, element.type, element.code],
       { queryParamsHandling: 'merge' })
       .catch(error => this.logger.error(error.message));
   }

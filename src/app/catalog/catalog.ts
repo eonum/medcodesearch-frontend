@@ -1,8 +1,8 @@
-import {CatalogElement} from '../model/catalog.element';
-import {ICatalogService} from '../service/i.catalog.service';
-import {ILoggerService} from '../service/logging/i.logger.service';
-import {CatalogConfiguration} from './catalog.configuration';
-import {Injectable} from '@angular/core';
+import { CatalogElement } from '../model/catalog.element';
+import { ICatalogService } from '../service/i.catalog.service';
+import { ILoggerService } from '../service/logging/i.logger.service';
+import { CatalogConfiguration } from './catalog.configuration';
+import { Injectable } from '@angular/core';
 
 /**
  * Class representing a catalog containing medical
@@ -27,9 +27,9 @@ export abstract class Catalog {
    * @param elements - elements within a catalog
    */
   public constructor(private service: ICatalogService,
-                     private logger: ILoggerService,
-                     public name: string,
-                     protected config: CatalogConfiguration) {
+    private logger: ILoggerService,
+    public name: string,
+    protected config: CatalogConfiguration) {
     this.versions = [];
   }
 

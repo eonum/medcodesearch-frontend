@@ -1,9 +1,9 @@
-import {Catalog} from '../../catalog/catalog';
-import {CatalogElement} from '../../model/catalog.element';
-import {ILoggerService} from '../../service/logging/i.logger.service';
-import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CatalogSearchService} from '../../service/routing/catalog-search.service';
+import { Catalog } from '../../catalog/catalog';
+import { CatalogElement } from '../../model/catalog.element';
+import { ILoggerService } from '../../service/logging/i.logger.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CatalogSearchService } from '../../service/routing/catalog-search.service';
 
 /**
  * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
@@ -33,9 +33,9 @@ export class MainComponent implements OnInit {
   private language: string;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService,
-              private searchService: CatalogSearchService) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService,
+    private searchService: CatalogSearchService) {
   }
 
   /**
