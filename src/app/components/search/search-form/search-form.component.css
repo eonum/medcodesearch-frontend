@@ -4,6 +4,7 @@
 .search-center {
     max-width: 500px;
     margin: auto;
+    text-align: center;
 }
 .btn-group:not(:first-child) {
     margin-left: 10px;

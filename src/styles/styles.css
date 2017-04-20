@@ -3,8 +3,8 @@ app-root > * {
 }
 
 body{
- /* background-color: rgb(245,245,245);
- 
+  background-color: rgba(245,245,245,0.8);
+ /*
   background: url(steto_smartphone_hd.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;

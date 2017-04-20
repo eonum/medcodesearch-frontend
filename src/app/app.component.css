@@ -18,6 +18,36 @@
   color: #24add3;
 }
 
+.btn-remember {
+  border: none;
+  background-color: rgba(245,245,245,0.0);
+  float: right;
+  padding: 0;
+  list-style: none;
+  margin: -80px 6px 0 0;
+}
+
+.btn-remember:hover {
+  background-color: rgba(36, 173, 211,0.5);
+}
+
+.badge {
+  padding: 1px 9px 2px;
+  font-size: 12.025px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #ffffff;
+  background-color: rgb(36, 173, 211);
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+
+.med-blue {
+  color: rgb(36, 173, 211);
+}
+
 .navbar {
 background-color: rgba(255,255,255,1.0);
 
