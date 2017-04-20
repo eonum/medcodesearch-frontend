@@ -70,11 +70,22 @@ describe('RememberElementService', () => {
 
   it('Should return a list of all remembered codes', () => {
     const rememberService = new RememberElementService();
+
+    let numberOfElements: number;
+    let codeOfFirstElement: string;
+
+    rememberService.getRememberedElements().subscribe(elements => {
+      numberOfElements = elements.length;
+      if (elements.length > 0) {
+        codeOfFirstElement = elements[0].code;
+      }
+    });
+
     const element = this.createElement('1234');
-    rememberService.add(element, 'V1.0', 'icd', 'de');
-    const elements: RememberedElement[] = rememberService.getRememberedElements();
-    expect(elements.length).toBe(1);
-    expect(elements[0].code).toBe('1234');
+    rememberService.add(element, 'V1.0', 'icd', 'de');    
+    
+    expect(numberOfElements).toBe(1);
+    expect(codeOfFirstElement).toBe('1234');
   });
 
   it('Should notify subscriber on adding element', () => {
@@ -85,7 +96,11 @@ describe('RememberElementService', () => {
     };
 
     const rememberService = new RememberElementService();
-    rememberService.subscribe(callback);
+    
+    rememberService.getRememberedElements().subscribe(element => {
+      callback();
+    });
+
     const element = this.createElement('1234');
     rememberService.add(element, 'V1.0', 'icd', 'de');
 
@@ -105,7 +120,10 @@ describe('RememberElementService', () => {
     const createdElement = RememberedElement.from(element, 'V1.0', 'icd', 'de');
     rememberService.add(element, 'V1.0', 'icd', 'de');
 
-    rememberService.subscribe(callback);
+    rememberService.getRememberedElements().subscribe(element => {
+      callback();
+    });
+
     rememberService.remove(createdElement);
 
     expect(callBackCalled).toBe(true);

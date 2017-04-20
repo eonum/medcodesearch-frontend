@@ -1,13 +1,14 @@
 import { CatalogElement } from '../model/catalog.element';
 import { RememberedElement } from '../model/remembered.element';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Observable } from "rxjs/Observable";
 
 /**
  * Provides functions to mark/unmark an element as favorite.
- * Clients can subscribe to changes of the element collection
- * with a callback method and will be notified on each change.
+ * Clients can subscribe to changes of the element collection.
  * 
- * The elements are stored within an in-memory dicitionnary
+ * The elements are stored within an in-memory dicitionary
  * and are lost as soon as the user closes or refreshes the
  * page (and therefore causes the app to restart).
  * Marked elements are shown by the {@link RememberElementComponent}.
@@ -16,21 +17,22 @@ import { Injectable } from '@angular/core';
 export class RememberElementService {
 
   /**
-   * Internal dictionnary to store the marked elements
+   * Internal dictionary to store the marked elements
    */
   private rememberedElements: { [key: string]: RememberedElement };
   private numberOfElements: number;
 
   /**
-   * Internal collection for subscribers of changes
-   * to the rememberedElements collection.
+   * BehaviorSubject to publish changes on remembered elements
+   * collection.
    */
-  private subscribers: (() => void)[];
+  private _rememberedElements: BehaviorSubject<RememberedElement[]>;
 
   public constructor() {
     this.rememberedElements = {};
     this.numberOfElements = 0;
-    this.subscribers = [];
+
+    this._rememberedElements = new BehaviorSubject([]);
   }
 
   /**
@@ -76,31 +78,22 @@ export class RememberElementService {
   }
 
   /**
-   * Get all marked elements as an array.
+   * Get all marked elements as observable. Subscribers can
+   * subscribe to changes on those elements.
    */
-  public getRememberedElements(): RememberedElement[] {
+  public getRememberedElements(): Observable<RememberedElement[]> {
+    return this._rememberedElements.asObservable();
+  }
+
+  /**
+   * Notify subscribers about the change of the collection.
+   */
+  private notify(): void {
     const elements = [];
     const keys = Object.keys(this.rememberedElements);
     keys.forEach(key => {
       elements.push(this.rememberedElements[key]);
     });
-    return elements;
-  }
-
-  /**
-   * Subscribe to changes of the remembered elements.
-   * The callback will be called if an element is marked
-   * or unmarked.
-   * 
-   * @param callback the callback method to call on notification
-   */
-  public subscribe(callback: () => void): void {
-    this.subscribers.push(callback);
-  }
-
-  private notify(): void {
-    this.subscribers.forEach(callback => {
-      callback();
-    });
+    this._rememberedElements.next(elements);
   }
 }
