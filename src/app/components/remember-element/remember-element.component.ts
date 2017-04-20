@@ -23,14 +23,9 @@ export class RememberElementComponent implements OnInit {
     @Inject('ILoggerService') private logger: ILoggerService) { }
 
   public ngOnInit(): void {
-    this.rememberService.subscribe(() => {
-      this.loadRememberedElements();
+    this.rememberService.getRememberedElements().subscribe((elements: RememberedElement[]) => {
+      this.rememberedElements = elements;
     });
-    this.loadRememberedElements();
-  }
-
-  private loadRememberedElements(): void {
-    this.rememberedElements = this.rememberService.getRememberedElements();
   }
 
   /**

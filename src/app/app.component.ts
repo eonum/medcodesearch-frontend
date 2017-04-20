@@ -1,3 +1,4 @@
+import { RememberedElement } from './model/remembered.element';
 import { ILoggerService } from './service/logging/i.logger.service';
 import { RememberElementService } from './service/remember.element.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
@@ -29,15 +30,9 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.rememberService.subscribe(() => {
-      this.setRememberedElementsCount();
+    this.rememberService.getRememberedElements().subscribe((elements: RememberedElement[]) => {
+      this.countRememberedElements = elements.length;
     });
-
-    this.setRememberedElementsCount();
-  }
-
-  private setRememberedElementsCount(): void {
-    this.countRememberedElements = this.rememberService.count();
   }
 
   public setLanguage(language: string): void {
