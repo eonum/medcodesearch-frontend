@@ -9,8 +9,9 @@
 }
 
 .active {
-  background-color: rgb(245,245,245);
+  background-color: rgba(36, 173, 211, 0.3);
 }
+
 p{
- box-shadow: 1px 1px 4px -1px rgba(89,89,89,0.5);
+ box-shadow: 1px 1px 4px -1px rgba(89,89,89,0.4);
 }
