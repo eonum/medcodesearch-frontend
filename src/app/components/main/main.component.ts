@@ -1,20 +1,13 @@
-import { Catalog } from '../../catalog/catalog';
-import { CatalogElement } from '../../model/catalog.element';
-import { ILoggerService } from '../../service/logging/i.logger.service';
-import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CatalogSearchService } from '../../service/routing/catalog-search.service';
-import { catalogConfigurations } from '../../catalog/catalog.configuration';
+import {ILoggerService} from '../../service/logging/i.logger.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {catalogConfigurations} from '../../catalog/catalog.configuration';
 
 /**
  * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
  * and {@link DetailComponent}.
- * A catalog is resolved by the {@link CatalogResolver} and then passed as input
- * to the {@link SearchFormComponent}. Each time the `query` or `catalog` in the
- * Routers params or data changes, the `searchResults` that are bound as Input
- * to the {@link SearchResultsComponent} are updated with new search results.
- * If a code is selected, the respective {@link CatalogElement} is loaded and
- * displayed by the {@link DetailComponent}.
+ * The Component controls the layout of the children. And if it is initialized
+ * on the route :catalog/:version, it redirects to the root element for given catalog and version.
  */
 @Component({
   selector: 'app-main',
@@ -22,54 +15,75 @@ import { catalogConfigurations } from '../../catalog/catalog.configuration';
   styleUrls: ['main.component.css'],
 
 })
+
 export class MainComponent implements OnInit {
 
-  public query = '';
-  public selectedElement: CatalogElement;
+  public query;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private searchService: CatalogSearchService) {
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   /**
-   * Subscribe to the DetailComponents route params to check,
-   * if a redirect to the root element is necessary.
+   * Subscribe to route parameters.
    */
   public ngOnInit(): void {
 
     if (!this.route.snapshot.params['version']) {
-      // redirect from CatalogResolver to a version.
+      /* CatalogResolver is redirecting to a version,
+       the Component will be initialized a second time.*/
       return;
     }
+
+    // Subscribe to the search query, to now if SearchResult component must be displayed.
     this.route.queryParams.subscribe((params: Params) => this.query = params['query']);
 
+    // Subscribe to route params, to check if a catalog element is selected.
     this.route.params.subscribe((params: Params) => {
 
-      if (!this.route.firstChild) {
-        const catalog = this.route.snapshot.params['catalog'];
-        const version = this.route.snapshot.params['version'];
+        if (!this.route.firstChild) {
 
-        // TODO use name as param :catalog
-        let config;
-        for (const name in catalogConfigurations) {
-          if (name.toLowerCase() === catalog) {
-            config = catalogConfigurations[name];
-          }
+          const root = this.getRootElement(
+            this.route.snapshot.params['catalog'],
+            this.route.snapshot.params['version']);
+
+          this.navigateToElement(root.type, root.code);
         }
 
-        const rootElement = config.rootElement;
-
-        this.router.navigate(
-          [rootElement.type, rootElement.code || version], {
-            relativeTo: this.route,
-            queryParamsHandling: 'merge'
-          });
       }
-    });
-
+    );
   }
 
+  /**
+   * @param catalog must be one of {@link catalogConfigurations} keys.
+   * @param version must be a valid version for the given catalog and current language.
+   *
+   * @returns {{type, code: string}}
+   */
+  private getRootElement(catalog: string, version: string): { type: string, code: string } {
+    // TODO: use name as param :catalog then we can use simply catalogConfigurations[catalog]
+    let root;
+    for (const name in catalogConfigurations) {
+      if (name.toLowerCase() === catalog.toLowerCase()) {
+        root = catalogConfigurations[name].rootElement;
+      }
+    }
+
+    return {type: root.type, code: root.code || version};
+  }
+
+  /**
+   * Navigate to `:type/:code` .
+   * @param type
+   * @param code
+   */
+  private navigateToElement(type: string, code: string): void {
+
+    this.router.navigate([type, code], {
+      relativeTo: this.route,
+      queryParamsHandling: 'merge'
+    });
+  }
 
 }
