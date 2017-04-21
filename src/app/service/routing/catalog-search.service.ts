@@ -37,10 +37,10 @@ export class CatalogSearchService {
    * @param icdCatalog
    */
   constructor(private route: ActivatedRoute,
-              private swissDrgCatalog: SwissDrgCatalog,
-              private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private swissDrgCatalog: SwissDrgCatalog,
+    private chopCatalog: CHOPCatalog,
+    private icdCatalog: ICDCatalog,
+    @Inject('ILoggerService') private logger: ILoggerService) {
 
     this.catalogs = {};
     this.catalogs[swissDrgCatalog.getDomain()] = swissDrgCatalog;
@@ -55,10 +55,10 @@ export class CatalogSearchService {
     * use switch map to push always only the newest result to the search results.*/
     this.requests.asObservable()
       .distinctUntilChanged(this.requestsEqual)
-      .switchMap((request: SearchRequest) => this.doSearch(request) )
+      .switchMap((request: SearchRequest) => this.doSearch(request))
       .subscribe(
-        (results: CatalogElement[]) => this.searchResults.next(results),
-        error => this.logger.error('[CatalogSearchService]', error));
+      (results: CatalogElement[]) => this.searchResults.next(results),
+      error => this.logger.error('[CatalogSearchService]', error));
   }
 
   private doSearch(searchRequest: SearchRequest): Promise<CatalogElement[]> {

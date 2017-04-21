@@ -82,8 +82,8 @@ describe('RememberElementService', () => {
     });
 
     const element = this.createElement('1234');
-    rememberService.add(element, 'V1.0', 'icd', 'de');    
-    
+    rememberService.add(element, 'V1.0', 'icd', 'de');
+
     expect(numberOfElements).toBe(1);
     expect(codeOfFirstElement).toBe('1234');
   });
@@ -96,7 +96,7 @@ describe('RememberElementService', () => {
     };
 
     const rememberService = new RememberElementService();
-    
+
     rememberService.getRememberedElements().subscribe(element => {
       callback();
     });

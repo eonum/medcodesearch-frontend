@@ -16,7 +16,7 @@ import { CatalogSearchService } from './service/routing/catalog-search.service';
 export class AppComponent implements OnInit {
   public title = 'medCodeSearch';
 
-  @ViewChild('tooltipElementAdded') tooltipElementAdded; 
+  @ViewChild('tooltipElementAdded') tooltipElementAdded;
 
   // TODO get from language guard or define constants for both.
   public languages = ['de', 'fr', 'it', 'en'];
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     this.rememberService.getRememberedElements().subscribe((elements: RememberedElement[]) => {
       const oldNumberOfElements = this.countRememberedElements;
       this.countRememberedElements = elements.length;
-      if (oldNumberOfElements < elements.length){
+      if (oldNumberOfElements < elements.length) {
         this.tooltipElementAdded.show();
         setTimeout(() => { this.tooltipElementAdded.hide(); }, 2000);
       }

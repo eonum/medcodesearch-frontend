@@ -139,18 +139,18 @@ export class CatalogService implements ICatalogService {
     return this.http.get(url).toPromise()
       .then(result => {
         const resultObject: CatalogElement = result.json() as CatalogElement;
-        
+
         // Assign the url manually because eonum API doesn't
         // return the url when details are loaded
         resultObject.url = `/${locale}/${elementType}/${version}/${code}`;
-        
+
         // The code of the element and the code to retrieve the element
         // don't always match (e.g. for partitions in SwissDRG).
         // Therefore store the code to display in name property
         // and store the code to retrieve the element into the code property
         resultObject.name = resultObject.code;
         resultObject.code = code;
-        
+
         return resultObject;
       })
       .catch(reason => {
