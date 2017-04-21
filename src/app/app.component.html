@@ -10,7 +10,8 @@
     </ul>
     <button type="button" class="btn btn-default" [popover]="popTemplate" placement="bottom" popoverTitle="{{'LBL_REMEMBER_TITLE' | translate}}">
       <span class="glyphicon glyphicon-shopping-cart"></span>
-      <span class="badge">{{countRememberedElements}}</span>
+      <span class="badge" [tooltip]="tooltipElementAddedTemplate" triggers="" #tooltipElementAdded="bs-tooltip" placement="bottom">{{countRememberedElements}}</span>
+      <ng-template #tooltipElementAddedTemplate>{{ 'LBL_ELEMENT_ADDED' | translate }}</ng-template>
     </button>
     <template #popTemplate>
       <app-remember-element></app-remember-element>

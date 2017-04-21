@@ -2,7 +2,7 @@ import { RememberedElement } from './model/remembered.element';
 import { ILoggerService } from './service/logging/i.logger.service';
 import { RememberElementService } from './service/remember.element.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,6 +14,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class AppComponent implements OnInit {
   public title = 'medCodeSearch';
+
+  @ViewChild('tooltipElementAdded') tooltipElementAdded; 
 
   // TODO get from language guard or define constants for both.
   public languages = ['de', 'fr', 'it', 'en'];
@@ -31,6 +33,8 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void {
     this.rememberService.getRememberedElements().subscribe((elements: RememberedElement[]) => {
       this.countRememberedElements = elements.length;
+      this.tooltipElementAdded.show();
+      setTimeout(() => { this.tooltipElementAdded.hide(); }, 2000);
     });
   }
 
