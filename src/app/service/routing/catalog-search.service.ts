@@ -6,7 +6,8 @@ import { ILoggerService } from '../logging/i.logger.service';
 import { Inject, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogElement } from '../../model/catalog.element';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 
 export class SearchRequest {
   public catalog: string;
@@ -68,7 +69,7 @@ export class CatalogSearchService {
       return this.catalogs[searchRequest.catalog].search(
         searchRequest.version, searchRequest.query);
     }
-    console.warn('No catalog in search request', searchRequest);
+    this.logger.log('No catalog in search request', searchRequest);
     return null;
   }
 
@@ -80,12 +81,12 @@ export class CatalogSearchService {
     this.searchResults.asObservable().subscribe(f);
   }
 
-  public search(searchRequest: SearchRequest) {
-    console.log('search: ', searchRequest)
+  public search(searchRequest: SearchRequest): void {
+    this.logger.log('Search: ', searchRequest);
     this.requests.next(searchRequest);
   }
 
-  public sendAnalytics(searchRequest: SearchRequest, type: string, code: string) {
+  public sendAnalytics(searchRequest: SearchRequest, type: string, code: string): void {
     const catalog = this.catalogs[searchRequest.catalog].sendAnalytics(
       type, code, searchRequest.query, searchRequest.version);
   }

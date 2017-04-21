@@ -58,9 +58,9 @@ export class CatalogResolver implements Resolve<Catalog> {
 
     this.logger.log(`Catalog Resolver: ${route.url}`);
 
-    let domain = route.params['catalog'];
-    let version = route.params['version'];
-    let catalog = this.catalogs[domain];
+    const domain = route.params['catalog'];
+    const version = route.params['version'];
+    const catalog = this.catalogs[domain];
 
     // Activate catalog and return it, or redirect to start
     if (catalog) {

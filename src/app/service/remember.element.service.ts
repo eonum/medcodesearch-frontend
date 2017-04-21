@@ -1,8 +1,8 @@
 import { CatalogElement } from '../model/catalog.element';
 import { RememberedElement } from '../model/remembered.element';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Provides functions to mark/unmark an element as favorite.

@@ -126,7 +126,11 @@ export class CatalogService implements ICatalogService {
     throw new Error('Not found');
   }
 
-  private async getSingleElementForTypeByCode(elementType: string, version: string, code: string, query?: string, language?: string): Promise<CatalogElement> {
+  private async getSingleElementForTypeByCode(elementType: string,
+    version: string,
+    code: string,
+    query?: string,
+    language?: string): Promise<CatalogElement> {
     const locale: string = language || this.getLocale();
     let url = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
 

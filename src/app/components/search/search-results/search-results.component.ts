@@ -4,7 +4,7 @@ import { ILoggerService } from '../../../service/logging/i.logger.service';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogSearchService, SearchRequest } from '../../../service/routing/catalog-search.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Component to display the search results.
@@ -38,7 +38,7 @@ export class SearchResultsComponent implements OnInit {
       (results: CatalogElement[]) => this.searchResults = results
     );
 
-    this.route.queryParams.subscribe(val => console.log(val))
+    this.route.queryParams.subscribe(val => this.logger.log('Val: ', val));
 
     Observable.combineLatest(
       this.route.params, this.route.queryParams,

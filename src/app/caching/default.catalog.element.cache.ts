@@ -16,7 +16,7 @@ interface Cache {
         { [code: string]: CatalogElement }
       }
     }
-  }
+  };
 }
 
 export class DefaultCatalogElementCache implements ICatalogElementCache {
@@ -49,7 +49,7 @@ export class DefaultCatalogElementCache implements ICatalogElementCache {
 
   public addElement(language: string, catalog: string, version: string, type: string, code: string, element: CatalogElement): void {
     if (!language || !catalog || !version || !type || !code || !element) {
-      throw new Error("Argument exception");
+      throw new Error('Argument exception');
     }
 
     if (!this.internalCache[language]) {
@@ -57,15 +57,15 @@ export class DefaultCatalogElementCache implements ICatalogElementCache {
     }
 
     if (!this.internalCache[language][catalog]) {
-      this.internalCache[language][catalog] = {}
+      this.internalCache[language][catalog] = {};
     }
 
     if (!this.internalCache[language][catalog][version]) {
-      this.internalCache[language][catalog][version] = {}
+      this.internalCache[language][catalog][version] = {};
     }
 
     if (!this.internalCache[language][catalog][version][type]) {
-      this.internalCache[language][catalog][version][type] = {}
+      this.internalCache[language][catalog][version][type] = {};
     }
 
     this.internalCache[language][catalog][version][type][code] = element;

@@ -16,7 +16,7 @@ import { CatalogSearchService } from './service/routing/catalog-search.service';
 export class AppComponent implements OnInit {
   public title = 'medCodeSearch';
 
-  @ViewChild('tooltipElementAdded') tooltipElementAdded;
+  @ViewChild('tooltipElementAdded') public tooltipElementAdded;
 
   // TODO get from language guard or define constants for both.
   public languages = ['de', 'fr', 'it', 'en'];

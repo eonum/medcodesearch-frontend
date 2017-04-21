@@ -120,7 +120,7 @@ describe('RememberElementService', () => {
     const createdElement = RememberedElement.from(element, 'V1.0', 'icd', 'de');
     rememberService.add(element, 'V1.0', 'icd', 'de');
 
-    rememberService.getRememberedElements().subscribe(element => {
+    rememberService.getRememberedElements().subscribe(elements => {
       callback();
     });
 
