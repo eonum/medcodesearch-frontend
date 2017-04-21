@@ -86,16 +86,6 @@ export class DetailComponent {
   }
 
   /**
-   * Extracts the type from the url of a {@link CatalogElement}
-   * @param url the url of a {@link CatalogElement}
-   */
-  private extractTypeFromUrl(url: string): string {
-    const regex: RegExp = new RegExp('^\/[a-z]{2}\/([a-z_]+)\/.*$');
-    const match = regex.exec(url);
-    return match[1];
-  }
-
-  /**
    * Extracts the code from the url of a {@link CatalogElement}
    * @param url the url of a {@link CatalogElement}
    */
