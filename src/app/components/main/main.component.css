@@ -1,5 +1,11 @@
 #detail-component {
+  background-color: white;
   padding: 10px;
+  margin-top: 50px;
+  border: 1px solid #eee;
+  border-left-width: 0.5rem;
+  border-radius: 0.5rem;
+  border-left-color: #24add3;
 }
 
 #search-result-component{
@@ -9,3 +15,4 @@
 #main-component{
   padding-top: 0.5em;
 }
+

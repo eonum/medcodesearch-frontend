@@ -4,9 +4,28 @@
 .search-center {
     max-width: 500px;
     margin: auto;
+    text-align: center;
 }
 .btn-group:not(:first-child) {
     margin-left: 10px;
+}
+
+.form-control {
+border-radius: 0px;
+border-right-color: white;
+}
+
+.btn-go{
+border-radius: 0px;
+background-color: #24add3;
+}
+
+.btn-default{
+    border-radius: 0px;
+}
+
+.white, .white a {
+  color: #fff;
 }
 
 @media screen and (max-width: 560px) {

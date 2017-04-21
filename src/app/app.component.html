@@ -1,6 +1,7 @@
-<nav class="navbar navbar-default navbar-static-top">
+
   <div class="container">
-    <a id="title" class="navbar-brand" href="http://www.test.com">{{title}}</a>
+    <a id="title" href="https://eonum.github.io/medcodelogic-frontend/">
+      <img src="assets/medcodesearch_big.png"></a>
     <ul href="#" class="language-select">
       <li *ngFor="let language of languages">
         <a href="javascript:void(0)"
@@ -8,22 +9,21 @@
            (click)="setLanguage(language)">{{language}}</a>
       </li>
     </ul>
-    <button type="button" class="btn btn-default" [popover]="popTemplate" placement="bottom" popoverTitle="{{'LBL_REMEMBER_TITLE' | translate}}">
-      <span class="glyphicon glyphicon-shopping-cart"></span>
+    <button type="button" class="btn btn-default btn-remember" [popover]="popTemplate" placement="bottom" popoverTitle="{{'LBL_REMEMBER_TITLE' | translate}}">
+      <span class="glyphicon glyphicon-menu-down med-blue"></span>
       <span class="badge">{{countRememberedElements}}</span>
     </button>
     <ng-template #popTemplate>
       <app-remember-element></app-remember-element>
     </ng-template>
   </div>
-</nav>
 
-<div class="container" style="margin-bottom: 60px;">
+<div class="container" style="margin-bottom: 60px; margin-top: 10px;">
   <router-outlet></router-outlet>
 </div>
 
 <!-- Footer-->
-<div class="navbar navbar-default navbar-fixed-bottom">
+<div class="navbar navbar-default navbar-fixed-bottom row-fluid">
   <div class="container">
     <div class="navbar-text pull-left">
       <p>copyright by eonum</p>
