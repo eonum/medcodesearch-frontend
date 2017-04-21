@@ -6,6 +6,7 @@ export class RememberedElement {
   public catalog: string;
   public version: string;
   public type: string;
+  public name: string;
   public code: string;
 
   public static from(element: CatalogElement, version: string, catalog: string, language: string): RememberedElement {
@@ -14,6 +15,7 @@ export class RememberedElement {
     to.catalog = catalog;
     to.version = version;
     to.type = element.type;
+    to.name = element.name;
     to.code = element.code;
 
     return to;

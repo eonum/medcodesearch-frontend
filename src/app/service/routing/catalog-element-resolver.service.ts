@@ -107,15 +107,12 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
     let parent = element.parent;
 
     if (parent) {
-      // Keep parent url because eonum API doesn't return the url
-      // when the details of an element are loaded from the API
       const parentUrl = parent.url;
 
       const code: string = this.extractCodeFromUrl(parentUrl);
       const type: string = this.extractTypeFromUrl(parentUrl);
 
       parent = await this.getElement(language, catalog, version, type, code);
-      parent.url = parentUrl;
       element.parent = parent;
     }
     return Promise.resolve(parent);

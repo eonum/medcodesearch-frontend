@@ -6,6 +6,7 @@ import { Highlight } from './Highlight';
  * diagnosis.
  */
 export class CatalogElement {
+  public name?: string;
   public code: string;
   public text: string;
   public type: string;

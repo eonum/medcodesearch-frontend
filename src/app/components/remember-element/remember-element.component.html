@@ -1,7 +1,7 @@
 <table class="table" *ngIf="rememberedElements?.length > 0">
   <tr *ngFor="let element of rememberedElements">
     <td>
-      <a (click)="openCode(element)">{{element.code}}</a>
+      <a (click)="openCode(element)">{{element.name}}</a>
     </td>
     <td>
       <a class="glyphicon glyphicon-remove" (click)="removeElement(element)"></a>
