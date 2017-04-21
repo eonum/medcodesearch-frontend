@@ -42,9 +42,15 @@ export class ActivatedRouteStub {
   private queryParamsSubject = new BehaviorSubject(this.testQueryParams);
   private queryParams = this.queryParamsSubject.asObservable();
 
+  public snapshot = {
+    params: {},
+    queryParams: {}
+  };
+
   /*Set the given params as next value in the 'params'-observable*/
   public setTestParams(params: {}): void {
     this.testParams = params;
+    this.snapshot.params = params;
     this.paramsSubject.next(params);
 
   }
@@ -52,6 +58,7 @@ export class ActivatedRouteStub {
   /*Set the given params as next value in the 'params'-observable*/
   public setTestQueryParams(queryParams: {}): void {
     this.testQueryParams = queryParams;
+    this.snapshot.queryParams = queryParams;
     this.queryParamsSubject.next(queryParams);
   }
 
@@ -63,7 +70,7 @@ export class ActivatedRouteStub {
 
   /*Set the catalog as next value in the 'data'-observable*/
   public setCatalog(catalog: Catalog): void {
-    this.setTestData({ catalog: catalog });
+    this.setTestData({ catalog: catalog, version: 'SOME_VERSION' });
   }
 
 
