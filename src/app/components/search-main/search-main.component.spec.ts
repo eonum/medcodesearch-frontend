@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchMainComponent } from './search-main.component';
-import { SearchFormComponent } from '../search-form/search-form.component';
-import { SearchResultsComponent } from '../search-results/search-results.component';
+import { SearchFormComponent } from '../search/search-form/search-form.component';
+import { SearchResultsComponent } from '../search/search-results/search-results.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRouteStub, RouterStub } from '../../router-stub';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetailComponent } from './detail.component';
-import { SearchFormComponent } from "../search-form/search-form.component";
+import { SearchFormComponent } from "../search/search-form/search-form.component";
 import { DetailSwissDrgComponent } from "../detail-swiss-drg/detail-swiss-drg.component";
 import { DetailIcdComponent } from "../detail-icd/detail-icd.component";
 import { DetailChopComponent } from "../detail-chop/detail-chop.component";

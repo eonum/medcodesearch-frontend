@@ -1,9 +1,9 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
-import { ICDCatalog } from '../../catalog/icd.catalog';
-import { CHOPCatalog } from '../../catalog/chop.catalog';
-import { Catalog } from '../../catalog/catalog';
+import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
+import { ICDCatalog } from '../../../catalog/icd.catalog';
+import { CHOPCatalog } from '../../../catalog/chop.catalog';
+import { Catalog } from '../../../catalog/catalog';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalDirective, ModalModule } from 'ng2-bootstrap';
 

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { CatalogElement } from '../../model/catalog.element';
-import { Catalog } from '../../catalog/catalog';
+import { CatalogElement } from '../../../model/catalog.element';
+import { Catalog } from '../../../catalog/catalog';
 import { Router, ActivatedRoute } from '@angular/router';
 
 /**
