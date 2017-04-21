@@ -70,8 +70,14 @@ export class MainComponent implements OnInit {
       }
     }
 
+    /* The code of the root element is the same as the current
+     version for ICD and CHOP.
+     For SwissDRG, the code of the root element is 'ALL'.
+     This code is configured in the CatalogConfiguration
+     of SwissDRG.*/
     return {type: root.type, code: root.code || version};
   }
+
 
   /**
    * Navigate to `:type/:code` .

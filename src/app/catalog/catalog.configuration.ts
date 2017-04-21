@@ -29,10 +29,19 @@ export class CatalogConfiguration {
    */
   public versionParam: string;
 
+  /**
+   * Contains some information about the root element of the
+   * catalog.
+   * Contains information about its type and - if the code of
+   * the root element is constant - its code.
+   */
   public rootElement: { type: string, code?: string };
 }
 
-
+/**
+ * Contains the configurations for all catalogs, grouped by
+ * catalog name.
+ */
 export const catalogConfigurations: { [name: string]: CatalogConfiguration } = {
 
   'CHOP': {
