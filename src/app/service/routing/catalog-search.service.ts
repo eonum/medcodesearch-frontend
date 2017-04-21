@@ -9,6 +9,9 @@ import { CatalogElement } from '../../model/catalog.element';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+
 export class SearchRequest {
   public catalog: string;
   public version: string;
