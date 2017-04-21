@@ -12,7 +12,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { Http, HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { PopoverModule } from 'ng2-bootstrap';
+import {PopoverModule, TooltipModule} from 'ng2-bootstrap';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -27,7 +27,8 @@ describe('AppComponent', () => {
             deps: [Http]
           }
         }),
-        PopoverModule.forRoot()
+        PopoverModule.forRoot(),
+        TooltipModule.forRoot(),
       ],
       declarations: [
         AppComponent,
@@ -60,7 +61,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('#title').textContent).toContain('medCodeSearch');
+    expect(compiled.querySelector('#title').innerHTML).toContain('<img');
 
   }));
 });

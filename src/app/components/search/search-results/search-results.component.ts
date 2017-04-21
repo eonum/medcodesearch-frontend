@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogSearchService, SearchRequest } from '../../../service/routing/catalog-search.service';
 import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/observable/combineLatest';
 /**
  * Component to display the search results.
  * Receives the `searchResults` as input from the {@link MainComponent}.
