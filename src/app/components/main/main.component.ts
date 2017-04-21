@@ -61,6 +61,11 @@ export class MainComponent implements OnInit {
 
         const rootElement = config.rootElement;
 
+        // The code of the root element is the same as the current
+        // version for ICD and CHOP.
+        // For SwissDRG, the code of the root element is 'ALL'.
+        // This code is configured in the CatalogConfiguration
+        // of SwissDRG.
         this.router.navigate(
           [rootElement.type, rootElement.code || version], {
             relativeTo: this.route,
