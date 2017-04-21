@@ -20,8 +20,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalModule, TooltipModule } from 'ng2-bootstrap';
 import * as TypeMoq from 'typemoq';
-import {CatalogSearchService} from '../../service/routing/catalog-search.service';
-import {RouterTestingModule} from '@angular/router/testing';
+import { CatalogSearchService } from '../../service/routing/catalog-search.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MainComponent', () => {
 
@@ -92,7 +92,7 @@ describe('MainComponent', () => {
 
     // Set up the activated route stub
     route = fixture.debugElement.injector.get(ActivatedRoute);
-    route.setTestParams({'catalog':'CATALOG', 'version':'VERSION'})
+    route.setTestParams({ 'catalog': 'CATALOG', 'version': 'VERSION' })
     route.setQuery(query);
     fixture.detectChanges();
   });
@@ -102,13 +102,13 @@ describe('MainComponent', () => {
   });
 
   it('should store the query', () => {
-      expect(component.query).toBe(query);
+    expect(component.query).toBe(query);
   });
 
   it('should call the catalogs search function and set the results', () => {
     fixture.whenStable().then(() => {
       // search should now be finished and the results set
-     //expect(component.searchResults).toBe(searchResults);
+      //expect(component.searchResults).toBe(searchResults);
     });
   });
 });
