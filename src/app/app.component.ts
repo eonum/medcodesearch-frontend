@@ -33,9 +33,12 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.rememberService.getRememberedElements().subscribe((elements: RememberedElement[]) => {
+      const oldNumberOfElements = this.countRememberedElements;
       this.countRememberedElements = elements.length;
-      this.tooltipElementAdded.show();
-      setTimeout(() => { this.tooltipElementAdded.hide(); }, 2000);
+      if (oldNumberOfElements < elements.length){
+        this.tooltipElementAdded.show();
+        setTimeout(() => { this.tooltipElementAdded.hide(); }, 2000);
+      }
     });
   }
 
