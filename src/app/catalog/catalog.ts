@@ -74,30 +74,6 @@ export abstract class Catalog {
     return Promise.resolve(germanVersions);
   }
 
-  public getRootElement(): Promise<CatalogElement> {
-    const rootElementType: string = this.getRootElementType();
-    const rootElementCode: string = this.getRootElementCode();
-
-    return this.getByCode(rootElementType, rootElementCode);
-  }
-
-  /**
-   * Return the type and code of the root element in an array that can be used as route params.
-   *
-   * @returns {[string,string]}
-   */
-  public getRootElementParams(): string[] {
-    return [this.getRootElementType(), this.getRootElementCode()];
-  }
-
-  public getRootElementType(): string {
-    return this.config.rootElement.type;
-  }
-
-  protected getRootElementCode(): string {
-    return this.activeVersion;
-  }
-
   private initService(): void {
     this.service.init(this.config);
   }

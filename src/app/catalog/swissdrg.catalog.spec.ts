@@ -29,7 +29,7 @@ describe('SwissDrgCatalog', () => {
         searchableTypes: ['drgs'],
         retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
         versionParam: 'drgs',
-        rootElementType: 'mdcs'
+        rootElement: { type: 'mdcs', code: 'ALL' }
       }))).verifiable(TypeMoq.Times.atLeastOnce());
 
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
@@ -44,7 +44,7 @@ describe('SwissDrgCatalog', () => {
         searchableTypes: ['drgs'],
         retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
         versionParam: 'drgs',
-        rootElementType: 'mdcs'
+        rootElement: { type: 'mdcs', code: 'ALL' }
       }))).verifiable(TypeMoq.Times.atLeastOnce());
 
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
@@ -97,20 +97,6 @@ describe('SwissDrgCatalog', () => {
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
     catalog.activateVersion('V1.0').then(res => {
       expect(catalog.getActiveVersion()).toBe('V1.0');
-    });
-  }));
-
-  it('Should return the root element', async(() => {
-    const root: CatalogElement = { code: 'ALL', text: 'The root', url: 'url/to/root', type: 'drgs' };
-    mock.setup(x => x.getByCode('V1.0', 'mdcs', 'ALL')).returns(() => {
-      return Promise.resolve(root);
-    });
-
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
-    catalog.activateVersion('V1.0').then(res => {
-      catalog.getRootElement().then(element => {
-        expect(element).toBe(root);
-      });
     });
   }));
 
