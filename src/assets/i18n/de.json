@@ -16,6 +16,7 @@
   "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "Der gewählte Katalog ist in der aktuellen Sprache nicht verfügbar.",
   "LBL_BACK": "Zurück",
   "LBL_REMEMBER_TITLE": "Markierte Elemente",
-  "LBL_REMEMBER_NOELEMENTS": "Sie haben noch keine Elemente markiert."
+  "LBL_REMEMBER_NOELEMENTS": "Sie haben noch keine Elemente markiert.",
+  "LBL_ELEMENT_ADDED": "Das Element wurde markiert."
 }
 

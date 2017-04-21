@@ -16,5 +16,6 @@
   "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "The selected catalog is not available for the current language.",
   "LBL_BACK": "Back",
   "LBL_REMEMBER_TITLE": "Marked elements",
-  "LBL_REMEMBER_NOELEMENTS": "You didn't mark any elements so far."
+  "LBL_REMEMBER_NOELEMENTS": "You didn't mark any elements so far.",
+  "LBL_ELEMENT_ADDED": "The element has been marked."
 }

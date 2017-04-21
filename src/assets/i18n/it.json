@@ -16,5 +16,6 @@
   "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "Il catalogo selezionato non è disponibile nel linguaggio corrente.",
   "LBL_BACK": "Ritorno",
   "LBL_REMEMBER_TITLE": "Elementi marqués",
-  "LBL_REMEMBER_NOELEMENTS": "Hai segnato alcun elemento finora."
+  "LBL_REMEMBER_NOELEMENTS": "Hai segnato alcun elemento finora.",
+  "LBL_ELEMENT_ADDED": "L'elemento è contrassegnato."
 }
