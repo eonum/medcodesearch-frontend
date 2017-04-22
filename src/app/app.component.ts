@@ -1,11 +1,10 @@
-import { RememberedElement } from './model/remembered.element';
-import { ILoggerService } from './service/logging/i.logger.service';
-import { RememberElementService } from './service/remember.element.service';
-import { CatalogResolver } from './service/routing/catalog-resolver.service';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { CatalogSearchService } from './service/routing/catalog-search.service';
+import {RememberedElement} from './model/remembered.element';
+import {ILoggerService} from './service/logging/i.logger.service';
+import {RememberElementService} from './service/remember.element.service';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {Settings} from './settings';
 
 @Component({
   selector: 'app-root',
@@ -18,16 +17,15 @@ export class AppComponent implements OnInit {
 
   @ViewChild('tooltipElementAdded') public tooltipElementAdded;
 
-  // TODO get from language guard or define constants for both.
-  public languages = ['de', 'fr', 'it', 'en'];
+  public languages = Settings.LANGUAGES;
 
   public countRememberedElements = 0;
 
   constructor(public translate: TranslateService,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private catalogResolver: CatalogResolver,
-    private router: Router,
-    private rememberService: RememberElementService) {
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private rememberService: RememberElementService) {
     translate.addLangs(this.languages);
   }
 
@@ -37,14 +35,17 @@ export class AppComponent implements OnInit {
       this.countRememberedElements = elements.length;
       if (oldNumberOfElements < elements.length) {
         this.tooltipElementAdded.show();
-        setTimeout(() => { this.tooltipElementAdded.hide(); }, 2000);
+        setTimeout(() => {
+          this.tooltipElementAdded.hide();
+        }, 2000);
       }
     });
   }
 
   public setLanguage(language: string): void {
+    const {catalog, version} = this.route.firstChild.firstChild.snapshot.params;
     this.router.navigate(
-      [language].concat(this.catalogResolver.getActiveRouteParams())
+      [language, catalog, version]
     ).catch(e => this.logger.log(e));
   }
 }

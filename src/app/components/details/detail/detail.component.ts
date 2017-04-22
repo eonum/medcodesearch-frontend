@@ -1,8 +1,8 @@
-import { CatalogElement } from '../../../model/catalog.element';
-import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { RememberElementService } from '../../../service/remember.element.service';
-import { Component, Inject } from '@angular/core';
-import { ActivatedRoute, Data, Router } from '@angular/router';
+import {CatalogElement} from '../../../model/catalog.element';
+import {ILoggerService} from '../../../service/logging/i.logger.service';
+import {RememberElementService} from '../../../service/remember.element.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -20,7 +20,7 @@ import { ActivatedRoute, Data, Router } from '@angular/router';
   styleUrls: ['./detail.component.css']
 })
 
-export class DetailComponent {
+export class DetailComponent implements OnInit {
 
   /**
    * The active catalog, resolved from the activated route.
@@ -48,20 +48,21 @@ export class DetailComponent {
   public count = 0;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    private rememberService: RememberElementService,
-    @Inject('ILoggerService') private logger: ILoggerService) {
+              private router: Router,
+              private rememberService: RememberElementService,
+              @Inject('ILoggerService') private logger: ILoggerService) {
+  }
 
+  public ngOnInit() {
     this.route.data.subscribe((data: Data) => {
-      this.selectedElement = data.catalogElement;
-      this.updateView();
-    }
+        this.selectedElement = data.catalogElement;
+        this.updateView();
+      }
     );
   }
 
-
   public updateView(): void {
-    this.catalog = this.route.snapshot.params['catalog'];
+    this.catalog = this.route.parent.snapshot.params['catalog'];
     this.setHierarchy();
     this.children = this.selectedElement.children;
   }

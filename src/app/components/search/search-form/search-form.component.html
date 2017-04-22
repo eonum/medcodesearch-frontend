@@ -1,47 +1,55 @@
 <ng-template [ngIf]="catalog">
 
   <div class="row search">
-      <div class="col-xs-12">
-          <div class="input-group search-center">
-              <input type="text" class="form-control" [formControl]="searchForm" placeholder="{{'LBL_SEARCH_PLACEHOLDER' | translate}}" #searchBox value="{{query}}" (keyup.enter)="search(searchBox.value)">
+    <div class="col-xs-12">
+      <div class="input-group search-center">
+        <input type="text" class="form-control" [formControl]="searchForm"
+               placeholder="{{'LBL_SEARCH_PLACEHOLDER' | translate}}" #searchBox value="{{query}}"
+               (keyup.enter)="search(searchBox.value)">
 
-            <span class="input-group-btn">
-                  <button class="btn btn-default btn-go" type="button" (click)="search(searchBox.value);"><span class="glyphicon glyphicon-search white"></span></button>
+        <span class="input-group-btn">
+                  <button class="btn btn-default btn-go" type="button" (click)="search(searchBox.value);"><span
+                    class="glyphicon glyphicon-search white"></span></button>
               </span>
-          </div>
       </div>
+    </div>
   </div>
 
   <div class="row">
-      <div class="col-xs-12">
-        <div class="search-center">
+    <div class="col-xs-12">
+      <div class="search-center">
 
-          <div class="btn-group" dropdown *ngFor="let cat of catalogs">
-              <button type="button" class="catalog btn btn-default"
-                      [ngClass]="{'active': cat.getDomain() === catalog}"
-                      (click)="updateCatalog(cat)">{{cat.name}}</button>
+        <div class="btn-group" dropdown *ngFor="let catDisplay of catalogDisplayInfos">
+          <button type="button" class="catalog btn btn-default"
+                  [ngClass]="{'active': catDisplay.catalog === catalog}"
+                  (click)="updateCatalog(catDisplay.catalog)">{{catDisplay.catalog}}
+          </button>
 
-              <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
-                  <span>{{cat.activeVersion | correctVersion}}</span>
-                  <span class="caret"></span>
-                  <span class="sr-only">{{cat.activeVersion}}</span>
-              </button>
-            <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
-                  <li *ngFor="let version of cat.versions['de'] "
-                      [ngClass]="{'active': cat.activeVersion === version}" role="menuitem"
-                      (click)="updateCatalog(cat, version)">
-                    <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
-                  </li>
-              </ul>
+          <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
+            <span>{{catDisplay.displayVersion | correctVersion}}</span>
+            <span class="caret"></span>
+            <span class="sr-only">{{catDisplay.displayVersion}}</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
+            <li *ngFor="let version of catDisplay.displayVersions"
+                [ngClass]="{
+                'active': catDisplay.activeVersion === version,
+                'disabled': catDisplay.languageVersions.indexOf(version) === -1
+                 }" role="menuitem"
+                (click)="updateCatalog(catDisplay.catalog, version)">
+              <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
+            </li>
+          </ul>
 
-              </div>
-          </div>
-
+        </div>
       </div>
+
+    </div>
   </div>
 
 
-  <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+       aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
@@ -56,8 +64,9 @@
 
         <div class="modal-footer">
           <button class="btn btn-default pull-left" (click)="hideChildModal()">{{'LBL_BACK' | translate}}</button>
-            <button *ngFor="let lang of languages"
-              type="button" class="btn btn-default" data-dismiss="modal" (click)="changeLanguage(lang)">{{lang}}</button>
+          <button *ngFor="let lang of languages"
+                  type="button" class="btn btn-default" data-dismiss="modal" (click)="changeLanguage(lang)">{{lang}}
+          </button>
         </div>
       </div>
     </div>

@@ -38,29 +38,30 @@ export class CatalogConfiguration {
   public rootElement: { type: string, code?: string };
 }
 
+
 /**
  * Contains the configurations for all catalogs, grouped by
  * catalog name.
  */
 export const catalogConfigurations: { [name: string]: CatalogConfiguration } = {
 
-  'CHOP': {
-    searchableTypes: ['chops'],
-    retrievableTypes: ['chops', 'chop_chapters'],
-    versionParam: 'chops',
-    rootElement: { type: 'chop_chapters' }
-  },
   'ICD': {
     searchableTypes: ['icds'],
     retrievableTypes: ['icds', 'icd_groups', 'icd_chapters'],
     versionParam: 'icds',
-    rootElement: { type: 'icd_chapters' }
+    rootElement: {type: 'icd_chapters'}
+  },
+  'CHOP': {
+    searchableTypes: ['chops'],
+    retrievableTypes: ['chops', 'chop_chapters'],
+    versionParam: 'chops',
+    rootElement: {type: 'chop_chapters'}
   },
   'SwissDRG': {
     searchableTypes: ['drgs'],
     retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
     versionParam: 'drgs',
-    rootElement: { type: 'mdcs', code: 'ALL' }
+    rootElement: {type: 'mdcs', code: 'ALL'}
   }
 
 };

@@ -13,14 +13,14 @@ const routes: Routes = [
     children: [
       {
         path: ':catalog',
+        resolve: { displayInfos: CatalogResolver },
         component: MainComponent,
-        resolve: { catalog: CatalogResolver }
       },
       {
         path: ':catalog/:version',
         component: MainComponent,
         resolve: {
-          catalog: CatalogResolver
+          displayInfos: CatalogResolver
         },
         children: [
           {
@@ -35,7 +35,7 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'icd',
+        redirectTo: 'ICD',
         pathMatch: 'full'
       }
     ]

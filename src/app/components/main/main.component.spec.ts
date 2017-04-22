@@ -23,6 +23,7 @@ import * as TypeMoq from 'typemoq';
 import {CatalogSearchService} from '../../service/routing/catalog-search.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {By} from '@angular/platform-browser';
+import {CatalogResolver} from '../../service/routing/catalog-resolver.service';
 
 describe('MainComponent', () => {
 
@@ -78,7 +79,8 @@ describe('MainComponent', () => {
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         {provide: 'ICatalogService', useClass: CatalogServiceMock},
         {provide: 'ILoggerService', useClass: NullLoggerService},
-        CatalogSearchService
+        CatalogSearchService,
+        CatalogResolver
       ]
     })
       .compileComponents();

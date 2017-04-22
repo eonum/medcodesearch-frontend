@@ -1,10 +1,9 @@
-import { Catalog } from '../../../catalog/catalog';
-import { CatalogElement } from '../../../model/catalog.element';
-import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CatalogSearchService, SearchRequest } from '../../../service/routing/catalog-search.service';
-import { Observable } from 'rxjs/Observable';
+import {CatalogElement} from '../../../model/catalog.element';
+import {ILoggerService} from '../../../service/logging/i.logger.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CatalogSearchService, SearchRequest} from '../../../service/routing/catalog-search.service';
+import {Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/observable/combineLatest';
 /**
@@ -25,9 +24,9 @@ export class SearchResultsComponent implements OnInit {
   public selectedCode: string;
 
   public constructor(private route: ActivatedRoute,
-    private router: Router,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private searchService: CatalogSearchService) {
+                     private router: Router,
+                     @Inject('ILoggerService') private logger: ILoggerService,
+                     private searchService: CatalogSearchService) {
   }
 
   /**
@@ -39,8 +38,6 @@ export class SearchResultsComponent implements OnInit {
       (results: CatalogElement[]) => this.searchResults = results
     );
 
-    this.route.queryParams.subscribe(val => this.logger.log('Val: ', val));
-
     Observable.combineLatest(
       this.route.params, this.route.queryParams,
       (params, queryParams) => Object.assign({}, params, queryParams) as SearchRequest
@@ -48,8 +45,13 @@ export class SearchResultsComponent implements OnInit {
 
   }
 
+  /**
+   * Handle click on a {@link CatalogElement}
+   * @param type
+   * @param code
+   */
   public openCode(type: string, code: string): void {
-    this.selectedCode = code; // mark for template
+    this.selectedCode = code;
 
     this.sendAnalytics(type, code);
     this.redirectToCode(type, code);
@@ -68,9 +70,9 @@ export class SearchResultsComponent implements OnInit {
   private redirectToCode(type: string, code: string): void {
 
     this.router.navigate([type, code], {
-      queryParamsHandling: 'merge',
-      relativeTo: this.route
-    }
+        queryParamsHandling: 'merge',
+        relativeTo: this.route
+      }
     ).catch(error => this.logger.error(error));
   }
 

@@ -2,6 +2,7 @@ import { ILoggerService } from '../logging/i.logger.service';
 import { Inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Settings } from '../../settings';
 
 /**
  * This is an authentication guard that grants always access,
@@ -14,13 +15,13 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class LanguageGuard implements CanActivate {
 
-  private DEFAULT_LANGUAGE = 'de';
-  private languages = ['de', 'fr', 'it', 'en'];
+
+  private languages = Settings.LANGUAGES;
 
   constructor(private translate: TranslateService,
     private router: Router,
     @Inject('ILoggerService') private logger: ILoggerService) {
-    translate.setDefaultLang(this.DEFAULT_LANGUAGE);
+    translate.setDefaultLang(Settings.DEFAULT_LANGUAGE);
   }
 
   /**
@@ -42,7 +43,7 @@ export class LanguageGuard implements CanActivate {
     }
 
     // get browser language or default
-    language = this.matchingLanguage(navigator.language) || this.DEFAULT_LANGUAGE;
+    language = this.matchingLanguage(navigator.language) || Settings.DEFAULT_LANGUAGE;
 
     // redirect
     this.router.navigate([language]).catch(error => this.logger.log(error));
@@ -72,7 +73,7 @@ export class LanguageGuard implements CanActivate {
     if (this.languages.indexOf(language) > -1) {
       this.translate.use(language);
     } else {
-      this.router.navigate([this.DEFAULT_LANGUAGE]);
+      this.router.navigate([Settings.DEFAULT_LANGUAGE]);
     }
   }
 }
