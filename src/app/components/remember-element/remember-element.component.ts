@@ -1,7 +1,7 @@
 import { RememberedElement } from '../../model/remembered.element';
 import { ILoggerService } from '../../service/logging/i.logger.service';
 import { RememberElementService } from '../../service/remember.element.service';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 /**
@@ -15,7 +15,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RememberElementComponent implements OnInit {
 
-  public rememberedElements: RememberedElement[];
+  public rememberedElements: RememberedElement[] = [];
+  
+  @ViewChild('tooltipElementAdded') public tooltipElementAdded;
 
   constructor(private rememberService: RememberElementService,
     private router: Router,
@@ -24,7 +26,12 @@ export class RememberElementComponent implements OnInit {
 
   public ngOnInit(): void {
     this.rememberService.getRememberedElements().subscribe((elements: RememberedElement[]) => {
+      const oldNumberOfElements = this.rememberedElements.length;
       this.rememberedElements = elements;
+      if (oldNumberOfElements < elements.length) {
+        this.tooltipElementAdded.show();
+        setTimeout(() => { this.tooltipElementAdded.hide(); }, 2000);
+      }
     });
   }
 
