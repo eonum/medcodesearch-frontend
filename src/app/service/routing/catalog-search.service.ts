@@ -1,13 +1,13 @@
-import { Catalog } from '../../catalog/catalog';
-import { CHOPCatalog } from '../../catalog/chop.catalog';
-import { ICDCatalog } from '../../catalog/icd.catalog';
-import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
-import { ILoggerService } from '../logging/i.logger.service';
-import { Inject, Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CatalogElement } from '../../model/catalog.element';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
+import {Catalog} from '../../catalog/catalog';
+import {CHOPCatalog} from '../../catalog/chop.catalog';
+import {ICDCatalog} from '../../catalog/icd.catalog';
+import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
+import {ILoggerService} from '../logging/i.logger.service';
+import {Inject, Injectable} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CatalogElement} from '../../model/catalog.element';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
 
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
@@ -41,28 +41,28 @@ export class CatalogSearchService {
    * @param icdCatalog
    */
   constructor(private route: ActivatedRoute,
-    private swissDrgCatalog: SwissDrgCatalog,
-    private chopCatalog: CHOPCatalog,
-    private icdCatalog: ICDCatalog,
-    @Inject('ILoggerService') private logger: ILoggerService) {
+              private swissDrgCatalog: SwissDrgCatalog,
+              private chopCatalog: CHOPCatalog,
+              private icdCatalog: ICDCatalog,
+              @Inject('ILoggerService') private logger: ILoggerService) {
 
     this.catalogs = {};
-    this.catalogs[swissDrgCatalog.getDomain()] = swissDrgCatalog;
-    this.catalogs[chopCatalog.getDomain()] = chopCatalog;
-    this.catalogs[icdCatalog.getDomain()] = icdCatalog;
+    this.catalogs[swissDrgCatalog.getName()] = swissDrgCatalog;
+    this.catalogs[chopCatalog.getName()] = chopCatalog;
+    this.catalogs[icdCatalog.getName()] = icdCatalog;
 
     this.searchResults = new BehaviorSubject(null); // fires always latest value on new subscription
 
     this.requests = new Subject();
 
-    /*Perform search when a new (distinct) search request is fired and
-    * use switch map to push always only the newest result to the search results.*/
+    /*Perform search when a new (distinct) search request is fired, and
+     * use switch map to push always only the newest result to the search results.*/
     this.requests.asObservable()
       .distinctUntilChanged(this.requestsEqual)
       .switchMap((request: SearchRequest) => this.doSearch(request))
       .subscribe(
-      (results: CatalogElement[]) => this.searchResults.next(results),
-      error => this.logger.error('[CatalogSearchService]', error));
+        (results: CatalogElement[]) => this.searchResults.next(results),
+        error => this.logger.error('[CatalogSearchService]', error));
   }
 
   private doSearch(searchRequest: SearchRequest): Promise<CatalogElement[]> {
@@ -72,7 +72,7 @@ export class CatalogSearchService {
       return this.catalogs[searchRequest.catalog].search(
         searchRequest.version, searchRequest.query);
     }
-    this.logger.log('No catalog in search request', searchRequest);
+    this.logger.error('No catalog in search request', searchRequest);
     return null;
   }
 
@@ -85,7 +85,6 @@ export class CatalogSearchService {
   }
 
   public search(searchRequest: SearchRequest): void {
-    this.logger.log('Search: ', searchRequest);
     this.requests.next(searchRequest);
   }
 

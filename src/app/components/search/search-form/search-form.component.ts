@@ -1,14 +1,15 @@
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { Catalog } from '../../../catalog/catalog';
-import { CHOPCatalog } from '../../../catalog/chop.catalog';
-import { ICDCatalog } from '../../../catalog/icd.catalog';
-import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
-import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ModalDirective } from 'ng2-bootstrap';
+import {Catalog} from '../../../catalog/catalog';
+import {CHOPCatalog} from '../../../catalog/chop.catalog';
+import {ICDCatalog} from '../../../catalog/icd.catalog';
+import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
+import {ILoggerService} from '../../../service/logging/i.logger.service';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {ActivatedRoute, Data, Params, Router} from '@angular/router';
+import {ModalDirective} from 'ng2-bootstrap';
+import {CatalogDisplayInfo, CatalogResolver} from '../../../service/routing/catalog-resolver.service';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -35,28 +36,18 @@ export class SearchFormComponent implements OnInit {
   public query: string;
   public catalog: string;
 
-  public catalogs: Catalog[]; // to display catalog selection
   public languages: string[];
   public selectedVersion: string;
   public searchForm = new FormControl();
 
+  public catalogDisplayInfos: CatalogDisplayInfo[];
+
   @ViewChild('childModal') public childModal: ModalDirective;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private swissDrgCatalog: SwissDrgCatalog,
-    private chopCatalog: CHOPCatalog,
-    private icdCatalog: ICDCatalog) {
-
-    this.logger.log('[SearchComponent] constructor');
-
-    this.catalogs = [icdCatalog, chopCatalog, swissDrgCatalog];
-
-    // Initialize the versions
-    this.swissDrgCatalog.getVersions();
-    this.chopCatalog.getVersions();
-    this.icdCatalog.getVersions();
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private catalogResolver: CatalogResolver) {
 
     this.searchForm.valueChanges
       .debounceTime(500)
@@ -68,14 +59,21 @@ export class SearchFormComponent implements OnInit {
   }
 
   /**
-   * Subscribe to route parameter to mark the selected catalog and displaythe query.
+   * Subscribe to route parameters.
    */
   public ngOnInit(): void {
+
     this.route.params.subscribe((params: Params) => {
+      // for the button styles
       this.catalog = params['catalog'];
     });
     this.route.queryParams.subscribe((params: Params) => {
+      // for the search field
       this.query = params['query'];
+    });
+    this.route.data.subscribe((data: Data) => {
+      // for the versions to display
+      this.catalogDisplayInfos = data.displayInfos;
     });
   }
 
@@ -89,23 +87,51 @@ export class SearchFormComponent implements OnInit {
 
   public changeLanguage(language: string): void {
     this.childModal.hide();
-    this.router.navigate([language, this.catalog, this.selectedVersion]
+    const params = [language, this.catalog];
+    if (this.selectedVersion) {
+      params.push(this.selectedVersion);
+    }
+    this.router.navigate(params
     ).catch(error => this.logger.error(error));
   }
 
   /**
    * Update based on catalog selection.
    */
-  public updateCatalog(catalog: Catalog, version?: string): void {
-    version = version || catalog.getActiveVersion();
-    if (!catalog.hasVersionInCurrentLanguage(version)) {
-      this.languages = catalog.getVersionLanguages(version);
-      this.catalog = catalog.getDomain();
-      this.selectedVersion = version;
-      this.childModal.show();
-    } else {
-      this.redirect(catalog.getDomain(), version, this.query);
+  public updateCatalog(catalog: string, version?: string): void {
+
+    // get the right CatalogDisplayInfo to check the version
+    const info = this.catalogDisplayInfos.find(
+      (inf: CatalogDisplayInfo) => inf.catalog === catalog);
+
+    if (!info) {
+      this.logger.error(`[UpdateCatalog] CatalogDisplayInfo for ${catalog} does not exist`);
+      return;
     }
+
+    version = version || info.displayVersion;
+
+    if (info.languageVersions.indexOf(version) === -1) {
+      this.showLanguageSelector(catalog, version);
+    } else {
+      this.redirect(catalog, version, this.query);
+    }
+  }
+
+  /**
+   * Get and set the available languages for the given catalog and version and open the modal.
+   *
+   * @param catalog must be one of {@link Settings.CATALOGS }
+   * @param version
+   * @returns {null}
+   */
+  private async showLanguageSelector(catalog: string, version: string): Promise<boolean> {
+    this.languages = await this.catalogResolver.getLanguages(catalog, version);
+
+    this.catalog = catalog;
+    this.selectedVersion = version;
+    this.childModal.show();
+    return null;
   }
 
   /**
@@ -115,7 +141,7 @@ export class SearchFormComponent implements OnInit {
 
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: query.length > 0 ? { query: query } : null
+      queryParams: query.length > 0 ? {query: query} : null
     }).catch(error => this.logger.error(error));
   }
 
@@ -127,7 +153,7 @@ export class SearchFormComponent implements OnInit {
    */
   private redirect(catalog: string, version: string, query: string): void {
 
-    const params = [catalog, version];
+    const params = version ? [catalog, version] : [catalog];
 
     this.router.navigate(params, {
       relativeTo: this.route.parent,

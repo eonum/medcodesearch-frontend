@@ -1,8 +1,9 @@
 import { ILoggerService } from './service/logging/i.logger.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Settings } from './settings';
 
 @Component({
   selector: 'app-root',
@@ -13,21 +14,22 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent implements OnInit {
   public title = 'medCodeSearch';
 
-  // TODO get from language guard or define constants for both.
-  public languages = ['de', 'fr', 'it', 'en'];
+  public languages = Settings.LANGUAGES;
 
   constructor(public translate: TranslateService,
     @Inject('ILoggerService') private logger: ILoggerService,
     private catalogResolver: CatalogResolver,
-    private router: Router) {
+    private router: Router,
+    private route: ActivatedRoute) {
     translate.addLangs(this.languages);
   }
 
   public ngOnInit(): void { }
 
   public setLanguage(language: string): void {
+    const {catalog, version} = this.route.firstChild.firstChild.snapshot.params;
     this.router.navigate(
-      [language].concat(this.catalogResolver.getActiveRouteParams())
+      [language, catalog, version]
     ).catch(e => this.logger.log(e));
   }
 }

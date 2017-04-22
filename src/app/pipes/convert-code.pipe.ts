@@ -1,17 +1,16 @@
-import { Catalog } from '../catalog/catalog';
-import { ILoggerService } from '../service/logging/i.logger.service';
-import { Inject, NgZone, Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ILoggerService} from '../service/logging/i.logger.service';
+import {Inject, NgZone, Pipe, PipeTransform} from '@angular/core';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
 
-@Pipe({ name: 'convertCode' })
+@Pipe({name: 'convertCode'})
 export class ConvertCodePipe implements PipeTransform {
 
   constructor(private sanitizer: DomSanitizer,
-    private ngZone: NgZone,
-    private route: ActivatedRoute,
-    private router: Router,
-    @Inject('ILoggerService') private logger: ILoggerService) {
+              private ngZone: NgZone,
+              private route: ActivatedRoute,
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService) {
     window['eonum'] = window['eonum'] || {};
     window['eonum'].searchCode = this.searchCode.bind(this);
   }
@@ -40,6 +39,7 @@ export class ConvertCodePipe implements PipeTransform {
     return link;
   }
 
+
   public searchCode(query: string): void {
     this.ngZone.run(() => this.searchCodeRun(query));
   }
@@ -49,12 +49,10 @@ export class ConvertCodePipe implements PipeTransform {
     while (currentRoute.children[0] !== undefined) {
       currentRoute = currentRoute.children[0];
     }
-    const catalog: Catalog = currentRoute.snapshot.data.catalog;
-    const version: string = currentRoute.snapshot.params['version'];
-    const language: string = currentRoute.snapshot.params['language'];
 
-    this.router.navigate([language, catalog.getDomain(), version], {
-      queryParams: { 'query': query }
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {'query': query}
     }).catch(error => this.logger.log(error));
   }
 }

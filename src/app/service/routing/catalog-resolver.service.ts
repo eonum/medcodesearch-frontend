@@ -1,120 +1,215 @@
-import { Catalog } from '../../catalog/catalog';
-import { CHOPCatalog } from '../../catalog/chop.catalog';
-import { ICDCatalog } from '../../catalog/icd.catalog';
-import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
-import { ILoggerService } from '../logging/i.logger.service';
-import { Inject, Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import {Catalog} from '../../catalog/catalog';
+import {CHOPCatalog} from '../../catalog/chop.catalog';
+import {ICDCatalog} from '../../catalog/icd.catalog';
+import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
+import {ILoggerService} from '../logging/i.logger.service';
+import {Inject, Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
+import {Settings} from '../../settings';
+
+
+export interface CatalogDisplayInfo {
+  catalog: string;
+  displayVersions: string[];
+  languageVersions: string[];
+  displayVersion: string;
+}
 
 /**
- * This service acts as resolver for a path that contains a `catalog`
- * and `version` parameter.
- * It gives the {@link MainComponent} access to the {@link Catalog}
- * that corresponds to the route, and saves it for global usage.
- *
- * @see
- * {@link AppRoutingModule},
+ * This service acts as resolver catalog - version - language related lookups.
+ * It resolves {@link CatalogDisplayInformation}'s for the SearchFormComponent,
+ * and handles redirects to a default catalog version from the route :language/:catalog/.
+ **
+ * @see {@link AppRoutingModule},
  * {@link https://angular.io/docs/ts/latest/guide/router.html#resolve-guard}
  *
  */
 @Injectable()
-export class CatalogResolver implements Resolve<Catalog> {
+export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
 
   /**Domain to catalog map for all available catalogs.*/
   private catalogs: { [domain: string]: Catalog };
 
-  /**To give global access to the active catalog*/
-  private activeCatalog: Catalog;
+  public activeVersions: { [language: string]: { [catalog: string]: string } } = {};
 
-  /**
-   * Constructor for class CatalogResolver.
-   *
-   * @param router
-   * @param swissDrgCatalog
-   * @param chopCatalog
-   * @param icdCatalog
-   */
+
   constructor(private router: Router,
-    private swissDrgCatalog: SwissDrgCatalog,
-    private chopCatalog: CHOPCatalog,
-    private icdCatalog: ICDCatalog,
-    @Inject('ILoggerService') private logger: ILoggerService) {
+              private swissDrgCatalog: SwissDrgCatalog,
+              private chopCatalog: CHOPCatalog,
+              private icdCatalog: ICDCatalog,
+              @Inject('ILoggerService') private logger: ILoggerService) {
 
     this.catalogs = {};
-    this.catalogs[swissDrgCatalog.getDomain()] = swissDrgCatalog;
-    this.catalogs[chopCatalog.getDomain()] = chopCatalog;
-    this.catalogs[icdCatalog.getDomain()] = icdCatalog;
+    this.catalogs[icdCatalog.getName()] = icdCatalog;
+    this.catalogs[chopCatalog.getName()] = chopCatalog;
+    this.catalogs[swissDrgCatalog.getName()] = swissDrgCatalog;
+
+    Settings.LANGUAGES.forEach((lang: string) => {
+      this.activeVersions[lang] = {};
+    });
+
+  }
+
+
+  /**
+   * Return the versions for the given `catalog` and `language` and set the corresponding `activeVersion`
+   * if it is not set yet (may be null if no versions exist),
+   *
+   * @see {@link Catalog.getVersions}
+   *
+   * @param lang
+   * @param catalog
+   * @returns {Promise<string[]>}
+   */
+  private async getVersions(lang: string, catalog: string): Promise<string[]> {
+
+    const versions = await this.catalogs[catalog].getVersions(lang);
+
+    if (!this.activeVersions[lang][catalog]) {
+      this.activeVersions[lang][catalog] = versions.length > 0 ? versions[0] : null;
+    }
+    return versions;
+  }
+
+
+  /**
+   * Return the versions that should be displayed as selection for the given catalog.
+   *
+   * @param {string} catalog must be one of {@link Settings.CATALOG}
+   * @returns {Promise<string[]>}
+   */
+  private getDisplayVersions(catalog: string): Promise<string[]> {
+    return this.getVersions(Settings.DEFAULT_LANGUAGE, catalog);
   }
 
   /**
-   * Try to resolve `catalog` and `version` parameters from the route to a catalog.
-   * On success, update the `activeCatalog` for global usage and return the
-   * catalog for the main component. Else, redirect to start.
+   * Collect and return an array of {@CatalogDisplayInfo}, that the {@link SearchFormComponent} can use
+   * to display the catalog-version-selectors.
+   *
+   * @param lang must be one of {@link Settings.LANGUAGES }
+   * @returns {Promise<Array>}
+   */
+  private async getDisplayInfos(lang: string): Promise<CatalogDisplayInfo[]> {
+
+    const displayInfos = [];
+
+    for (const catalog of Settings.CATALOGS) {
+
+      const displayVersions = await this.getDisplayVersions(catalog);
+      const languageVersions = await this.getVersions(lang, catalog);
+
+      // TODO display another version on the Button, when none exist for the language ?
+      const displayVersion = await this.getActiveVersion(lang, catalog);
+
+      displayInfos.push(
+        {
+          catalog: catalog,
+          displayVersions: displayVersions,
+          languageVersions: languageVersions,
+          displayVersion: displayVersion,
+        } as CatalogDisplayInfo
+      );
+    }
+
+    return Promise.resolve(displayInfos);
+  }
+
+  /**
+   * Check if the `version` exists for `catalog` and `language`. If it is valid, return the {@ CatalogDisplayInfo}'s for
+   * the given params. Else redirect to the active version.
+   *
+   * @param language must be one of {@link Settings.LANGUAGES }
+   * @param version
+   * @param catalog must be one of {@link Settings.CATALOG}
+   * @returns {Promise<CatalogDisplayInfo[]>}
+   */
+  private async resolveDisplayInfos(language: string, version: string, catalog: string): Promise<CatalogDisplayInfo[]> {
+    const valid = await this.versionExists(language, catalog, version);
+    if (!valid) {
+    } else {
+      this.activeVersions[language][catalog] = version;
+      // TODO maybe also update the active versions for other languages when they are available
+    }
+    // TODO check behaviour for invalid versions
+    return valid ? this.getDisplayInfos(language) : this.navigateToActiveVersion(language, catalog);
+  }
+
+  /**
+   * Return the `activeVersion` for given params.
+   * If it is not set, load the versions and set it first.
+   *
+   * @param language must be one of {@link Settings.LANGUAGES}
+   * @param catalog must be one of {@link Settings.CATALOG}
+   * @returns {Promise<string>} value can be null.
+   */
+  private async getActiveVersion(language: string, catalog: string): Promise<string> {
+
+    if (!this.activeVersions[language][catalog]) {
+      await this.getVersions(language, catalog);
+    }
+
+    return Promise.resolve(this.activeVersions[language][catalog]);
+  }
+
+
+  /**
+   * Navigate to the active version of given  `catalog` and `language`.
+   * If the catalog has no versions in the given language, redirect to start.
+   *
+   * @param language must be one of {@link Settings.LANGUAGES }
+   * @param catalog must be one of {@link Settings.CATALOG}
+   */
+  private async navigateToActiveVersion(language: string, catalog: string): Promise<CatalogDisplayInfo[]> {
+
+    const version = await this.getActiveVersion(language, catalog);
+
+    const params = version ? [language, catalog, version] : [language];
+
+    this.router.navigate(params, {
+      queryParamsHandling: 'merge'
+    });
+
+    return null;
+  }
+
+  /**
+   * Resolve from the `:language, :catalog` and `:version` Params of the route the {@link CatalogDisplayInfo}'s for the
+   * {@link SearchFormComponent}. Validate the `:version` and perform redirects if necessary.
    *
    * @param route
    * @param state
    */
-  public resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<Catalog> {
+  public resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<CatalogDisplayInfo[]> {
 
-    this.logger.log(`Catalog Resolver: ${route.url}`);
+    const {language, version, catalog} = route.params;
 
-    const domain = route.params['catalog'];
-    const version = route.params['version'];
-    const catalog = this.catalogs[domain];
-
-    // Activate catalog and return it, or redirect to start
-    if (catalog) {
-      if (version) {
-        return catalog.activateVersion(version).then(
-          (success: boolean) => {
-            if (success) { // valid version
-              this.activeCatalog = catalog;
-              return catalog;
-            } else {
-              this.redirectToStart(route);
-            }
-          }
-        );
-      } else {
-        this.redirectToDefaultCatalog(route);
-      }
-
+    if (!version) {
+      return this.navigateToActiveVersion(language, catalog).catch(e => this.logger.error(e));
     } else {
-      this.redirectToStart(route);
+      return this.resolveDisplayInfos(language, version, catalog);
     }
   }
 
-  private redirectToStart(route: ActivatedRouteSnapshot): Promise<boolean> {
-    return this.router.navigate([route.params['language']]).catch(e => this.logger.log(e));
-  }
 
-  private redirectToDefaultCatalog(route: ActivatedRouteSnapshot): void {
-    const domain = route.params['catalog'];
-    const catalog = this.catalogs[domain];
-    if (catalog) {
-      catalog.getVersions().then(versions => {
-        this.router.navigate([route.params['language'], route.params['catalog'], versions[0]]).catch(e => this.logger.log(e));
-      },
-        error => this.logger.log(error)
-      );
-    } else {
-      this.redirectToStart(route);
-    }
+  /**
+   * @param {string} catalog must be one of {@link Settings.CATALOG}
+   * @param {string} version
+   * @returns {string[]} some of {@link Settings.LANGUAGES}
+   */
+  public getLanguages(catalog: string, version: string): Promise<string[]> {
+    return this.catalogs[catalog].getLanguages(version);
   }
 
   /**
-   * Return the active route parameters `[catalog, version]`.
-   * Used for redirect to active catalog and version after language change.
-   * @returns {string[]}
+   * @see {@link Catalog.hasVersion}
+   *
+   * @param lang must be one of {@link Settings.LANGUAGES }
+   * @param catalog must be one of {@link Settings.CATALOGS }
+   * @param [version] if absent, return true if any version exists.
+   * @returns {Promise<boolean>}
    */
-  public getActiveRouteParams(): string[] {
-    if (!this.activeCatalog) {
-      this.logger.log('No active catalog!');
-      return [];
-    }
-    return [
-      this.activeCatalog.getDomain(),
-      this.activeCatalog.getActiveVersion()
-    ];
+  public versionExists(lang: string, catalog: string, version?: string): Promise<boolean> {
+    return this.catalogs[catalog].hasVersion(lang, version);
   }
+
 }

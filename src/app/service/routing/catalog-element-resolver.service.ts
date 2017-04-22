@@ -35,9 +35,9 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
 
   private initCatalogMap(): void {
     this.catalogs = {};
-    this.catalogs[this.swissDrgCatalog.getDomain()] = this.swissDrgCatalog;
-    this.catalogs[this.chopCatalog.getDomain()] = this.chopCatalog;
-    this.catalogs[this.icdCatalog.getDomain()] = this.icdCatalog;
+    this.catalogs[this.swissDrgCatalog.getName()] = this.swissDrgCatalog;
+    this.catalogs[this.chopCatalog.getName()] = this.chopCatalog;
+    this.catalogs[this.icdCatalog.getName()] = this.icdCatalog;
   }
 
   private initElementCache(): void {
@@ -47,7 +47,7 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
     languages.forEach(language => {
       this.elementCache[language] = {};
       catalogList.forEach(catalog => {
-        this.elementCache[language][catalog.getDomain()] = {};
+        this.elementCache[language][catalog.getName()] = {};
       });
     });
   }
