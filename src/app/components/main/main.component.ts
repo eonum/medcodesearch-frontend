@@ -55,9 +55,6 @@ export class MainComponent implements OnInit {
     );
   }
 
-
-
-
   /**
    * Navigate to `:type/:code` .
    * @param type
