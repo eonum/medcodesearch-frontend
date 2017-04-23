@@ -72,12 +72,8 @@
 					<div class="lead">
 						<p>Container for the <a href="_src_app_components_search_search_form_search_form_component_.searchformcomponent.html">SearchFormComponent</a>,<a href="_src_app_components_search_search_results_search_results_component_.searchresultscomponent.html">SearchResultsComponent</a>
 							and <a href="_src_app_components_details_detail_detail_component_.detailcomponent.html">DetailComponent</a>.
-							A catalog is resolved by the <a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html">CatalogResolver</a> and then passed as input
-							to the <a href="_src_app_components_search_search_form_search_form_component_.searchformcomponent.html">SearchFormComponent</a>. Each time the <code>query</code> or <code>catalog</code> in the
-							Routers params or data changes, the <code>searchResults</code> that are bound as Input
-							to the <a href="_src_app_components_search_search_results_search_results_component_.searchresultscomponent.html">SearchResultsComponent</a> are updated with new search results.
-							If a code is selected, the respective <a href="_src_app_model_catalog_element_.catalogelement.html">CatalogElement</a> is loaded and
-						displayed by the <a href="_src_app_components_details_detail_detail_component_.detailcomponent.html">DetailComponent</a>.</p>
+							The Component controls the layout of the children. And if it is initialized
+						on the route :catalog/:version, it redirects to the root element for given catalog and version.</p>
 					</div>
 				</div>
 			</section>
@@ -92,7 +88,7 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><span class="tsd-signature-type">any</span></li>
+					<li><span class="tsd-signature-type">OnInit</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -108,25 +104,18 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_src_app_components_main_main_component_.maincomponent.html#catalog" class="tsd-kind-icon">catalog</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#code" class="tsd-kind-icon">code</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#catalogresolver" class="tsd-kind-icon">catalog<wbr>Resolver</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#logger" class="tsd-kind-icon">logger</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_src_app_components_main_main_component_.maincomponent.html#query" class="tsd-kind-icon">query</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#route" class="tsd-kind-icon">route</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#router" class="tsd-kind-icon">router</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_src_app_components_main_main_component_.maincomponent.html#searchresults" class="tsd-kind-icon">search<wbr>Results</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_src_app_components_main_main_component_.maincomponent.html#selectedelement" class="tsd-kind-icon">selected<wbr>Element</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#handleerror" class="tsd-kind-icon">handle<wbr>Error</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#navigatetoelement" class="tsd-kind-icon">navigate<wbr>ToElement</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_components_main_main_component_.maincomponent.html#ngoninit" class="tsd-kind-icon">ng<wbr>OnInit</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#updatedetailview" class="tsd-kind-icon">update<wbr>Detail<wbr>View</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#updatesearchresultsview" class="tsd-kind-icon">update<wbr>Search<wbr>Results<wbr>View</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_components_main_main_component_.maincomponent.html#updateview" class="tsd-kind-icon">update<wbr>View</a></li>
 							</ul>
 						</section>
 					</div>
@@ -138,13 +127,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Main<wbr>Component<span class="tsd-signature-symbol">(</span>route<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActivatedRoute</span>, router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, logger<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_components_main_main_component_.maincomponent.html" class="tsd-signature-type">MainComponent</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Main<wbr>Component<span class="tsd-signature-symbol">(</span>route<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActivatedRoute</span>, router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, logger<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a>, catalogResolver<span class="tsd-signature-symbol">: </span><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html" class="tsd-signature-type">CatalogResolver</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_components_main_main_component_.maincomponent.html" class="tsd-signature-type">MainComponent</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L32">src/app/components/main/main.component.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/components/main/main.component.ts#L22">src/app/components/main/main.component.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -158,6 +147,9 @@
 								<li>
 									<h5>logger: <a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a></h5>
 								</li>
+								<li>
+									<h5>catalogResolver: <a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html" class="tsd-signature-type">CatalogResolver</a></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_src_app_components_main_main_component_.maincomponent.html" class="tsd-signature-type">MainComponent</a></h4>
 						</li>
@@ -166,23 +158,13 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="catalog" class="tsd-anchor"></a>
-					<h3>catalog</h3>
-					<div class="tsd-signature tsd-kind-icon">catalog<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_catalog_.catalog.html" class="tsd-signature-type">Catalog</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L26">src/app/components/main/main.component.ts:26</a></li>
-						</ul>
-					</aside>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="code" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> code</h3>
-					<div class="tsd-signature tsd-kind-icon">code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="catalogresolver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> catalog<wbr>Resolver</h3>
+					<div class="tsd-signature tsd-kind-icon">catalog<wbr>Resolver<span class="tsd-signature-symbol">:</span> <a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html" class="tsd-signature-type">CatalogResolver</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L31">src/app/components/main/main.component.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/components/main/main.component.ts#L27">src/app/components/main/main.component.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -192,17 +174,17 @@
 					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L36">src/app/components/main/main.component.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/components/main/main.component.ts#L26">src/app/components/main/main.component.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="query" class="tsd-anchor"></a>
 					<h3>query</h3>
-					<div class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L25">src/app/components/main/main.component.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/components/main/main.component.ts#L22">src/app/components/main/main.component.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -212,7 +194,7 @@
 					<div class="tsd-signature tsd-kind-icon">route<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ActivatedRoute</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L34">src/app/components/main/main.component.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/components/main/main.component.ts#L24">src/app/components/main/main.component.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -222,37 +204,7 @@
 					<div class="tsd-signature tsd-kind-icon">router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Router</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L35">src/app/components/main/main.component.ts:35</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="searchresults" class="tsd-anchor"></a>
-					<h3>search<wbr>Results</h3>
-					<div class="tsd-signature tsd-kind-icon">search<wbr>Results<span class="tsd-signature-symbol">:</span> <a href="_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L29">src/app/components/main/main.component.ts:29</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="selectedelement" class="tsd-anchor"></a>
-					<h3>selected<wbr>Element</h3>
-					<div class="tsd-signature tsd-kind-icon">selected<wbr>Element<span class="tsd-signature-symbol">:</span> <a href="_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L28">src/app/components/main/main.component.ts:28</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="type" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L32">src/app/components/main/main.component.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/components/main/main.component.ts#L25">src/app/components/main/main.component.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -260,22 +212,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="handleerror" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> handle<wbr>Error</h3>
+					<a name="navigatetoelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> navigate<wbr>ToElement</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">handle<wbr>Error<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">navigate<wbr>ToElement<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L120">src/app/components/main/main.component.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/components/main/main.component.ts#L63">src/app/components/main/main.component.ts:63</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Navigate to <code>:type/:code</code> .</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>error: <span class="tsd-signature-type">any</span></h5>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>code: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -292,81 +254,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L41">src/app/components/main/main.component.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/components/main/main.component.ts#L33">src/app/components/main/main.component.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Subscribe to route parameter determine if the details view should be displayed</p>
+									<p>Subscribe to route parameters.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="updatedetailview" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Detail<wbr>View</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>Detail<wbr>View<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L81">src/app/components/main/main.component.ts:81</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Load an element of which the details will be displayed.
-										If a code is provided in the url by the user, the according
-										element will be displayed.
-										Otherwise the root element of the current catalog will be
-									displayed.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="updatesearchresultsview" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Search<wbr>Results<wbr>View</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>Search<wbr>Results<wbr>View<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L106">src/app/components/main/main.component.ts:106</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>If a search parameter is provided, the search
-										results will be displayed.
-									Otherwise no search results will be displayed.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="updateview" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>View</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>View<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/components/main/main.component.ts#L67">src/app/components/main/main.component.ts:67</a></li>
-								</ul>
-							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -394,11 +289,8 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_src_app_components_main_main_component_.maincomponent.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_src_app_components_main_main_component_.maincomponent.html#catalog" class="tsd-kind-icon">catalog</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_components_main_main_component_.maincomponent.html#code" class="tsd-kind-icon">code</a>
+								<a href="_src_app_components_main_main_component_.maincomponent.html#catalogresolver" class="tsd-kind-icon">catalog<wbr>Resolver</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_src_app_components_main_main_component_.maincomponent.html#logger" class="tsd-kind-icon">logger</a>
@@ -412,29 +304,11 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_src_app_components_main_main_component_.maincomponent.html#router" class="tsd-kind-icon">router</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_src_app_components_main_main_component_.maincomponent.html#searchresults" class="tsd-kind-icon">search<wbr>Results</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_src_app_components_main_main_component_.maincomponent.html#selectedelement" class="tsd-kind-icon">selected<wbr>Element</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_components_main_main_component_.maincomponent.html#type" class="tsd-kind-icon">type</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_components_main_main_component_.maincomponent.html#handleerror" class="tsd-kind-icon">handle<wbr>Error</a>
+								<a href="_src_app_components_main_main_component_.maincomponent.html#navigatetoelement" class="tsd-kind-icon">navigate<wbr>ToElement</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_src_app_components_main_main_component_.maincomponent.html#ngoninit" class="tsd-kind-icon">ng<wbr>OnInit</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_components_main_main_component_.maincomponent.html#updatedetailview" class="tsd-kind-icon">update<wbr>Detail<wbr>View</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_components_main_main_component_.maincomponent.html#updatesearchresultsview" class="tsd-kind-icon">update<wbr>Search<wbr>Results<wbr>View</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_components_main_main_component_.maincomponent.html#updateview" class="tsd-kind-icon">update<wbr>View</a>
 							</li>
 						</ul>
 					</li>

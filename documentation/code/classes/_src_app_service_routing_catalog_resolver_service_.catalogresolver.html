@@ -70,10 +70,10 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>This service acts as resolver for a path that contains a <code>catalog</code>
-							and <code>version</code> parameter.
-							It gives the <a href="_src_app_components_main_main_component_.maincomponent.html">MainComponent</a> access to the <a href="_src_app_catalog_catalog_.catalog.html">Catalog</a>
-						that corresponds to the route, and saves it for global usage.</p>
+						<p>This service acts as resolver catalog - version - language related lookups.
+							It resolves {@link CatalogDisplayInformation}&#39;s for the SearchFormComponent,
+							and handles redirects to a default catalog version from the route :language/:catalog/.
+						*</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>see</dt>
@@ -94,7 +94,7 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><span class="tsd-signature-type">Resolve</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_app_catalog_catalog_.catalog.html" class="tsd-signature-type">Catalog</a><span class="tsd-signature-symbol">&gt;</span></li>
+					<li><span class="tsd-signature-type">Resolve</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_src_app_service_routing_catalog_resolver_service_.catalogdisplayinfo.html" class="tsd-signature-type">CatalogDisplayInfo</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -107,25 +107,24 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#activecatalog" class="tsd-kind-icon">active<wbr>Catalog</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#catalogs" class="tsd-kind-icon">catalogs</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#chopcatalog" class="tsd-kind-icon">chop<wbr>Catalog</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#icdcatalog" class="tsd-kind-icon">icd<wbr>Catalog</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#activeversions" class="tsd-kind-icon">active<wbr>Versions</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#logger" class="tsd-kind-icon">logger</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#router" class="tsd-kind-icon">router</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#swissdrgcatalog" class="tsd-kind-icon">swiss<wbr>Drg<wbr>Catalog</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getactiverouteparams" class="tsd-kind-icon">get<wbr>Active<wbr>Route<wbr>Params</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#redirecttodefaultcatalog" class="tsd-kind-icon">redirect<wbr>ToDefault<wbr>Catalog</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#redirecttostart" class="tsd-kind-icon">redirect<wbr>ToStart</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getactiveversion" class="tsd-kind-icon">get<wbr>Active<wbr>Version</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getdisplayinfos" class="tsd-kind-icon">get<wbr>Display<wbr>Infos</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getlanguages" class="tsd-kind-icon">get<wbr>Languages</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getrootelement" class="tsd-kind-icon">get<wbr>Root<wbr>Element</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#navigatetoactiveversion" class="tsd-kind-icon">navigate<wbr>ToActive<wbr>Version</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#resolve" class="tsd-kind-icon">resolve</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#versionexists" class="tsd-kind-icon">version<wbr>Exists</a></li>
 							</ul>
 						</section>
 					</div>
@@ -137,37 +136,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Catalog<wbr>Resolver<span class="tsd-signature-symbol">(</span>router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, swissDrgCatalog<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_swissdrg_catalog_.swissdrgcatalog.html" class="tsd-signature-type">SwissDrgCatalog</a>, chopCatalog<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_chop_catalog_.chopcatalog.html" class="tsd-signature-type">CHOPCatalog</a>, icdCatalog<span class="tsd-signature-symbol">: </span><a href="_src_app_catalog_icd_catalog_.icdcatalog.html" class="tsd-signature-type">ICDCatalog</a>, logger<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html" class="tsd-signature-type">CatalogResolver</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Catalog<wbr>Resolver<span class="tsd-signature-symbol">(</span>router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, logger<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html" class="tsd-signature-type">CatalogResolver</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L27">src/app/service/routing/catalog-resolver.service.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L28">src/app/service/routing/catalog-resolver.service.ts:28</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Constructor for class CatalogResolver.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>router: <span class="tsd-signature-type">Router</span></h5>
-								</li>
-								<li>
-									<h5>swissDrgCatalog: <a href="_src_app_catalog_swissdrg_catalog_.swissdrgcatalog.html" class="tsd-signature-type">SwissDrgCatalog</a></h5>
-								</li>
-								<li>
-									<h5>chopCatalog: <a href="_src_app_catalog_chop_catalog_.chopcatalog.html" class="tsd-signature-type">CHOPCatalog</a></h5>
-								</li>
-								<li>
-									<h5>icdCatalog: <a href="_src_app_catalog_icd_catalog_.icdcatalog.html" class="tsd-signature-type">ICDCatalog</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-										</div>
-									</div>
 								</li>
 								<li>
 									<h5>logger: <a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a></h5>
@@ -178,68 +159,29 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="activecatalog" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> active<wbr>Catalog</h3>
-					<div class="tsd-signature tsd-kind-icon">active<wbr>Catalog<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_catalog_.catalog.html" class="tsd-signature-type">Catalog</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="activeversions" class="tsd-anchor"></a>
+					<h3>active<wbr>Versions</h3>
+					<div class="tsd-signature tsd-kind-icon">active<wbr>Versions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L27">src/app/service/routing/catalog-resolver.service.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L28">src/app/service/routing/catalog-resolver.service.ts:28</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>To give global access to the active catalog</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="catalogs" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> catalogs</h3>
-					<div class="tsd-signature tsd-kind-icon">catalogs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L24">src/app/service/routing/catalog-resolver.service.ts:24</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Domain to catalog map for all available catalogs.</p>
-						</div>
-					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>domain: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="_src_app_catalog_catalog_.catalog.html" class="tsd-signature-type">Catalog</a></h5>
+								<h5><span class="tsd-signature-symbol">[</span>language: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">object</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-index-signature">
+										<h5><span class="tsd-signature-symbol">[</span>catalog: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+									</li>
+								</ul>
 							</li>
 						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="chopcatalog" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> chop<wbr>Catalog</h3>
-					<div class="tsd-signature tsd-kind-icon">chop<wbr>Catalog<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_chop_catalog_.chopcatalog.html" class="tsd-signature-type">CHOPCatalog</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L39">src/app/service/routing/catalog-resolver.service.ts:39</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="icdcatalog" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> icd<wbr>Catalog</h3>
-					<div class="tsd-signature tsd-kind-icon">icd<wbr>Catalog<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_icd_catalog_.icdcatalog.html" class="tsd-signature-type">ICDCatalog</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L40">src/app/service/routing/catalog-resolver.service.ts:40</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
@@ -248,7 +190,7 @@
 					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_src_app_service_logging_i_logger_service_.iloggerservice.html" class="tsd-signature-type">ILoggerService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L41">src/app/service/routing/catalog-resolver.service.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L31">src/app/service/routing/catalog-resolver.service.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -258,89 +200,193 @@
 					<div class="tsd-signature tsd-kind-icon">router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Router</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L37">src/app/service/routing/catalog-resolver.service.ts:37</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="swissdrgcatalog" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> swiss<wbr>Drg<wbr>Catalog</h3>
-					<div class="tsd-signature tsd-kind-icon">swiss<wbr>Drg<wbr>Catalog<span class="tsd-signature-symbol">:</span> <a href="_src_app_catalog_swissdrg_catalog_.swissdrgcatalog.html" class="tsd-signature-type">SwissDrgCatalog</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L38">src/app/service/routing/catalog-resolver.service.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L31">src/app/service/routing/catalog-resolver.service.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getactiverouteparams" class="tsd-anchor"></a>
-					<h3>get<wbr>Active<wbr>Route<wbr>Params</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Active<wbr>Route<wbr>Params<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getactiveversion" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Active<wbr>Version</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Active<wbr>Version<span class="tsd-signature-symbol">(</span>lang<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, catalog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L109">src/app/service/routing/catalog-resolver.service.ts:109</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L80">src/app/service/routing/catalog-resolver.service.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Return the active route parameters <code>[catalog, version]</code>.
-									Used for redirect to active catalog and version after language change.</p>
+									<p>Return the <code>activeVersion</code> for given params.
+									If it is not set, load the versions and set it first.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>lang: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be one of <a href="../modules/_src_app_settings_.html#settings.languages">Settings.LANGUAGES</a></p>
+									</div>
+								</li>
+								<li>
+									<h5>catalog: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be one of <a href="../modules/_src_app_settings_.html#settings.catalogs">Settings.CATALOGS</a></p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>value can be null.</p>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="redirecttodefaultcatalog" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> redirect<wbr>ToDefault<wbr>Catalog</h3>
+					<a name="getdisplayinfos" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Display<wbr>Infos</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">redirect<wbr>ToDefault<wbr>Catalog<span class="tsd-signature-symbol">(</span>route<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActivatedRouteSnapshot</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Display<wbr>Infos<span class="tsd-signature-symbol">(</span>lang<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_app_service_routing_catalog_resolver_service_.catalogdisplayinfo.html" class="tsd-signature-type">CatalogDisplayInfo</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L89">src/app/service/routing/catalog-resolver.service.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L46">src/app/service/routing/catalog-resolver.service.ts:46</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Collect and return an array of {@CatalogDisplayInfo}, that the <a href="_src_app_components_search_search_form_search_form_component_.searchformcomponent.html">SearchFormComponent</a> can use
+									to display the catalog-version-selectors.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>route: <span class="tsd-signature-type">ActivatedRouteSnapshot</span></h5>
+									<h5>lang: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be one of <a href="../modules/_src_app_settings_.html#settings.languages"></a></p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_src_app_service_routing_catalog_resolver_service_.catalogdisplayinfo.html" class="tsd-signature-type">CatalogDisplayInfo</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getlanguages" class="tsd-anchor"></a>
+					<h3>get<wbr>Languages</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Languages<span class="tsd-signature-symbol">(</span>catalog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L136">src/app/service/routing/catalog-resolver.service.ts:136</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>catalog: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be one of <a href="../modules/_src_app_settings_.html#settings.catalogs">Settings.CATALOGS</a></p>
+									</div>
+								</li>
+								<li>
+									<h5>version: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>some of <a href="../modules/_src_app_settings_.html#settings.languages">Settings.LANGUAGES</a></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getrootelement" class="tsd-anchor"></a>
+					<h3>get<wbr>Root<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Root<wbr>Element<span class="tsd-signature-symbol">(</span>catalog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L168">src/app/service/routing/catalog-resolver.service.ts:168</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>catalog: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be one of <a href="../modules/_src_app_catalog_catalog_configuration_.html#catalogconfigurations">catalogConfigurations</a> keys.</p>
+									</div>
+								</li>
+								<li>
+									<h5>version: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be a valid version for the given catalog and current language.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="navigatetoactiveversion" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> navigate<wbr>ToActive<wbr>Version</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">navigate<wbr>ToActive<wbr>Version<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, catalog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L98">src/app/service/routing/catalog-resolver.service.ts:98</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Navigate to the active version of given  <code>catalog</code> and <code>language</code>.
+									If the catalog has no versions in the given language, redirect to start.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>language: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be one of <a href="../modules/_src_app_settings_.html#settings.languages"></a></p>
+									</div>
+								</li>
+								<li>
+									<h5>catalog: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be one of <a href="../modules/_src_app_settings_.html#settings.catalogs">Settings.CATALOGS</a></p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="redirecttostart" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> redirect<wbr>ToStart</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">redirect<wbr>ToStart<span class="tsd-signature-symbol">(</span>route<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActivatedRouteSnapshot</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L85">src/app/service/routing/catalog-resolver.service.ts:85</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>route: <span class="tsd-signature-type">ActivatedRouteSnapshot</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -348,20 +394,19 @@
 					<a name="resolve" class="tsd-anchor"></a>
 					<h3>resolve</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">resolve<span class="tsd-signature-symbol">(</span>route<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActivatedRouteSnapshot</span>, state<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RouterStateSnapshot</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_app_catalog_catalog_.catalog.html" class="tsd-signature-type">Catalog</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">resolve<span class="tsd-signature-symbol">(</span>route<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActivatedRouteSnapshot</span>, state<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RouterStateSnapshot</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_src_app_service_routing_catalog_resolver_service_.catalogdisplayinfo.html" class="tsd-signature-type">CatalogDisplayInfo</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/8f05435/src/app/service/routing/catalog-resolver.service.ts#L57">src/app/service/routing/catalog-resolver.service.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L114">src/app/service/routing/catalog-resolver.service.ts:114</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Try to resolve <code>catalog</code> and <code>version</code> parameters from the route to a catalog.
-										On success, update the <code>activeCatalog</code> for global usage and return the
-									catalog for the main component. Else, redirect to start.</p>
+									<p>Resolve from the <code>:language, :catalog</code> and <code>:version</code> Params of the route the <a href="../interfaces/_src_app_service_routing_catalog_resolver_service_.catalogdisplayinfo.html">CatalogDisplayInfo</a>&#39;s for the
+									<a href="_src_app_components_search_search_form_search_form_component_.searchformcomponent.html">SearchFormComponent</a>. Validate the <code>:version</code> and perform redirects if necessary.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -375,7 +420,44 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_app_catalog_catalog_.catalog.html" class="tsd-signature-type">Catalog</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_src_app_service_routing_catalog_resolver_service_.catalogdisplayinfo.html" class="tsd-signature-type">CatalogDisplayInfo</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="versionexists" class="tsd-anchor"></a>
+					<h3>version<wbr>Exists</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">version<wbr>Exists<span class="tsd-signature-symbol">(</span>lang<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, catalog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, version<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/service/routing/catalog-resolver.service.ts#L156">src/app/service/routing/catalog-resolver.service.ts:156</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>lang: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be one of <a href="../modules/_src_app_settings_.html#settings.languages"></a></p>
+									</div>
+								</li>
+								<li>
+									<h5>catalog: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>must be one of <a href="../modules/_src_app_settings_.html#settings.catalogs"></a></p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> version: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -402,17 +484,8 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#activecatalog" class="tsd-kind-icon">active<wbr>Catalog</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#catalogs" class="tsd-kind-icon">catalogs</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#chopcatalog" class="tsd-kind-icon">chop<wbr>Catalog</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#icdcatalog" class="tsd-kind-icon">icd<wbr>Catalog</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#activeversions" class="tsd-kind-icon">active<wbr>Versions</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#logger" class="tsd-kind-icon">logger</a>
@@ -420,25 +493,34 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#router" class="tsd-kind-icon">router</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#swissdrgcatalog" class="tsd-kind-icon">swiss<wbr>Drg<wbr>Catalog</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getactiveversion" class="tsd-kind-icon">get<wbr>Active<wbr>Version</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getdisplayinfos" class="tsd-kind-icon">get<wbr>Display<wbr>Infos</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getactiverouteparams" class="tsd-kind-icon">get<wbr>Active<wbr>Route<wbr>Params</a>
+								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getlanguages" class="tsd-kind-icon">get<wbr>Languages</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#getrootelement" class="tsd-kind-icon">get<wbr>Root<wbr>Element</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#redirecttodefaultcatalog" class="tsd-kind-icon">redirect<wbr>ToDefault<wbr>Catalog</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#redirecttostart" class="tsd-kind-icon">redirect<wbr>ToStart</a>
+								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#navigatetoactiveversion" class="tsd-kind-icon">navigate<wbr>ToActive<wbr>Version</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#resolve" class="tsd-kind-icon">resolve</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_app_service_routing_catalog_resolver_service_.catalogresolver.html#versionexists" class="tsd-kind-icon">version<wbr>Exists</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_src_app_service_routing_catalog_resolver_service_.catalogdisplayinfo.html" class="tsd-kind-icon">Catalog<wbr>Display<wbr>Info</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

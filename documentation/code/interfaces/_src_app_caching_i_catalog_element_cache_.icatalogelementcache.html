@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CorrectVersionPipe | medCodeSearch</title>
+	<title>ICatalogElementCache | medCodeSearch</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,31 +54,39 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_src_app_pipes_correct_version_pipe_.html">&quot;src/app/pipes/correct-version.pipe&quot;</a>
+					<a href="../modules/_src_app_caching_i_catalog_element_cache_.html">&quot;src/app/caching/i.catalog.element.cache&quot;</a>
 				</li>
 				<li>
-					<a href="_src_app_pipes_correct_version_pipe_.correctversionpipe.html">CorrectVersionPipe</a>
+					<a href="_src_app_caching_i_catalog_element_cache_.icatalogelementcache.html">ICatalogElementCache</a>
 				</li>
 			</ul>
-			<h1>Class CorrectVersionPipe</h1>
+			<h1>Interface ICatalogElementCache</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Interface for a cache for <a href="../classes/_src_app_model_catalog_element_.catalogelement.html">CatalogElement</a>s.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CorrectVersionPipe</span>
+						<span class="target">ICatalogElementCache</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
-				<h3>Implements</h3>
+				<h3>Implemented by</h3>
 				<ul class="tsd-hierarchy">
-					<li><span class="tsd-signature-type">PipeTransform</span></li>
+					<li><a href="../classes/_src_app_caching_default_catalog_element_cache_.defaultcatalogelementcache.html" class="tsd-signature-type">DefaultCatalogElementCache</a></li>
+					<li><a href="../classes/_src_app_caching_null_catalog_element_cache_.nullcatalogelementcache.html" class="tsd-signature-type">NullCatalogElementCache</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -86,62 +94,105 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_src_app_pipes_correct_version_pipe_.correctversionpipe.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_pipes_correct_version_pipe_.correctversionpipe.html#transform" class="tsd-kind-icon">transform</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_src_app_caching_i_catalog_element_cache_.icatalogelementcache.html#addelement" class="tsd-kind-icon">add<wbr>Element</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_src_app_caching_i_catalog_element_cache_.icatalogelementcache.html#clear" class="tsd-kind-icon">clear</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_src_app_caching_i_catalog_element_cache_.icatalogelementcache.html#getelement" class="tsd-kind-icon">get<wbr>Element</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Correct<wbr>Version<wbr>Pipe<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_pipes_correct_version_pipe_.correctversionpipe.html" class="tsd-signature-type">CorrectVersionPipe</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/pipes/correct-version.pipe.ts#L4">src/app/pipes/correct-version.pipe.ts:4</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_src_app_pipes_correct_version_pipe_.correctversionpipe.html" class="tsd-signature-type">CorrectVersionPipe</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="transform" class="tsd-anchor"></a>
-					<h3>transform</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">transform<span class="tsd-signature-symbol">(</span>s<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="addelement" class="tsd-anchor"></a>
+					<h3>add<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Element<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, catalog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, element<span class="tsd-signature-symbol">: </span><a href="../classes/_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/pipes/correct-version.pipe.ts#L8">src/app/pipes/correct-version.pipe.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/caching/i.catalog.element.cache.ts#L8">src/app/caching/i.catalog.element.cache.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>s: <span class="tsd-signature-type">string</span></h5>
+									<h5>language: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>catalog: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>version: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>code: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>element: <a href="../classes/_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="clear" class="tsd-anchor"></a>
+					<h3>clear</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/caching/i.catalog.element.cache.ts#L9">src/app/caching/i.catalog.element.cache.ts:9</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="getelement" class="tsd-anchor"></a>
+					<h3>get<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Element<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, catalog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/a3e93ea/src/app/caching/i.catalog.element.cache.ts#L7">src/app/caching/i.catalog.element.cache.ts:7</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>language: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>catalog: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>version: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>code: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -154,7 +205,7 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_src_app_pipes_correct_version_pipe_.html">"src/app/pipes/correct-<wbr>version.pipe"</a>
+						<a href="../modules/_src_app_caching_i_catalog_element_cache_.html">"src/app/caching/i.catalog.element.cache"</a>
 					</li>
 				</ul>
 			</nav>
@@ -162,14 +213,17 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_src_app_pipes_correct_version_pipe_.correctversionpipe.html" class="tsd-kind-icon">Correct<wbr>Version<wbr>Pipe</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_src_app_caching_i_catalog_element_cache_.icatalogelementcache.html" class="tsd-kind-icon">ICatalog<wbr>Element<wbr>Cache</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_src_app_pipes_correct_version_pipe_.correctversionpipe.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="_src_app_caching_i_catalog_element_cache_.icatalogelementcache.html#addelement" class="tsd-kind-icon">add<wbr>Element</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_src_app_pipes_correct_version_pipe_.correctversionpipe.html#transform" class="tsd-kind-icon">transform</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="_src_app_caching_i_catalog_element_cache_.icatalogelementcache.html#clear" class="tsd-kind-icon">clear</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="_src_app_caching_i_catalog_element_cache_.icatalogelementcache.html#getelement" class="tsd-kind-icon">get<wbr>Element</a>
 							</li>
 						</ul>
 					</li>
