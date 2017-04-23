@@ -13,9 +13,6 @@ import {Settings} from '../settings';
 @Injectable()
 export abstract class Catalog {
 
-  /**Cache for the versions*/
-  protected versions: { [language: string]: string[] };
-
   /**
    * Constructor for class Catalog. Initializes the versions.
    *
@@ -28,7 +25,6 @@ export abstract class Catalog {
                      private logger: ILoggerService,
                      public name: string,
                      protected config: CatalogConfiguration) {
-    this.versions = {};
   }
 
   /**
@@ -68,62 +64,4 @@ export abstract class Catalog {
     this.service.sendAnalytics(version, type, code, query);
   }
 
-  /**
-   * Return the versions for the given language, loaded trough the {@link CatalogService}
-   *
-   * @param lang must be one of {@link Settings.languages }
-   * @returns {Promise<string[]>  }
-   */
-  private async loadVersions(lang: string): Promise<string[]> {
-
-    this.initService();
-    return this.service.getVersions(lang);
-  }
-
-
-  /**
-   *
-   * @param lang lang must be one of {@link Settings.LANGUAGES }
-   * @param [version] if absent, return true if any version exists.
-   * @returns {Promise<boolean>}
-   */
-  public async hasVersion(lang: string, version?: string): Promise<boolean> {
-    const versions = await this.getVersions(lang);
-    const exists = (!version && versions.length > 0) || versions.indexOf(version) > -1;
-    return Promise.resolve(exists);
-  }
-
-  /**
-   * Return the stored versions for the given language.
-   * Load and store them first if necessary,
-   *
-   * @param lang must be one of {@link Settings.languages }
-   * @returns {Promise<string[]>}
-   */
-  public async getVersions(lang: string): Promise<string[]> {
-
-    if (!this.versions[lang]) {
-      this.versions[lang] = (await this.loadVersions(lang)).reverse();
-    }
-    return Promise.resolve(this.versions[lang]);
-  }
-
-
-  /**
-   * Return a list with all languages where the given version exists.
-   * @param version
-   * @returns {Promise<Array>} values from {@link Settings.LANGUAGES }
-   */
-  public async getLanguages(version: string): Promise<string[]> {
-    const languages = [];
-
-    for (const lang of Settings.LANGUAGES) {
-
-      const exists = await this.hasVersion(lang, version);
-      if (exists) {
-        languages.push(lang);
-      }
-    }
-    return Promise.resolve(languages);
-  }
 }

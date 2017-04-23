@@ -1,9 +1,6 @@
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Catalog} from '../../../catalog/catalog';
-import {CHOPCatalog} from '../../../catalog/chop.catalog';
-import {ICDCatalog} from '../../../catalog/icd.catalog';
-import {SwissDrgCatalog} from '../../../catalog/swissdrg.catalog';
 import {ILoggerService} from '../../../service/logging/i.logger.service';
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
@@ -32,7 +29,6 @@ import {CatalogDisplayInfo, CatalogResolver} from '../../../service/routing/cata
 
 export class SearchFormComponent implements OnInit {
 
-  // selected values (resolved in main component from route)
   public query: string;
   public catalog: string;
 
@@ -100,14 +96,8 @@ export class SearchFormComponent implements OnInit {
    */
   public updateCatalog(catalog: string, version?: string): void {
 
-    // get the right CatalogDisplayInfo to check the version
-    const info = this.catalogDisplayInfos.find(
-      (inf: CatalogDisplayInfo) => inf.catalog === catalog);
-
-    if (!info) {
-      this.logger.error(`[UpdateCatalog] CatalogDisplayInfo for ${catalog} does not exist`);
-      return;
-    }
+    // get the CatalogDisplayInfo to check the version
+    const info = this.catalogDisplayInfos.find((inf: CatalogDisplayInfo) => inf.catalog === catalog);
 
     version = version || info.displayVersion;
 
@@ -125,13 +115,12 @@ export class SearchFormComponent implements OnInit {
    * @param version
    * @returns {null}
    */
-  private async showLanguageSelector(catalog: string, version: string): Promise<boolean> {
-    this.languages = await this.catalogResolver.getLanguages(catalog, version);
+  private showLanguageSelector(catalog: string, version: string): void {
+    this.languages = this.catalogResolver.getLanguages(catalog, version);
 
     this.catalog = catalog;
     this.selectedVersion = version;
     this.childModal.show();
-    return null;
   }
 
   /**
@@ -152,13 +141,18 @@ export class SearchFormComponent implements OnInit {
    * @param query
    */
   private redirect(catalog: string, version: string, query: string): void {
-
-    const params = version ? [catalog, version] : [catalog];
+    let params;
+    if (version) {
+      const root = this.catalogResolver.getRootElement(catalog, version);
+      params = [catalog, version, root.type, root.code];
+    } else {
+      params = [catalog];
+    }
 
     this.router.navigate(params, {
       relativeTo: this.route.parent,
       queryParamsHandling: 'merge'
-    }).catch(error => this.logger.error(error));
+    });
   }
 
 }

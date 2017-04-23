@@ -1,11 +1,9 @@
-import {Catalog} from '../../catalog/catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
 import {ILoggerService} from '../logging/i.logger.service';
 import {Inject, Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 import {Settings} from '../../settings';
+import {VERSIONS} from '../../versions';
+import {catalogConfigurations} from '../../catalog/catalog.configuration';
 
 
 export interface CatalogDisplayInfo {
@@ -27,59 +25,15 @@ export interface CatalogDisplayInfo {
 @Injectable()
 export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
 
-  /**Domain to catalog map for all available catalogs.*/
-  private catalogs: { [domain: string]: Catalog };
-
   public activeVersions: { [language: string]: { [catalog: string]: string } } = {};
 
 
-  constructor(private router: Router,
-              private swissDrgCatalog: SwissDrgCatalog,
-              private chopCatalog: CHOPCatalog,
-              private icdCatalog: ICDCatalog,
-              @Inject('ILoggerService') private logger: ILoggerService) {
-
-    this.catalogs = {};
-    this.catalogs[icdCatalog.getName()] = icdCatalog;
-    this.catalogs[chopCatalog.getName()] = chopCatalog;
-    this.catalogs[swissDrgCatalog.getName()] = swissDrgCatalog;
+  constructor(private router: Router, @Inject('ILoggerService') private logger: ILoggerService) {
 
     Settings.LANGUAGES.forEach((lang: string) => {
-      this.activeVersions[lang] = {};
+      this.activeVersions[lang] = {}
     });
 
-  }
-
-
-  /**
-   * Return the versions for the given `catalog` and `language` and set the corresponding `activeVersion`
-   * if it is not set yet (may be null if no versions exist),
-   *
-   * @see {@link Catalog.getVersions}
-   *
-   * @param lang
-   * @param catalog
-   * @returns {Promise<string[]>}
-   */
-  private async getVersions(lang: string, catalog: string): Promise<string[]> {
-
-    const versions = await this.catalogs[catalog].getVersions(lang);
-
-    if (!this.activeVersions[lang][catalog]) {
-      this.activeVersions[lang][catalog] = versions.length > 0 ? versions[0] : null;
-    }
-    return versions;
-  }
-
-
-  /**
-   * Return the versions that should be displayed as selection for the given catalog.
-   *
-   * @param {string} catalog must be one of {@link Settings.CATALOG}
-   * @returns {Promise<string[]>}
-   */
-  private getDisplayVersions(catalog: string): Promise<string[]> {
-    return this.getVersions(Settings.DEFAULT_LANGUAGE, catalog);
   }
 
   /**
@@ -89,17 +43,17 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
    * @param lang must be one of {@link Settings.LANGUAGES }
    * @returns {Promise<Array>}
    */
-  private async getDisplayInfos(lang: string): Promise<CatalogDisplayInfo[]> {
+  private getDisplayInfos(lang: string): CatalogDisplayInfo[] {
 
     const displayInfos = [];
 
     for (const catalog of Settings.CATALOGS) {
 
-      const displayVersions = await this.getDisplayVersions(catalog);
-      const languageVersions = await this.getVersions(lang, catalog);
+      const displayVersions = VERSIONS[Settings.DEFAULT_LANGUAGE][catalog];
+      const languageVersions = VERSIONS[lang][catalog];
 
       // TODO display another version on the Button, when none exist for the language ?
-      const displayVersion = await this.getActiveVersion(lang, catalog);
+      const displayVersion = this.getActiveVersion(lang, catalog);
 
       displayInfos.push(
         {
@@ -111,44 +65,26 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
       );
     }
 
-    return Promise.resolve(displayInfos);
+    return displayInfos;
   }
 
-  /**
-   * Check if the `version` exists for `catalog` and `language`. If it is valid, return the {@ CatalogDisplayInfo}'s for
-   * the given params. Else redirect to the active version.
-   *
-   * @param language must be one of {@link Settings.LANGUAGES }
-   * @param version
-   * @param catalog must be one of {@link Settings.CATALOG}
-   * @returns {Promise<CatalogDisplayInfo[]>}
-   */
-  private async resolveDisplayInfos(language: string, version: string, catalog: string): Promise<CatalogDisplayInfo[]> {
-    const valid = await this.versionExists(language, catalog, version);
-    if (!valid) {
-    } else {
-      this.activeVersions[language][catalog] = version;
-      // TODO maybe also update the active versions for other languages when they are available
-    }
-    // TODO check behaviour for invalid versions
-    return valid ? this.getDisplayInfos(language) : this.navigateToActiveVersion(language, catalog);
-  }
 
   /**
    * Return the `activeVersion` for given params.
    * If it is not set, load the versions and set it first.
    *
-   * @param language must be one of {@link Settings.LANGUAGES}
-   * @param catalog must be one of {@link Settings.CATALOG}
+   * @param lang must be one of {@link Settings.LANGUAGES}
+   * @param catalog must be one of {@link Settings.CATALOGS}
    * @returns {Promise<string>} value can be null.
    */
-  private async getActiveVersion(language: string, catalog: string): Promise<string> {
+  private getActiveVersion(lang: string, catalog: string): string {
 
-    if (!this.activeVersions[language][catalog]) {
-      await this.getVersions(language, catalog);
+    if (!this.activeVersions[lang][catalog]) {
+      const versions = VERSIONS[lang][catalog];
+      this.activeVersions[lang][catalog] = versions.length > 0 ? versions[0] : null;
     }
 
-    return Promise.resolve(this.activeVersions[language][catalog]);
+    return this.activeVersions[lang][catalog];
   }
 
 
@@ -157,19 +93,15 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
    * If the catalog has no versions in the given language, redirect to start.
    *
    * @param language must be one of {@link Settings.LANGUAGES }
-   * @param catalog must be one of {@link Settings.CATALOG}
+   * @param catalog must be one of {@link Settings.CATALOGS}
    */
-  private async navigateToActiveVersion(language: string, catalog: string): Promise<CatalogDisplayInfo[]> {
+  private navigateToActiveVersion(language: string, catalog: string): void {
 
-    const version = await this.getActiveVersion(language, catalog);
+    const version = this.getActiveVersion(language, catalog);
 
     const params = version ? [language, catalog, version] : [language];
 
-    this.router.navigate(params, {
-      queryParamsHandling: 'merge'
-    });
-
-    return null;
+    this.router.navigate(params, {queryParamsHandling: 'merge'});
   }
 
   /**
@@ -183,33 +115,65 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
 
     const {language, version, catalog} = route.params;
 
-    if (!version) {
-      return this.navigateToActiveVersion(language, catalog).catch(e => this.logger.error(e));
-    } else {
-      return this.resolveDisplayInfos(language, version, catalog);
+    if (!version || !this.versionExists(language, catalog, version)) {
+      this.navigateToActiveVersion(language, catalog);
+      return null;
     }
+
+    // set version active for all available languages
+    this.getLanguages(catalog, version).forEach((lang: string) => {
+      this.activeVersions[language][catalog] = version;
+    });
+
+    return Promise.resolve(this.getDisplayInfos(language));
   }
 
-
   /**
-   * @param {string} catalog must be one of {@link Settings.CATALOG}
+   * @param {string} catalog must be one of {@link Settings.CATALOGS}
    * @param {string} version
    * @returns {string[]} some of {@link Settings.LANGUAGES}
    */
-  public getLanguages(catalog: string, version: string): Promise<string[]> {
-    return this.catalogs[catalog].getLanguages(version);
+  public getLanguages(catalog: string, version: string): string[] {
+    const languages = [];
+
+    for (const lang of Settings.LANGUAGES) {
+
+      const exists = this.versionExists(lang, catalog, version);
+      if (exists) {
+        languages.push(lang);
+      }
+    }
+    return languages;
   }
 
   /**
-   * @see {@link Catalog.hasVersion}
    *
    * @param lang must be one of {@link Settings.LANGUAGES }
    * @param catalog must be one of {@link Settings.CATALOGS }
    * @param [version] if absent, return true if any version exists.
    * @returns {Promise<boolean>}
    */
-  public versionExists(lang: string, catalog: string, version?: string): Promise<boolean> {
-    return this.catalogs[catalog].hasVersion(lang, version);
+  public versionExists(lang: string, catalog: string, version?: string): boolean {
+    const versions = VERSIONS[lang][catalog];
+
+    return (!version && versions.length !== 0) || (versions.indexOf(version) > -1 );
+  }
+
+  /**
+   * @param catalog must be one of {@link catalogConfigurations} keys.
+   * @param version must be a valid version for the given catalog and current language.
+   *
+   * @returns {{type, code: string}}
+   */
+  public getRootElement(catalog: string, version: string): { type: string, code: string } {
+    const root = catalogConfigurations[catalog].rootElement;
+
+    /* The code of the root element is the same as the current
+     version for ICD and CHOP.
+     For SwissDRG, the code of the root element is 'ALL'.
+     This code is configured in the CatalogConfiguration
+     of SwissDRG.*/
+    return {type: root.type, code: root.code || version};
   }
 
 }

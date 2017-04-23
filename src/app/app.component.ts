@@ -42,10 +42,13 @@ export class AppComponent implements OnInit {
     });
   }
 
-  public setLanguage(language: string): void {
-    const {catalog, version} = this.route.firstChild.firstChild.snapshot.params;
-    this.router.navigate(
-      [language, catalog, version]
-    ).catch(e => this.logger.log(e));
+  public setLanguage(lang: string): void {
+    const {language, catalog, version} = this.route.firstChild.firstChild.snapshot.params;
+
+    if (lang !== language) {
+      this.router.navigate(
+        [lang, catalog, version]
+      ).catch(e => this.logger.log(e));
+    }
   }
 }

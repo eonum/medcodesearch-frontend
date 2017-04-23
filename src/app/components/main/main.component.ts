@@ -2,6 +2,7 @@ import {ILoggerService} from '../../service/logging/i.logger.service';
 import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {catalogConfigurations} from '../../catalog/catalog.configuration';
+import {CatalogResolver} from '../../service/routing/catalog-resolver.service';
 
 /**
  * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
@@ -22,7 +23,8 @@ export class MainComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private catalogResolver: CatalogResolver) {
   }
 
   /**
@@ -41,10 +43,8 @@ export class MainComponent implements OnInit {
 
     // Subscribe to route params, to check if a catalog element is selected.
     this.route.params.subscribe((params: Params) => {
-
         if (!this.route.firstChild) {
-
-          const root = this.getRootElement(
+          const root = this.catalogResolver.getRootElement(
             this.route.snapshot.params['catalog'],
             this.route.snapshot.params['version']);
 
@@ -55,28 +55,7 @@ export class MainComponent implements OnInit {
     );
   }
 
-  /**
-   * @param catalog must be one of {@link catalogConfigurations} keys.
-   * @param version must be a valid version for the given catalog and current language.
-   *
-   * @returns {{type, code: string}}
-   */
-  private getRootElement(catalog: string, version: string): { type: string, code: string } {
-    // TODO: use name as param :catalog then we can use simply catalogConfigurations[catalog]
-    let root;
-    for (const name in catalogConfigurations) {
-      if (name.toLowerCase() === catalog.toLowerCase()) {
-        root = catalogConfigurations[name].rootElement;
-      }
-    }
 
-    /* The code of the root element is the same as the current
-     version for ICD and CHOP.
-     For SwissDRG, the code of the root element is 'ALL'.
-     This code is configured in the CatalogConfiguration
-     of SwissDRG.*/
-    return {type: root.type, code: root.code || version};
-  }
 
 
   /**
