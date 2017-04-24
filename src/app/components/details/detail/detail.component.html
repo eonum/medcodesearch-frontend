@@ -1,5 +1,9 @@
 <ng-template [ngIf]="selectedElement">
 
+  <button type="button" class="btn btn-default button-remember" (click)="rememberCode(selectedElement)">
+    <span class="glyphicon glyphicon-star"></span>
+  </button>
+
   <ol class="breadcrumb">
     <li *ngFor="let element of hierarchy">
       <ng-template [ngIf]="selectedElement !== element">
@@ -12,9 +16,7 @@
   </ol>
 
   <div class="box">
-    <button type="button" class="btn btn-default" (click)="rememberCode(selectedElement)">
-      <span class="glyphicon glyphicon-star"></span>
-    </button>
+
     <h3>{{selectedElement.name}}</h3>
     <p>{{selectedElement.text}}</p>
 

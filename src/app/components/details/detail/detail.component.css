@@ -16,3 +16,8 @@ h3 {
   margin-top: 10px;
 }
 
+
+.button-remember {
+  float: right;
+  margin: 10px 10px 0 0;
+}
