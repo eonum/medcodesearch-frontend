@@ -4,7 +4,7 @@ Frontend for the medcodelogic search service: A joint project with the Universit
 
 --------------------------------------------
 
-V0.2 is hosted as GithubProject Page for this repo.
+V0.3 is hosted as GithubProject Page for this repo.
 
 [eonum.github.io/medcodelogic-frontend](https://eonum.github.io/medcodelogic-frontend)
 
@@ -12,7 +12,7 @@ V0.2 is hosted as GithubProject Page for this repo.
 ## Documentation Folder
 
 - `code` [Typedoc](http://typedoc.org/) generated from the source.
-- `uml` [PlantUML](http://plantuml.com) Sequence Diagrams for the control flow of the *page load*, *catalog/version change and query/code search*, and the *language-switch*.
+- `uml` [PlantUML](http://plantuml.com) Sequence Diagrams for the control flow of the *page load*, *catalog/version change and query/code search*, and the *language-switch*. (Currently not up-to-date)
 - `architecture` Description of the service structur that is used as interface for the `search.eonum.ch` API.
 
 
