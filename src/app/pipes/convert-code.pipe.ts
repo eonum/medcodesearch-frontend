@@ -2,6 +2,7 @@ import {ILoggerService} from '../service/logging/i.logger.service';
 import {Inject, NgZone, Pipe, PipeTransform} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MobileService} from '../service/mobile.service';
 
 @Pipe({name: 'convertCode'})
 export class ConvertCodePipe implements PipeTransform {
@@ -10,6 +11,7 @@ export class ConvertCodePipe implements PipeTransform {
               private ngZone: NgZone,
               private route: ActivatedRoute,
               private router: Router,
+              public mobileService: MobileService,
               @Inject('ILoggerService') private logger: ILoggerService) {
     window['eonum'] = window['eonum'] || {};
     window['eonum'].searchCode = this.searchCode.bind(this);
@@ -54,6 +56,9 @@ export class ConvertCodePipe implements PipeTransform {
       relativeTo: this.route,
       queryParams: {'query': query}
     }).catch(error => this.logger.log(error));
+
+    this.mobileService.focus('results')
+
   }
 }
 
