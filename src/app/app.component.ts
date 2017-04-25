@@ -29,10 +29,14 @@ export class AppComponent implements OnInit {
   public setLanguage(lang: string): void {
     const {language, catalog, version} = this.route.firstChild.firstChild.snapshot.params;
 
-    if (lang !== language) {
+    if (lang !== language || (lang === '' && (lang = language))) {
       this.router.navigate(
         [lang, catalog, version]
       ).catch(e => this.logger.log(e));
     }
+  }
+
+  public toRoot(): void {
+    this.setLanguage('');
   }
 }
