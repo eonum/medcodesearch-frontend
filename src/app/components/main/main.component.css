@@ -4,6 +4,7 @@
 
 #search-results {
   margin-top: 50px;
+  transition: margin 0.5s ease-in-out;
 }
 
 #search-results-container.mobile {
@@ -13,9 +14,11 @@
 #search-results-container.mobile #search-results {
   width: 200%;
   margin-left: 0;
+  margin-top: 15px;
   transition: margin 0.5s ease-in-out;
 }
 #search-results-container.mobile #search-results.details {
   margin-left: -100%;
   transition: margin 0.5s ease-in-out;
+  position: fixed;
 }
