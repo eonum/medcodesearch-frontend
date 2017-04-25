@@ -3,7 +3,6 @@ import {ICatalogService} from '../service/i.catalog.service';
 import {ILoggerService} from '../service/logging/i.logger.service';
 import {CatalogConfiguration} from './catalog.configuration';
 import {Injectable} from '@angular/core';
-import {Settings} from '../settings';
 
 /**
  * Class representing a catalog containing medical

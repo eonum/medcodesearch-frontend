@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
               private router: Router,
               @Inject('ILoggerService') private logger: ILoggerService,
               private catalogResolver: CatalogResolver,
-              private mobileService: MobileService) {
+              public mobileService: MobileService) {
 
   }
 
