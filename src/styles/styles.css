@@ -30,7 +30,11 @@ body{
   margin-top: 10px;
 }
 
-em { 
+em {
     font-weight: bold;
     font-style: normal;
+}
+
+#search-results-container.mobile .back-button {
+  display: block;
 }

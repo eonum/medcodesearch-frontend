@@ -1,9 +1,10 @@
 import {CatalogElement} from '../../../model/catalog.element';
 import {ILoggerService} from '../../../service/logging/i.logger.service';
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Output, EventEmitter} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CatalogSearchService, SearchRequest} from '../../../service/routing/catalog-search.service';
 import {Observable} from 'rxjs/Observable';
+import {MobileService} from '../../../service/mobile.service';
 
 import 'rxjs/add/observable/combineLatest';
 /**
@@ -20,13 +21,13 @@ import 'rxjs/add/observable/combineLatest';
 export class SearchResultsComponent implements OnInit {
 
   public searchResults: CatalogElement[];
-
   public selectedCode: string;
 
   public constructor(private route: ActivatedRoute,
                      private router: Router,
                      @Inject('ILoggerService') private logger: ILoggerService,
-                     private searchService: CatalogSearchService) {
+                     private searchService: CatalogSearchService,
+                     private mobileService: MobileService) {
   }
 
   /**
@@ -74,6 +75,9 @@ export class SearchResultsComponent implements OnInit {
         relativeTo: this.route
       }
     ).catch(error => this.logger.error(error));
+
+    this.mobileService.focus('details');
+
   }
 
 }

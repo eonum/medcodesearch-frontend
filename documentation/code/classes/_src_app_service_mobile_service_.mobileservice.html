@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>RememberElementService | medCodeSearch</title>
+	<title>MobileService | medCodeSearch</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_src_app_service_remember_element_service_.html">&quot;src/app/service/remember.element.service&quot;</a>
+					<a href="../modules/_src_app_service_mobile_service_.html">&quot;src/app/service/mobile.service&quot;</a>
 				</li>
 				<li>
-					<a href="_src_app_service_remember_element_service_.rememberelementservice.html">RememberElementService</a>
+					<a href="_src_app_service_mobile_service_.mobileservice.html">MobileService</a>
 				</li>
 			</ul>
-			<h1>Class RememberElementService</h1>
+			<h1>Class MobileService</h1>
 		</div>
 	</div>
 </header>
@@ -70,20 +70,16 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Provides functions to mark/unmark an element as favorite.
-						Clients can subscribe to changes of the element collection.</p>
+						<p>Communicates with appropriate components to take care of mobile functionality,
+						namely the switching between results and details.</p>
 					</div>
-					<p>The elements are stored within an in-memory dicitionary
-						and are lost as soon as the user closes or refreshes the
-						page (and therefore causes the app to restart).
-					Marked elements are shown by the <a href="_src_app_components_remember_element_remember_element_component_.rememberelementcomponent.html">RememberElementComponent</a>.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">RememberElementService</span>
+						<span class="target">MobileService</span>
 					</li>
 				</ul>
 			</section>
@@ -94,25 +90,27 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_src_app_service_remember_element_service_.rememberelementservice.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_src_app_service_mobile_service_.mobileservice.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_remember_element_service_.rememberelementservice.html#_rememberedelements" class="tsd-kind-icon">_remembered<wbr>Elements</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_remember_element_service_.rememberelementservice.html#numberofelements" class="tsd-kind-icon">number<wbr>OfElements</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_remember_element_service_.rememberelementservice.html#rememberedelements" class="tsd-kind-icon">remembered<wbr>Elements</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_mobile_service_.mobileservice.html#mobile" class="tsd-kind-icon">mobile</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_mobile_service_.mobileservice.html#mobilethreshold" class="tsd-kind-icon">mobile<wbr>Threshold</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_mobile_service_.mobileservice.html#query" class="tsd-kind-icon">query</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_mobile_service_.mobileservice.html#showdetails" class="tsd-kind-icon">show<wbr>Details</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_remember_element_service_.rememberelementservice.html#add" class="tsd-kind-icon">add</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_remember_element_service_.rememberelementservice.html#count" class="tsd-kind-icon">count</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_remember_element_service_.rememberelementservice.html#getrememberedelements" class="tsd-kind-icon">get<wbr>Remembered<wbr>Elements</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_remember_element_service_.rememberelementservice.html#notify" class="tsd-kind-icon">notify</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_remember_element_service_.rememberelementservice.html#remove" class="tsd-kind-icon">remove</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_mobile_service_.mobileservice.html#focus" class="tsd-kind-icon">focus</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_mobile_service_.mobileservice.html#getmobile" class="tsd-kind-icon">get<wbr>Mobile</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_mobile_service_.mobileservice.html#getshowdetails" class="tsd-kind-icon">get<wbr>Show<wbr>Details</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_app_service_mobile_service_.mobileservice.html#mobilecheck" class="tsd-kind-icon">mobile<wbr>Check</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_mobile_service_.mobileservice.html#resizewindow" class="tsd-kind-icon">resize<wbr>Window</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_app_service_mobile_service_.mobileservice.html#setquery" class="tsd-kind-icon">set<wbr>Query</a></li>
 							</ul>
 						</section>
 					</div>
@@ -124,16 +122,16 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Remember<wbr>Element<wbr>Service<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_service_remember_element_service_.rememberelementservice.html" class="tsd-signature-type">RememberElementService</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Mobile<wbr>Service<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_app_service_mobile_service_.mobileservice.html" class="tsd-signature-type">MobileService</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/remember.element.service.ts#L29">src/app/service/remember.element.service.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L29">src/app/service/mobile.service.ts:29</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_src_app_service_remember_element_service_.rememberelementservice.html" class="tsd-signature-type">RememberElementService</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_src_app_service_mobile_service_.mobileservice.html" class="tsd-signature-type">MobileService</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -141,102 +139,97 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_rememberedelements" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _remembered<wbr>Elements</h3>
-					<div class="tsd-signature tsd-kind-icon">_remembered<wbr>Elements<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_app_model_remembered_element_.rememberedelement.html" class="tsd-signature-type">RememberedElement</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="mobile" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> mobile</h3>
+					<div class="tsd-signature tsd-kind-icon">mobile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/remember.element.service.ts#L29">src/app/service/remember.element.service.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L19">src/app/service/mobile.service.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>BehaviorSubject to publish changes on remembered elements
-							collection.</p>
+							<p>Indicates whether or not mobile mode is active.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="numberofelements" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> number<wbr>OfElements</h3>
-					<div class="tsd-signature tsd-kind-icon">number<wbr>OfElements<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="mobilethreshold" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> mobile<wbr>Threshold</h3>
+					<div class="tsd-signature tsd-kind-icon">mobile<wbr>Threshold<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;700</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/remember.element.service.ts#L23">src/app/service/remember.element.service.ts:23</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="rememberedelements" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> remembered<wbr>Elements</h3>
-					<div class="tsd-signature tsd-kind-icon">remembered<wbr>Elements<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/remember.element.service.ts#L22">src/app/service/remember.element.service.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L14">src/app/service/mobile.service.ts:14</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Internal dictionary to store the marked elements</p>
+							<p>Threshold at which ui switches to mobile.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="query" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> query</h3>
+					<div class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L29">src/app/service/mobile.service.ts:29</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Search query; used to decide whether or not mobile should be activated.</p>
 						</div>
 					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="_src_app_model_remembered_element_.rememberedelement.html" class="tsd-signature-type">RememberedElement</a></h5>
-							</li>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="showdetails" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> show<wbr>Details</h3>
+					<div class="tsd-signature tsd-kind-icon">show<wbr>Details<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L24">src/app/service/mobile.service.ts:24</a></li>
 						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If mobile mode is active, indicates whether details or results are shown.</p>
+						</div>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="add" class="tsd-anchor"></a>
-					<h3>add</h3>
+					<a name="focus" class="tsd-anchor"></a>
+					<h3>focus</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><a href="_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, catalog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">focus<span class="tsd-signature-symbol">(</span>focus<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/remember.element.service.ts#L57">src/app/service/remember.element.service.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L91">src/app/service/mobile.service.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Marks an element as favorite.</p>
+									<p>Called from SearchResultsComponent or DetailComponent to switch between results and details.</p>
 								</div>
-								<p>Additional information about language, version and
-									catalog is required for being able to display the
-								element afterwards.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>element: <a href="_src_app_model_catalog_element_.catalogelement.html" class="tsd-signature-type">CatalogElement</a></h5>
+									<h5>focus: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the element to mark</p>
-									</div>
-								</li>
-								<li>
-									<h5>version: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the current version of the catalog</p>
-									</div>
-								</li>
-								<li>
-									<h5>catalog: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the current catalog</p>
-									</div>
-								</li>
-								<li>
-									<h5>language: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the current language</p>
+										<p>the &quot;side&quot; to focus on (results or details).</p>
 									</div>
 								</li>
 							</ul>
@@ -245,96 +238,137 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="count" class="tsd-anchor"></a>
-					<h3>count</h3>
+					<a name="getmobile" class="tsd-anchor"></a>
+					<h3>get<wbr>Mobile</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">count<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Mobile<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/remember.element.service.ts#L41">src/app/service/remember.element.service.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L60">src/app/service/mobile.service.ts:60</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns the number of currently marked elements.</p>
+									<p>Called from MainComponent which sets a class to indicate mobile mode.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>whether or not mobile mode is active</p>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getrememberedelements" class="tsd-anchor"></a>
-					<h3>get<wbr>Remembered<wbr>Elements</h3>
+					<a name="getshowdetails" class="tsd-anchor"></a>
+					<h3>get<wbr>Show<wbr>Details</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Remembered<wbr>Elements<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_app_model_remembered_element_.rememberedelement.html" class="tsd-signature-type">RememberedElement</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Show<wbr>Details<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/remember.element.service.ts#L84">src/app/service/remember.element.service.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L69">src/app/service/mobile.service.ts:69</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get all marked elements as observable. Subscribers can
-									subscribe to changes on those elements.</p>
+									<p>Called from mainComponent which sets a class to switch between results and details.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_app_model_remembered_element_.rememberedelement.html" class="tsd-signature-type">RememberedElement</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>whether or not details are to be shown</p>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="notify" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> notify</h3>
+					<a name="mobilecheck" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> mobile<wbr>Check</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">notify<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">mobile<wbr>Check<span class="tsd-signature-symbol">(</span>width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/remember.element.service.ts#L91">src/app/service/remember.element.service.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L78">src/app/service/mobile.service.ts:78</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Notify subscribers about the change of the collection.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="remove" class="tsd-anchor"></a>
-					<h3>remove</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">remove<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><a href="_src_app_model_remembered_element_.rememberedelement.html" class="tsd-signature-type">RememberedElement</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/remember.element.service.ts#L71">src/app/service/remember.element.service.ts:71</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Unmark a specific element</p>
+									<p>Checks if width is smaller or greater than mobileThreshold and sets mobile.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>element: <a href="_src_app_model_remembered_element_.rememberedelement.html" class="tsd-signature-type">RememberedElement</a></h5>
+									<h5>width: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the element to unmark</p>
+										<p>the width of the browser window.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="resizewindow" class="tsd-anchor"></a>
+					<h3>resize<wbr>Window</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">resize<wbr>Window<span class="tsd-signature-symbol">(</span>width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L51">src/app/service/mobile.service.ts:51</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Called from MainComponent whenever browser size changes.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>width: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the width of the browser window</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setquery" class="tsd-anchor"></a>
+					<h3>set<wbr>Query</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Query<span class="tsd-signature-symbol">(</span>query<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eonum/medcodelogic-frontend/blob/301aedb/src/app/service/mobile.service.ts#L41">src/app/service/mobile.service.ts:41</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Called from MainComponent and SearchFormComponent whenever the query is set or updated.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>query: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the search query</p>
 									</div>
 								</li>
 							</ul>
@@ -351,7 +385,7 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_src_app_service_remember_element_service_.html">"src/app/service/remember.element.service"</a>
+						<a href="../modules/_src_app_service_mobile_service_.html">"src/app/service/mobile.service"</a>
 					</li>
 				</ul>
 			</nav>
@@ -360,34 +394,40 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_src_app_service_remember_element_service_.rememberelementservice.html" class="tsd-kind-icon">Remember<wbr>Element<wbr>Service</a>
+						<a href="_src_app_service_mobile_service_.mobileservice.html" class="tsd-kind-icon">Mobile<wbr>Service</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_src_app_service_remember_element_service_.rememberelementservice.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_src_app_service_mobile_service_.mobileservice.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_remember_element_service_.rememberelementservice.html#_rememberedelements" class="tsd-kind-icon">_remembered<wbr>Elements</a>
+								<a href="_src_app_service_mobile_service_.mobileservice.html#mobile" class="tsd-kind-icon">mobile</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_remember_element_service_.rememberelementservice.html#numberofelements" class="tsd-kind-icon">number<wbr>OfElements</a>
+								<a href="_src_app_service_mobile_service_.mobileservice.html#mobilethreshold" class="tsd-kind-icon">mobile<wbr>Threshold</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_remember_element_service_.rememberelementservice.html#rememberedelements" class="tsd-kind-icon">remembered<wbr>Elements</a>
+								<a href="_src_app_service_mobile_service_.mobileservice.html#query" class="tsd-kind-icon">query</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_src_app_service_mobile_service_.mobileservice.html#showdetails" class="tsd-kind-icon">show<wbr>Details</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_src_app_service_remember_element_service_.rememberelementservice.html#add" class="tsd-kind-icon">add</a>
+								<a href="_src_app_service_mobile_service_.mobileservice.html#focus" class="tsd-kind-icon">focus</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_src_app_service_remember_element_service_.rememberelementservice.html#count" class="tsd-kind-icon">count</a>
+								<a href="_src_app_service_mobile_service_.mobileservice.html#getmobile" class="tsd-kind-icon">get<wbr>Mobile</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_src_app_service_remember_element_service_.rememberelementservice.html#getrememberedelements" class="tsd-kind-icon">get<wbr>Remembered<wbr>Elements</a>
+								<a href="_src_app_service_mobile_service_.mobileservice.html#getshowdetails" class="tsd-kind-icon">get<wbr>Show<wbr>Details</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_src_app_service_remember_element_service_.rememberelementservice.html#notify" class="tsd-kind-icon">notify</a>
+								<a href="_src_app_service_mobile_service_.mobileservice.html#mobilecheck" class="tsd-kind-icon">mobile<wbr>Check</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_src_app_service_remember_element_service_.rememberelementservice.html#remove" class="tsd-kind-icon">remove</a>
+								<a href="_src_app_service_mobile_service_.mobileservice.html#resizewindow" class="tsd-kind-icon">resize<wbr>Window</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_app_service_mobile_service_.mobileservice.html#setquery" class="tsd-kind-icon">set<wbr>Query</a>
 							</li>
 						</ul>
 					</li>

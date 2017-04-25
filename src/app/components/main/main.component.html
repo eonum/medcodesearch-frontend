@@ -1,14 +1,15 @@
 <div id="main-component">
   <app-search-form></app-search-form>
 
-  <div class="row">
+  <div class="row" id="search-results-container" [class.mobile]="mobile || mobileService.getMobile()">
+    <div id="search-results" [class.details]="mobileService.getShowDetails()">
+      <div class="col-xs-6" *ngIf="query">
+        <app-search-results></app-search-results>
+      </div>
 
-    <div id="search-result-component" class="col-sm-6" *ngIf="query">
-      <app-search-results></app-search-results>
-    </div>
-
-    <div id="detail-component" [class.col-sm-6]="query">
-      <router-outlet ></router-outlet>
+      <div [ngClass]="query ? 'col-xs-6' : 'col-xs-12'">
+        <router-outlet></router-outlet>
+      </div>
     </div>
 
   </div>

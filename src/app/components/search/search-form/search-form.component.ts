@@ -7,6 +7,7 @@ import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Data, Params, Router} from '@angular/router';
 import {ModalDirective} from 'ng2-bootstrap';
 import {CatalogDisplayInfo, CatalogResolver} from '../../../service/routing/catalog-resolver.service';
+import {MobileService} from '../../../service/mobile.service';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -43,7 +44,8 @@ export class SearchFormComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               @Inject('ILoggerService') private logger: ILoggerService,
-              private catalogResolver: CatalogResolver) {
+              private catalogResolver: CatalogResolver,
+              private mobileService: MobileService) {
 
     this.searchForm.valueChanges
       .debounceTime(500)
@@ -132,6 +134,8 @@ export class SearchFormComponent implements OnInit {
       relativeTo: this.route,
       queryParams: query.length > 0 ? {query: query} : null
     }).catch(error => this.logger.error(error));
+
+    this.mobileService.setQuery(query);
   }
 
   /**

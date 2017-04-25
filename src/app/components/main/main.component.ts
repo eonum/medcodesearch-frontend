@@ -1,8 +1,8 @@
 import {ILoggerService} from '../../service/logging/i.logger.service';
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, HostListener} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {catalogConfigurations} from '../../catalog/catalog.configuration';
 import {CatalogResolver} from '../../service/routing/catalog-resolver.service';
+import {MobileService} from '../../service/mobile.service';
 
 /**
  * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
@@ -14,17 +14,19 @@ import {CatalogResolver} from '../../service/routing/catalog-resolver.service';
   selector: 'app-main',
   templateUrl: 'main.component.html',
   styleUrls: ['main.component.css'],
-
 })
 
 export class MainComponent implements OnInit {
 
   public query;
+  public mobile;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               @Inject('ILoggerService') private logger: ILoggerService,
-              private catalogResolver: CatalogResolver) {
+              private catalogResolver: CatalogResolver,
+              private mobileService: MobileService) {
+
   }
 
   /**
@@ -40,6 +42,7 @@ export class MainComponent implements OnInit {
 
     // Subscribe to the search query, to now if SearchResult component must be displayed.
     this.route.queryParams.subscribe((params: Params) => this.query = params['query']);
+    this.mobileService.setQuery(this.query);
 
     // Subscribe to route params, to check if a catalog element is selected.
     this.route.params.subscribe((params: Params) => {
@@ -55,6 +58,7 @@ export class MainComponent implements OnInit {
     );
   }
 
+
   /**
    * Navigate to `:type/:code` .
    * @param type
@@ -66,6 +70,12 @@ export class MainComponent implements OnInit {
       relativeTo: this.route,
       queryParamsHandling: 'merge'
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  private onResize(event: any): void {
+    this.mobileService.resizeWindow(event.target.innerWidth);
+    this.mobile = this.mobileService.getMobile();
   }
 
 }

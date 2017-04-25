@@ -1,18 +1,21 @@
-#detail-component {
-  background-color: white;
-  padding: 10px;
-  margin-top: 50px;
-  border: 1px solid #eee;
-  border-left-width: 0.5rem;
-  border-radius: 0.5rem;
-  border-left-color: #24add3;
-}
-
-#search-result-component{
-  padding: 20px;
-}
-
 #main-component{
   padding-top: 0.5em;
 }
 
+#search-results {
+  margin-top: 50px;
+}
+
+#search-results-container.mobile {
+  overflow: hidden;
+}
+/* "#search-results-container.mobile .back-button" is in styles.css because accessing child components only works if they are included without router-outlet */
+#search-results-container.mobile #search-results {
+  width: 200%;
+  margin-left: 0;
+  transition: margin 0.5s ease-in-out;
+}
+#search-results-container.mobile #search-results.details {
+  margin-left: -100%;
+  transition: margin 0.5s ease-in-out;
+}

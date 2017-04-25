@@ -1,8 +1,9 @@
 import {CatalogElement} from '../../../model/catalog.element';
 import {ILoggerService} from '../../../service/logging/i.logger.service';
 import {RememberElementService} from '../../../service/remember.element.service';
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, EventEmitter, Output} from '@angular/core';
 import {ActivatedRoute, Data, Router} from '@angular/router';
+import {MobileService} from '../../../service/mobile.service';
 
 /**
  * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
@@ -50,10 +51,11 @@ export class DetailComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private rememberService: RememberElementService,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+              @Inject('ILoggerService') private logger: ILoggerService,
+              public mobileService: MobileService) {
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.route.data.subscribe((data: Data) => {
         this.selectedElement = data.catalogElement;
         this.updateView();
