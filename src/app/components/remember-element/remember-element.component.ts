@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RememberElementComponent implements OnInit {
 
   public rememberedElements: RememberedElement[] = [];
-  
+
   @ViewChild('tooltipElementAdded') public tooltipElementAdded;
 
   constructor(private rememberService: RememberElementService,

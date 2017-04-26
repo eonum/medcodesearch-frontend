@@ -1,5 +1,5 @@
 import { ILoggerService } from './i.logger.service';
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 
 /**
  * Implementation of {@link ILoggerService} for testing.

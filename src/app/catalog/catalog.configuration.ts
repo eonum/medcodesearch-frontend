@@ -49,19 +49,19 @@ export const catalogConfigurations: { [name: string]: CatalogConfiguration } = {
     searchableTypes: ['icds'],
     retrievableTypes: ['icds', 'icd_groups', 'icd_chapters'],
     versionParam: 'icds',
-    rootElement: {type: 'icd_chapters'}
+    rootElement: { type: 'icd_chapters' }
   },
   'CHOP': {
     searchableTypes: ['chops'],
     retrievableTypes: ['chops', 'chop_chapters'],
     versionParam: 'chops',
-    rootElement: {type: 'chop_chapters'}
+    rootElement: { type: 'chop_chapters' }
   },
   'SwissDRG': {
     searchableTypes: ['drgs'],
     retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
     versionParam: 'drgs',
-    rootElement: {type: 'mdcs', code: 'ALL'}
+    rootElement: { type: 'mdcs', code: 'ALL' }
   }
 
 };

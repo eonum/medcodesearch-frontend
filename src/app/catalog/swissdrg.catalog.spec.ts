@@ -1,8 +1,8 @@
-import {CatalogElement} from '../model/catalog.element';
-import {ICatalogService} from '../service/i.catalog.service';
-import {NullLoggerService} from '../service/logging/null.logger.service';
-import {SwissDrgCatalog} from './swissdrg.catalog';
-import {async} from '@angular/core/testing';
+import { CatalogElement } from '../model/catalog.element';
+import { ICatalogService } from '../service/i.catalog.service';
+import { NullLoggerService } from '../service/logging/null.logger.service';
+import { SwissDrgCatalog } from './swissdrg.catalog';
+import { async } from '@angular/core/testing';
 import * as TypeMoq from 'typemoq';
 
 describe('SwissDrgCatalog', () => {
@@ -21,21 +21,21 @@ describe('SwissDrgCatalog', () => {
 
     mock.setup(service => service.getLocale()).returns(() => 'de');
   });
-/*
-  it('Should initialize service when retrieving versions', async(() => {
-
-    mock.setup(x => x.init(TypeMoq.It.isValue(
-      {
-        searchableTypes: ['drgs'],
-        retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
-        versionParam: 'drgs',
-        rootElement: {type: 'mdcs', code: 'ALL'}
-      }))).verifiable(TypeMoq.Times.atLeastOnce());
-
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
-    //catalog.getVersions('de');
-    mock.verifyAll();
-  }));*/
+  /*
+    it('Should initialize service when retrieving versions', async(() => {
+  
+      mock.setup(x => x.init(TypeMoq.It.isValue(
+        {
+          searchableTypes: ['drgs'],
+          retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
+          versionParam: 'drgs',
+          rootElement: {type: 'mdcs', code: 'ALL'}
+        }))).verifiable(TypeMoq.Times.atLeastOnce());
+  
+      const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
+      //catalog.getVersions('de');
+      mock.verifyAll();
+    }));*/
 
   it('Should initialize service when searching', async(() => {
 
@@ -44,7 +44,7 @@ describe('SwissDrgCatalog', () => {
         searchableTypes: ['drgs'],
         retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
         versionParam: 'drgs',
-        rootElement: {type: 'mdcs', code: 'ALL'}
+        rootElement: { type: 'mdcs', code: 'ALL' }
       }))).verifiable(TypeMoq.Times.atLeastOnce());
 
     const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
@@ -52,27 +52,27 @@ describe('SwissDrgCatalog', () => {
       mock.verifyAll();
     });
   }));
-/*
-  it('Should get a list of versions', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
-    catalog.getVersions('de').then(versions => {
-      expect(versions.length).toBe(4);
-    });
-  }));
-
-  it('Should get a list of versions from cache', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
-    catalog.getVersions('de').then(outerVersions => {
+  /*
+    it('Should get a list of versions', async(() => {
+      const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
       catalog.getVersions('de').then(versions => {
         expect(versions.length).toBe(4);
       });
-    });
-  }));
- */
+    }));
+  
+    it('Should get a list of versions from cache', async(() => {
+      const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
+      catalog.getVersions('de').then(outerVersions => {
+        catalog.getVersions('de').then(versions => {
+          expect(versions.length).toBe(4);
+        });
+      });
+    }));
+   */
   it('Should return a list of results', async(() => {
     const catalogs: CatalogElement[] = [
-      {code: 'Content 1', text: 'Description content 1', url: '/url/to/content1', type: 'drgs'},
-      {code: 'Content 2', text: 'Description content 2', url: '/url/to/content2', type: 'drgs'}
+      { code: 'Content 1', text: 'Description content 1', url: '/url/to/content1', type: 'drgs' },
+      { code: 'Content 2', text: 'Description content 2', url: '/url/to/content2', type: 'drgs' }
     ];
 
     mock.setup(x => x.search('V1.0', 'Content')).returns(() => Promise.resolve(catalogs));
@@ -93,22 +93,22 @@ describe('SwissDrgCatalog', () => {
       });
   }));
 
-/*
-  it('Should have version "V4.0" in current lang', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
-    catalog.hasVersion('de', 'V4.0').then(res => {
-
-      expect(res).toBe(true);
-    });
-  }));
-
-  it('Should not have version "V5.0" in current lang', async(() => {
-    const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
-    catalog.hasVersion('de', 'V5.0').then(res => {
-
-      expect(res).toBeFalsy();
-    });
-
-  }));
-*/
+  /*
+    it('Should have version "V4.0" in current lang', async(() => {
+      const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
+      catalog.hasVersion('de', 'V4.0').then(res => {
+  
+        expect(res).toBe(true);
+      });
+    }));
+  
+    it('Should not have version "V5.0" in current lang', async(() => {
+      const catalog: SwissDrgCatalog = new SwissDrgCatalog(mock.object, new NullLoggerService());
+      catalog.hasVersion('de', 'V5.0').then(res => {
+  
+        expect(res).toBeFalsy();
+      });
+  
+    }));
+  */
 });

@@ -1,13 +1,13 @@
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {Catalog} from '../../../catalog/catalog';
-import {ILoggerService} from '../../../service/logging/i.logger.service';
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {ActivatedRoute, Data, Params, Router} from '@angular/router';
-import {ModalDirective} from 'ng2-bootstrap';
-import {CatalogDisplayInfo, CatalogResolver} from '../../../service/routing/catalog-resolver.service';
-import {MobileService} from '../../../service/mobile.service';
+import { Catalog } from '../../../catalog/catalog';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Data, Params, Router } from '@angular/router';
+import { ModalDirective } from 'ng2-bootstrap';
+import { CatalogDisplayInfo, CatalogResolver } from '../../../service/routing/catalog-resolver.service';
+import { MobileService } from '../../../service/mobile.service';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -42,10 +42,10 @@ export class SearchFormComponent implements OnInit {
   @ViewChild('childModal') public childModal: ModalDirective;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService,
-              private catalogResolver: CatalogResolver,
-              private mobileService: MobileService) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService,
+    private catalogResolver: CatalogResolver,
+    private mobileService: MobileService) {
 
     this.searchForm.valueChanges
       .debounceTime(500)
@@ -132,7 +132,7 @@ export class SearchFormComponent implements OnInit {
 
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: query.length > 0 ? {query: query} : null
+      queryParams: query.length > 0 ? { query: query } : null
     }).catch(error => this.logger.error(error));
 
     this.mobileService.setQuery(query);

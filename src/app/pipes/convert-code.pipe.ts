@@ -1,18 +1,18 @@
-import {ILoggerService} from '../service/logging/i.logger.service';
-import {Inject, NgZone, Pipe, PipeTransform} from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MobileService} from '../service/mobile.service';
+import { ILoggerService } from '../service/logging/i.logger.service';
+import { Inject, NgZone, Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MobileService } from '../service/mobile.service';
 
-@Pipe({name: 'convertCode'})
+@Pipe({ name: 'convertCode' })
 export class ConvertCodePipe implements PipeTransform {
 
   constructor(private sanitizer: DomSanitizer,
-              private ngZone: NgZone,
-              private route: ActivatedRoute,
-              private router: Router,
-              public mobileService: MobileService,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private ngZone: NgZone,
+    private route: ActivatedRoute,
+    private router: Router,
+    public mobileService: MobileService,
+    @Inject('ILoggerService') private logger: ILoggerService) {
     window['eonum'] = window['eonum'] || {};
     window['eonum'].searchCode = this.searchCode.bind(this);
   }
@@ -54,7 +54,7 @@ export class ConvertCodePipe implements PipeTransform {
 
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: {'query': query}
+      queryParams: { 'query': query }
     }).catch(error => this.logger.log(error));
 
     this.mobileService.focus('results')

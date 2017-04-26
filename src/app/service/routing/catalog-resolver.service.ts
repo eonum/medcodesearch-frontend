@@ -1,9 +1,9 @@
-import {ILoggerService} from '../logging/i.logger.service';
-import {Inject, Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
-import {Settings} from '../../settings';
-import {VERSIONS} from '../../versions';
-import {catalogConfigurations} from '../../catalog/catalog.configuration';
+import { ILoggerService } from '../logging/i.logger.service';
+import { Inject, Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { Settings } from '../../settings';
+import { VERSIONS } from '../../versions';
+import { catalogConfigurations } from '../../catalog/catalog.configuration';
 
 
 export interface CatalogDisplayInfo {
@@ -101,7 +101,7 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
 
     const params = version ? [language, catalog, version] : [language];
 
-    this.router.navigate(params, {queryParamsHandling: 'merge'});
+    this.router.navigate(params, { queryParamsHandling: 'merge' });
   }
 
   /**
@@ -113,7 +113,7 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
    */
   public resolve(route: ActivatedRouteSnapshot, state?: RouterStateSnapshot): Promise<CatalogDisplayInfo[]> {
 
-    const {language, version, catalog} = route.params;
+    const { language, version, catalog } = route.params;
 
     if (!version || !this.versionExists(language, catalog, version)) {
       this.navigateToActiveVersion(language, catalog);
@@ -156,7 +156,7 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
   public versionExists(lang: string, catalog: string, version?: string): boolean {
     const versions = VERSIONS[lang][catalog];
 
-    return (!version && versions.length !== 0) || (versions.indexOf(version) > -1 );
+    return (!version && versions.length !== 0) || (versions.indexOf(version) > -1);
   }
 
   /**
@@ -173,7 +173,7 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
      For SwissDRG, the code of the root element is 'ALL'.
      This code is configured in the CatalogConfiguration
      of SwissDRG.*/
-    return {type: root.type, code: root.code || version};
+    return { type: root.type, code: root.code || version };
   }
 
 }

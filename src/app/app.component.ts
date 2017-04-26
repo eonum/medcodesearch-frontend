@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void { }
 
   public setLanguage(lang: string): void {
-    const {language, catalog, version} = this.route.firstChild.firstChild.snapshot.params;
+    const { language, catalog, version } = this.route.firstChild.firstChild.snapshot.params;
 
     if (lang !== language || (lang === '' && (lang = language))) {
       this.router.navigate(
