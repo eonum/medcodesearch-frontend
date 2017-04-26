@@ -32,7 +32,6 @@ describe('MainComponent', () => {
 
   let router;
   let route;
-  let mock: TypeMoq.IMock<SwissDrgCatalog>;
 
   /*Test data*/
 
@@ -127,8 +126,8 @@ describe('MainComponent', () => {
 
     fixture.detectChanges();
     expect(router.lastNavigation).toBeTruthy();
-    expect(router.lastNavigation.url).toBe('mdcs/ALL')
-    expect(router.lastNavigation.extras.queryParamsHandling).toBe('merge')
+    expect(router.lastNavigation.url).toBe('mdcs/ALL');
+    expect(router.lastNavigation.extras.queryParamsHandling).toBe('merge');
   });
 
 

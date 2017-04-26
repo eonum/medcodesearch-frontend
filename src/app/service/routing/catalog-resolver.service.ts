@@ -31,7 +31,7 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
   constructor(private router: Router, @Inject('ILoggerService') private logger: ILoggerService) {
 
     Settings.LANGUAGES.forEach((lang: string) => {
-      this.activeVersions[lang] = {}
+      this.activeVersions[lang] = {};
     });
 
   }

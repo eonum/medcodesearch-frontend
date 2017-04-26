@@ -57,7 +57,7 @@ export class ConvertCodePipe implements PipeTransform {
       queryParams: { 'query': query }
     }).catch(error => this.logger.log(error));
 
-    this.mobileService.focus('results')
+    this.mobileService.focus('results');
 
   }
 }
