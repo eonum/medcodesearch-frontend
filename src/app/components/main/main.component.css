@@ -20,5 +20,4 @@
 #search-results-container.mobile #search-results.details {
   margin-left: -100%;
   transition: margin 0.5s ease-in-out;
-  position: fixed;
 }
