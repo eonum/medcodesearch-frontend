@@ -54,16 +54,22 @@ table {
   padding: 0;
 }
 
+.dropdown-menu > li > a {
+  padding: 5px 20px;
+}
+
+.dropdown-menu > li.favorite-item-title > a {
+  padding: 3px 20px;
+}
+
 .badge {
   padding: 1px 9px 2px;
-  font-size: 12.025px;
-  font-weight: bold;
-  white-space: nowrap;
   color: #ffffff;
   background-color: rgb(36, 173, 211);
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
+  margin-right: 2px;
 }
 
 .med-blue {
