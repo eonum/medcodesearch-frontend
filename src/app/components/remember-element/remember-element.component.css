@@ -69,13 +69,28 @@ table {
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
-  margin-right: 2px;
+  margin-right: 5px;
+  padding-top: 2px;
 }
 
 .med-blue {
   color: rgb(36, 173, 211);
 }
 div.pull-right {
-  margin-left: 18px;
+  margin-left: 10px;
   margin-top: 3px;
+}
+
+.dropdown-toggle{
+  background-color: transparent;
+  border: none;
+  border: 1px solid transparent;
+}
+.dropdown-toggle:hover{
+  background-color: rgba(36, 173, 211, 0.2);
+  border: solid 1px rgb(36, 173, 211);
+}
+
+.glyphicon-star{
+  font-size: 14px;
 }

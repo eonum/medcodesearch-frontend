@@ -6,13 +6,13 @@
     </div>
     <div class="main">
       <button type="button" class="btn btn-default button-remember" (click)="rememberCode(selectedElement)">
-        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star med-blue"></span>
       </button>
 
       <ol class="breadcrumb">
         <li *ngFor="let element of hierarchy">
           <ng-template [ngIf]="selectedElement !== element">
-            <span class="link" (click)="openCode(element)" tooltip={{element.text}}>{{element.name}}</span>
+            <span class="link" (click)="openCode(element)" tooltip={{element.text}} placement="bottom">{{element.name}}</span>
           </ng-template>
           <ng-template [ngIf]="selectedElement === element">
             {{element.name}}

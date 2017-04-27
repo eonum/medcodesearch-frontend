@@ -1,12 +1,12 @@
 <div class="btn-group pull-right" dropdown>
   <button type="button" class="btn btn-default dropdown-toggle" dropdownToggle>
     <span class="badge" [tooltip]="tooltipTemplate" triggers="" #tooltip="bs-tooltip" placement="bottom">{{rememberedElements.length}}</span>
-    <span class="glyphicon glyphicon-menu-down med-blue"></span>
+    
+    <span class="glyphicon glyphicon-star med-blue"></span>
     <ng-template #tooltipTemplate>{{ toolTipMessage }}</ng-template>
   </button>
 
   <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu">
-    <li class="favorite-item-title disabled"><a><strong>Favoriten</strong></a></li>
     <ng-template [ngIf]="rememberedElements?.length > 0">
       <li class="favorite-item" *ngFor="let element of rememberedElements">
         <a>

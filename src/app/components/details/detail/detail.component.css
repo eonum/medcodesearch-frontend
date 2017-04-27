@@ -48,3 +48,15 @@ h3 {
 
   margin-top: 0;
 }
+
+.glyphicon-star{
+  font-size: 20px;
+}
+
+.button-remember {
+  border: none;
+  margin: 3px 0px 0px 0px;
+}
+.med-blue {
+  color: rgb(36, 173, 211);
+}

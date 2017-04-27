@@ -1,8 +1,8 @@
 <div id="main-component">
   <app-search-form></app-search-form>
 
-  <div class="row" id="search-results-container" [class.mobile]="mobile || mobileService.getMobile()">
-    <div id="search-results" [class.details]="mobileService.getShowDetails()">
+  <div class="row" id="search-results-container" [class.mobile]="mobile || mobileService.getMobile()" [class.details]="mobileService.getShowDetails()">
+    <div id="search-results">
       <div class="col-xs-6" *ngIf="query">
         <app-search-results></app-search-results>
       </div>
