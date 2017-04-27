@@ -54,11 +54,16 @@ table {
   padding: 0;
 }
 
+.dropdown-menu > li > a {
+  padding: 5px 20px;
+}
+
+.dropdown-menu > li.favorite-item-title > a {
+  padding: 3px 20px;
+}
+
 .badge {
   padding: 1px 9px 2px;
-  font-size: 12.025px;
-  font-weight: bold;
-  white-space: nowrap;
   color: #ffffff;
   background-color: rgb(36, 173, 211);
   -webkit-border-radius: 9px;
@@ -79,13 +84,13 @@ div.pull-right {
 .dropdown-toggle{
   background-color: transparent;
   border: none;
-
+  border: 1px solid transparent;
 }
 .dropdown-toggle:hover{
   background-color: rgba(36, 173, 211, 0.2);
   border: solid 1px rgb(36, 173, 211);
-
 }
+
 .glyphicon-star{
   font-size: 14px;
 }

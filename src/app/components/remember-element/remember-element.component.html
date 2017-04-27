@@ -7,7 +7,6 @@
   </button>
 
   <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu">
-    <li class="favorite-item-title disabled"><a><strong><span class="glyphicon glyphicon-menu-down med-blue"></span></strong></a></li>
     <ng-template [ngIf]="rememberedElements?.length > 0">
       <li class="favorite-item" *ngFor="let element of rememberedElements">
         <a>
