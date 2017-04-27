@@ -51,7 +51,7 @@ table {
 .dropdown-menu {
   min-width: 240px;
   max-width: 340px;
-  padding-top: 0px;
+  padding: 0;
 }
 
 .badge {

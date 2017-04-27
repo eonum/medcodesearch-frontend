@@ -1,8 +1,8 @@
 <div class="btn-group pull-right" dropdown>
   <button type="button" class="btn btn-default dropdown-toggle" dropdownToggle>
-    <span class="badge" [tooltip]="tooltipElementAddedTemplate" triggers="" #tooltipElementAdded="bs-tooltip" placement="bottom">{{rememberedElements.length}}</span>
+    <span class="badge" [tooltip]="tooltipTemplate" triggers="" #tooltip="bs-tooltip" placement="bottom">{{rememberedElements.length}}</span>
     <span class="glyphicon glyphicon-menu-down med-blue"></span>
-    <ng-template #tooltipElementAddedTemplate>{{ 'LBL_ELEMENT_ADDED' | translate }}</ng-template>
+    <ng-template #tooltipTemplate>{{ toolTipMessage }}</ng-template>
   </button>
 
   <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu">
@@ -12,7 +12,7 @@
         <a>
           <div class="favorite-item-left"(click)="openCode(element)">
             <span class="favorite-item-label" >{{element.name}}</span><br>
-            <span>{{element.text}}</span>
+            <span title="{{element.text}}">{{element.text}}</span>
           </div>
           <div class="favorite-item-right">
             <span (click)="removeElement(element)" class="favorite-item-button glyphicon glyphicon-trash pull-right"></span>
