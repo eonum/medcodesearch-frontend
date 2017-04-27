@@ -6,12 +6,18 @@
   </button>
 
   <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu">
-    <li class="disabled"><a><strong>Favoriten</strong></a></li>
+    <li class="favorite-item-title disabled"><a><strong>Favoriten</strong></a></li>
     <ng-template [ngIf]="rememberedElements?.length > 0">
-      <li *ngFor="let element of rememberedElements">
+      <li class="favorite-item" *ngFor="let element of rememberedElements">
         <a>
-          <span (click)="openCode(element)" class="favorite-item-label" >{{element.name}}</span>
-          <span (click)="removeElement(element)" class="favorite-item-button glyphicon glyphicon-trash pull-right"></span>
+          <div class="favorite-item-left"(click)="openCode(element)">
+            <span class="favorite-item-label" >{{element.name}}</span><br>
+            <span>{{element.text}}</span>
+          </div>
+          <div class="favorite-item-right">
+            <span (click)="removeElement(element)" class="favorite-item-button glyphicon glyphicon-trash pull-right"></span>
+          </div>
+          <div class="clearfix"></div>
         </a>
       </li>
     </ng-template>
