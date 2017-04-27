@@ -1,9 +1,9 @@
-import { ILoggerService } from './service/logging/i.logger.service';
-import { CatalogResolver } from './service/routing/catalog-resolver.service';
-import { Component, Inject, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { Settings } from './settings';
+import {ILoggerService} from './service/logging/i.logger.service';
+import {CatalogResolver} from './service/routing/catalog-resolver.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {Settings} from './settings';
 
 @Component({
   selector: 'app-root',
@@ -17,26 +17,36 @@ export class AppComponent implements OnInit {
   public languages = Settings.LANGUAGES;
 
   constructor(public translate: TranslateService,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private catalogResolver: CatalogResolver,
-    private router: Router,
-    private route: ActivatedRoute) {
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private catalogResolver: CatalogResolver,
+              private router: Router,
+              private route: ActivatedRoute) {
     translate.addLangs(this.languages);
   }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {
+  }
 
   public setLanguage(lang: string): void {
     const {language, catalog, version} = this.route.firstChild.firstChild.snapshot.params;
 
-    if (lang !== language || (lang === '' && (lang = language))) {
+    if (lang !== language) {
       this.router.navigate(
         [lang, catalog, version]
       ).catch(e => this.logger.log(e));
+    } else {
+      this.toRoot();
     }
   }
 
   public toRoot(): void {
-    this.setLanguage('');
+
+    const {language, catalog, version} = this.route.firstChild.firstChild.snapshot.params;
+
+    const root = this.catalogResolver.getRootElement(catalog, version);
+
+    this.router.navigate(
+      [language, catalog, version, root.type, root.code]
+    ).catch(e => this.logger.log(e));
   }
 }
