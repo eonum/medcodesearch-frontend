@@ -1,9 +1,9 @@
-import {ILoggerService} from './service/logging/i.logger.service';
-import {CatalogResolver} from './service/routing/catalog-resolver.service';
-import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {Settings} from './settings';
+import { ILoggerService } from './service/logging/i.logger.service';
+import { CatalogResolver } from './service/routing/catalog-resolver.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Settings } from './settings';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
 
   public toRoot(): void {
 
-    const {language, catalog, version} = this.route.firstChild.firstChild.snapshot.params;
+    const { language, catalog, version } = this.route.firstChild.firstChild.snapshot.params;
 
     const root = this.catalogResolver.getRootElement(catalog, version);
 
