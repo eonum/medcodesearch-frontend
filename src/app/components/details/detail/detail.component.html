@@ -12,7 +12,7 @@
       <ol class="breadcrumb">
         <li *ngFor="let element of hierarchy">
           <ng-template [ngIf]="selectedElement !== element">
-            <span class="link" (click)="openCode(element)" tooltip={{element.text}}>{{element.name}}</span>
+            <span class="link" (click)="openCode(element)" tooltip={{element.text}} placement="bottom">{{element.name}}</span>
           </ng-template>
           <ng-template [ngIf]="selectedElement === element">
             {{element.name}}
