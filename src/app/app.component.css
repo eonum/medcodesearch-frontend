@@ -28,7 +28,7 @@
 }
 
 .btn-remember:hover {
-  background-color: rgba(36, 173, 211,0.5);
+  background-color: rgba(36, 173, 211,1.0);
 }
 
 .navbar{
@@ -53,3 +53,10 @@
   margin-bottom: 60px;
   margin-top: 10px;
 }
+.vertical-line{
+      width: 1px; 
+      float: right; 
+      margin-left: 15px;
+      margin-top: 5px;
+      background-color: darkgrey;
+    }
