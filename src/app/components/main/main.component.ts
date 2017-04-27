@@ -1,8 +1,8 @@
-import {ILoggerService} from '../../service/logging/i.logger.service';
-import {Component, Inject, OnInit, HostListener} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {CatalogResolver} from '../../service/routing/catalog-resolver.service';
-import {MobileService} from '../../service/mobile.service';
+import { ILoggerService } from '../../service/logging/i.logger.service';
+import { Component, Inject, OnInit, HostListener } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { CatalogResolver } from '../../service/routing/catalog-resolver.service';
+import { MobileService } from '../../service/mobile.service';
 
 /**
  * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
@@ -22,10 +22,10 @@ export class MainComponent implements OnInit {
   public mobile;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService,
-              private catalogResolver: CatalogResolver,
-              public mobileService: MobileService) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService,
+    private catalogResolver: CatalogResolver,
+    public mobileService: MobileService) {
 
   }
 
@@ -46,15 +46,15 @@ export class MainComponent implements OnInit {
 
     // Subscribe to route params, to check if a catalog element is selected.
     this.route.params.subscribe((params: Params) => {
-        if (!this.route.firstChild) {
-          const root = this.catalogResolver.getRootElement(
-            this.route.snapshot.params['catalog'],
-            this.route.snapshot.params['version']);
+      if (!this.route.firstChild) {
+        const root = this.catalogResolver.getRootElement(
+          this.route.snapshot.params['catalog'],
+          this.route.snapshot.params['version']);
 
-          this.navigateToElement(root.type, root.code);
-        }
-
+        this.navigateToElement(root.type, root.code);
       }
+
+    }
     );
   }
 

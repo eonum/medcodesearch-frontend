@@ -3,6 +3,7 @@ import { ILoggerService } from '../../service/logging/i.logger.service';
 import { RememberElementService } from '../../service/remember.element.service';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Displays elements which were marked by the user.
@@ -15,13 +16,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RememberElementComponent implements OnInit {
 
+  /**
+   * The elements which have been marked as favorites by the
+   * user. Are retrieved from the {@link RememberElementService}
+   */
   public rememberedElements: RememberedElement[] = [];
-  
-  @ViewChild('tooltipElementAdded') public tooltipElementAdded;
+
+  /**
+   * The message which will be shown on the tooltip
+   */
+  public toolTipMessage: string;
+
+  @ViewChild('tooltip') public tooltip;
 
   constructor(private rememberService: RememberElementService,
     private router: Router,
     private route: ActivatedRoute,
+    private translate: TranslateService,
     @Inject('ILoggerService') private logger: ILoggerService) { }
 
   public ngOnInit(): void {
@@ -29,8 +40,7 @@ export class RememberElementComponent implements OnInit {
       const oldNumberOfElements = this.rememberedElements.length;
       this.rememberedElements = elements;
       if (oldNumberOfElements < elements.length) {
-        this.tooltipElementAdded.show();
-        setTimeout(() => { this.tooltipElementAdded.hide(); }, 2000);
+        this.showTooltip('LBL_ELEMENT_ADDED');
       }
     });
   }
@@ -56,5 +66,14 @@ export class RememberElementComponent implements OnInit {
    */
   private removeElement(element: RememberedElement): void {
     this.rememberService.remove(element);
+    this.showTooltip('LBL_ELEMENT_REMOVED');
+  }
+
+  private showTooltip(labelKey: string): void {
+    this.translate.get(labelKey).subscribe((res: string) => {
+      this.toolTipMessage = res;
+      this.tooltip.show();
+      setTimeout(() => { this.tooltip.hide(); }, 2000);
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 /**
  * Communicates with appropriate components to take care of mobile functionality,

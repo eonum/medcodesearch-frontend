@@ -3,6 +3,20 @@ table {
     border-bottom: 1px solid rgb(221, 221, 221);
 }
 
+.favorite-item-title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #f7f7f7;
+  padding: 5px 0;
+}
+
+.favorite-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.favorite-item:last-child {
+  border-bottom: none;
+}
+
 .favorite-item-label, .favorite-item-button {
   color: #24add3;
 }
@@ -20,8 +34,24 @@ table {
   cursor: pointer;
 }
 
+.favorite-item-left {
+  float: left;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.favorite-item-right {
+  float: left;
+  width: 10%;
+  padding-top: 2px;
+}
+
 .dropdown-menu {
   min-width: 240px;
+  max-width: 340px;
+  padding: 0;
 }
 
 .badge {
