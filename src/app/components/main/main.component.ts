@@ -48,10 +48,10 @@ export class MainComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
 
       if (!this.route.firstChild) {
-        const {catalog, version} = this.route.snapshot.params;
+        const { catalog, version } = this.route.snapshot.params;
         const root = this.catalogResolver.getRootElement(catalog, version);
         this.navigateToElement(root.type, root.code);
-      } 
+      }
 
     }
     );

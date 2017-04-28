@@ -86,7 +86,7 @@ export class RememberElementService {
    * @param catalog the catalog of the element
    * @param language the language of the element
    */
-  public isMarked(element: CatalogElement, version: string, catalog:string, language:string): boolean {
+  public isMarked(element: CatalogElement, version: string, catalog: string, language: string): boolean {
     const key = RememberedElement.keyForCatalogElement(element, version, catalog, language);
     return this.rememberedElements[key] !== undefined;
   }

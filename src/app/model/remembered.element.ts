@@ -23,10 +23,6 @@ export class RememberedElement {
     return to;
   }
 
-  public getId(): string {
-    return RememberedElement.keyForRememberedElement(this);
-  }
-
   public static keyForCatalogElement(element: CatalogElement, version: string, catalog: string, language: string): string {
     return RememberedElement.keyFor(element.code, element.type, version, catalog, language);
   }
@@ -37,5 +33,9 @@ export class RememberedElement {
 
   private static keyFor(code: string, type: string, version: string, catalog: string, language: string): string {
     return `${language}_${catalog}_${version}_${type}_${code}`;
+  }
+
+  public getId(): string {
+    return RememberedElement.keyForRememberedElement(this);
   }
 }

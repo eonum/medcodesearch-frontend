@@ -76,9 +76,9 @@ export class SearchResultsComponent implements OnInit {
   private redirectToCode(type: string, code: string): void {
 
     this.router.navigate([type, code], {
-        queryParamsHandling: 'merge',
-        relativeTo: this.route
-      }
+      queryParamsHandling: 'merge',
+      relativeTo: this.route
+    }
     ).catch(error => this.logger.error(error));
 
     this.mobileService.focus('details');
