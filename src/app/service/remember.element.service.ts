@@ -55,8 +55,8 @@ export class RememberElementService {
    * @param language the current language
    */
   public add(element: CatalogElement, version: string, catalog: string, language: string): void {
-    const elementToStore = RememberedElement.from(element, version, catalog, language);
-    if (!this.rememberedElements[elementToStore.getId()]) {
+    if (!this.isMarked(element, version, catalog, language)) {
+      const elementToStore = RememberedElement.from(element, version, catalog, language);
       this.rememberedElements[elementToStore.getId()] = elementToStore;
       this.numberOfElements++;
       this.notify();
@@ -75,6 +75,20 @@ export class RememberElementService {
       this.numberOfElements--;
       this.notify();
     }
+  }
+
+  /**
+   * Returns a value whether the specified element has already been
+   * added to the remembered elements.
+   * 
+   * @param element the element to check for being marked
+   * @param version the version of the element
+   * @param catalog the catalog of the element
+   * @param language the language of the element
+   */
+  public isMarked(element: CatalogElement, version: string, catalog:string, language:string): boolean {
+    const key = RememberedElement.keyForCatalogElement(element, version, catalog, language);
+    return this.rememberedElements[key] !== undefined;
   }
 
   /**

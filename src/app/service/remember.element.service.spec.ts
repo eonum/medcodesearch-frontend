@@ -32,6 +32,27 @@ describe('RememberElementService', () => {
     expect(rememberService.count()).toBe(1);
   });
 
+  it('Should return false if the element is not in list', () => {
+    const rememberService = new RememberElementService();
+    expect(rememberService.isMarked(this.createElement('1234'), 'V1.0', 'icd', 'de')).toBeFalsy();
+  });
+
+  it('Should return true if the element is in the list', () => {
+    const rememberService = new RememberElementService();
+    const element = this.createElement('1234');
+    rememberService.add(element, 'V1.0', 'icd', 'de');
+    expect(rememberService.isMarked(element, 'V1.0', 'icd', 'de')).toBeTruthy();
+  });
+
+  it('Should return false after element is removed from the list', () => {
+    const rememberService = new RememberElementService();
+    const element = this.createElement('1234');
+    rememberService.add(element, 'V1.0', 'icd', 'de');
+    const createdElement = RememberedElement.from(element, 'V1.0', 'icd', 'de');
+    rememberService.remove(createdElement);
+    expect(rememberService.isMarked(element, 'V1.0', 'icd', 'de')).toBeFalsy();
+  });
+
   it('Should increase number of elements accordingly when adding multiple elements', () => {
     const rememberService = new RememberElementService();
     for (let i = 0; i < 50; i++) {

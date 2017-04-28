@@ -24,6 +24,18 @@ export class RememberedElement {
   }
 
   public getId(): string {
-    return `${this.language}_${this.catalog}_${this.version}_${this.type}_${this.code}`;
+    return RememberedElement.keyForRememberedElement(this);
+  }
+
+  public static keyForCatalogElement(element: CatalogElement, version: string, catalog: string, language: string): string {
+    return RememberedElement.keyFor(element.code, element.type, version, catalog, language);
+  }
+
+  public static keyForRememberedElement(element: RememberedElement): string {
+    return RememberedElement.keyFor(element.code, element.type, element.version, element.catalog, element.language);
+  }
+
+  private static keyFor(code: string, type: string, version: string, catalog: string, language: string): string {
+    return `${language}_${catalog}_${version}_${type}_${code}`;
   }
 }

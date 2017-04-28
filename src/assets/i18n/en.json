@@ -17,6 +17,7 @@
   "LBL_BACK": "Back",
   "LBL_REMEMBER_TITLE": "Marked elements",
   "LBL_REMEMBER_NOELEMENTS": "You didn't mark any elements so far.",
-  "LBL_ELEMENT_ADDED": "The element has been marked.",
-  "LBL_ELEMENT_REMOVED": "The element has been unmarked."
+  "LBL_ELEMENT_ADDED": "The element has been added to list.",
+  "LBL_ELEMENT_REMOVED": "The element has been removed from the list.",
+  "LBL_REMEMBER_ELEMENT": "Add to list"
 }

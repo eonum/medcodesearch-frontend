@@ -12,7 +12,6 @@ import { Settings } from './settings';
 })
 
 export class AppComponent {
-  public title = 'medCodeSearch';
 
   public languages = Settings.LANGUAGES;
 
