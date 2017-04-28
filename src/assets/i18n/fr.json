@@ -17,7 +17,8 @@
   "LBL_BACK": "Retour",
   "LBL_REMEMBER_TITLE": "Eléments marqués",
   "LBL_REMEMBER_NOELEMENTS": "Vous n'avez marqué aucun élément.",
-  "LBL_ELEMENT_ADDED": "L'élément a été marqué.",
-  "LBL_ELEMENT_REMOVED": "L'élément a été enlevé."
+  "LBL_ELEMENT_ADDED": "L'élément a été mémorisé.",
+  "LBL_ELEMENT_REMOVED": "L'élément a été retiré de la liste.",
+  "LBL_REMEMBER_ELEMENT": "Mémoriser"
 }
 

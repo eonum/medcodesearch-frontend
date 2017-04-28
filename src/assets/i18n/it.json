@@ -17,5 +17,7 @@
   "LBL_BACK": "Ritorno",
   "LBL_REMEMBER_TITLE": "Elementi marqués",
   "LBL_REMEMBER_NOELEMENTS": "Hai segnato alcun elemento finora.",
-  "LBL_ELEMENT_ADDED": "L'elemento è stato rimosso"
+  "LBL_ELEMENT_ADDED": "L'elemento è stato aggiunto alla lista.",
+  "LBL_ELEMENT_REMOVED": "L'elemento è stato rimosso dalla lista",
+  "LBL_REMEMBER_ELEMENT": "Segna nella lista"
 }
