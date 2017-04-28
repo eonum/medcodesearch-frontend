@@ -1,6 +1,6 @@
 import { CatalogElement } from '../../../model/catalog.element';
 import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { RememberElementService } from '../../../service/remember.element.service';
+import { FavoriteElementService } from '../../../service/favorite.element.service';
 import { Component, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { MobileService } from '../../../service/mobile.service';
@@ -43,7 +43,7 @@ export class DetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private rememberService: RememberElementService,
+    private favoriteService: FavoriteElementService,
     @Inject('ILoggerService') private logger: ILoggerService,
     public mobileService: MobileService) {
   }
@@ -68,16 +68,16 @@ export class DetailComponent implements OnInit {
 
   /**
    * Mark the specified element as favorite so that it
-   * appears in the list of remembered elements at the
-   * {@link RememberElementComponent}.
+   * appears in the list of favorite elements at the
+   * {@link FavoriteElementComponent}.
    * 
-   * @param element the element to remember
+   * @param element the element to mark as favorite
    */
-  public rememberCode(element: CatalogElement): void {
+  public setAsFavorite(element: CatalogElement): void {
     const language: string = this.route.parent.snapshot.params['language'];
     const catalog: string = this.route.parent.snapshot.params['catalog'];
     const version: string = this.route.parent.snapshot.params['version'];
-    this.rememberService.add(element, version, catalog, language);
+    this.favoriteService.add(element, version, catalog, language);
   }
 
   /**
@@ -90,7 +90,7 @@ export class DetailComponent implements OnInit {
     const language: string = this.route.parent.snapshot.params['language'];
     const catalog: string = this.route.parent.snapshot.params['catalog'];
     const version: string = this.route.parent.snapshot.params['version'];
-    return this.rememberService.isMarked(element, version, catalog, language);
+    return this.favoriteService.isFavorite(element, version, catalog, language);
   }
 
   /**

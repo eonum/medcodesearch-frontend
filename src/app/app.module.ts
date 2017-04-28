@@ -9,14 +9,14 @@ import { DetailIcdComponent } from './components/details/detail-icd/detail-icd.c
 import { DetailSwissDrgComponent } from './components/details/detail-swiss-drg/detail-swiss-drg.component';
 import { DetailComponent } from './components/details/detail/detail.component';
 import { MainComponent } from './components/main/main.component';
-import { RememberElementComponent } from './components/remember-element/remember-element.component';
+import { FavoriteElementComponent } from './components/favorite-element/favorite-element.component';
 import { SearchFormComponent } from './components/search/search-form/search-form.component';
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { ConvertCodePipe } from './pipes/convert-code.pipe';
 import { CorrectVersionPipe } from './pipes/correct-version.pipe';
 import { CatalogService } from './service/catalog.service';
 import { ConsoleLoggerService } from './service/logging/console.logger.service';
-import { RememberElementService } from './service/remember.element.service';
+import { FavoriteElementService } from './service/favorite.element.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -46,7 +46,7 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
     DetailIcdComponent,
     ConvertCodePipe,
     CorrectVersionPipe,
-    RememberElementComponent
+    FavoriteElementComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +74,7 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
     { provide: 'ICatalogService', useClass: CatalogService },
     { provide: 'ILoggerService', useClass: ConsoleLoggerService },
     { provide: 'ICatalogElementCache', useClass: DefaultCatalogElementCache },
-    RememberElementService,
+    FavoriteElementService,
     SwissDrgCatalog,
     CHOPCatalog,
     ICDCatalog,

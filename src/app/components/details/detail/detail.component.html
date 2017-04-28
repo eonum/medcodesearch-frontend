@@ -5,11 +5,11 @@
       <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
     </div>
     <div class="main">
-      <button type="button" class="btn btn-default button-remember" [class.disabled]="isFavorite(selectedElement)" (click)="rememberCode(selectedElement)">
+      <button type="button" class="btn btn-default button-favorite" [class.disabled]="isFavorite(selectedElement)" (click)="setAsFavorite(selectedElement)">
         <span class="glyphicon med-blue"
           [class.glyphicon-star]="isFavorite(selectedElement)"
           [class.glyphicon-star-empty]="!isFavorite(selectedElement)"></span>
-        <span>{{'LBL_REMEMBER_ELEMENT' | translate}}</span>
+        <span>{{'LBL_FAVORITE_ELEMENT' | translate}}</span>
       </button>
 
       <ol class="breadcrumb">

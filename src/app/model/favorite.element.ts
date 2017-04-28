@@ -1,6 +1,6 @@
 import { CatalogElement } from './catalog.element';
 
-export class RememberedElement {
+export class FavoriteElement {
 
   public language: string;
   public catalog: string;
@@ -10,8 +10,8 @@ export class RememberedElement {
   public code: string;
   public text: string;
 
-  public static from(element: CatalogElement, version: string, catalog: string, language: string): RememberedElement {
-    const to = new RememberedElement();
+  public static from(element: CatalogElement, version: string, catalog: string, language: string): FavoriteElement {
+    const to = new FavoriteElement();
     to.language = language;
     to.catalog = catalog;
     to.version = version;
@@ -24,11 +24,11 @@ export class RememberedElement {
   }
 
   public static keyForCatalogElement(element: CatalogElement, version: string, catalog: string, language: string): string {
-    return RememberedElement.keyFor(element.code, element.type, version, catalog, language);
+    return FavoriteElement.keyFor(element.code, element.type, version, catalog, language);
   }
 
-  public static keyForRememberedElement(element: RememberedElement): string {
-    return RememberedElement.keyFor(element.code, element.type, element.version, element.catalog, element.language);
+  public static keyForFavoriteElement(element: FavoriteElement): string {
+    return FavoriteElement.keyFor(element.code, element.type, element.version, element.catalog, element.language);
   }
 
   private static keyFor(code: string, type: string, version: string, catalog: string, language: string): string {
@@ -36,6 +36,6 @@ export class RememberedElement {
   }
 
   public getId(): string {
-    return RememberedElement.keyForRememberedElement(this);
+    return FavoriteElement.keyForFavoriteElement(this);
   }
 }

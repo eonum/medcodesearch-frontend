@@ -15,9 +15,9 @@
   "LBL_SELECT_LANGUAGE": "Select your language",
   "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "The selected catalog is not available for the current language.",
   "LBL_BACK": "Back",
-  "LBL_REMEMBER_TITLE": "Marked elements",
-  "LBL_REMEMBER_NOELEMENTS": "You didn't mark any elements so far.",
+  "LBL_FAVORITE_TITLE": "Marked elements",
+  "LBL_FAVORITE_NOELEMENTS": "You didn't mark any elements so far.",
   "LBL_ELEMENT_ADDED": "The element has been added to list.",
   "LBL_ELEMENT_REMOVED": "The element has been removed from the list.",
-  "LBL_REMEMBER_ELEMENT": "Add to list"
+  "LBL_FAVORITE_ELEMENT": "Add to list"
 }

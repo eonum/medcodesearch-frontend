@@ -1,5 +1,5 @@
 import { CatalogElement } from '../model/catalog.element';
-import { RememberedElement } from '../model/remembered.element';
+import { FavoriteElement } from '../model/favorite.element';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -11,32 +11,32 @@ import { Observable } from 'rxjs/Observable';
  * The elements are stored within an in-memory dicitionary
  * and are lost as soon as the user closes or refreshes the
  * page (and therefore causes the app to restart).
- * Marked elements are shown by the {@link RememberElementComponent}.
+ * Marked elements are shown by the {@link FavoriteElementComponent}.
  */
 @Injectable()
-export class RememberElementService {
+export class FavoriteElementService {
 
   /**
-   * Internal dictionary to store the marked elements
+   * Internal dictionary to store the favorite elements
    */
-  private rememberedElements: { [key: string]: RememberedElement };
+  private favoriteElements: { [key: string]: FavoriteElement };
   private numberOfElements: number;
 
   /**
-   * BehaviorSubject to publish changes on remembered elements
+   * BehaviorSubject to publish changes on favorite elements
    * collection.
    */
-  private _rememberedElements: BehaviorSubject<RememberedElement[]>;
+  private _favoriteElements: BehaviorSubject<FavoriteElement[]>;
 
   public constructor() {
-    this.rememberedElements = {};
+    this.favoriteElements = {};
     this.numberOfElements = 0;
 
-    this._rememberedElements = new BehaviorSubject([]);
+    this._favoriteElements = new BehaviorSubject([]);
   }
 
   /**
-   * Returns the number of currently marked elements.
+   * Returns the number of currently favorite elements.
    */
   public count(): number {
     return this.numberOfElements;
@@ -55,9 +55,9 @@ export class RememberElementService {
    * @param language the current language
    */
   public add(element: CatalogElement, version: string, catalog: string, language: string): void {
-    if (!this.isMarked(element, version, catalog, language)) {
-      const elementToStore = RememberedElement.from(element, version, catalog, language);
-      this.rememberedElements[elementToStore.getId()] = elementToStore;
+    if (!this.isFavorite(element, version, catalog, language)) {
+      const elementToStore = FavoriteElement.from(element, version, catalog, language);
+      this.favoriteElements[elementToStore.getId()] = elementToStore;
       this.numberOfElements++;
       this.notify();
     }
@@ -68,10 +68,10 @@ export class RememberElementService {
    * 
    * @param element the element to unmark
    */
-  public remove(element: RememberedElement): void {
+  public remove(element: FavoriteElement): void {
     const id = element.getId();
-    if (this.rememberedElements[id]) {
-      delete this.rememberedElements[id];
+    if (this.favoriteElements[id]) {
+      delete this.favoriteElements[id];
       this.numberOfElements--;
       this.notify();
     }
@@ -79,24 +79,24 @@ export class RememberElementService {
 
   /**
    * Returns a value whether the specified element has already been
-   * added to the remembered elements.
+   * added to the favorite elements.
    * 
    * @param element the element to check for being marked
    * @param version the version of the element
    * @param catalog the catalog of the element
    * @param language the language of the element
    */
-  public isMarked(element: CatalogElement, version: string, catalog: string, language: string): boolean {
-    const key = RememberedElement.keyForCatalogElement(element, version, catalog, language);
-    return this.rememberedElements[key] !== undefined;
+  public isFavorite(element: CatalogElement, version: string, catalog: string, language: string): boolean {
+    const key = FavoriteElement.keyForCatalogElement(element, version, catalog, language);
+    return this.favoriteElements[key] !== undefined;
   }
 
   /**
-   * Get all marked elements as observable. Subscribers can
+   * Get all favorite elements as observable. Subscribers can
    * subscribe to changes on those elements.
    */
-  public getRememberedElements(): Observable<RememberedElement[]> {
-    return this._rememberedElements.asObservable();
+  public getFavoriteElements(): Observable<FavoriteElement[]> {
+    return this._favoriteElements.asObservable();
   }
 
   /**
@@ -104,10 +104,10 @@ export class RememberElementService {
    */
   private notify(): void {
     const elements = [];
-    const keys = Object.keys(this.rememberedElements);
+    const keys = Object.keys(this.favoriteElements);
     keys.forEach(key => {
-      elements.push(this.rememberedElements[key]);
+      elements.push(this.favoriteElements[key]);
     });
-    this._rememberedElements.next(elements);
+    this._favoriteElements.next(elements);
   }
 }

@@ -1,6 +1,6 @@
-import { RememberedElement } from '../../model/remembered.element';
+import { FavoriteElement } from '../../model/favorite.element';
 import { ILoggerService } from '../../service/logging/i.logger.service';
-import { RememberElementService } from '../../service/remember.element.service';
+import { FavoriteElementService } from '../../service/favorite.element.service';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,17 +10,17 @@ import { TranslateService } from '@ngx-translate/core';
  * Allows opening and removing of marked elements.
  */
 @Component({
-  selector: 'app-remember-element',
-  templateUrl: './remember-element.component.html',
-  styleUrls: ['./remember-element.component.css']
+  selector: 'app-favorite-element',
+  templateUrl: './favorite-element.component.html',
+  styleUrls: ['./favorite-element.component.css']
 })
-export class RememberElementComponent implements OnInit {
+export class FavoriteElementComponent implements OnInit {
 
   /**
    * The elements which have been marked as favorites by the
-   * user. Are retrieved from the {@link RememberElementService}
+   * user. Are retrieved from the {@link FavoriteElementService}
    */
-  public rememberedElements: RememberedElement[] = [];
+  public favoriteElements: FavoriteElement[] = [];
 
   /**
    * The message which will be shown on the tooltip
@@ -29,16 +29,16 @@ export class RememberElementComponent implements OnInit {
 
   @ViewChild('tooltip') public tooltip;
 
-  constructor(private rememberService: RememberElementService,
+  constructor(private favoriteService: FavoriteElementService,
     private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
     @Inject('ILoggerService') private logger: ILoggerService) { }
 
   public ngOnInit(): void {
-    this.rememberService.getRememberedElements().subscribe((elements: RememberedElement[]) => {
-      const oldNumberOfElements = this.rememberedElements.length;
-      this.rememberedElements = elements;
+    this.favoriteService.getFavoriteElements().subscribe((elements: FavoriteElement[]) => {
+      const oldNumberOfElements = this.favoriteElements.length;
+      this.favoriteElements = elements;
       if (oldNumberOfElements < elements.length) {
         this.showTooltip('LBL_ELEMENT_ADDED');
       }
@@ -50,7 +50,7 @@ export class RememberElementComponent implements OnInit {
    *
    * @param element the element to display
    */
-  private openCode(element: RememberedElement): void {
+  private openCode(element: FavoriteElement): void {
     this.logger.log('Route: ', this.route);
     this.router.navigate(
       [element.language, element.catalog, element.version, element.type, element.code],
@@ -64,8 +64,8 @@ export class RememberElementComponent implements OnInit {
    *
    * @param element the element to remove
    */
-  private removeElement(element: RememberedElement): void {
-    this.rememberService.remove(element);
+  private removeElement(element: FavoriteElement): void {
+    this.favoriteService.remove(element);
     this.showTooltip('LBL_ELEMENT_REMOVED');
   }
 
