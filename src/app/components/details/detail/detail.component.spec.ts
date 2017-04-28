@@ -1,3 +1,4 @@
+import { MobileService } from '../../../service/mobile.service';
 import { CHOPCatalog } from '../../../catalog/chop.catalog';
 import { ICDCatalog } from '../../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
@@ -66,7 +67,8 @@ describe('DetailComponent', () => {
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
-        RememberElementService
+        RememberElementService,
+        MobileService
       ]
     })
       .compileComponents();

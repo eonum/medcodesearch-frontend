@@ -1,3 +1,4 @@
+import { MobileService } from '../../../service/mobile.service';
 import { Catalog } from '../../../catalog/catalog';
 import { CHOPCatalog } from '../../../catalog/chop.catalog';
 import { ICDCatalog } from '../../../catalog/icd.catalog';
@@ -37,7 +38,8 @@ describe('SearchFormComponent', () => {
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
-        CatalogResolver
+        CatalogResolver,
+        MobileService
       ]
     })
       .compileComponents();

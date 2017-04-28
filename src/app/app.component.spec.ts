@@ -51,11 +51,11 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'medCodeSearch'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('medCodeSearch');
-  }));
+  // it(`should have as title 'medCodeSearch'`, async(() => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   const app = fixture.debugElement.componentInstance;
+  //   expect(app.title).toEqual('medCodeSearch');
+  // }));
 
   it('should render title with an id', async(() => {
     const fixture = TestBed.createComponent(AppComponent);

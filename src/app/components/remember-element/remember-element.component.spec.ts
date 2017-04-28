@@ -5,6 +5,7 @@ import { RememberElementComponent } from './remember-element.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { TooltipModule } from 'ng2-bootstrap';
 
 describe('RememberElementComponent', () => {
   let component: RememberElementComponent;
@@ -13,7 +14,7 @@ describe('RememberElementComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RememberElementComponent],
-      imports: [TranslateModule.forRoot(), RouterModule],
+      imports: [TranslateModule.forRoot(), TooltipModule.forRoot(), RouterModule],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
