@@ -1,6 +1,6 @@
 import { FavoriteElement } from '../../model/favorite.element';
 import { ILoggerService } from '../../service/logging/i.logger.service';
-import { FavoriteElementService } from '../../service/favorite.element.service';
+import { IFavoriteElementService } from '../../service/favorites/i.favorite.element.service';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -29,11 +29,11 @@ export class FavoriteElementComponent implements OnInit {
 
   @ViewChild('tooltip') public tooltip;
 
-  constructor(private favoriteService: FavoriteElementService,
-    private router: Router,
+  constructor(private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
-    @Inject('ILoggerService') private logger: ILoggerService) { }
+    @Inject('ILoggerService') private logger: ILoggerService,
+    @Inject('IFavoriteService') private favoriteService: IFavoriteElementService,) { }
 
   public ngOnInit(): void {
     this.favoriteService.getFavoriteElements().subscribe((elements: FavoriteElement[]) => {

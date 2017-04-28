@@ -16,7 +16,7 @@ import { ConvertCodePipe } from './pipes/convert-code.pipe';
 import { CorrectVersionPipe } from './pipes/correct-version.pipe';
 import { CatalogService } from './service/catalog.service';
 import { ConsoleLoggerService } from './service/logging/console.logger.service';
-import { FavoriteElementService } from './service/favorite.element.service';
+import { FavoriteElementService } from './service/favorites/favorite.element.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,7 +74,7 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
     { provide: 'ICatalogService', useClass: CatalogService },
     { provide: 'ILoggerService', useClass: ConsoleLoggerService },
     { provide: 'ICatalogElementCache', useClass: DefaultCatalogElementCache },
-    FavoriteElementService,
+    { provide: 'IFavoriteService', useClass: FavoriteElementService },
     SwissDrgCatalog,
     CHOPCatalog,
     ICDCatalog,

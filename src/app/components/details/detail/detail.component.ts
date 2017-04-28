@@ -1,9 +1,9 @@
 import { CatalogElement } from '../../../model/catalog.element';
 import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { FavoriteElementService } from '../../../service/favorite.element.service';
 import { Component, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { MobileService } from '../../../service/mobile.service';
+import { IFavoriteElementService } from '../../../service/favorites/i.favorite.element.service';
 
 /**
  * Component for displaying of detail information of a specific
@@ -43,7 +43,7 @@ export class DetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private favoriteService: FavoriteElementService,
+    @Inject('IFavoriteService') private favoriteService: IFavoriteElementService,
     @Inject('ILoggerService') private logger: ILoggerService,
     public mobileService: MobileService) {
   }

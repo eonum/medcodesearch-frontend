@@ -1,5 +1,5 @@
-import { CatalogElement } from '../model/catalog.element';
-import { FavoriteElement } from '../model/favorite.element';
+import { CatalogElement } from '../../model/catalog.element';
+import { FavoriteElement } from '../../model/favorite.element';
 import { FavoriteElementService } from './favorite.element.service';
 
 describe('FavoriteElementService', () => {

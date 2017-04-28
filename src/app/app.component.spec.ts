@@ -1,3 +1,4 @@
+import { FavoriteElementServiceMock } from './service/favorites/favorite.service.mock';
 import { AppComponent } from './app.component';
 import { HttpLoaderFactory } from './app.module';
 import { CHOPCatalog } from './catalog/chop.catalog';
@@ -6,7 +7,6 @@ import { SwissDrgCatalog } from './catalog/swissdrg.catalog';
 import { FavoriteElementComponent } from './components/favorite-element/favorite-element.component';
 import { CatalogServiceMock } from './service/catalog.service.mock';
 import { NullLoggerService } from './service/logging/null.logger.service';
-import { FavoriteElementService } from './service/favorite.element.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { async, TestBed } from '@angular/core/testing';
 import { Http, HttpModule } from '@angular/http';
@@ -37,11 +37,11 @@ describe('AppComponent', () => {
       providers: [
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
+        { provide: 'IFavoriteService', useClass: FavoriteElementServiceMock },
         SwissDrgCatalog,
         CHOPCatalog,
         ICDCatalog,
-        CatalogResolver,
-        FavoriteElementService]
+        CatalogResolver]
     }).compileComponents();
   }));
 

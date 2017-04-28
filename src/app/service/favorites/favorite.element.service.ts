@@ -1,5 +1,6 @@
-import { CatalogElement } from '../model/catalog.element';
-import { FavoriteElement } from '../model/favorite.element';
+import { IFavoriteElementService } from './i.favorite.element.service';
+import { CatalogElement } from '../../model/catalog.element';
+import { FavoriteElement } from '../../model/favorite.element';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs/Observable';
  * Marked elements are shown by the {@link FavoriteElementComponent}.
  */
 @Injectable()
-export class FavoriteElementService {
+export class FavoriteElementService implements IFavoriteElementService {
 
   /**
    * Internal dictionary to store the favorite elements

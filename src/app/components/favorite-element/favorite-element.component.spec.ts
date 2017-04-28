@@ -1,6 +1,6 @@
+import { FavoriteElementServiceMock } from '../../service/favorites/favorite.service.mock';
 import { ActivatedRouteStub, RouterStub } from '../../router-stub';
 import { NullLoggerService } from '../../service/logging/null.logger.service';
-import { FavoriteElementService } from '../../service/favorite.element.service';
 import { FavoriteElementComponent } from './favorite-element.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -19,7 +19,7 @@ describe('FavoriteElementComponent', () => {
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
         { provide: 'ILoggerService', useClass: NullLoggerService },
-        FavoriteElementService
+        { provide: 'IFavoriteService', useClass: FavoriteElementServiceMock}
       ]
     })
       .compileComponents();
