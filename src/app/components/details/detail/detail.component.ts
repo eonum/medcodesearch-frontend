@@ -6,34 +6,29 @@ import { ActivatedRoute, Data, Router } from '@angular/router';
 import { MobileService } from '../../../service/mobile.service';
 
 /**
- * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
- * of a {@link CatalogElement}.
- * The component is assigned to the route `<catalog>/<version>/<type>/<code>`.
- *
- * A catalog is resolved by the {@link CatalogResolver} and then passed as input
- * to this component. Each time the `type` or `code` in the
- * Routers params or data changes, the `selectedElement` is updated.
+ * Component for displaying of detail information of a specific
+ * CatalogElement.
+ * Displays also the hierarchy of the current catalog to a specific
+ * element and the children of a specific element.
+ * 
+ * The element to display is resolved from routing params by the
+ * {@link CatalogElementResolver}.
  */
-
 @Component({
   selector: 'app-detail-component',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-
 export class DetailComponent implements OnInit {
 
   /**
    * The active catalog, resolved from the activated route.
-   * Serves as input for the search-form component.
-   * */
-
+   */
   public catalog: string;
 
   /**
    * The current element for which the details are displayed
    */
-
   public selectedElement: CatalogElement;
 
   /**
@@ -45,8 +40,6 @@ export class DetailComponent implements OnInit {
    * All children of the `selectedElement`
    */
   public children: CatalogElement[] = [];
-
-  public count = 0;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -63,17 +56,41 @@ export class DetailComponent implements OnInit {
     );
   }
 
+  /**
+   * Reload the hierarchy and the children for
+   * the selectedElement.
+   */
   public updateView(): void {
     this.catalog = this.route.parent.snapshot.params['catalog'];
     this.setHierarchy();
     this.children = this.selectedElement.children;
   }
 
+  /**
+   * Mark the specified element as favorite so that it
+   * appears in the list of remembered elements at the
+   * {@link RememberElementComponent}.
+   * 
+   * @param element the element to remember
+   */
   public rememberCode(element: CatalogElement): void {
     const language: string = this.route.parent.snapshot.params['language'];
     const catalog: string = this.route.parent.snapshot.params['catalog'];
     const version: string = this.route.parent.snapshot.params['version'];
     this.rememberService.add(element, version, catalog, language);
+  }
+
+  /**
+   * Check whether the specified element has been marked
+   * as favorite.
+   * 
+   * @param element the element to check
+   */
+  public isFavorite(element: CatalogElement): boolean {
+    const language: string = this.route.parent.snapshot.params['language'];
+    const catalog: string = this.route.parent.snapshot.params['catalog'];
+    const version: string = this.route.parent.snapshot.params['version'];
+    return this.rememberService.isMarked(element, version, catalog, language);
   }
 
   /**
@@ -103,7 +120,7 @@ export class DetailComponent implements OnInit {
   /**
    * Navigates to a particular code.
    *
-   * @param elm
+   * @param element the element to navigate to
    */
   public openCode(element: CatalogElement): void {
     const languageRouteParam = this.route.snapshot.params['language'];
