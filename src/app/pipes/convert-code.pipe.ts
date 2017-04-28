@@ -18,15 +18,18 @@ export class ConvertCodePipe implements PipeTransform {
   }
 
   public transform(s: string): SafeHtml {
-    const regex = new RegExp(/[\{\(](([\w\d]{1,3}\.?){1,3})(-(([\w\d]{1,3}\.?){1,3})?)?[\}\)]/g);
+
+    const regex = new RegExp(/[\{\(](([A-Z\d]{1,3}\.?){1,3})(-(([A-Z\d]{1,3}\.?){1,3})?)?[\}\)]/g);
     s = s.replace(regex, this.wrapCode);
     return this.sanitizer.bypassSecurityTrustHtml(s);
 
     /*
-     PROBLEME
-     --------
-     Die Kategorien Z40-Z54 dienen
-     Einzelne Episoden von reaktiver Depression (F32.0, F32.1, F32.2)
+     ORIGINALE
+     ---------
+     var item = data[field][j].replace(/[\{|\(](\w{2,3}\.\w{1,2}(\.\w{1,2})?)-?[\}|\)]/, '<a href="/search?query=$1">$1</a>');
+     item = item.replace(/\{(\w{2,3})(\.-)?\}/, '<a href="/search?query=$1">$1</a>');
+     item = item.replace(/\{(\w{2,3})-(\w{2,3})\}/, '<a href="/search?query=$1">$1</a>-<a href="/search?query=$2">$2</a>');
+     item = item.replace(/\((\d\d\.\d\d)-(\d\d\.\d\d)\)/, '<a href="/search?query=$1#">$1</a>-<a href="/search?query=$2">$2</a>');
      */
   }
 
