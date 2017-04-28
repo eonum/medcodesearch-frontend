@@ -44,15 +44,14 @@ export class MainComponent implements OnInit {
     this.route.queryParams.subscribe((params: Params) => this.query = params['query']);
     this.mobileService.setQuery(this.query);
 
-    // Subscribe to route params, to check if a catalog element is selected.
+    // Subscribe to route params, to check  if childroute :type/:code exists.
     this.route.params.subscribe((params: Params) => {
-      if (!this.route.firstChild) {
-        const root = this.catalogResolver.getRootElement(
-          this.route.snapshot.params['catalog'],
-          this.route.snapshot.params['version']);
 
+      if (!this.route.firstChild) {
+        const {catalog, version} = this.route.snapshot.params;
+        const root = this.catalogResolver.getRootElement(catalog, version);
         this.navigateToElement(root.type, root.code);
-      }
+      } 
 
     }
     );

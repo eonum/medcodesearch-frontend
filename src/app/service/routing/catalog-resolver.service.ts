@@ -38,7 +38,7 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
 
   /**
    * Collect and return an array of {@CatalogDisplayInfo}, that the {@link SearchFormComponent} can use
-   * to display the catalog-version-selectors.
+   * to populate the drop-down's with the catalog versions.
    *
    * @param lang must be one of {@link Settings.LANGUAGES }
    * @returns {Promise<Array>}

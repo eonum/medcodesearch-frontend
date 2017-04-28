@@ -11,7 +11,7 @@ import { Settings } from './settings';
   styleUrls: ['app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   public title = 'medCodeSearch';
 
   public languages = Settings.LANGUAGES;
@@ -24,29 +24,36 @@ export class AppComponent implements OnInit {
     translate.addLangs(this.languages);
   }
 
-  public ngOnInit(): void {
-  }
 
+
+  /**
+   * Navigate to the root element of the current routes catalog with the given language, and
+   * preserve the query params.
+   *
+   * @param lang must be one of {@link Settings.LANGUAGES}
+   */
   public setLanguage(lang: string): void {
-    const { language, catalog, version } = this.route.firstChild.firstChild.snapshot.params;
-
-    if (lang !== language) {
-      this.router.navigate(
-        [lang, catalog, version]
-      ).catch(e => this.logger.log(e));
-    } else {
-      this.toRoot();
-    }
+    this.toRoot(lang, this.route.snapshot.queryParams['query']);
   }
 
-  public toRoot(): void {
+  /**
+   * Navigate to the root element of the current routes catalog.
+   *
+   * @param [selectedLang] - use as :lang param when present
+   * @param [query]- add as query param when present
+   */
+  public toRoot(selectedLang?: string, query?: string): void {
 
     const { language, catalog, version } = this.route.firstChild.firstChild.snapshot.params;
 
     const root = this.catalogResolver.getRootElement(catalog, version);
 
+    const extras = query ? { queryParams: { query: query } } : {};
+    const params = [selectedLang || language, catalog, version, root.type, root.code];
+
     this.router.navigate(
-      [language, catalog, version, root.type, root.code]
+      params, extras
     ).catch(e => this.logger.log(e));
+
   }
 }
