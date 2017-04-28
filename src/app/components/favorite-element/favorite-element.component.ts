@@ -33,7 +33,7 @@ export class FavoriteElementComponent implements OnInit {
     private route: ActivatedRoute,
     private translate: TranslateService,
     @Inject('ILoggerService') private logger: ILoggerService,
-    @Inject('IFavoriteService') private favoriteService: IFavoriteElementService,) { }
+    @Inject('IFavoriteService') private favoriteService: IFavoriteElementService, ) { }
 
   public ngOnInit(): void {
     this.favoriteService.getFavoriteElements().subscribe((elements: FavoriteElement[]) => {

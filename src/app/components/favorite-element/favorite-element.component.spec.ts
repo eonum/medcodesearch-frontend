@@ -19,7 +19,7 @@ describe('FavoriteElementComponent', () => {
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
         { provide: 'ILoggerService', useClass: NullLoggerService },
-        { provide: 'IFavoriteService', useClass: FavoriteElementServiceMock}
+        { provide: 'IFavoriteService', useClass: FavoriteElementServiceMock }
       ]
     })
       .compileComponents();
