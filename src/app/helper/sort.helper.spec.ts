@@ -63,7 +63,7 @@ describe('SortHelper', () => {
       { code: 'V', text: 'first', type: 'drg', url: 'http:/path/first' }
     ];
 
-    let result = sortHelper.sort(toSort);
+    const result = sortHelper.sort(toSort);
 
     expect(result[0].text).toBe('first');
     expect(result[1].text).toBe('second');
@@ -75,7 +75,7 @@ describe('SortHelper', () => {
       { code: 'A21', text: 'first', type: 'drg', url: 'http:/path/first' }
     ];
 
-    let result = sortHelper.sort(toSort);
+    const result = sortHelper.sort(toSort);
 
     expect(result[0].text).toBe('first');
     expect(result[1].text).toBe('second');
@@ -87,7 +87,7 @@ describe('SortHelper', () => {
       { code: '10', text: 'first', type: 'drg', url: 'http:/path/first' }
     ];
 
-    let result = sortHelper.sort(toSort);
+    const result = sortHelper.sort(toSort);
 
     expect(result[0].text).toBe('first');
     expect(result[1].text).toBe('second');
@@ -95,7 +95,7 @@ describe('SortHelper', () => {
 
   it('Should throw error when called with null', () => {
     expect(() => sortHelper.sort(null)).toThrowError();
-  });  
+  });
 
   const numberWithLeadingLetterTestData = [
     ['AB10', true],

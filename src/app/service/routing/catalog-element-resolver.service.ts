@@ -103,7 +103,7 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
    * into the cache.
    * @param currentElement the leaf element of which the hierarchy will be loaded
    */
-  private async loadParents(language: string, catalog: string, version: string, element: CatalogElement) {
+  private async loadParents(language: string, catalog: string, version: string, element: CatalogElement): Promise<void> {
 
     let parent = element.parent;
 

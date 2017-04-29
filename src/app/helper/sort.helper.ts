@@ -13,19 +13,19 @@ export class SortHelper {
    * @param elements the elements to sort
    */
   public sort(elements: CatalogElement[]): CatalogElement[] {
-    if (!elements){
+    if (!elements) {
       throw new Error('Elements must not be null');
     }
 
     return elements.sort((a: CatalogElement, b: CatalogElement) => {
-        if (this.isNumberWithLeadingLetter(a.code)) {
-          return this.compareAsNumberWithLeadingLetter(a.code, b.code);
-        } else if (this.isRomanNumber(a.code)) {
-          return this.compareAsRomanNumber(a.code, b.code);
-        } else {
-          return this.compareAsLiteral(a.code, b.code);
-        }
-      });
+      if (this.isNumberWithLeadingLetter(a.code)) {
+        return this.compareAsNumberWithLeadingLetter(a.code, b.code);
+      } else if (this.isRomanNumber(a.code)) {
+        return this.compareAsRomanNumber(a.code, b.code);
+      } else {
+        return this.compareAsLiteral(a.code, b.code);
+      }
+    });
   }
 
   /**
