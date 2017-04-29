@@ -27,7 +27,6 @@ describe('SwissDrgCatalog', () => {
       mock.setup(x => x.init(TypeMoq.It.isValue(
         {
           searchableTypes: ['drgs'],
-          retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
           versionParam: 'drgs',
           rootElement: {type: 'mdcs', code: 'ALL'}
         }))).verifiable(TypeMoq.Times.atLeastOnce());
@@ -42,7 +41,6 @@ describe('SwissDrgCatalog', () => {
     mock.setup(x => x.init(TypeMoq.It.isValue(
       {
         searchableTypes: ['drgs'],
-        retrievableTypes: ['drgs', 'adrgs', 'partition', 'mdcs'],
         versionParam: 'drgs',
         rootElement: { type: 'mdcs', code: 'ALL' }
       }))).verifiable(TypeMoq.Times.atLeastOnce());
