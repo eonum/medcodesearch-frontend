@@ -2,6 +2,8 @@ import { SortHelper } from './sort.helper';
 
 describe('SortHelper', () => {
 
+  const sortHelper = new SortHelper();
+
   const convertToRomanTestData = [
     ['I', 1],
     ['II', 2],
@@ -15,45 +17,85 @@ describe('SortHelper', () => {
 
   convertToRomanTestData.forEach(testCase => {
     it(`${testCase[0]} should be a roman number`, () => {
-      expect(SortHelper.isRomanNumber(testCase[0] as string)).toBeTruthy();
+      expect(sortHelper.isRomanNumber(testCase[0] as string)).toBeTruthy();
     });
 
     it(`${testCase[0]} should be converted to ${testCase[1]}`, () => {
-      expect(SortHelper.convertRomanToNumber(testCase[0] as string)).toBe(testCase[1]);
+      expect(sortHelper.convertRomanToNumber(testCase[0] as string)).toBe(testCase[1]);
     });
   });
 
   it(`'I' should be equal to 'I'`, () => {
-    expect(SortHelper.compareAsRomanNumber('I', 'I')).toBe(0);
+    expect(sortHelper.compareAsRomanNumber('I', 'I')).toBe(0);
   });
 
   it(`'MMMCMXCIX' should be greater than 'DCLX'`, () => {
-    expect(SortHelper.compareAsRomanNumber('MMMCMXCIX', 'DCLX')).toBeGreaterThan(0);
+    expect(sortHelper.compareAsRomanNumber('MMMCMXCIX', 'DCLX')).toBeGreaterThan(0);
   });
 
   it(`'DCLX' should be smaller than 'MMMCMXCIX'`, () => {
-    expect(SortHelper.compareAsRomanNumber('DCLX', 'MMMCMXCIX')).toBeLessThan(0);
+    expect(sortHelper.compareAsRomanNumber('DCLX', 'MMMCMXCIX')).toBeLessThan(0);
   });
 
   it(`'A10' should be greater than 'A2'`, () => {
-    expect(SortHelper.compareAsNumberWithLeadingLetter('A10', 'A2')).toBeGreaterThan(0);
+    expect(sortHelper.compareAsNumberWithLeadingLetter('A10', 'A2')).toBeGreaterThan(0);
   });
 
   it(`'AB10' should be greater than 'A10'`, () => {
-    expect(SortHelper.compareAsNumberWithLeadingLetter('AB10', 'A10')).toBeGreaterThan(0);
+    expect(sortHelper.compareAsNumberWithLeadingLetter('AB10', 'A10')).toBeGreaterThan(0);
   });
 
   it(`'A2' should be greater than 'A1'`, () => {
-    expect(SortHelper.compareAsNumberWithLeadingLetter('A2', 'A1')).toBeGreaterThan(0);
+    expect(sortHelper.compareAsNumberWithLeadingLetter('A2', 'A1')).toBeGreaterThan(0);
   });
 
   it(`'B10' should be greater than 'A2'`, () => {
-    expect(SortHelper.compareAsNumberWithLeadingLetter('B10', 'A2')).toBeGreaterThan(0);
+    expect(sortHelper.compareAsNumberWithLeadingLetter('B10', 'A2')).toBeGreaterThan(0);
   });
 
   it(`'A2' should be smaller than 'B10'`, () => {
-    expect(SortHelper.compareAsNumberWithLeadingLetter('A2', 'B10')).toBeLessThan(0);
+    expect(sortHelper.compareAsNumberWithLeadingLetter('A2', 'B10')).toBeLessThan(0);
   });
+
+  it('Should treat elements with roman numbers as codes accordingly', () => {
+    const toSort = [
+      { code: 'XI', text: 'second', type: 'drg', url: 'http:/path/second' },
+      { code: 'V', text: 'first', type: 'drg', url: 'http:/path/first' }
+    ];
+
+    let result = sortHelper.sort(toSort);
+
+    expect(result[0].text).toBe('first');
+    expect(result[1].text).toBe('second');
+  });
+
+  it('Should treat elements with leading letters as codes accordingly', () => {
+    const toSort = [
+      { code: 'B190', text: 'second', type: 'drg', url: 'http:/path/second' },
+      { code: 'A21', text: 'first', type: 'drg', url: 'http:/path/first' }
+    ];
+
+    let result = sortHelper.sort(toSort);
+
+    expect(result[0].text).toBe('first');
+    expect(result[1].text).toBe('second');
+  });
+
+  it('Should treat elements with normal numbers as codes accordingly', () => {
+    const toSort = [
+      { code: '34', text: 'second', type: 'drg', url: 'http:/path/second' },
+      { code: '10', text: 'first', type: 'drg', url: 'http:/path/first' }
+    ];
+
+    let result = sortHelper.sort(toSort);
+
+    expect(result[0].text).toBe('first');
+    expect(result[1].text).toBe('second');
+  });
+
+  it('Should throw error when called with null', () => {
+    expect(() => sortHelper.sort(null)).toThrowError();
+  });  
 
   const numberWithLeadingLetterTestData = [
     ['AB10', true],
@@ -66,7 +108,7 @@ describe('SortHelper', () => {
 
   numberWithLeadingLetterTestData.forEach(testCase => {
     it(`Test on number with leading letter of '${testCase[0]}' should return ${testCase[1]}`, () => {
-      expect(SortHelper.isNumberWithLeadingLetter(testCase[0] as string)).toBe(testCase[1]);
+      expect(sortHelper.isNumberWithLeadingLetter(testCase[0] as string)).toBe(testCase[1]);
     });
   });
 
@@ -78,7 +120,7 @@ describe('SortHelper', () => {
 
   normalLiteralsTestData.forEach(testCase => {
     it(`Comparison of '${testCase[0]}' with '${testCase[1]}' should return ${testCase[2]}`, () => {
-      expect(SortHelper.compareAsLiteral(testCase[0] as string, testCase[1] as string)).toBe(testCase[2]);
+      expect(sortHelper.compareAsLiteral(testCase[0] as string, testCase[1] as string)).toBe(testCase[2]);
     });
   });
 

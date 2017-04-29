@@ -27,6 +27,7 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
     private swissDrgCatalog: SwissDrgCatalog,
     private chopCatalog: CHOPCatalog,
     private icdCatalog: ICDCatalog,
+    private sortHelper: SortHelper,
     @Inject('ILoggerService') private logger: ILoggerService,
     @Inject('ICatalogElementCache') private elementCache: ICatalogElementCache) {
     this.initCatalogMap();
@@ -129,15 +130,7 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
     if (children) {
       children.forEach(child => child.type = this.extractTypeFromUrl(child.url));
 
-      element.children = children.sort((a: CatalogElement, b: CatalogElement) => {
-        if (SortHelper.isNumberWithLeadingLetter(a.code)) {
-          return SortHelper.compareAsNumberWithLeadingLetter(a.code, b.code);
-        } else if (SortHelper.isRomanNumber(a.code)) {
-          return SortHelper.compareAsRomanNumber(a.code, b.code);
-        } else {
-          return SortHelper.compareAsLiteral(a.code, b.code);
-        }
-      });
+      element.children = this.sortHelper.sort(element.children);
     }
   }
 

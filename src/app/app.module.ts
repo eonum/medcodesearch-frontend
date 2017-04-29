@@ -1,3 +1,4 @@
+import { SortHelper } from './helper/sort.helper';
 import { DefaultCatalogElementCache } from './caching/default.catalog.element.cache';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -80,7 +81,8 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
     ICDCatalog,
     CatalogResolver,
     CatalogSearchService,
-    MobileService
+    MobileService,
+    SortHelper
   ],
   bootstrap: [AppComponent]
 })

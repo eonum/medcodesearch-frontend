@@ -1,7 +1,32 @@
+import { CatalogElement } from '../model/catalog.element';
 /**
- * Helper class for sorting. Provides some custom compare-methods
+ * Helper class for sorting of {@link CatalogElement}s.
+ * Provides some custom compare-methods
  */
 export class SortHelper {
+
+  /**
+   * Sort elements based on the type of their codes.
+   * Handles roman numbers, numbers with leading letters
+   * and normal text literals.
+   * 
+   * @param elements the elements to sort
+   */
+  public sort(elements: CatalogElement[]): CatalogElement[] {
+    if (!elements){
+      throw new Error('Elements must not be null');
+    }
+
+    return elements.sort((a: CatalogElement, b: CatalogElement) => {
+        if (this.isNumberWithLeadingLetter(a.code)) {
+          return this.compareAsNumberWithLeadingLetter(a.code, b.code);
+        } else if (this.isRomanNumber(a.code)) {
+          return this.compareAsRomanNumber(a.code, b.code);
+        } else {
+          return this.compareAsLiteral(a.code, b.code);
+        }
+      });
+  }
 
   /**
    * Compares two strings lexicographically.
@@ -12,7 +37,7 @@ export class SortHelper {
    * @param a the first argument to compare
    * @param b the second argument to compare
    */
-  public static compareAsLiteral(a: string, b: string): number {
+  public compareAsLiteral(a: string, b: string): number {
     if (a < b) { return -1; }
     if (a > b) { return 1; }
     return 0;
@@ -26,7 +51,7 @@ export class SortHelper {
    * 
    * @param literal the literal to check
    */
-  public static isNumberWithLeadingLetter(literal: string): boolean {
+  public isNumberWithLeadingLetter(literal: string): boolean {
     const regex = new RegExp('^[A-Z]+([0-9]+)$');
     return regex.test(literal);
   }
@@ -48,7 +73,7 @@ export class SortHelper {
    * @param a the first argument to compare
    * @param b the second argument to compare
    */
-  public static compareAsNumberWithLeadingLetter(a: string, b: string): number {
+  public compareAsNumberWithLeadingLetter(a: string, b: string): number {
     const regex = new RegExp('^([A-Z]+)([0-9]+)$');
 
     const matchA = regex.exec(a);
@@ -68,7 +93,7 @@ export class SortHelper {
    * (like 'MMXIV')
    * @param literal the literal to check 
    */
-  public static isRomanNumber(literal: string): boolean {
+  public isRomanNumber(literal: string): boolean {
     const regex = new RegExp('^[MDCLXVI]+$');
     return regex.test(literal);
   }
@@ -78,7 +103,7 @@ export class SortHelper {
    * @param a the first argument to compare
    * @param b the second argument to compare
    */
-  public static compareAsRomanNumber(a: string, b: string): number {
+  public compareAsRomanNumber(a: string, b: string): number {
     const numA: number = this.convertRomanToNumber(a);
     const numB: number = this.convertRomanToNumber(b);
 
@@ -89,7 +114,7 @@ export class SortHelper {
    * Converts a given roman number into an integer.
    * @param literal the literal to convert
    */
-  public static convertRomanToNumber(literal: string): number {
+  public convertRomanToNumber(literal: string): number {
     let num = 0;
     let currentLiteral: string = literal;
 
