@@ -30,19 +30,24 @@ export class FavoriteElementComponent implements OnInit {
   @ViewChild('tooltip') public tooltip;
 
   constructor(private router: Router,
-    private route: ActivatedRoute,
-    private translate: TranslateService,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    @Inject('IFavoriteService') private favoriteService: IFavoriteElementService, ) { }
+              private route: ActivatedRoute,
+              private translate: TranslateService,
+              @Inject('ILoggerService') private logger: ILoggerService,
+              @Inject('IFavoriteService') private favoriteService: IFavoriteElementService, ) { }
 
   public ngOnInit(): void {
-    this.favoriteService.getFavoriteElements().subscribe((elements: FavoriteElement[]) => {
-      const oldNumberOfElements = this.favoriteElements.length;
-      this.favoriteElements = elements;
-      if (oldNumberOfElements < elements.length) {
-        this.showTooltip('LBL_ELEMENT_ADDED');
-      }
-    });
+    this.favoriteService.getFavoriteElements()
+      .subscribe((elements: FavoriteElement[]) => {
+        this.updateFavorites(elements);
+      });
+  }
+
+  private updateFavorites(favorites: FavoriteElement[]): void {
+    const oldNumberOfElements = this.favoriteElements.length;
+    this.favoriteElements = favorites;
+    if (oldNumberOfElements < favorites.length) {
+      this.showTooltip('LBL_ELEMENT_ADDED');
+    }
   }
 
   /**
@@ -51,7 +56,6 @@ export class FavoriteElementComponent implements OnInit {
    * @param element the element to display
    */
   private openCode(element: FavoriteElement): void {
-    this.logger.log('Route: ', this.route);
     this.router.navigate(
       [element.language, element.catalog, element.version, element.type, element.code],
       { queryParamsHandling: 'merge' })
@@ -69,6 +73,12 @@ export class FavoriteElementComponent implements OnInit {
     this.showTooltip('LBL_ELEMENT_REMOVED');
   }
 
+  /**
+   * Display the specified label text within a tooltip
+   * below favorite button.
+   * 
+   * @param labelKey the key of the label to display
+   */
   private showTooltip(labelKey: string): void {
     this.translate.get(labelKey).subscribe((res: string) => {
       this.toolTipMessage = res;

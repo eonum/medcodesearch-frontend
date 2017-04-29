@@ -15,7 +15,6 @@ import 'rxjs/add/operator/switchMap';
 export class SearchRequest {
   public catalog: string;
   public version: string;
-  public language: string;
   public query: string;
 }
 
@@ -61,13 +60,14 @@ export class CatalogSearchService {
       .distinctUntilChanged(this.requestsEqual)
       .switchMap((request: SearchRequest) => this.doSearch(request))
       .subscribe(
-      (results: CatalogElement[]) => this.searchResults.next(results),
+      (results: CatalogElement[]) => {
+        this.searchResults.next(results);
+      },
       error => this.logger.error('[CatalogSearchService]', error));
   }
 
   private doSearch(searchRequest: SearchRequest): Promise<CatalogElement[]> {
-
-    if (searchRequest.catalog) {
+    if (searchRequest && searchRequest.catalog) {
       this.searchResults.next(null); // remove displayed search results
       return this.catalogs[searchRequest.catalog].search(
         searchRequest.version, searchRequest.query);
