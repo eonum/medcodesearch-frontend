@@ -116,7 +116,6 @@ export class CatalogService implements ICatalogService {
     try {
       const webResult: CatalogElement = await this.getSingleElementForTypeByCode(type, version, code, null, language);
       if (webResult !== undefined && webResult !== null) {
-        webResult.type = type;
         return webResult;
       }
     } catch (error) {
@@ -143,6 +142,10 @@ export class CatalogService implements ICatalogService {
     return this.http.get(url).toPromise()
       .then(result => {
         const resultObject: CatalogElement = result.json() as CatalogElement;
+
+        // Assign the type because eonum API doesn't use
+        // the concept of types.
+        resultObject.type = elementType;
 
         // Assign the url manually because eonum API doesn't
         // return the url when details are loaded
