@@ -60,6 +60,7 @@ export abstract class Catalog {
    *
    */
   public sendAnalytics(type: string, code: string, query: string, version?: string): void {
+    this.initService();
     this.service.sendAnalytics(version, type, code, query);
   }
 
