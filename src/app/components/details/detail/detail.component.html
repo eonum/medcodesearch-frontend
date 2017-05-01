@@ -5,7 +5,7 @@
       <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
     </div>
     <div class="main">
-      <button type="button" class="btn btn-default button-favorite" [class.active]="isFavorite(selectedElement)" (click)="toggleFavorite(selectedElement)">
+      <button type="button" class="btn btn-default button-favorite" [class.active]="isFavorite(selectedElement)" (click)="toggleFavorite(selectedElement)" #buttonFavorite>
         <span class="glyphicon med-blue"
           [class.glyphicon-star]="isFavorite(selectedElement)"
           [class.glyphicon-star-empty]="!isFavorite(selectedElement)"></span>

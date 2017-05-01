@@ -1,6 +1,6 @@
 import { CatalogElement } from '../../../model/catalog.element';
 import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { Component, Inject, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, Inject, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { MobileService } from '../../../service/mobile.service';
 import { IFavoriteElementService } from '../../../service/favorites/i.favorite.element.service';
@@ -40,6 +40,8 @@ export class DetailComponent implements OnInit {
    * All children of the `selectedElement`
    */
   public children: CatalogElement[] = [];
+
+  @ViewChild('buttonFavorite') public buttonFavorite;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -82,6 +84,7 @@ export class DetailComponent implements OnInit {
     } else {
       this.favoriteService.removeByCatalogElement(element, version, catalog, language);
     }
+    this.buttonFavorite.nativeElement.blur();
   }
 
   /**
