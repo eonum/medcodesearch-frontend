@@ -34,8 +34,4 @@ export class FavoriteElement {
   private static keyFor(code: string, type: string, version: string, catalog: string, language: string): string {
     return `${language}_${catalog}_${version}_${type}_${code}`;
   }
-
-  public getId(): string {
-    return FavoriteElement.keyForFavoriteElement(this);
-  }
 }

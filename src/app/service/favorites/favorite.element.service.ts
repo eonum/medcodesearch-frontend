@@ -1,9 +1,10 @@
 import { IFavoriteElementService } from './i.favorite.element.service';
 import { CatalogElement } from '../../model/catalog.element';
 import { FavoriteElement } from '../../model/favorite.element';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { IFavoritePersister } from './persisters/i.favorite.persister';
 
 /**
  * Provides functions to mark/unmark an element as favorite.
@@ -29,11 +30,19 @@ export class FavoriteElementService implements IFavoriteElementService {
    */
   private _favoriteElements: BehaviorSubject<FavoriteElement[]>;
 
-  public constructor() {
-    this.favoriteElements = {};
-    this.numberOfElements = 0;
-
+  public constructor( @Inject('IFavoritePersister') private persister: IFavoritePersister) {
     this._favoriteElements = new BehaviorSubject([]);
+
+    const restored = this.persister.restore();
+    if (restored) {
+      this.favoriteElements = restored.elements;
+      this.numberOfElements = restored.numberOfElements;
+    } else {
+      this.favoriteElements = {};
+      this.numberOfElements = 0;
+    }
+
+    this.notify();
   }
 
   /**
@@ -58,9 +67,10 @@ export class FavoriteElementService implements IFavoriteElementService {
   public add(element: CatalogElement, version: string, catalog: string, language: string): void {
     if (!this.isFavorite(element, version, catalog, language)) {
       const elementToStore = FavoriteElement.from(element, version, catalog, language);
-      this.favoriteElements[elementToStore.getId()] = elementToStore;
+      this.favoriteElements[FavoriteElement.keyForFavoriteElement(elementToStore)] = elementToStore;
       this.numberOfElements++;
       this.notify();
+      this.persister.persist(this.favoriteElements, this.numberOfElements);
     }
   }
 
@@ -70,7 +80,7 @@ export class FavoriteElementService implements IFavoriteElementService {
    * @param element the element to remove from favorites
    */
   public removeByFavoriteElement(element: FavoriteElement): void {
-    const id = element.getId();
+    const id = FavoriteElement.keyForFavoriteElement(element);
     this.removeById(id);
   }
 
@@ -98,6 +108,7 @@ export class FavoriteElementService implements IFavoriteElementService {
       delete this.favoriteElements[id];
       this.numberOfElements--;
       this.notify();
+      this.persister.persist(this.favoriteElements, this.numberOfElements);
     }
   }
 

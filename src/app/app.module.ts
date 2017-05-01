@@ -1,3 +1,4 @@
+import { StorageFavoritePersister } from './service/favorites/persisters/storage.favorite.persister';
 import { SortHelper } from './helper/sort.helper';
 import { DefaultCatalogElementCache } from './caching/default.catalog.element.cache';
 import { AppRoutingModule } from './app-routing.module';
@@ -76,6 +77,7 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
     { provide: 'ILoggerService', useClass: ConsoleLoggerService },
     { provide: 'ICatalogElementCache', useClass: DefaultCatalogElementCache },
     { provide: 'IFavoriteService', useClass: FavoriteElementService },
+    { provide: 'IFavoritePersister', useClass: StorageFavoritePersister },
     SwissDrgCatalog,
     CHOPCatalog,
     ICDCatalog,
