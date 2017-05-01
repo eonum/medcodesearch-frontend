@@ -67,11 +67,10 @@ export class DetailComponent implements OnInit {
   }
 
   /**
-   * Mark the specified element as favorite so that it
-   * appears in the list of favorite elements at the
-   * {@link FavoriteElementComponent}.
+   * Add the specified element to the list of favorites
+   * or remove it from the list.
    * 
-   * @param element the element to mark as favorite
+   * @param element the element to add or remove
    */
   public toggleFavorite(element: CatalogElement): void {
     const language: string = this.route.parent.snapshot.params['language'];
