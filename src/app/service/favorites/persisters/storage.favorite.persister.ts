@@ -17,21 +17,21 @@ export class StorageFavoritePersister implements IFavoritePersister {
   private testLocalStorage(): boolean {
     const test = 'test';
     try {
-        localStorage.setItem(test, test);
-        localStorage.removeItem(test);
-        return true;
-    } catch(e) {
-        return false;
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
-/**
- * Persists specified data to LocalStorage.
- * @param elementsToPersist the elements to store
- * @param numberOfElements the number of elements to store
- */
+  /**
+   * Persists specified data to LocalStorage.
+   * @param elementsToPersist the elements to store
+   * @param numberOfElements the number of elements to store
+   */
   public persist(elementsToPersist: { [key: string]: FavoriteElement }, numberOfElements: number): void {
-    if (!this.testLocalStorage()){
+    if (!this.testLocalStorage()) {
       return;
     }
 
@@ -43,7 +43,7 @@ export class StorageFavoritePersister implements IFavoritePersister {
    * Returns null if no elements can be restored.
    */
   public restore(): { elements: { [key: string]: FavoriteElement }, numberOfElements: number } {
-    if (this.testLocalStorage()){
+    if (this.testLocalStorage()) {
       return JSON.parse(localStorage.getItem(this.storageKey));
     }
 
