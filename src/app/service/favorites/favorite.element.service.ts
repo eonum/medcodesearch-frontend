@@ -69,8 +69,17 @@ export class FavoriteElementService implements IFavoriteElementService {
    * 
    * @param element the element to unmark
    */
-  public remove(element: FavoriteElement): void {
+  public removeByFavoriteElement(element: FavoriteElement): void {
     const id = element.getId();
+    this.removeById(id);
+  }
+
+  public removeByCatalogElement(element: CatalogElement, version: string, catalog: string, language: string): void {
+    const id = FavoriteElement.keyForCatalogElement(element, version, catalog, language);
+    this.removeById(id);
+  }
+
+  private removeById(id: string): void {
     if (this.favoriteElements[id]) {
       delete this.favoriteElements[id];
       this.numberOfElements--;

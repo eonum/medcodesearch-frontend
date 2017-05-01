@@ -10,13 +10,16 @@ export class FavoriteElementServiceMock implements IFavoriteElementService {
   public add(element: CatalogElement, version: string, catalog: string, language: string): void {
 
   }
-  public remove(element: FavoriteElement): void {
-
-  }
   public isFavorite(element: CatalogElement, version: string, catalog: string, language: string): boolean {
     return false;
   }
   public getFavoriteElements(): Observable<FavoriteElement[]> {
     return Observable.from([]);
+  }
+  public removeByFavoriteElement(element: FavoriteElement): void {
+
+  }
+  public removeByCatalogElement(element: CatalogElement, version: string, catalog: string, language: string): void {
+
   }
 }

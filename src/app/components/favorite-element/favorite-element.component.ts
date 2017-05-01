@@ -30,10 +30,10 @@ export class FavoriteElementComponent implements OnInit {
   @ViewChild('tooltip') public tooltip;
 
   constructor(private router: Router,
-              private route: ActivatedRoute,
-              private translate: TranslateService,
-              @Inject('ILoggerService') private logger: ILoggerService,
-              @Inject('IFavoriteService') private favoriteService: IFavoriteElementService, ) { }
+    private route: ActivatedRoute,
+    private translate: TranslateService,
+    @Inject('ILoggerService') private logger: ILoggerService,
+    @Inject('IFavoriteService') private favoriteService: IFavoriteElementService, ) { }
 
   public ngOnInit(): void {
     this.favoriteService.getFavoriteElements()
@@ -47,6 +47,8 @@ export class FavoriteElementComponent implements OnInit {
     this.favoriteElements = favorites;
     if (oldNumberOfElements < favorites.length) {
       this.showTooltip('LBL_ELEMENT_ADDED');
+    } else if (oldNumberOfElements > favorites.length) {
+      this.showTooltip('LBL_ELEMENT_REMOVED');
     }
   }
 
@@ -69,7 +71,7 @@ export class FavoriteElementComponent implements OnInit {
    * @param element the element to remove
    */
   private removeElement(element: FavoriteElement): void {
-    this.favoriteService.remove(element);
+    this.favoriteService.removeByFavoriteElement(element);
     this.showTooltip('LBL_ELEMENT_REMOVED');
   }
 

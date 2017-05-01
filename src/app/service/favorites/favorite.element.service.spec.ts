@@ -49,7 +49,7 @@ describe('FavoriteElementService', () => {
     const element = this.createElement('1234');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
     const createdElement = FavoriteElement.from(element, 'V1.0', 'icd', 'de');
-    favoriteService.remove(createdElement);
+    favoriteService.removeByFavoriteElement(createdElement);
     expect(favoriteService.isFavorite(element, 'V1.0', 'icd', 'de')).toBeFalsy();
   });
 
@@ -68,7 +68,7 @@ describe('FavoriteElementService', () => {
     const createdElement = FavoriteElement.from(element, 'V1.0', 'icd', 'de');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
 
-    favoriteService.remove(createdElement);
+    favoriteService.removeByFavoriteElement(createdElement);
 
     expect(favoriteService.count()).toBe(0);
   });
@@ -78,14 +78,24 @@ describe('FavoriteElementService', () => {
     const element = this.createElement('1234');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
 
-    favoriteService.remove(new FavoriteElement());
+    favoriteService.removeByFavoriteElement(new FavoriteElement());
 
     expect(favoriteService.count()).toBe(1);
   });
 
   it('Should not decrease number of elements when removing an element from empty list', () => {
     const favoriteService = new FavoriteElementService();
-    favoriteService.remove(new FavoriteElement());
+    favoriteService.removeByFavoriteElement(new FavoriteElement());
+    expect(favoriteService.count()).toBe(0);
+  });
+
+  it('Should decrease number of elements when removing a catalog element', () => {
+    const favoriteService = new FavoriteElementService();
+    const element = this.createElement('1234');
+    favoriteService.add(element, 'V1.0', 'icd', 'de');
+
+    favoriteService.removeByCatalogElement(element, 'V1.0', 'icd', 'de');
+
     expect(favoriteService.count()).toBe(0);
   });
 
@@ -145,7 +155,7 @@ describe('FavoriteElementService', () => {
       callback();
     });
 
-    favoriteService.remove(createdElement);
+    favoriteService.removeByFavoriteElement(createdElement);
 
     expect(callBackCalled).toBe(true);
   });

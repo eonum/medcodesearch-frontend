@@ -73,11 +73,16 @@ export class DetailComponent implements OnInit {
    * 
    * @param element the element to mark as favorite
    */
-  public setAsFavorite(element: CatalogElement): void {
+  public toggleFavorite(element: CatalogElement): void {
     const language: string = this.route.parent.snapshot.params['language'];
     const catalog: string = this.route.parent.snapshot.params['catalog'];
     const version: string = this.route.parent.snapshot.params['version'];
-    this.favoriteService.add(element, version, catalog, language);
+
+    if (!this.favoriteService.isFavorite(element, version, catalog, language)) {
+      this.favoriteService.add(element, version, catalog, language);
+    } else {
+      this.favoriteService.removeByCatalogElement(element, version, catalog, language);
+    }
   }
 
   /**

@@ -80,7 +80,6 @@ describe('DetailComponent', () => {
 
     // Set up a catalog mock
     mock = TypeMoq.Mock.ofType<SwissDrgCatalog>();
-    mock.setup(x => x.getActiveVersion()).returns(() => version);
     mock.setup(x => x.search(version, query)).returns(() => Promise.resolve(searchResults));
 
     // Set up the activated route stub

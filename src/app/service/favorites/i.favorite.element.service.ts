@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Observable';
 export interface IFavoriteElementService {
   count(): number;
   add(element: CatalogElement, version: string, catalog: string, language: string): void;
-  remove(element: FavoriteElement): void;
+  removeByFavoriteElement(element: FavoriteElement): void;
+  removeByCatalogElement(element: CatalogElement, version: string, catalog: string, language: string): void;
   isFavorite(element: CatalogElement, version: string, catalog: string, language: string): boolean;
   getFavoriteElements(): Observable<FavoriteElement[]>;
 }
