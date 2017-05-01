@@ -1,6 +1,6 @@
 import { CatalogElement } from '../../../model/catalog.element';
 import { ILoggerService } from '../../../service/logging/i.logger.service';
-import { Component, Inject, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, Inject, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { MobileService } from '../../../service/mobile.service';
 import { IFavoriteElementService } from '../../../service/favorites/i.favorite.element.service';
@@ -41,6 +41,8 @@ export class DetailComponent implements OnInit {
    */
   public children: CatalogElement[] = [];
 
+  @ViewChild('buttonFavorite') public buttonFavorite;
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     @Inject('IFavoriteService') private favoriteService: IFavoriteElementService,
@@ -67,11 +69,10 @@ export class DetailComponent implements OnInit {
   }
 
   /**
-   * Mark the specified element as favorite so that it
-   * appears in the list of favorite elements at the
-   * {@link FavoriteElementComponent}.
+   * Add the specified element to the list of favorites
+   * or remove it from the list.
    *
-   * @param element the element to mark as favorite
+   * @param element the element to add or remove
    */
   public toggleFavorite(element: CatalogElement): void {
 
@@ -84,6 +85,7 @@ export class DetailComponent implements OnInit {
     } else {
       this.favoriteService.removeByCatalogElement(element, version, catalog, language);
     }
+    this.buttonFavorite.nativeElement.blur();
   }
 
   /**
