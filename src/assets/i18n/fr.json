@@ -20,6 +20,7 @@
   "LBL_ELEMENT_ADDED": "L'élément a été mémorisé.",
   "LBL_ELEMENT_REMOVED": "L'élément a été retiré de la liste.",
   "LBL_FAVORITE_ELEMENT": "Mémoriser",
-  "LBL_IS_FAVORITE": "Mémorisé"
+  "LBL_IS_FAVORITE": "Mémorisé",
+  "LBL_SIBLINGS": "Eléments similaires"
 }
 

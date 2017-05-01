@@ -10,7 +10,7 @@ import { IFavoriteElementService } from '../../../service/favorites/i.favorite.e
  * CatalogElement.
  * Displays also the hierarchy of the current catalog to a specific
  * element and the children of a specific element.
- * 
+ *
  * The element to display is resolved from routing params by the
  * {@link CatalogElementResolver}.
  */
@@ -71,10 +71,11 @@ export class DetailComponent implements OnInit {
   /**
    * Add the specified element to the list of favorites
    * or remove it from the list.
-   * 
+   *
    * @param element the element to add or remove
    */
   public toggleFavorite(element: CatalogElement): void {
+
     const language: string = this.route.parent.snapshot.params['language'];
     const catalog: string = this.route.parent.snapshot.params['catalog'];
     const version: string = this.route.parent.snapshot.params['version'];
@@ -90,7 +91,7 @@ export class DetailComponent implements OnInit {
   /**
    * Check whether the specified element has been marked
    * as favorite.
-   * 
+   *
    * @param element the element to check
    */
   public isFavorite(element: CatalogElement): boolean {

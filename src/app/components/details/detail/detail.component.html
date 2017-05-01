@@ -42,6 +42,17 @@
             </li>
           </ul>
         </ng-template>
+
+        <ng-template [ngIf]="selectedElement.children?.length < 1">
+          <h4>{{'LBL_SIBLINGS' | translate}}</h4>
+          <ul>
+            <ng-container *ngFor="let sibling of selectedElement.parent.children">
+              <li *ngIf="sibling.code !== selectedElement.code">
+                <span class="link" (click)="openCode(sibling)">{{sibling.code}}</span>: {{sibling.text}}
+              </li>
+            </ng-container>
+          </ul>
+        </ng-template>
       </div>
     </div>
   </div>

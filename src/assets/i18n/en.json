@@ -20,5 +20,6 @@
   "LBL_ELEMENT_ADDED": "The element has been added to list.",
   "LBL_ELEMENT_REMOVED": "The element has been removed from the list.",
   "LBL_FAVORITE_ELEMENT": "Add to list",
-  "LBL_IS_FAVORITE": "Added"
+  "LBL_IS_FAVORITE": "Added",
+  "LBL_SIBLINGS": "Similar Elements"
 }
