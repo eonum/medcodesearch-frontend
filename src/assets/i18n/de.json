@@ -20,6 +20,7 @@
   "LBL_ELEMENT_ADDED": "Das Element wurde zur Merkliste hinzugefügt.",
   "LBL_ELEMENT_REMOVED": "Das Element wurde aus der Merkliste entfernt.",
   "LBL_FAVORITE_ELEMENT": "Merken",
-  "LBL_IS_FAVORITE": "Gemerkt"
+  "LBL_IS_FAVORITE": "Gemerkt",
+  "LBL_SIBLINGS": "Ähnliche Elemente"
 }
 
