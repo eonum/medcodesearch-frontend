@@ -26,7 +26,7 @@ export class SessionFavoritePersister implements IFavoritePersister {
   }
 
   /**
-   * Persists specified data to LocalStorage.
+   * Persists specified data to SessionStorage.
    * @param elementsToPersist the elements to store
    * @param numberOfElements the number of elements to store
    */
@@ -39,7 +39,7 @@ export class SessionFavoritePersister implements IFavoritePersister {
   }
 
   /**
-   * Restore the previously stored elements from the LocalStorage.
+   * Restore the previously stored elements from the SessionStorage.
    * Returns null if no elements can be restored.
    */
   public restore(): { elements: { [key: string]: FavoriteElement }, numberOfElements: number } {
