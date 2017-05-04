@@ -65,6 +65,8 @@ export class SearchResultsComponent implements OnInit {
 	
 	/**
 	* Sends an analytics message to the eonum server
+	* @param type the type of the CatalogElement that was being clicked on
+	* @param code the code of the CatalogElement that was being clicked on
 	*/
   private sendAnalytics(type: string, code: string): void {
 
