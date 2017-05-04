@@ -62,7 +62,10 @@ export class SearchResultsComponent implements OnInit {
     this.sendAnalytics(type, code);
     this.redirectToCode(type, code);
   }
-
+	
+	/**
+	* Sends an analytics message to the eonum server
+	*/
   private sendAnalytics(type: string, code: string): void {
 
     const searchRequest: SearchRequest = Object.assign({},
