@@ -1,4 +1,4 @@
-v.0.1 Initial Version
+v.0.3
 Software Requirement Specification
 ==================================
 
@@ -107,7 +107,7 @@ The following section describes the user stories of the eonum MedCode search web
 |#5|Display Detail Information of Code|
 |---|---|
 |**Priority**|HIGH|
-|**Status**|TODO|
+|**Status**|DONE|
 |**User Story**|#5|
 |**Initiating Actor**|User|
 |**Goal**|All available detail information about a code should be displayed|
@@ -125,7 +125,7 @@ The following section describes the user stories of the eonum MedCode search web
 |#6|Navigation in hierarchical Structure of Catalogue|
 |---|---|
 |**Priority**|MEDIUM|
-|**Status**|TODO POC|
+|**Status**|DONE|
 |**User Story**|#6|
 |**Initiating Actor**|User|
 |**Goal**|As a User I want to be able to navigate in the hierarchical structure of the codes|
@@ -143,7 +143,7 @@ The following section describes the user stories of the eonum MedCode search web
 |#7|Language Switch|
 |---|---|
 |**Priority**|HIGH|
-|**Status**|In Progress|
+|**Status**|DONE|
 |**User Story**|#7|
 |**Initiating Actor**|User|
 |**Goal**|The user can switch between different UI languages|
@@ -161,7 +161,7 @@ The following section describes the user stories of the eonum MedCode search web
 |#8|Highlighting Search Term|
 |---|---|
 |**Priority**|HIGH|
-|**Status**|TODO|
+|**Status**|DONE|
 |**User Story**|#8|
 |**Initiating Actor**|User|
 |**Goal**|Search terms in the search result set should appear higlighted|
@@ -177,17 +177,17 @@ The following section describes the user stories of the eonum MedCode search web
 
 #### 2.2.4 Take over Codes / Remember Codes
 
-|#10|Take over Codes / Remember Codes|
+#10|Take over Codes / Remember Codes|
 |---|---|
-|**Priority**|TBD|
-|**Status**||
+|**Priority**|LOW|
+|**Status**|DONE|
 |**User Story**|#10|
 |**Initiating Actor**|User|
-|**Goal**||
+|**Goal**|As a User I want to be able to remember codes so that I can quickly find them again later|
 |**Sucess Guarantee**||
-|**Description**|<ol><li></li></ol>|
+|**Description**|<ol><li>User stars a Code</li><li>The code is added to the list of remembered codes</li></ol>|
 |**Preconditions**||
-|**Triggers**||
+|**Triggers**|User stars a Code|
 |**Exceptions**||
 |**Postconditions**||
 |**Rules**||
@@ -197,18 +197,18 @@ The following section describes the user stories of the eonum MedCode search web
 
 |#11|Analytical Feedback about searched Codes|
 |---|---|
-|**Priority**|TBD|
-|**Status**||
+|**Priority**|HIGH|
+|**Status**|DONE|
 |**User Story**|#11|
 |**Initiating Actor**|User|
-|**Goal**||
+|**Goal**|As a System Administrator I want to get feedback about clicked search results to be able to improve the search algorithm|
 |**Sucess Guarantee**||
-|**Description**|<ol><li></li></ol>|
-|**Preconditions**||
-|**Triggers**||
+|**Description**|<ol><li>The User submits a search query</li><li>A list of search results is displayed</li><li>User clicks a search result</li><li>Feedback about the clicked search result is sent to the system</li></ol>|
+|**Preconditions**|User selected a catalogue|
+|**Triggers**|User clicks a search result|
 |**Exceptions**||
 |**Postconditions**||
-|**Rules**||
+|**Rules**|only the first clicked result after a search query should be considered|
 |**Extensions**||
 
 
@@ -227,34 +227,40 @@ The following section describes the user stories of the eonum MedCode search web
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
 |Free Text Search| **Expected**<br>The user can search for Codes containing the search term or a synonym of the search term in the name or description<br><br>**Constraints**<br><li>If no Code matches the query, report an error</li><li>If the search term is too short, report an error</li><li>If the search term contains illegal characters, report an error</li><br><br>**Main Actor**<br>User                                     |DONE|
-|More results| **Expected**<br>The user can load more search results <br><br>**Constraints**<br><li>TBD: Pagination necessary for smaller screens?</li><br><br>**Main Actor**<br>User                                     |TODO|
-|Terminal Codes| **Expected**<br>Free Text Search should only search for terminal codes<br><br>**Constraints**<br><li>Only applicable in ICD and CHOP</li><br><br>**Main Actor**<br>User                                     |TODO|
-|Live Search| **Expected**<br>While entering a search string a preliminary list of live results should be displayed<br><br>**Constraints**<br><li>TBD: Minimum length of String to start search</li><br><br>**Main Actor**<br>User                                     |TODO|
+|More results| **Expected**<br>The user can load more search results <br><br>**Constraints**<br><li>TBD: Pagination necessary for smaller screens?</li><br><br>**Main Actor**<br>User                                     |TODO?|
+|Terminal Codes| **Expected**<br>Free Text Search should only search for terminal codes<br><br>**Constraints**<br><li>Only applicable in ICD and CHOP</li><br><br>**Main Actor**<br>User                                     |DONE|
+|Live Search| **Expected**<br>While entering a search string a preliminary list of live results should be displayed<br><br>**Constraints**<br><br>**Main Actor**<br>User                                     |DONE|
+|Display Root Element| **Expected**<br>When no search query is entered, the root element of the catalogue should be displayed<br><br>**Constraints**<br><br><br>**Main Actor**<br>System                                    |DONE|---------------|:---------|
 
 #### 3.1.3 Display Detail Information of Code
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
-|Display Detail Info| **Expected**<br>All available Information about a code should be displayed<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |DONE|
-|Detail Info of Hierarchy| **Expected**<br>Information about symptoms in codes on a higher level in the hierarchy, should be displayed in the detail info of terminal codes<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |DONE|---------------|:---------|
+|Display Detail Info| **Expected**<br>All available Information about a code should be displayed<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |DONE||---------------|:---------|
 
 #### 3.1.4 Navigation in hierarchical Structure of Catalogue
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
-|Display Hierarchy| **Expected**<br>When displaying a search result set the position in the hierarchy of the code should be displayed<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |TODO|
-|Navigate Hierarchy| **Expected**<br>When the User navigates to another level of the hierarchy the search result set should be updated to contain all codes on the selected level of the hierarchy<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |TODO|---------------|:---------|
+|Display Hierarchy| **Expected**<br>When displaying a search result set the position in the hierarchy of the code should be displayed<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |DONE|
+|Navigate Hierarchy| **Expected**<br>When the User navigates to another level of the hierarchy the search result set should be updated to contain all codes on the selected level of the hierarchy<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |DONE|
+|Tooltip| **Expected**<br>When hovering an element of the hierarchical structure a tooltip containing the description of the element should appear<br><br>**Constraints**<br><br><br>**Main Actor**<br>System                                     |DONE|---------------|:---------|
 
 #### 3.1.5 Language Switch
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
 |Language Switch| **Expected**<br>The user should be able to toggle the language of the UI<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |DONE|
 |Default Language| **Expected**<br>The default language should be set according to the browser language<br><br>**Constraints**<br>If browser language is not English, German, French or Italian, set language to English<br><br>**Main Actor**<br>User                                     |TODO|
-|Unavailable languages| **Expected**<br>If a catalogue is not available in all languages these language should be greyed out and appear non selectable<br><br>**Constraints**<br>If a catalogue is selected which is unavailable in the currently selected language, the User should be notified and asked to select one of the available languages<br><br>**Main Actor**<br>User                                     |TODO|
+|Unavailable languages| **Expected**<br>If a catalogue is not available in all languages these language should be greyed out and appear non selectable<br><br>**Constraints**<br>If a catalogue is selected which is unavailable in the currently selected language, the User should be notified and asked to select one of the available languages<br><br>**Main Actor**<br>User                                     |DONE|
 
 #### 3.1.6 Highlighting Search Term
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
-|Highlight| **Expected**<br>Search terms and synonyms of the search term should appear highlighted in the result set<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |TODO|---------------|:---------|
+|Highlight| **Expected**<br>Search terms and synonyms of the search term should appear highlighted in the result set<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |DONE|---------------|:---------|
 
+
+#### 3.1.7 Analytical Feedback about searched Codes
+| Title                              | Description                      | Status |
+|:-----------------------------------|:---------------------------------|:---------|
+|Analytics| **Expected**<br>After a search query feedback about clicked elements should be sent to the system. <br><br>**Constraints**<br><br>Only the first clicked element should be considered<br>**Main Actor**<br>System                                                                                       |DONE|---------------|:---------|
 
 
 
