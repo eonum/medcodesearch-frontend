@@ -43,7 +43,7 @@
           </ul>
         </ng-template>
 
-        <ng-template [ngIf]="selectedElement.children?.length < 1">
+        <ng-template [ngIf]="selectedElement.children?.length < 1 && selectedElement.parent.children.length > 1">
           <h4>{{'LBL_SIBLINGS' | translate}}</h4>
           <ul>
             <ng-container *ngFor="let sibling of selectedElement.parent.children">
