@@ -5,7 +5,7 @@
       <div class="input-group search-center">
         <input type="text" class="form-control" [formControl]="searchForm"
                placeholder="{{'LBL_SEARCH_PLACEHOLDER' | translate}}" #searchBox value="{{query}}"
-               (keyup.enter)="search(searchBox.value)">
+               (keyup.enter)="search(searchBox.value)" autofocus>
 
         <span class="input-group-btn">
                   <button class="btn btn-default btn-go" type="button" (click)="search(searchBox.value);"><span
