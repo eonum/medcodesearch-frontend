@@ -30,19 +30,19 @@ export class StorageFavoritePersister implements IFavoritePersister {
    * @param elementsToPersist the elements to store
    * @param numberOfElements the number of elements to store
    */
-  public persist(elementsToPersist: { [key: string]: FavoriteElement }, numberOfElements: number): void {
+  public persist(elementsToPersist: { [key: string]: FavoriteElement }): void {
     if (!this.testLocalStorage()) {
       return;
     }
 
-    localStorage.setItem(this.storageKey, JSON.stringify({ elements: elementsToPersist, numberOfElements: numberOfElements }));
+    localStorage.setItem(this.storageKey, JSON.stringify(elementsToPersist));
   }
 
   /**
    * Restore the previously stored elements from the LocalStorage.
    * Returns null if no elements can be restored.
    */
-  public restore(): { elements: { [key: string]: FavoriteElement }, numberOfElements: number } {
+  public restore(): { [key: string]: FavoriteElement } {
     if (this.testLocalStorage()) {
       return JSON.parse(localStorage.getItem(this.storageKey));
     }

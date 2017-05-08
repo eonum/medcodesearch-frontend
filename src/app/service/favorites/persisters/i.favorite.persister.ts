@@ -6,6 +6,6 @@ import { FavoriteElement } from '../../../model/favorite.element';
  * like LocalStorage.
  */
 export interface IFavoritePersister {
-  persist(elementsToPersist: { [key: string]: FavoriteElement }, numberOfElements: number): void;
-  restore(): { elements: { [key: string]: FavoriteElement }, numberOfElements: number };
+  persist(elementsToPersist: { [key: string]: FavoriteElement }): void;
+  restore(): { [key: string]: FavoriteElement };
 }

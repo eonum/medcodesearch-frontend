@@ -7,11 +7,11 @@ import { FavoriteElement } from '../../../model/favorite.element';
  */
 export class NullFavoritePersister implements IFavoritePersister {
 
-  public persist(elementsToPersist: { [key: string]: FavoriteElement }, numberOfElements: number): void {
+  public persist(elementsToPersist: { [key: string]: FavoriteElement }): void {
 
   }
 
-  public restore(): { elements: { [key: string]: FavoriteElement }, numberOfElements: number } {
+  public restore(): { [key: string]: FavoriteElement } {
     return null;
   }
 }

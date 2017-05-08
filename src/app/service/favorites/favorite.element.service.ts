@@ -22,7 +22,6 @@ export class FavoriteElementService implements IFavoriteElementService {
    * Internal dictionary to store the favorite elements
    */
   private favoriteElements: { [key: string]: FavoriteElement };
-  private numberOfElements: number;
 
   /**
    * BehaviorSubject to publish changes on favorite elements
@@ -35,11 +34,9 @@ export class FavoriteElementService implements IFavoriteElementService {
 
     const restored = this.persister.restore();
     if (restored) {
-      this.favoriteElements = restored.elements;
-      this.numberOfElements = restored.numberOfElements;
+      this.favoriteElements = restored;
     } else {
       this.favoriteElements = {};
-      this.numberOfElements = 0;
     }
 
     this.notify();
@@ -49,7 +46,7 @@ export class FavoriteElementService implements IFavoriteElementService {
    * Returns the number of currently favorite elements.
    */
   public count(): number {
-    return this.numberOfElements;
+    return Object.keys(this.favoriteElements).length;
   }
 
   /**
@@ -68,9 +65,8 @@ export class FavoriteElementService implements IFavoriteElementService {
     if (!this.isFavorite(element, version, catalog, language)) {
       const elementToStore = FavoriteElement.from(element, version, catalog, language);
       this.favoriteElements[FavoriteElement.keyForFavoriteElement(elementToStore)] = elementToStore;
-      this.numberOfElements++;
       this.notify();
-      this.persister.persist(this.favoriteElements, this.numberOfElements);
+      this.persister.persist(this.favoriteElements);
     }
   }
 
@@ -106,9 +102,8 @@ export class FavoriteElementService implements IFavoriteElementService {
   private removeById(id: string): void {
     if (this.favoriteElements[id]) {
       delete this.favoriteElements[id];
-      this.numberOfElements--;
       this.notify();
-      this.persister.persist(this.favoriteElements, this.numberOfElements);
+      this.persister.persist(this.favoriteElements);
     }
   }
 
