@@ -44,7 +44,6 @@ export class SearchResultsComponent implements OnInit {
       (params, queryParams) => Object.assign({}, params, queryParams) as SearchRequest
     ).subscribe(request => {
       if (request.query) {
-        console.log(request);
         this.searchService.search(request);
       }
     });

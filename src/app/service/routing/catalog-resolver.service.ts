@@ -27,7 +27,6 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
 
   public activeVersions: { [language: string]: { [catalog: string]: string } } = {};
 
-
   constructor(private router: Router, @Inject('ILoggerService') private logger: ILoggerService) {
 
     Settings.LANGUAGES.forEach((lang: string) => {
@@ -95,11 +94,27 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
    * @param language must be one of {@link Settings.LANGUAGES }
    * @param catalog must be one of {@link Settings.CATALOGS}
    */
-  private navigateToActiveVersion(language: string, catalog: string): void {
+  public navigateToActiveVersion(language: string, catalog: string): void {
 
     const version = this.getActiveVersion(language, catalog);
 
-    const params = version ? [language, catalog, version] : [language];
+    if (version) {
+      this.navigateToRoot(language, catalog, version);
+    } else {
+      this.router.navigate([language], { queryParamsHandling: 'merge' });
+    }
+
+  }
+
+  /**
+   * Navigate to the root element of the catalog without verifying if the version or catalog exist in the language.
+   * @param language must be one of {@link Settings.LANGUAGES}
+   * @param catalog must be one of {@link Settings.CATALOGS} that exists in the language
+   * @param version must exist in the catalog and version
+   */
+  private navigateToRoot(language: string, catalog: string, version: string): void {
+    const root = this.getRootElement(catalog, version);
+    const params = [language, catalog, version, root.type, root.code];
 
     this.router.navigate(params, { queryParamsHandling: 'merge' });
   }
@@ -122,7 +137,7 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
 
     // set version active for all available languages
     this.getLanguages(catalog, version).forEach((lang: string) => {
-      this.activeVersions[language][catalog] = version;
+      this.activeVersions[lang][catalog] = version;
     });
 
     return Promise.resolve(this.getDisplayInfos(language));

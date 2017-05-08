@@ -32,27 +32,20 @@ export class AppComponent {
    * @param lang must be one of {@link Settings.LANGUAGES}
    */
   public setLanguage(lang: string): void {
-    this.toRoot(lang, this.route.snapshot.queryParams['query']);
+    const catalog = this.route.firstChild.firstChild.snapshot.params['catalog'];
+    this.catalogResolver.navigateToActiveVersion(lang, catalog);
   }
 
   /**
    * Navigate to the root element of the current routes catalog.
-   *
-   * @param [selectedLang] - use as :lang param when present
-   * @param [query]- add as query param when present
    */
-  public toRoot(selectedLang?: string, query?: string): void {
+  public toRoot(): void {
 
     const { language, catalog, version } = this.route.firstChild.firstChild.snapshot.params;
-
     const root = this.catalogResolver.getRootElement(catalog, version);
+    const params = [language, catalog, version, root.type, root.code];
 
-    const extras = query ? { queryParams: { query: query } } : {};
-    const params = [selectedLang || language, catalog, version, root.type, root.code];
-
-    this.router.navigate(
-      params, extras
-    ).catch(e => this.logger.log(e));
+    this.router.navigate(params).catch(e => this.logger.log(e));
 
   }
 }

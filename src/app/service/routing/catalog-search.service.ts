@@ -40,10 +40,10 @@ export class CatalogSearchService {
    * @param icdCatalog
    */
   constructor(private route: ActivatedRoute,
-    private swissDrgCatalog: SwissDrgCatalog,
-    private chopCatalog: CHOPCatalog,
-    private icdCatalog: ICDCatalog,
-    @Inject('ILoggerService') private logger: ILoggerService) {
+              private swissDrgCatalog: SwissDrgCatalog,
+              private chopCatalog: CHOPCatalog,
+              private icdCatalog: ICDCatalog,
+              @Inject('ILoggerService') private logger: ILoggerService) {
 
     this.catalogs = {};
     this.catalogs[swissDrgCatalog.getName()] = swissDrgCatalog;
@@ -60,20 +60,17 @@ export class CatalogSearchService {
       .distinctUntilChanged(this.requestsEqual)
       .switchMap((request: SearchRequest) => this.doSearch(request))
       .subscribe(
-      (results: CatalogElement[]) => {
-        this.searchResults.next(results);
-      },
-      error => this.logger.error('[CatalogSearchService]', error));
+        (results: CatalogElement[]) => this.searchResults.next(results),
+        error => this.logger.error('[CatalogSearchService]', error)
+      );
   }
 
   private doSearch(searchRequest: SearchRequest): Promise<CatalogElement[]> {
-    if (searchRequest && searchRequest.catalog) {
-      this.searchResults.next(null); // remove displayed search results
-      return this.catalogs[searchRequest.catalog].search(
-        searchRequest.version, searchRequest.query);
-    }
-    this.logger.error('No catalog in search request', searchRequest);
-    return null;
+    this.logger.log('[SearchService] search:', searchRequest);
+
+    this.searchResults.next(null); // remove displayed search results
+    const catalog = this.catalogs[searchRequest.catalog];
+    return catalog.search(searchRequest.version, searchRequest.query);
   }
 
   /**
@@ -85,7 +82,11 @@ export class CatalogSearchService {
   }
 
   public search(searchRequest: SearchRequest): void {
-    this.requests.next(searchRequest);
+    if (searchRequest && searchRequest.catalog) {
+      this.requests.next(searchRequest);
+    } else {
+      this.logger.error('No catalog in search request', searchRequest);
+    }
   }
 
   public sendAnalytics(searchRequest: SearchRequest, type: string, code: string): void {
