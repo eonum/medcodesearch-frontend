@@ -43,7 +43,7 @@ export class LanguageGuard implements CanActivate {
     }
 
     // get browser language or default
-    language = this.matchingLanguage(navigator.language) || Settings.DEFAULT_LANGUAGE;
+    language = window.localStorage.getItem('eonumLanguage') || this.matchingLanguage(navigator.language) || Settings.DEFAULT_LANGUAGE;
 
     // redirect
     this.router.navigate([language]).catch(error => this.logger.log(error));

@@ -34,6 +34,7 @@ export class AppComponent {
   public setLanguage(lang: string): void {
     const catalog = this.route.firstChild.firstChild.snapshot.params['catalog'];
     this.catalogResolver.navigateToActiveVersion(lang, catalog);
+    window.localStorage.setItem('eonumLanguage', lang);
   }
 
   /**
