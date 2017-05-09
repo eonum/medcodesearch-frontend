@@ -1,10 +1,9 @@
-<div class="btn-group pull-right" dropdown>
-  <button type="button" class="btn btn-default dropdown-toggle" dropdownToggle>
-    <span class="badge" [tooltip]="tooltipTemplate" triggers="" #tooltip="bs-tooltip" placement="bottom">{{favoriteElements.length}}</span>
-    
+<div class="btn-group pull-right" dropdown (click)="dropdownShown()">
+  <button type="button" class="btn btn-default dropdown-toggle" dropdownToggle [tooltip]="tooltipTemplate" triggers="" #tooltip="bs-tooltip" placement="bottom">
+    <span class="badge">{{favoriteElements.length}}</span>    
     <span class="glyphicon glyphicon-star med-blue"></span>
-    <ng-template #tooltipTemplate>{{ toolTipMessage }}</ng-template>
   </button>
+  <ng-template #tooltipTemplate>{{ toolTipMessage }}</ng-template>
 
   <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu">
     <ng-template [ngIf]="favoriteElements?.length > 0">
@@ -15,7 +14,7 @@
             <span title="{{element.text}}">{{element.text}}</span>
           </div>
           <div class="favorite-item-right">
-            <span (click)="removeElement(element)" class="favorite-item-button glyphicon glyphicon-trash pull-right"></span>
+            <span (click)="removeElement($event, element)" class="favorite-item-button glyphicon glyphicon-trash pull-right"></span>
           </div>
           <div class="clearfix"></div>
         </a>

@@ -27,6 +27,11 @@ export class FavoriteElementComponent implements OnInit {
    */
   public toolTipMessage: string;
 
+  /**
+   * Timer which will hide tooltip on completion
+   */
+  private tooltipTimer: any;
+
   @ViewChild('tooltip') public tooltip;
 
   constructor(private router: Router,
@@ -47,8 +52,6 @@ export class FavoriteElementComponent implements OnInit {
     this.favoriteElements = favorites;
     if (oldNumberOfElements < favorites.length) {
       this.showTooltip('LBL_ELEMENT_ADDED');
-    } else if (oldNumberOfElements > favorites.length) {
-      this.showTooltip('LBL_ELEMENT_REMOVED');
     }
   }
 
@@ -70,9 +73,10 @@ export class FavoriteElementComponent implements OnInit {
    *
    * @param element the element to remove
    */
-  private removeElement(element: FavoriteElement): void {
+  private removeElement(event: any, element: FavoriteElement): void {
     this.favoriteService.removeByFavoriteElement(element);
-    this.showTooltip('LBL_ELEMENT_REMOVED');
+    // Prevent dropdown from closing
+    event.stopPropagation();
   }
 
   /**
@@ -85,7 +89,33 @@ export class FavoriteElementComponent implements OnInit {
     this.translate.get(labelKey).subscribe((res: string) => {
       this.toolTipMessage = res;
       this.tooltip.show();
-      setTimeout(() => { this.tooltip.hide(); }, 2000);
+      this.tooltipTimer = setTimeout(() => { 
+        this.hideTooltip();
+        this.tooltipTimer = null;
+      }, 2000);
     });
+  }
+
+  /**
+   * Hide the tooltip if shown
+   */
+  private hideTooltip(): void {
+    if (this.tooltip.isOpen){      
+      this.tooltip.hide();
+    }
+  }
+
+  /**
+   * This method is executed when the button which opens
+   * the dropdown is clicked.
+   * Hide the tooltip immediately and clear a running timer
+   * which would hide the tooltip on completion.
+   */
+  private dropdownShown(){
+    this.hideTooltip();
+    if (this.tooltipTimer){
+        clearTimeout(this.tooltipTimer);
+        this.tooltipTimer = null;
+      }
   }
 }

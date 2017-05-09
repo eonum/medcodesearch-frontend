@@ -4,8 +4,9 @@
 
 Unit-Tests werden automatisiert mittels des *Karma*-Testrunners für Angular 2 durchgeführt. Folgende Units werden dabei jeweils isoliert getestet:
 
-- sämtliche **Komponenten-Klassen**
+- sämtliche **Service-Klassen**
 - sämtliche **Catalog-Klassen**
+- sämtliche **Helper-Klassen**
 
 Zugriffe auf die *eonum-API* werden dabei mithilfe von Mock-Objekten simuliert, da ein Zugriff auf die echte API die Tests erheblich verlangsamen würde.
 
@@ -17,13 +18,13 @@ In diesem Projekt wird keine Datenbank verwendet. Es wird ausschliesslich auf di
 
 ## Integrationstests
 
-Integrations-Tests werden ebenfalls mithilfe des *Karma*-Testrunners durchgeführt. Dabei wird insbesondere das Zusammenspiel zwischen Angular-Komponenten und den Katalogen getestet. Angular 2 bietet stark ausgebaute Testing-Mechanismen, so dass eine User-Story sehr genau in einem Test-Szenario nachgebildet und getestet werden kann.
+Auf Integrations-Tests wird verzichtet, da der grösste Teil der Business-Logik sich gekapselt in den Services befindet und die Angular-Komponenten allesamt sehr schlank sind. Der Aufwand wäre unverhältnismässig.
 
-Die Usecases basieren auf den User-Stories und sind im Dokument `srs_eonum.md` definiert. Sie werden im Verlaufe des Projekts ergänzt. Jeder Usecase wird automatisiert getestet.
+Das Testing der User Stories wird durch die Usability-Tests abgedeckt. Die Stories sind im Dokument `srs_eonum.md` definiert.
 
 ## Installationstests
 
-Die Applikation wird am Ende jeder Iteration auf eine Github-Page publiziert. So kann überprüft werden, dass die Installation funktioniert.
+Die Applikation wird am Ende jeder Iteration auf eine Github-Page publiziert. So kann überprüft werden, dass die Installation funktioniert. Ausserdem wird die Installation auf verschiedenen Server-Umgebungen (Apache, nginx) durchgeführt, um die entsprechende Konfiguration zu testen.
 
 ## GUI Tests
 
@@ -33,4 +34,4 @@ GUI-Tests werden manuell durchgeführt.
 
 Die künftigen Benutzer der Software werden primär medizinisches Personal (Ärzte, Spitalpersonal) und sonstige interessierten fachkundigen Personen sein. Die Benutzer verfügen in der Regel über eine medizinische Ausbildung oder zumindest medizinische Kenntnisse. Erklärungen zu den in der Applikation verwendeten medizinischen Fachbegriffe sind deshalb nicht notwendig.
 
-Usability-Tests werden mithilfe von Medizin-Studenten durchgeführt. Dabei werden vorgängig einige Szenarien entworfen (z.B. "Suchen Sie im neuesten CHOP-Katalog nach dem Begriff 'Blinddarmentzündung'"), welche die Probanden dann durchspielen müssen. Resultate und Erkenntnisse aus den Tests werden schriftlich festgehalten und allfällige Verbesserungen so rasch wie möglich in die Applikation eingearbeitet.
+Usability-Tests werden mithilfe von Kodierern und anderem medizinischen Personal durchgeführt. Dabei werden vorgängig einige Szenarien entworfen (z.B. "Suchen Sie im neuesten CHOP-Katalog nach dem Begriff 'Blinddarmentzündung'"), welche die Probanden dann durchspielen müssen. Resultate und Erkenntnisse aus den Tests werden schriftlich festgehalten und allfällige Verbesserungen so rasch wie möglich in die Applikation eingearbeitet.
