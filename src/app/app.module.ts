@@ -20,20 +20,33 @@ import { CatalogService } from './service/catalog.service';
 import { ConsoleLoggerService } from './service/logging/console.logger.service';
 import { FavoriteElementService } from './service/favorites/favorite.element.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BsDropdownModule, CollapseModule, ModalModule, PopoverModule, TooltipModule } from 'ng2-bootstrap';
-import { CatalogElementResolver } from './service/routing/catalog-element-resolver.service';
 import { CatalogSearchService } from './service/routing/catalog-search.service';
 import { MobileService } from './service/mobile.service';
+import { CatalogVersionService } from './service/catalog-version.service';
 
-// AoT requires an exported function for factories
+/**
+ * Factory function to initialize the TranslateModule.
+ */
 export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/');
+}
+
+/**
+ * Factory function for the {@link CatalogVersionService}. Gets called on app initialization,
+ * and loads the versions.
+ *
+ * @param service {CatalogVersionService}
+ * @returns {()=>Promise<any>}
+ */
+export function VersionLoaderFactory(service: CatalogVersionService): () => Promise<any> {
+  return () => service.loadVersions();
 }
 
 @NgModule({
@@ -84,7 +97,14 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
     CatalogResolver,
     CatalogSearchService,
     MobileService,
-    SortHelper
+    SortHelper,
+    CatalogVersionService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: VersionLoaderFactory,
+      deps: [CatalogVersionService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

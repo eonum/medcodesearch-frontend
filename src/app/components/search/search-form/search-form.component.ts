@@ -8,6 +8,7 @@ import { ActivatedRoute, Data, Params, Router } from '@angular/router';
 import { ModalDirective } from 'ng2-bootstrap';
 import { CatalogDisplayInfo, CatalogResolver } from '../../../service/routing/catalog-resolver.service';
 import { MobileService } from '../../../service/mobile.service';
+import { CatalogVersionService } from '../../../service/catalog-version.service';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -45,6 +46,7 @@ export class SearchFormComponent implements OnInit {
     private router: Router,
     @Inject('ILoggerService') private logger: ILoggerService,
     private catalogResolver: CatalogResolver,
+    private versionService: CatalogVersionService,
     private mobileService: MobileService) {
 
     this.searchForm.valueChanges
@@ -70,7 +72,7 @@ export class SearchFormComponent implements OnInit {
       this.query = params['query'];
     });
     this.route.data.subscribe((data: Data) => {
-      // for the versions to display
+      // catalog versions to populate the drop-downs, according to the route param
       this.catalogDisplayInfos = data.displayInfos;
     });
   }
@@ -89,12 +91,12 @@ export class SearchFormComponent implements OnInit {
     if (this.selectedVersion) {
       params.push(this.selectedVersion);
     }
-    this.router.navigate(params
-    ).catch(error => this.logger.error(error));
+    this.router.navigate(params).catch(error => this.logger.error(error));
   }
 
   /**
-   * Update based on catalog selection.
+   * Check if the catalog and version exist, and either navigate to the selection, or
+   * display the language selector pop-up.
    */
   public updateCatalog(catalog: string, version?: string): void {
 
@@ -106,7 +108,7 @@ export class SearchFormComponent implements OnInit {
     if (info.languageVersions.indexOf(version) === -1) {
       this.showLanguageSelector(catalog, version);
     } else {
-      this.redirect(catalog, version, this.query);
+      this.redirect(catalog, version);
     }
   }
 
@@ -118,7 +120,7 @@ export class SearchFormComponent implements OnInit {
    * @returns {null}
    */
   private showLanguageSelector(catalog: string, version: string): void {
-    this.languages = this.catalogResolver.getLanguages(catalog, version);
+    this.languages = this.versionService.getLanguages(catalog, version);
 
     this.catalog = catalog;
     this.selectedVersion = version;
@@ -142,9 +144,8 @@ export class SearchFormComponent implements OnInit {
    * Do the catalog selection by redirecting with the given parameters.
    * @param catalog
    * @param version
-   * @param query
    */
-  private redirect(catalog: string, version: string, query: string): void {
+  private redirect(catalog: string, version: string): void {
     let params;
     if (version) {
       const root = this.catalogResolver.getRootElement(catalog, version);

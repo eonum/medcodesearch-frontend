@@ -13,6 +13,7 @@ import { Http, HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { PopoverModule, TooltipModule } from 'ng2-bootstrap';
+import { CatalogVersionService } from './service/catalog-version.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -41,7 +42,9 @@ describe('AppComponent', () => {
         SwissDrgCatalog,
         CHOPCatalog,
         ICDCatalog,
-        CatalogResolver]
+        CatalogResolver,
+        CatalogVersionService,
+      ]
     }).compileComponents();
   }));
 

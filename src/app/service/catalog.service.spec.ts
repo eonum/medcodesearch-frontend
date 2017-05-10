@@ -4,18 +4,10 @@ import { catalogConfigurations } from '../catalog/catalog.configuration';
 import { ICatalogService } from './i.catalog.service';
 import { NullLoggerService } from './logging/null.logger.service';
 import { CatalogService } from './catalog.service';
-import { TestBed, async, inject } from '@angular/core/testing';
-import {
-  HttpModule,
-  Http,
-  Response,
-  ResponseOptions,
-  XHRBackend,
-  BaseRequestOptions
-} from '@angular/http';
+import { inject, TestBed } from '@angular/core/testing';
+import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import * as TypeMoq from 'typemoq';
 
 describe('CatalogService', () => {
 

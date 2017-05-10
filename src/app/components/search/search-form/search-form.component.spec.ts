@@ -16,6 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalModule } from 'ng2-bootstrap';
 import { CatalogResolver } from '../../../service/routing/catalog-resolver.service';
+import { CatalogVersionService } from '../../../service/catalog-version.service';
+import { HttpModule } from '@angular/http';
 
 describe('SearchFormComponent', () => {
   let component: SearchFormComponent;
@@ -29,6 +31,7 @@ describe('SearchFormComponent', () => {
         ReactiveFormsModule,
         TranslateModule.forRoot(),
         ModalModule.forRoot(),
+        HttpModule,
       ],
       declarations: [SearchFormComponent, CorrectVersionPipe
       ],
@@ -39,7 +42,8 @@ describe('SearchFormComponent', () => {
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
         CatalogResolver,
-        MobileService
+        MobileService,
+        CatalogVersionService,
       ]
     })
       .compileComponents();

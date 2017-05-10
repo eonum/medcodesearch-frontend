@@ -25,6 +25,8 @@ import { CatalogSearchService } from '../../service/routing/catalog-search.servi
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { CatalogResolver } from '../../service/routing/catalog-resolver.service';
+import { CatalogVersionService } from '../../service/catalog-version.service';
+import { HttpModule } from '@angular/http';
 
 describe('MainComponent', () => {
 
@@ -64,14 +66,14 @@ describe('MainComponent', () => {
         DetailIcdComponent,
         ConvertCodePipe,
         CorrectVersionPipe,
-
       ],
       imports: [
         TranslateModule.forRoot(),
         ModalModule.forRoot(),
         ReactiveFormsModule,
         TooltipModule.forRoot(),
-        RouterTestingModule
+        RouterTestingModule,
+        HttpModule,
       ],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
@@ -81,7 +83,8 @@ describe('MainComponent', () => {
         { provide: 'ILoggerService', useClass: NullLoggerService },
         CatalogSearchService,
         MobileService,
-        CatalogResolver
+        CatalogResolver,
+        CatalogVersionService,
       ]
     })
       .compileComponents();
