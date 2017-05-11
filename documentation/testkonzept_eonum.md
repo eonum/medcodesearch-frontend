@@ -7,6 +7,7 @@ Unit-Tests werden automatisiert mittels des *Karma*-Testrunners für Angular 2 d
 - sämtliche **Service-Klassen**
 - sämtliche **Catalog-Klassen**
 - sämtliche **Helper-Klassen**
+- sämtliche **Pipe-Klassen**
 
 Zugriffe auf die *eonum-API* werden dabei mithilfe von Mock-Objekten simuliert, da ein Zugriff auf die echte API die Tests erheblich verlangsamen würde.
 
