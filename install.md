@@ -27,3 +27,35 @@ In vielen Fällen kann diese Konfiguration in eine Datei namens .htaccess geschr
 	location / {
     	try_files $uri$args $uri$args/ /index.html;
 	}
+	
+	
+---
+
+# Updaten der Versions
+
+Das dynamische laden der Versionen über die einzenlen API Knoten, hat 
+leider zu einer kurzen, aber doch merkbaren Verzögerung geführt. 
+Zudem macht es den entsprechenden Code unnötig asynchron-lastig und 
+schlecht wartbar. 
+
+Damit die Versionen flüssig geladen werden, aber man sie doch updaten kann,
+ohne die App neu zu 'build'-en. Werden diese nun bei App-initializierung 
+vom File `assets/versions.json` geladen. 
+
+Das kann gegebenenfalls einfach durch einen entsprechenden API Knoten 
+ersetzt werden. 
+
+Das Python script `generateVersions.py`, generiert dieses File bei Bedarf neu.
+ 
+-----
+ 
+# Build 
+ 
+ Um einen neuen build der App zu erstellen, einfach folgenden Befehl ausführen.
+    
+    npm install && npm run-script build
+    
+ Der Output befindet sich dann, mit neuen `versions.json` file, 
+ im `dist` Ordner. 
+ 
+ 
