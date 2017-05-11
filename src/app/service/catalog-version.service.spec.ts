@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { CatalogVersionService } from './catalog-version.service';
 import { HttpModule } from '@angular/http';
 

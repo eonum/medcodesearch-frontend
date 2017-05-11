@@ -89,7 +89,7 @@ export class FavoriteElementComponent implements OnInit {
     this.translate.get(labelKey).subscribe((res: string) => {
       this.toolTipMessage = res;
       this.tooltip.show();
-      this.tooltipTimer = setTimeout(() => { 
+      this.tooltipTimer = setTimeout(() => {
         this.hideTooltip();
         this.tooltipTimer = null;
       }, 2000);
@@ -100,7 +100,7 @@ export class FavoriteElementComponent implements OnInit {
    * Hide the tooltip if shown
    */
   private hideTooltip(): void {
-    if (this.tooltip.isOpen){      
+    if (this.tooltip.isOpen) {
       this.tooltip.hide();
     }
   }
@@ -111,11 +111,11 @@ export class FavoriteElementComponent implements OnInit {
    * Hide the tooltip immediately and clear a running timer
    * which would hide the tooltip on completion.
    */
-  private dropdownShown(){
+  private onDropdownShown(): void {
     this.hideTooltip();
-    if (this.tooltipTimer){
-        clearTimeout(this.tooltipTimer);
-        this.tooltipTimer = null;
-      }
+    if (this.tooltipTimer) {
+      clearTimeout(this.tooltipTimer);
+      this.tooltipTimer = null;
+    }
   }
 }

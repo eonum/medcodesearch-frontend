@@ -16,7 +16,7 @@ describe('CatalogResolver', () => {
   let versionServiceMock;
   let router;
 
-  function serviceFactory(logger: ILoggerService) {
+  function serviceFactory(logger: ILoggerService): CatalogResolver {
     versionServiceMock = TypeMoq.Mock.ofType<CatalogVersionService>();
     router = new RouterStub();
     return new CatalogResolver(router, versionServiceMock.object, logger);
@@ -57,7 +57,7 @@ describe('CatalogResolver', () => {
       const language = 'de';
       const catalog = 'SwissDRG';
       const version = 'V4.0';
-      routeParams = {catalog: catalog, version: version,language: language};
+      routeParams = { catalog: catalog, version: version, language: language };
 
       versionServiceMock.setup(x =>
         x.versionExists(language, catalog, version)
@@ -89,7 +89,7 @@ describe('CatalogResolver', () => {
       const language = 'de';
       const catalog = 'SwissDRG';
       const version = 'V4.0';
-      routeParams = {catalog: catalog, version: version,language: language};
+      routeParams = { catalog: catalog, version: version, language: language };
 
       versionServiceMock.setup(x =>
         x.versionExists(language, catalog, version)
@@ -118,7 +118,7 @@ describe('CatalogResolver', () => {
       const catalog = 'SwissDRG';
       const version = 'V4.0';
 
-      routeParams = {catalog: catalog, version: version,language: language};
+      routeParams = { catalog: catalog, version: version, language: language };
 
       versionServiceMock.setup(x =>
         x.versionExists(language, catalog)
