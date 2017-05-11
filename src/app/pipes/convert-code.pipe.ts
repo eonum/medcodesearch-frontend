@@ -4,6 +4,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MobileService } from '../service/mobile.service';
 
+declare var window: any;
+
 @Pipe({ name: 'convertCode' })
 export class ConvertCodePipe implements PipeTransform {
 

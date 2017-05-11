@@ -5,12 +5,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Settings } from './settings';
 
+declare var window: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css']
 })
-
 export class AppComponent {
 
   public languages = Settings.LANGUAGES;
