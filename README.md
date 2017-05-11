@@ -9,12 +9,10 @@ V0.2 is hosted as GithubProject Page for this repo.
 [eonum.github.io/medcodelogic-frontend](https://eonum.github.io/medcodelogic-frontend)
 
 ----------------------------------------------
-## Documentation Folder
+## Documentation
 
-- `code` [Typedoc](http://typedoc.org/) generated from the source.
-- `uml` [PlantUML](http://plantuml.com) Sequence Diagrams for the control flow of the *page load*, *catalog/version change and query/code search*, and the *language-switch*.
-- `architecture` Description of the service structur that is used as interface for the `search.eonum.ch` API.
-
+The documentation of this project resides in the directory `/documentation`. See the file
+`/documentation/CodeStructure.md` for an overview of the project structure.
 
 ## Setup
 This project was generated with the [Angular CLI](https://angular.io/docs/ts/latest/cli-quickstart.html).
@@ -33,11 +31,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
 
 ## Further help
 
