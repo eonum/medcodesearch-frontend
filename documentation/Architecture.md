@@ -1,6 +1,6 @@
 # Architektur eonum search frontend
 
-![](./Architecture.png)
+![](./CatalogArchitecture.png)
 
 Die eonum-API kennt drei verschiedene Kataloge. Diese Kataloge weisen zahlreiche Gemeinsamkeiten auf, welche teilweise in eine Oberklasse `Catalog` ausgelagert werden können.
 
