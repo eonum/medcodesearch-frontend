@@ -1,8 +1,8 @@
-import {ILoggerService} from '../../service/logging/i.logger.service';
-import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {catalogConfigurations} from '../../catalog/catalog.configuration';
-import {CatalogResolver} from '../../service/routing/catalog-resolver.service';
+import { ILoggerService } from '../../service/logging/i.logger.service';
+import { Component, Inject, OnInit, HostListener } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { CatalogResolver } from '../../service/routing/catalog-resolver.service';
+import { MobileService } from '../../service/mobile.service';
 
 /**
  * Container for the {@link SearchFormComponent},{@link SearchResultsComponent}
@@ -14,17 +14,19 @@ import {CatalogResolver} from '../../service/routing/catalog-resolver.service';
   selector: 'app-main',
   templateUrl: 'main.component.html',
   styleUrls: ['main.component.css'],
-
 })
 
 export class MainComponent implements OnInit {
 
   public query;
+  public mobile;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService,
-              private catalogResolver: CatalogResolver) {
+    private router: Router,
+    @Inject('ILoggerService') private logger: ILoggerService,
+    private catalogResolver: CatalogResolver,
+    public mobileService: MobileService) {
+
   }
 
   /**
@@ -40,20 +42,21 @@ export class MainComponent implements OnInit {
 
     // Subscribe to the search query, to now if SearchResult component must be displayed.
     this.route.queryParams.subscribe((params: Params) => this.query = params['query']);
+    this.mobileService.setQuery(this.query);
 
-    // Subscribe to route params, to check if a catalog element is selected.
+    // Subscribe to route params, to check  if childroute :type/:code exists.
     this.route.params.subscribe((params: Params) => {
-        if (!this.route.firstChild) {
-          const root = this.catalogResolver.getRootElement(
-            this.route.snapshot.params['catalog'],
-            this.route.snapshot.params['version']);
 
-          this.navigateToElement(root.type, root.code);
-        }
-
+      if (!this.route.firstChild) {
+        const { catalog, version } = this.route.snapshot.params;
+        const root = this.catalogResolver.getRootElement(catalog, version);
+        this.navigateToElement(root.type, root.code);
       }
+
+    }
     );
   }
+
 
   /**
    * Navigate to `:type/:code` .
@@ -66,6 +69,12 @@ export class MainComponent implements OnInit {
       relativeTo: this.route,
       queryParamsHandling: 'merge'
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  private onResize(event: any): void {
+    this.mobileService.resizeWindow(event.target.innerWidth);
+    this.mobile = this.mobileService.getMobile();
   }
 
 }

@@ -1,0 +1,96 @@
+table {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.favorite-item-title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #f7f7f7;
+  padding: 5px 0;
+}
+
+.favorite-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.favorite-item:last-child {
+  border-bottom: none;
+}
+
+.favorite-item-label, .favorite-item-button {
+  color: #24add3;
+}
+
+.favorite-item-button:hover {
+  cursor: pointer;
+}
+
+.favorite-item-label:active, .favorite-item-button:active {
+  color: gray;
+}
+
+.favorite-item-label:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.favorite-item-left {
+  float: left;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.favorite-item-right {
+  float: left;
+  width: 10%;
+  padding-top: 2px;
+}
+
+.dropdown-menu {
+  min-width: 240px;
+  max-width: 340px;
+  padding: 0;
+}
+
+.dropdown-menu > li > a {
+  padding: 5px 20px;
+}
+
+.dropdown-menu > li.favorite-item-title > a {
+  padding: 3px 20px;
+}
+
+.badge {
+  padding: 1px 9px 2px;
+  color: #ffffff;
+  background-color: rgb(36, 173, 211);
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  margin-right: 5px;
+  padding-top: 2px;
+}
+
+.med-blue {
+  color: rgb(36, 173, 211);
+}
+div.pull-right {
+  margin-left: 10px;
+  margin-top: 3px;
+}
+
+.dropdown-toggle{
+  background-color: transparent;
+  border: none;
+  border: 1px solid transparent;
+}
+.dropdown-toggle:hover{
+  background-color: rgba(36, 173, 211, 0.2);
+  border: solid 1px rgb(36, 173, 211);
+}
+
+.glyphicon-star{
+  font-size: 14px;
+}

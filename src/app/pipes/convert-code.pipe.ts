@@ -1,30 +1,37 @@
-import {ILoggerService} from '../service/logging/i.logger.service';
-import {Inject, NgZone, Pipe, PipeTransform} from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ILoggerService } from '../service/logging/i.logger.service';
+import { Inject, NgZone, Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MobileService } from '../service/mobile.service';
 
-@Pipe({name: 'convertCode'})
+declare var window: any;
+
+@Pipe({ name: 'convertCode' })
 export class ConvertCodePipe implements PipeTransform {
 
   constructor(private sanitizer: DomSanitizer,
-              private ngZone: NgZone,
-              private route: ActivatedRoute,
-              private router: Router,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private ngZone: NgZone,
+    private route: ActivatedRoute,
+    private router: Router,
+    public mobileService: MobileService,
+    @Inject('ILoggerService') private logger: ILoggerService) {
     window['eonum'] = window['eonum'] || {};
     window['eonum'].searchCode = this.searchCode.bind(this);
   }
 
   public transform(s: string): SafeHtml {
-    const regex = new RegExp(/[\{\(](([\w\d]{1,3}\.?){1,3})(-(([\w\d]{1,3}\.?){1,3})?)?[\}\)]/g);
+
+    const regex = new RegExp(/[\{\(](([A-Z\d]{1,3}\.?){1,3})(-(([A-Z\d]{1,3}\.?){1,3})?)?[\}\)]/g);
     s = s.replace(regex, this.wrapCode);
     return this.sanitizer.bypassSecurityTrustHtml(s);
 
     /*
-     PROBLEME
-     --------
-     Die Kategorien Z40-Z54 dienen
-     Einzelne Episoden von reaktiver Depression (F32.0, F32.1, F32.2)
+     ORIGINALE
+     ---------
+     var item = data[field][j].replace(/[\{|\(](\w{2,3}\.\w{1,2}(\.\w{1,2})?)-?[\}|\)]/, '<a href="/search?query=$1">$1</a>');
+     item = item.replace(/\{(\w{2,3})(\.-)?\}/, '<a href="/search?query=$1">$1</a>');
+     item = item.replace(/\{(\w{2,3})-(\w{2,3})\}/, '<a href="/search?query=$1">$1</a>-<a href="/search?query=$2">$2</a>');
+     item = item.replace(/\((\d\d\.\d\d)-(\d\d\.\d\d)\)/, '<a href="/search?query=$1#">$1</a>-<a href="/search?query=$2">$2</a>');
      */
   }
 
@@ -52,8 +59,11 @@ export class ConvertCodePipe implements PipeTransform {
 
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: {'query': query}
+      queryParams: { 'query': query }
     }).catch(error => this.logger.log(error));
+
+    this.mobileService.focus('results');
+
   }
 }
 

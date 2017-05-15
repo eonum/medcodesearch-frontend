@@ -1,3 +1,5 @@
+import { FavoriteElementServiceMock } from '../../../service/favorites/favorite.service.mock';
+import { MobileService } from '../../../service/mobile.service';
 import { CHOPCatalog } from '../../../catalog/chop.catalog';
 import { ICDCatalog } from '../../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
@@ -7,7 +9,6 @@ import { CorrectVersionPipe } from '../../../pipes/correct-version.pipe';
 import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
 import { CatalogServiceMock } from '../../../service/catalog.service.mock';
 import { NullLoggerService } from '../../../service/logging/null.logger.service';
-import { RememberElementService } from '../../../service/remember.element.service';
 import { SearchFormComponent } from '../../search/search-form/search-form.component';
 import { DetailChopComponent } from '../detail-chop/detail-chop.component';
 import { DetailIcdComponent } from '../detail-icd/detail-icd.component';
@@ -66,7 +67,8 @@ describe('DetailComponent', () => {
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
-        RememberElementService
+        { provide: 'IFavoriteService', useClass: FavoriteElementServiceMock },
+        MobileService
       ]
     })
       .compileComponents();
@@ -78,7 +80,6 @@ describe('DetailComponent', () => {
 
     // Set up a catalog mock
     mock = TypeMoq.Mock.ofType<SwissDrgCatalog>();
-    mock.setup(x => x.getActiveVersion()).returns(() => version);
     mock.setup(x => x.search(version, query)).returns(() => Promise.resolve(searchResults));
 
     // Set up the activated route stub

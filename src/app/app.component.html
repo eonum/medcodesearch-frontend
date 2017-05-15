@@ -2,19 +2,20 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
+      <app-favorite-element></app-favorite-element>
+      <div class="vertical-line" style="height: 30px;"></div>
       <ul href="#" class="language-select">
         <li *ngFor="let language of languages">
           <a href="javascript:void(0)"
               [class.active]="translate.currentLang===language"
               (click)="setLanguage(language)">{{language}}</a>
         </li>
-      </ul>      
-      <app-remember-element></app-remember-element>
+      </ul>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <a id="title" href="https://eonum.github.io/medcodelogic-frontend/">
+      <a id="title" href="javascript:void(0)" (click)="toRoot()">
         <img src="assets/medcodesearch_big.png">
       </a>
     </div>
@@ -26,7 +27,7 @@
 </div>
 
 <!-- Footer-->
-<div class="navbar navbar-default navbar-fixed-bottom row-fluid">
+<div class="navbar navbar-default row-fluid">
   <div class="container">
     <div class="navbar-text pull-left">
       <p>copyright by eonum</p>

@@ -2,7 +2,7 @@
   float: right;
   padding: 0;
   list-style: none;
-  margin: 6px 6px 0 0;
+  margin: 9px 6px 0 0;
 }
 
 .language-select li {
@@ -18,7 +18,7 @@
   color: #24add3;
 }
 
-.btn-remember {
+.btn-favorite {
   border: none;
   background-color: rgba(245,245,245,0.0);
   float: right;
@@ -27,24 +27,22 @@
   margin: 6px 6px 0 0;
 }
 
-.btn-remember:hover {
-  background-color: rgba(36, 173, 211,0.5);
+.btn-favorite:hover {
+  background-color: rgba(36, 173, 211,1.0);
 }
 
-.navbar {
-  background-color: rgba(255,255,255,1.0);
-}
-
-.navbar-fixed-bottom{
+.navbar{
   height:50px;
-  background-color: rgba(245, 245, 245, 1.0)
+  background-color: rgba(245, 245, 245, 0.4);
+  border: solid 1px rgba(245,245,245, 0.0);
+  margin-bottom: 0px;
 }
 
 #title {
   display: block;
   max-width:200px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 #title > img {
@@ -55,3 +53,10 @@
   margin-bottom: 60px;
   margin-top: 10px;
 }
+.vertical-line{
+      width: 1px; 
+      float: right; 
+      margin-left: 15px;
+      margin-top: 5px;
+      background-color: darkgrey;
+    }

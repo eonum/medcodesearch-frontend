@@ -1,38 +1,34 @@
-import {CatalogElement} from '../../../model/catalog.element';
-import {ILoggerService} from '../../../service/logging/i.logger.service';
-import {RememberElementService} from '../../../service/remember.element.service';
-import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Data, Router} from '@angular/router';
+import { CatalogElement } from '../../../model/catalog.element';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
+import { Component, Inject, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import { MobileService } from '../../../service/mobile.service';
+import { IFavoriteElementService } from '../../../service/favorites/i.favorite.element.service';
 
 /**
- * Container for a {@link SearchFormComponent} and the details (including the hierarchy)
- * of a {@link CatalogElement}.
- * The component is assigned to the route `<catalog>/<version>/<type>/<code>`.
+ * Component for displaying of detail information of a specific
+ * CatalogElement.
+ * Displays also the hierarchy of the current catalog to a specific
+ * element and the children of a specific element.
  *
- * A catalog is resolved by the {@link CatalogResolver} and then passed as input
- * to this component. Each time the `type` or `code` in the
- * Routers params or data changes, the `selectedElement` is updated.
+ * The element to display is resolved from routing params by the
+ * {@link CatalogElementResolver}.
  */
-
 @Component({
   selector: 'app-detail-component',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-
 export class DetailComponent implements OnInit {
 
   /**
    * The active catalog, resolved from the activated route.
-   * Serves as input for the search-form component.
-   * */
-
+   */
   public catalog: string;
 
   /**
    * The current element for which the details are displayed
    */
-
   public selectedElement: CatalogElement;
 
   /**
@@ -45,33 +41,64 @@ export class DetailComponent implements OnInit {
    */
   public children: CatalogElement[] = [];
 
-  public count = 0;
+  @ViewChild('buttonFavorite') public buttonFavorite;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private rememberService: RememberElementService,
-              @Inject('ILoggerService') private logger: ILoggerService) {
+    private router: Router,
+    @Inject('IFavoriteService') private favoriteService: IFavoriteElementService,
+    @Inject('ILoggerService') private logger: ILoggerService,
+    public mobileService: MobileService) {
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.route.data.subscribe((data: Data) => {
-        this.selectedElement = data.catalogElement;
-        this.updateView();
-      }
+      this.selectedElement = data.catalogElement;
+      this.updateView();
+    }
     );
   }
 
+  /**
+   * Reload the hierarchy and the children for
+   * the selectedElement.
+   */
   public updateView(): void {
     this.catalog = this.route.parent.snapshot.params['catalog'];
     this.setHierarchy();
     this.children = this.selectedElement.children;
   }
 
-  public rememberCode(element: CatalogElement): void {
+  /**
+   * Add the specified element to the list of favorites
+   * or remove it from the list.
+   *
+   * @param element the element to add or remove
+   */
+  public toggleFavorite(element: CatalogElement): void {
+
     const language: string = this.route.parent.snapshot.params['language'];
     const catalog: string = this.route.parent.snapshot.params['catalog'];
     const version: string = this.route.parent.snapshot.params['version'];
-    this.rememberService.add(element, version, catalog, language);
+
+    if (!this.favoriteService.isFavorite(element, version, catalog, language)) {
+      this.favoriteService.add(element, version, catalog, language);
+    } else {
+      this.favoriteService.removeByCatalogElement(element, version, catalog, language);
+    }
+    this.buttonFavorite.nativeElement.blur();
+  }
+
+  /**
+   * Check whether the specified element has been marked
+   * as favorite.
+   *
+   * @param element the element to check
+   */
+  public isFavorite(element: CatalogElement): boolean {
+    const language: string = this.route.parent.snapshot.params['language'];
+    const catalog: string = this.route.parent.snapshot.params['catalog'];
+    const version: string = this.route.parent.snapshot.params['version'];
+    return this.favoriteService.isFavorite(element, version, catalog, language);
   }
 
   /**
@@ -101,7 +128,7 @@ export class DetailComponent implements OnInit {
   /**
    * Navigates to a particular code.
    *
-   * @param elm
+   * @param element the element to navigate to
    */
   public openCode(element: CatalogElement): void {
     const languageRouteParam = this.route.snapshot.params['language'];

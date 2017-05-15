@@ -1,18 +1,61 @@
-.breadcrumb  {
+.main {
+  width: 100%;
+}
+.breadcrumb {
   background-color: rgba(255, 255, 255, 0.85);
   margin-bottom: 0px;
 }
-
-.tooltip {
-background-color: #337ab7;
-
+.breadcrumb > li + li:before {
+  padding: 0 0 0 8px;
 }
+.tooltip {
+  background-color: #337ab7;
 
-.box {
-  margin-top: 0px;
 }
 
 h3 {
   margin-top: 10px;
 }
 
+.button-favorite {
+  float: right;
+  margin: 10px 10px 0 0;
+}
+
+#detail-component {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-left-width: 0.5rem;
+  border-radius: 0.5rem;
+  border-left-color: #24add3;
+}
+
+.back-button {
+  position: relative;
+  width: 10%;
+  background-color: #24add3;
+  margin: -10px 0 -10px -10px;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+  display: none;
+}
+.back-button span {
+  color: white;
+  font-weight: bold;
+  font-size: 32px;
+}
+.box {
+
+  margin-top: 0;
+}
+
+.button-favorite {
+  margin: 3px 0px 0px 0px;
+  color: rgb(36, 173, 211);
+}
+
+.button-favorite > a {
+  color: rgb(36, 173, 211);
+}

@@ -11,12 +11,12 @@ from urllib.request import urlopen
 from pprint import pformat
 
 DIR = os.path.dirname(os.path.realpath(__file__))
-FILE_PATH = DIR + "/src/app/versions.ts"
+FILE_PATH = DIR + "/src/assets/versions.json"
 
 URL = "https://search.eonum.ch/{}/{}/versions"
-LANGUAGES = ['de', 'fr', 'it', 'en' ]
-CATALOGS = ['icds', 'chops', 'drgs']
-CATALOG_NAMES = {'icds': 'ICD', 'chops':'CHOP', 'drgs': 'SwissDRG'}
+LANGUAGES = ["de", "fr", "it", "en" ]
+CATALOGS = ["icds", "chops", "drgs"]
+CATALOG_NAMES = {"icds": "ICD", "chops":"CHOP", "drgs": "SwissDRG"}
 
 versions = {}
 
@@ -26,11 +26,13 @@ for lang in LANGUAGES:
         url = URL.format(lang, cat)
         print('GET: ' + url)
         # request url and save in reversed order
-        versions[lang][CATALOG_NAMES[cat]] = json.loads(urlopen(url).read())[::-1] 
+        versions[lang][CATALOG_NAMES[cat]] = json.loads(urlopen(url).read())[::-1]
 
-content = 'export const VERSIONS = ' + pformat(versions) + ';\n'
+#content = json
 
-open(FILE_PATH,'w').write(content)
+with open(FILE_PATH,'w') as outfile:
+    json.dump(versions, outfile,indent=4)
 
-print('\nWrote src/app/versions.ts: \n' + content)
+
+print('\nWrote' + FILE_PATH + '\n' + json.dumps(versions,indent=4))
 

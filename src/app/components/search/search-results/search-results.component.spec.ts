@@ -1,3 +1,4 @@
+import { MobileService } from '../../../service/mobile.service';
 import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
 import { NullLoggerService } from '../../../service/logging/null.logger.service';
 import { SearchResultsComponent } from './search-results.component';
@@ -24,6 +25,7 @@ describe('SearchResultsComponent', () => {
         { provide: 'ILoggerService', useClass: NullLoggerService },
         CatalogSearchService, SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
+        MobileService
       ]
     })
       .compileComponents();

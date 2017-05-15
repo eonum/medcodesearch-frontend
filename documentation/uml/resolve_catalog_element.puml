@@ -1,0 +1,73 @@
+@startuml
+actor User
+control Router <<@angular>> #orange
+entity CatalogElementResolver as ElementResolver #lightgreen
+entity CatalogElementCache as Cache #lightgrey
+entity "ICDCatalog \n <<Placeholder for any Catalog>>" as ICD #lightgreen
+entity CatalogService #lightgreen
+database search.eonum <<REST API>> #orange
+participant DetailComponent #lightblue
+
+== Navigate to CatalogHierarchy ==
+
+User -> Router: de/ICD/ICD10-GM-2016/icds/E20.0
+activate Router #orange
+
+...resolve language and catalog...
+Router -> ElementResolver: resolve(...)
+
+ElementResolver -> Cache: getElement('de', '2016','icds', 'E20.0')
+activate Cache #lightgreen
+Cache -> ElementResolver: element:CatalogElement or Null
+
+deactivate Cache #lightgreen
+activate ElementResolver #lightgrey
+
+group element not in cache
+    ElementResolver --> ICD: getElement('2016', 'icds', 'E20.0')
+    activate ICD #lightgreen
+
+    ICD -> CatalogService: init(self.config)
+    activate CatalogService #lightgreen
+    CatalogService --> ICD
+    ICD ->> CatalogService: getByCode('2016', 'icds', 'E20.0')
+    CatalogService ->> search.eonum : de/icds/ICD10-GM-2016/E20
+
+    activate search.eonum #orange
+    search.eonum --> CatalogService: element:json
+    deactivate search.eonum
+
+    CatalogService --> ICD: element: CatalogElement
+    deactivate CatalogService
+
+    ICD --> ElementResolver: element: CatalogElement
+    deactivate ICD
+
+
+    ElementResolver -> Cache: save element
+    activate Cache #lightgreen
+    Cache --> ElementResolver
+    deactivate Cache #lightgreen
+
+    loop for all parent elements
+        ElementResolver --> ICD: getElement(...)
+        activate ICD #lightgreen
+        ...
+        ICD --> ElementResolver: element: CatalogElement
+        deactivate ICD
+        ElementResolver -> Cache: save element
+        activate Cache #lightgreen
+        Cache --> ElementResolver
+        deactivate Cache #lightgreen
+
+    end
+end
+
+ElementResolver --> Router: element:CatalogElement
+deactivate ElementResolver
+
+Router -> DetailComponent: element
+DetailComponent --> Router
+Router -> User: display
+
+@enduml

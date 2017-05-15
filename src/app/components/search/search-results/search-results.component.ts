@@ -1,9 +1,10 @@
-import {CatalogElement} from '../../../model/catalog.element';
-import {ILoggerService} from '../../../service/logging/i.logger.service';
-import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CatalogSearchService, SearchRequest} from '../../../service/routing/catalog-search.service';
-import {Observable} from 'rxjs/Observable';
+import { CatalogElement } from '../../../model/catalog.element';
+import { ILoggerService } from '../../../service/logging/i.logger.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CatalogSearchService, SearchRequest } from '../../../service/routing/catalog-search.service';
+import { Observable } from 'rxjs/Observable';
+import { MobileService } from '../../../service/mobile.service';
 
 import 'rxjs/add/observable/combineLatest';
 /**
@@ -20,13 +21,13 @@ import 'rxjs/add/observable/combineLatest';
 export class SearchResultsComponent implements OnInit {
 
   public searchResults: CatalogElement[];
-
   public selectedCode: string;
 
   public constructor(private route: ActivatedRoute,
                      private router: Router,
                      @Inject('ILoggerService') private logger: ILoggerService,
-                     private searchService: CatalogSearchService) {
+                     private searchService: CatalogSearchService,
+                     private mobileService: MobileService) {
   }
 
   /**
@@ -41,7 +42,11 @@ export class SearchResultsComponent implements OnInit {
     Observable.combineLatest(
       this.route.params, this.route.queryParams,
       (params, queryParams) => Object.assign({}, params, queryParams) as SearchRequest
-    ).subscribe(request => this.searchService.search(request));
+    ).subscribe(request => {
+      if (request.query) {
+        this.searchService.search(request);
+      }
+    });
 
   }
 
@@ -56,7 +61,12 @@ export class SearchResultsComponent implements OnInit {
     this.sendAnalytics(type, code);
     this.redirectToCode(type, code);
   }
-
+	
+	/**
+	* Sends an analytics message to the eonum server
+	* @param type the type of the CatalogElement that was being clicked on
+	* @param code the code of the CatalogElement that was being clicked on
+	*/
   private sendAnalytics(type: string, code: string): void {
 
     const searchRequest: SearchRequest = Object.assign({},
@@ -70,10 +80,13 @@ export class SearchResultsComponent implements OnInit {
   private redirectToCode(type: string, code: string): void {
 
     this.router.navigate([type, code], {
-        queryParamsHandling: 'merge',
-        relativeTo: this.route
-      }
+      queryParamsHandling: 'merge',
+      relativeTo: this.route
+    }
     ).catch(error => this.logger.error(error));
+
+    this.mobileService.focus('details');
+
   }
 
 }

@@ -1,31 +1,32 @@
+import { FavoriteElementServiceMock } from '../../service/favorites/favorite.service.mock';
 import { ActivatedRouteStub, RouterStub } from '../../router-stub';
 import { NullLoggerService } from '../../service/logging/null.logger.service';
-import { RememberElementService } from '../../service/remember.element.service';
-import { RememberElementComponent } from './remember-element.component';
+import { FavoriteElementComponent } from './favorite-element.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { TooltipModule } from 'ng2-bootstrap';
 
-describe('RememberElementComponent', () => {
-  let component: RememberElementComponent;
-  let fixture: ComponentFixture<RememberElementComponent>;
+describe('FavoriteElementComponent', () => {
+  let component: FavoriteElementComponent;
+  let fixture: ComponentFixture<FavoriteElementComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RememberElementComponent],
-      imports: [TranslateModule.forRoot(), RouterModule],
+      declarations: [FavoriteElementComponent],
+      imports: [TranslateModule.forRoot(), TooltipModule.forRoot(), RouterModule],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
         { provide: 'ILoggerService', useClass: NullLoggerService },
-        RememberElementService
+        { provide: 'IFavoriteService', useClass: FavoriteElementServiceMock }
       ]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RememberElementComponent);
+    fixture = TestBed.createComponent(FavoriteElementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -5,7 +5,7 @@
       <div class="input-group search-center">
         <input type="text" class="form-control" [formControl]="searchForm"
                placeholder="{{'LBL_SEARCH_PLACEHOLDER' | translate}}" #searchBox value="{{query}}"
-               (keyup.enter)="search(searchBox.value)">
+               (keyup.enter)="search(searchBox.value)" autofocus>
 
         <span class="input-group-btn">
                   <button class="btn btn-default btn-go" type="button" (click)="search(searchBox.value);"><span
@@ -26,7 +26,8 @@
           </button>
 
           <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
-            <span>{{catDisplay.displayVersion | correctVersion}}</span>
+            <span *ngIf="catDisplay.languageVersions.indexOf(catDisplay.displayVersion) != -1; else placeholder">{{catDisplay.displayVersion | correctVersion}}</span>
+            <ng-template #placeholder><span class="text-hide">select Version</span></ng-template>
             <span class="caret"></span>
             <span class="sr-only">{{catDisplay.displayVersion}}</span>
           </button>

@@ -1,38 +1,53 @@
 import { ILoggerService } from './service/logging/i.logger.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Settings } from './settings';
+
+declare var window: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css']
 })
-
-export class AppComponent implements OnInit {
-  public title = 'medCodeSearch';
+export class AppComponent {
 
   public languages = Settings.LANGUAGES;
 
   constructor(public translate: TranslateService,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private catalogResolver: CatalogResolver,
-    private router: Router,
-    private route: ActivatedRoute) {
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private catalogResolver: CatalogResolver,
+              private router: Router,
+              private route: ActivatedRoute) {
     translate.addLangs(this.languages);
   }
 
-  public ngOnInit(): void { }
 
+
+  /**
+   * Navigate to the root element of the current routes catalog with the given language, and
+   * preserve the query params.
+   *
+   * @param lang must be one of {@link Settings.LANGUAGES}
+   */
   public setLanguage(lang: string): void {
-    const {language, catalog, version} = this.route.firstChild.firstChild.snapshot.params;
+    const catalog = this.route.firstChild.firstChild.snapshot.params['catalog'];
+    this.catalogResolver.navigateToActiveVersion(lang, catalog);
+    window.localStorage.setItem('eonumLanguage', lang);
+  }
 
-    if (lang !== language) {
-      this.router.navigate(
-        [lang, catalog, version]
-      ).catch(e => this.logger.log(e));
-    }
+  /**
+   * Navigate to the root element of the current routes catalog.
+   */
+  public toRoot(): void {
+
+    const { language, catalog, version } = this.route.firstChild.firstChild.snapshot.params;
+    const root = this.catalogResolver.getRootElement(catalog, version);
+    const params = [language, catalog, version, root.type, root.code];
+
+    this.router.navigate(params).catch(e => this.logger.log(e));
+
   }
 }

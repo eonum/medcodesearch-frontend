@@ -1,13 +1,13 @@
-import {Catalog} from '../../catalog/catalog';
-import {CHOPCatalog} from '../../catalog/chop.catalog';
-import {ICDCatalog} from '../../catalog/icd.catalog';
-import {SwissDrgCatalog} from '../../catalog/swissdrg.catalog';
-import {ILoggerService} from '../logging/i.logger.service';
-import {Inject, Injectable} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {CatalogElement} from '../../model/catalog.element';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Subject} from 'rxjs/Subject';
+import { Catalog } from '../../catalog/catalog';
+import { CHOPCatalog } from '../../catalog/chop.catalog';
+import { ICDCatalog } from '../../catalog/icd.catalog';
+import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { ILoggerService } from '../logging/i.logger.service';
+import { Inject, Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CatalogElement } from '../../model/catalog.element';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
@@ -15,7 +15,6 @@ import 'rxjs/add/operator/switchMap';
 export class SearchRequest {
   public catalog: string;
   public version: string;
-  public language: string;
   public query: string;
 }
 
@@ -62,18 +61,16 @@ export class CatalogSearchService {
       .switchMap((request: SearchRequest) => this.doSearch(request))
       .subscribe(
         (results: CatalogElement[]) => this.searchResults.next(results),
-        error => this.logger.error('[CatalogSearchService]', error));
+        error => this.logger.error('[CatalogSearchService]', error)
+      );
   }
 
   private doSearch(searchRequest: SearchRequest): Promise<CatalogElement[]> {
+    this.logger.log('[SearchService] search:', searchRequest);
 
-    if (searchRequest.catalog) {
-      this.searchResults.next(null); // remove displayed search results
-      return this.catalogs[searchRequest.catalog].search(
-        searchRequest.version, searchRequest.query);
-    }
-    this.logger.error('No catalog in search request', searchRequest);
-    return null;
+    this.searchResults.next(null); // remove displayed search results
+    const catalog = this.catalogs[searchRequest.catalog];
+    return catalog.search(searchRequest.version, searchRequest.query);
   }
 
   /**
@@ -85,7 +82,11 @@ export class CatalogSearchService {
   }
 
   public search(searchRequest: SearchRequest): void {
-    this.requests.next(searchRequest);
+    if (searchRequest && searchRequest.catalog) {
+      this.requests.next(searchRequest);
+    } else {
+      this.logger.error('No catalog in search request', searchRequest);
+    }
   }
 
   public sendAnalytics(searchRequest: SearchRequest, type: string, code: string): void {

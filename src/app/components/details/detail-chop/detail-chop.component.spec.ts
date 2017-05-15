@@ -1,3 +1,4 @@
+import { MobileService } from '../../../service/mobile.service';
 import { ConvertCodePipe } from '../../../pipes/convert-code.pipe';
 import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
 import { NullLoggerService } from '../../../service/logging/null.logger.service';
@@ -15,6 +16,7 @@ describe('DetailChopComponent', () => {
       declarations: [DetailChopComponent, ConvertCodePipe],
       imports: [RouterModule, TranslateModule.forRoot()],
       providers: [
+        MobileService,
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
         { provide: 'ILoggerService', useClass: NullLoggerService }]

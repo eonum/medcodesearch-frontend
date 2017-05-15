@@ -1,19 +1,27 @@
-# Coding Standards
+# Code structure and coding Standards
 
 ## Project Structure
 
-- **documentation**: Contains documentation files for the application.
-- **e2e**: Contains all files concerning end-to-end tests (not yet used).
+- **documentation**: Contains documentation files for the application
+	- **code**: Contains the generated code documentation (see section Code Documentation below)
+	- **scripts**: Contains some scripts
+	- **uml**: Contains some UML diagrams
 - **src**
 	- **app**: Contains the sourcecode of the application and some configuration files.
+		- **caching**: Contains classes related to caching of catalog elements
 		- **catalog**: Contains all catalog related classes (catalog interfaces and their implementations).
 		- **components**: Contains all angular components used in the application. Each component resides in its own subfolder containing all files related to this component (`.ts`, `.css`, `.html`, `.spec.ts`).
+		- **helper**: Contaings helper classes for sorting of catalog elements
 		- **model**: Contains all classes which are used to model the elements of a catalog and are returned from the eonum API.
-		- **service**: Contains all service interfaces and implementations, which access the eonum API.
+		- **pipes**: Contains pipe classes
+		- **service**: Contains all service interfaces and implementations.
+			- **favorites**: Contains service and persister classes for managing and persisting of favorite elements
+			- **logging**: Contains service classes for logging
+			- **routing**: Contains service classes which read routing parameters and perform according actions like searching, loading of elements
 	- **assets**: Contains all icons, images and other static resources.
 	- **styles**: Contains all global stylesheets.
 
-## General Guidelines
+## General Code Guidelines
 
 - Each class is defined in *its own file*.
 - All file-, class-, method- and directory names are in **english**, as well as all comments.
@@ -28,13 +36,14 @@
 
 - **CSS-classes** follow the `.lower-dash-syntax` like the bootstrap-css-classes.
 
-## Documentation
+## Code Documentation
 
-- [**JSDoc**](http://usejsdoc.org) syntax is used in the whole project to document the TypeScript classes
+- [**Typedoc**](http://typedoc.org) syntax is used in the whole project to document the TypeScript classes
 - **Every class** has a class comment describing the responsibility of the class.
 - **Every public method** has a comment describing *what the method does*, *what it returns* and *what the parameters mean*.
 - Inline comments to describe what the code is doing are encouraged wherever appropriate.
 - The comments are in english.
+- The typedoc files can be generated using the scripts in files `scripts/generate.documentation.bat` (Windows) or `scripts/generate.documentation.mac` (Mac, Linux bash) residing in the documentation directory.
 
 ## Component Classes
 

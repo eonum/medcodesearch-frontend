@@ -1,0 +1,40 @@
+@startuml
+actor User
+control Router <<@angular>> #orange
+
+entity CatalogVersionService as VersionService #lightgreen
+participant SearchFormComponent #lightblue
+
+
+
+== Change Catalog and/or Version ==
+
+
+User -> SearchFormComponent: select catalog-version e.g ICD10-GM-2016
+
+activate SearchFormComponent #lightblue
+SearchFormComponent -> SearchFormComponent: updateCatalog('ICD', 'ICD10-GM-2016')
+
+group version does not exist in current language
+
+  SearchFormComponent -> VersionService: getLanguages('ICD', 'ICD10-GM-2016')
+  activate VersionService #lightgreen
+  VersionService --> SearchFormComponent: ['de', 'fr']
+  deactivate VersionService #lightgreen
+  SearchFormComponent -> SearchFormComponent: showLanguageSelector(['de', 'fr'])
+  SearchFormComponent ->> User
+  activate User #dddddd
+  User ->> SearchFormComponent: select another language : 'de'
+  deactivate User
+
+end
+
+SearchFormComponent --> Router: navigate to 'icds/ICD10-GM-2016;query=query'
+activate Router #orange
+deactivate SearchFormComponent
+
+...resolve route...
+Router -> User: display
+deactivate Router #orange
+
+@enduml

@@ -1,41 +1,59 @@
 <ng-template [ngIf]="selectedElement">
+  <div id="detail-component" style="display: flex">
 
-  <ol class="breadcrumb">
-    <li *ngFor="let element of hierarchy">
-      <ng-template [ngIf]="selectedElement !== element">
-        <span class="link" (click)="openCode(element)" tooltip={{element.text}}>{{element.name}}</span>
-      </ng-template>
-      <ng-template [ngIf]="selectedElement === element">
-        {{element.name}}
-      </ng-template>
-    </li>
-  </ol>
+    <div class="back-button" (click)="mobileService.focus('results')">
+      <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+    </div>
+    <div class="main">
+      <button type="button" class="btn btn-default button-favorite" [class.active]="isFavorite(selectedElement)" (click)="toggleFavorite(selectedElement)" #buttonFavorite>
+        <span class="glyphicon med-blue"
+          [class.glyphicon-star]="isFavorite(selectedElement)"
+          [class.glyphicon-star-empty]="!isFavorite(selectedElement)"></span>
+        <span *ngIf="!isFavorite(selectedElement)">{{'LBL_FAVORITE_ELEMENT' | translate}}</span>
+        <span *ngIf="isFavorite(selectedElement)">{{'LBL_IS_FAVORITE' | translate}}</span>
+      </button>
 
-  <div class="box">
-    <button type="button" class="btn btn-default" (click)="rememberCode(selectedElement)">
-      <span class="glyphicon glyphicon-star"></span>
-    </button>
-    <h3>{{selectedElement.name}}</h3>
-    <p>{{selectedElement.text}}</p>
-
-    <app-detail-swiss-drg *ngIf="catalog === 'SwissDRG'" [selectedElement]="selectedElement">
-    </app-detail-swiss-drg>
-    <app-detail-chop *ngIf="catalog === 'CHOP'" [selectedElement]="selectedElement"></app-detail-chop>
-    <app-detail-icd *ngIf="catalog === 'ICD'" [selectedElement]="selectedElement"></app-detail-icd>
-
-    <ng-template [ngIf]="children?.length > 0">
-      <h4>{{'LBL_CHILDREN' | translate}}</h4>
-      <ul>
-        <li *ngFor="let child of children">
-          <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
+      <ol class="breadcrumb">
+        <li *ngFor="let element of hierarchy">
+          <ng-template [ngIf]="selectedElement !== element">
+            <span class="link" (click)="openCode(element)" tooltip={{element.text}} placement="bottom">{{element.name}}</span>
+          </ng-template>
+          <ng-template [ngIf]="selectedElement === element">
+            {{element.name}}
+          </ng-template>
         </li>
-      </ul>
-    </ng-template>
+      </ol>
+
+      <div class="box">
+
+        <h3>{{selectedElement.name}}</h3>
+        <p>{{selectedElement.text}}</p>
+
+        <app-detail-swiss-drg *ngIf="catalog === 'SwissDRG'" [selectedElement]="selectedElement">
+        </app-detail-swiss-drg>
+        <app-detail-chop *ngIf="catalog === 'CHOP'" [selectedElement]="selectedElement"></app-detail-chop>
+        <app-detail-icd *ngIf="catalog === 'ICD'" [selectedElement]="selectedElement"></app-detail-icd>
+
+        <ng-template [ngIf]="children?.length > 0">
+          <h4>{{'LBL_CHILDREN' | translate}}</h4>
+          <ul>
+            <li *ngFor="let child of children">
+              <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
+            </li>
+          </ul>
+        </ng-template>
+
+        <ng-template [ngIf]="selectedElement.children?.length < 1 && selectedElement.parent?.children?.length > 1">
+          <h4>{{'LBL_SIBLINGS' | translate}}</h4>
+          <ul>
+            <ng-container *ngFor="let sibling of selectedElement.parent.children">
+              <li *ngIf="sibling.code !== selectedElement.code">
+                <span class="link" (click)="openCode(sibling)">{{sibling.code}}</span>: {{sibling.text}}
+              </li>
+            </ng-container>
+          </ul>
+        </ng-template>
+      </div>
+    </div>
   </div>
-
 </ng-template>
-
-<!--
-<span class="link " (click)="toSearch()">{{'LBL_BACK_SEARCH' | translate}}</span>
-<a [routerLink]="['../../']">{{'LBL_BACK_SEARCH' | translate}}</a>
--->
