@@ -1,4 +1,4 @@
-v.0.3
+v.0.4
 Software Requirement Specification
 ==================================
 
@@ -52,7 +52,6 @@ The following section describes the user stories of the eonum MedCode search web
 10. Take over Codes / Remember Codes
 11. Analytical Feedback about searched Codes
 
-**TODO**: Add Full Text to User Stories
 
 ### 2.2 Use cases
 
@@ -226,8 +225,7 @@ The following section describes the user stories of the eonum MedCode search web
 #### 3.1.2 Free Text Search
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
-|Free Text Search| **Expected**<br>The user can search for Codes containing the search term or a synonym of the search term in the name or description<br><br>**Constraints**<br><li>If no Code matches the query, report an error</li><li>If the search term is too short, report an error</li><li>If the search term contains illegal characters, report an error</li><br><br>**Main Actor**<br>User                                     |DONE|
-|More results| **Expected**<br>The user can load more search results <br><br>**Constraints**<br><li>TBD: Pagination necessary for smaller screens?</li><br><br>**Main Actor**<br>User                                     |TODO?|
+|Free Text Search| **Expected**<br>The user can search for Codes containing the search term or a synonym of the search term in the name or description<br><br>**Constraints**<br><li>If no Code matches the query, report an error</li><br><br>**Main Actor**<br>User                                     |DONE|
 |Terminal Codes| **Expected**<br>Free Text Search should only search for terminal codes<br><br>**Constraints**<br><li>Only applicable in ICD and CHOP</li><br><br>**Main Actor**<br>User                                     |DONE|
 |Live Search| **Expected**<br>While entering a search string a preliminary list of live results should be displayed<br><br>**Constraints**<br><br>**Main Actor**<br>User                                     |DONE|
 |Display Root Element| **Expected**<br>When no search query is entered, the root element of the catalogue should be displayed<br><br>**Constraints**<br><br><br>**Main Actor**<br>System                                    |DONE|---------------|:---------|
@@ -248,7 +246,7 @@ The following section describes the user stories of the eonum MedCode search web
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
 |Language Switch| **Expected**<br>The user should be able to toggle the language of the UI<br><br>**Constraints**<br><br><br>**Main Actor**<br>User                                     |DONE|
-|Default Language| **Expected**<br>The default language should be set according to the browser language<br><br>**Constraints**<br>If browser language is not English, German, French or Italian, set language to English<br><br>**Main Actor**<br>User                                     |TODO|
+|Default Language| **Expected**<br>The default language should be set according to the browser language<br><br>**Constraints**<br>If browser language is not English, German, French or Italian, set language to Default<br><br>**Main Actor**<br>User                                     |DONE|
 |Unavailable languages| **Expected**<br>If a catalogue is not available in all languages these language should be greyed out and appear non selectable<br><br>**Constraints**<br>If a catalogue is selected which is unavailable in the currently selected language, the User should be notified and asked to select one of the available languages<br><br>**Main Actor**<br>User                                     |DONE|
 
 #### 3.1.6 Highlighting Search Term
@@ -267,16 +265,13 @@ The following section describes the user stories of the eonum MedCode search web
 
 
 ### 3.2 Non-functional requirements
-#### 3.2.1 Responsiveness
+
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
-|Compatibility| **Expected**<br> The software should work with Google Chrome, InternetExplorer, Firefox and Safari<br><br>**Constraints**<br><br><br>**Main Actor**<br>User|Pending|
-|Responsiveness| **Expected**<br> The software should either respond immediately or show that it is loding data<br><br>**Constraints**<br><br><br>**Main Actor**<br>User|Pending|
-|Customer satisfied| **Expected**<br> Our website design must satisfy our customer<br><br>**Constraints**<br><br><br>**Main Actor**<br>Customer|Pending|
+|Compatibility| **Expected**<br> The software should work with Google Chrome, InternetExplorer, Firefox and Safari<br><br>**Constraints**<br><br><br>**Main Actor**<br>User|DONE|
+|Responsiveness| **Expected**<br> The software should either respond immediately or show that it is loding data<br><br>**Constraints**<br><br><br>**Main Actor**<br>User|DONE|
+|Customer satisfied| **Expected**<br> Our website design must satisfy our customer<br><br>**Constraints**<br><br><br>**Main Actor**<br>Customer|DONE|
 
-
-#### 3.2.2 Usability
-**TODO:** Insert usability reqirements here (e.g. usable without manual for users with domain knowledge in medical coding)
 
 #### 3.2.3 Application Naming
 
