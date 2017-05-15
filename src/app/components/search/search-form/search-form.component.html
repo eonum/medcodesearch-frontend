@@ -26,7 +26,8 @@
           </button>
 
           <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
-            <span>{{catDisplay.displayVersion | correctVersion}}</span>
+            <span *ngIf="catDisplay.languageVersions.indexOf(catDisplay.displayVersion) != -1; else placeholder">{{catDisplay.displayVersion | correctVersion}}</span>
+            <ng-template #placeholder><span class="text-hide">select Version</span></ng-template>
             <span class="caret"></span>
             <span class="sr-only">{{catDisplay.displayVersion}}</span>
           </button>
