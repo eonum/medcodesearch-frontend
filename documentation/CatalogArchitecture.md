@@ -11,3 +11,5 @@ Die Kataloge kommunizieren nicht direkt mit der eonum-API, da dies die Testbarke
 Zum Testen können beliebige Fake-Objekte, welche das `ICatalogService`-Interface implementieren, im Konstruktor an einen Katalog übergeben werden.
 
 Die Klasse `CatalogElement` modelliert ein Objekt aus einem Katalog. `CatalogElement` enthält dabei alle Eigenschaften der Objekte, welche in allen Katalogen gleich sind.
+
+Die Klasse `CatalogConfiguration` dient zum initializieren des `CatalogService` und beinhaltet Daten wie die Katalog-Suchadressen und die verfügbaren Versionen.
