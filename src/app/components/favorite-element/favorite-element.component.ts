@@ -82,7 +82,7 @@ export class FavoriteElementComponent implements OnInit {
   /**
    * Display the specified label text within a tooltip
    * below favorite button.
-   * 
+   *
    * @param labelKey the key of the label to display
    */
   private showTooltip(labelKey: string): void {
@@ -111,7 +111,7 @@ export class FavoriteElementComponent implements OnInit {
    * Hide the tooltip immediately and clear a running timer
    * which would hide the tooltip on completion.
    */
-  private onDropdownShown(): void {
+  public onDropdownShown(): void {
     this.hideTooltip();
     if (this.tooltipTimer) {
       clearTimeout(this.tooltipTimer);
