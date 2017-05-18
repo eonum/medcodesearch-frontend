@@ -1,0 +1,78 @@
+
+@startuml
+actor User
+control Router <<@angular>> #orange
+participant SearchFormComponent #lightblue
+
+entity CatalogResolver #lightgreen
+'database search.eonum <<REST API>> #orange
+entity CatalogVersionService as VersionService #lightgreen
+
+== Resolve and validate route to catalog ==
+
+User -> Router: /...
+activate Router #orange
+
+Router ->> CatalogResolver: resolve(route)
+
+activate CatalogResolver #lightgreen
+alt route = :lang/:catalog
+  CatalogResolver -> CatalogResolver: getActiveVersion(:lang, :catalog)
+  note right
+      if not set, get first version
+      or navigate to :lang/, if
+      catalog does not exist
+    end note
+  CatalogResolver ->> Router: navigate :lang/:catalog/:version
+
+else route = :lang/:catalog/:version...
+  CatalogResolver -> VersionService: versionExists(:lang, :catalog, :version)
+  activate VersionService #lightgreen
+
+  alt version does not exist
+    VersionService --> CatalogResolver: false
+
+    CatalogResolver ->> Router: navigate :lang/:catalog
+  else version exists
+    alt route=:lang/:catalog/:version
+
+    VersionService --> CatalogResolver: true
+    deactivate VersionService
+    note over CatalogResolver
+        navigate to root element
+      end note
+    CatalogResolver ->> Router: navigate :lang/:catalog/:version/:type/:code
+
+    else route=:lang/:catalog/:version/:type/:code
+        CatalogResolver -> CatalogResolver: activateVersion (:lang, :catalog, :version)
+
+    loop for catalog in catalogs
+       CatalogResolver -> VersionService: getVersions (:lang, catalog)
+       activate VersionService #lightgreen
+       VersionService --> CatalogResolver: version[]
+       deactivate VersionService #lightgreen
+
+       CatalogResolver -> CatalogResolver: getActivateVersion (:lang, catalog): version
+       CatalogResolver -> CatalogResolver: displayInfos.add({versions[], version})
+    end
+    CatalogResolver ->> Router: displayInfos:DisplayInfo[]
+    deactivate CatalogResolver
+
+    Router ->> SearchFormComponent: displayInfos
+    activate SearchFormComponent #lightblue
+    SearchFormComponent -> SearchFormComponent: display catalog selection
+    SearchFormComponent --> Router
+    deactivate SearchFormComponent
+
+    ...resolve catalog element...
+
+    Router --> User: display
+    deactivate Router
+    end
+
+  end
+
+end
+
+
+@enduml

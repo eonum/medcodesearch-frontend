@@ -1,6 +1,6 @@
 # Architektur Favorite System
 
-![](./FavoriteArchitecture.png)
+![](uml/class/FavoriteArchitecture.png)
 
 
 Die MedCodeSearch Software unterstützt das Sichern von Favoriten, so dass der/die Benutzer/in einen bestimmten Code schnell wieder finden kann. In diesem Dokument ist die Architektur beschrieben. 

@@ -1,15 +1,15 @@
-#Analytics documentation
+# Analytics documentation
 
 MedCodeSearch sends analytics data to eonum in order to optimize the search algorithm. In this documentation is specified when MedCodeSearch sends this data and how.
 
 
-###When does analytics data get sent?
+### When does analytics data get sent?
 
 When the user clicks on a code in the search results list.  
 No data is sent when the user clicks on a subordinate or superior code or on a code in the list of remembered codes.
 
 
-###How does analytics data get sent?
+### How does analytics data get sent?
 
 MedCodeSearch sends a http-request to eonum with the URL-Parameter:  
 query=Input  
@@ -25,7 +25,7 @@ Where "Language" is the language of the catalogue of the code
 and "Input" ist der search term that was used.  
 
 
-###How is the analytics feature implemented?
+### How is the analytics feature implemented?
 
 The function to send the analytics data is handled by two components:  
 search-results.component.ts and catalog.service.ts 

@@ -29,7 +29,7 @@ In vielen Fällen kann diese Konfiguration in eine Datei namens .htaccess geschr
 	}
 	
 	
----
+
 
 # Updaten der Versions
 
@@ -47,7 +47,7 @@ ersetzt werden.
 
 Das Python script `generateVersions.py`, generiert dieses File bei Bedarf neu.
  
------
+
  
 # Build 
  
@@ -55,7 +55,7 @@ Das Python script `generateVersions.py`, generiert dieses File bei Bedarf neu.
     
     npm install && npm run-script build
     
- Der Output befindet sich dann, mit neuen `versions.json` file, 
+ Der Output befindet sich dann, mit neuen `assets/versions.json` file, 
  im `dist` Ordner. 
  
  

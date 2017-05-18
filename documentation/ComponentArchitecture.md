@@ -1,6 +1,6 @@
 # Architektur Favorite System
 
-![](./HtmlArchitecture.png)
+![](uml/class/HtmlArchitecture.png)
 
 In diesem Dokument ist die Architektur der Angular-Komponenten dokumentiert.
 

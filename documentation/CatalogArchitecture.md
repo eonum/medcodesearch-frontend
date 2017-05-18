@@ -1,6 +1,6 @@
 # Architektur eonum search frontend
 
-![](./CatalogArchitecture.png)
+![](uml/class/CatalogArchitecture.png)
 
 Die MedCodeSearch Software erlaubt es, mehrere verschiedene Kataloge nach Elementen zu durchsuchen. In diesem Dokument is beschrieben, wie die Architektur dahinter aussieht.
 

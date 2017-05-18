@@ -15,8 +15,8 @@ export class CatalogService implements ICatalogService {
   private config: CatalogConfiguration;
 
   public constructor(private http: Http,
-    private translate: TranslateService,
-    @Inject('ILoggerService') private logger: ILoggerService) {
+                     private translate: TranslateService,
+                     @Inject('ILoggerService') private logger: ILoggerService) {
   }
 
   /**
@@ -126,10 +126,10 @@ export class CatalogService implements ICatalogService {
   }
 
   private async getSingleElementForTypeByCode(elementType: string,
-    version: string,
-    code: string,
-    query?: string,
-    language?: string): Promise<CatalogElement> {
+                                              version: string,
+                                              code: string,
+                                              query?: string,
+                                              language?: string): Promise<CatalogElement> {
     const locale: string = language || this.getLocale();
     let url = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
 

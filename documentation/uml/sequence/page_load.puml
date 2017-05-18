@@ -1,0 +1,130 @@
+
+@startuml
+actor User
+control Router <<@angular>> #orange
+
+entity LanguageGuard #lightgreen
+entity CatalogVersionService as VersionService #lightgreen
+'database search.eonum <<REST API>> #orange
+participant MainComponent #lightblue
+participant SearchFormComponent #lightblue
+participant SearchResultsComponent as ResultsComp #lightblue
+participant DetailComponent #lightblue
+
+== Page Load, Route resolving ==
+
+User -> Router:
+
+note right #lightgreen
+  /:lang/:catalog/:version/:type/:code
+end note
+
+activate Router #orange
+
+note over Router
+  /
+end note
+
+note over Router #lightblue
+  init AppComponent
+end note
+
+
+Router -> VersionService
+activate VersionService #lightgreen
+
+VersionService -> VersionService: loadVersions()
+note left #lightgrey
+    from 'assets/versions.json'
+end note
+VersionService --> Router
+deactivate VersionService
+
+
+
+
+
+note over Router
+  /:lang
+end note
+
+Router -> LanguageGuard: canActivate(:lang)
+
+activate LanguageGuard #lightgreen
+
+note over LanguageGuard
+  validate and set Language
+end note
+LanguageGuard --> Router: grant access
+deactivate LanguageGuard
+
+note over Router
+  /:lang/:catalog/:version
+end note
+
+
+
+
+create MainComponent
+
+... <b>CatalogResolver</b> validates catalog and resolves displayInfos ...
+
+Router -> MainComponent: init
+activate MainComponent #lightblue
+
+MainComponent ->> Router: subscribe to changes
+
+
+Router ->> MainComponent: {params:{'de', 'ICD', '2016' }, queryParams{query}}
+
+create SearchFormComponent
+MainComponent ->> SearchFormComponent: init
+activate SearchFormComponent #lightblue
+
+SearchFormComponent -> Router: subscribe to changes
+Router ->> SearchFormComponent: {data:{displayInfos},params:{'de', 'ICD', '2016' }, queryParams{query}}
+SearchFormComponent -> SearchFormComponent: display catalog selection
+SearchFormComponent --> MainComponent
+deactivate SearchFormComponent
+
+create ResultsComp
+MainComponent ->> ResultsComp : init
+activate ResultsComp  #lightblue
+
+ResultsComp -> Router: subscribe to changes
+Router ->> ResultsComp: {params:{'de', 'ICD', '2016' }, queryParams{query}}
+
+note over ResultsComp
+  subscribe to CatalogSearchService
+end note
+
+ResultsComp --> MainComponent
+deactivate ResultsComp
+
+
+MainComponent --> Router
+deactivate MainComponent
+
+note over Router
+  /:lang/:catalog/:version/:type/:code
+end note
+
+create DetailComponent
+
+... <b>CatalogElementResolver</b> loads CatalogElement for hiererchy ...
+
+Router -> DetailComponent: init
+activate DetailComponent #lightblue
+
+DetailComponent -> Router: subscribe to changes
+Router ->> DetailComponent: data:{catalogElement}
+
+DetailComponent -> DetailComponent: display element
+DetailComponent --> Router
+Router --> User: display
+deactivate Router
+
+
+
+@enduml
+

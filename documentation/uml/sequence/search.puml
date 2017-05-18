@@ -3,8 +3,7 @@ actor User
 control Router <<@angular>> #orange
 
 entity "ICDCatalog \n <<Placeholder for any Catalog>>" as ICD #lightgreen
-entity CatalogService #lightgreen
-database search.eonum <<REST API>> #orange
+
 entity CatalogSearchService as SearchService #lightgreen
 participant SearchFormComponent #lightblue
 participant SearchResultsComponent as ResultsComp #lightblue
@@ -16,40 +15,33 @@ User -> SearchFormComponent: enter search-query: 'a query'
 activate SearchFormComponent #lightblue
 
 SearchFormComponent -> Router: navigate({query:'a query'}
-activate Router #orange
-
-Router --> SearchFormComponent
-
 deactivate SearchFormComponent #lightblue
 
-activate ResultsComp  #lightblue
+activate Router #orange
+
 
 Router ->> ResultsComp: {params:{'de', 'ICD', '2016' }, queryParams{query}}
 
-activate SearchService #lightgrey
+activate ResultsComp  #lightblue
 
 group search query in route params
 
     ResultsComp  -> SearchService: search('de', 'ICD', '2016', query)
     activate SearchService #lightgreen
-
+    note over SearchService
+    end note
     SearchService ->> ICD: search('de', '2016', query)
+
+
+
     activate ICD #lightgreen
-    ICD -> CatalogService: init(self.config)
-        activate CatalogService #lightgreen
-        CatalogService -> ICD
-        ICD ->> CatalogService: search(query)
-        CatalogService ->> search.eonum : .../search?search=query
 
-        activate search.eonum #orange
-        search.eonum --> CatalogService: results: json
-        deactivate search.eonum
+    note over ICD
+       Search in eonum API
+       end note
 
-        CatalogService --> ICD: searchResults
-        deactivate CatalogService
-
-        ICD --> SearchService: searchResults: CatalogElement[]
-        deactivate ICD
+    ICD --> SearchService: searchResults: CatalogElement[]
+    deactivate ICD
 
     SearchService --> ResultsComp: searchResults:CatalogElement[]
     deactivate SearchService #lightgreen
@@ -57,10 +49,8 @@ group search query in route params
 
 end
 
+ResultsComp  --> Router
 deactivate ResultsComp
-
-deactivate SearchService
-
 
 Router --> User: display
 deactivate Router
