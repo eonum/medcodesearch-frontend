@@ -282,6 +282,131 @@ The following section describes the user stories of the eonum MedCode search web
 #### 3.2.3 License
 <li>Application should be released under an Open Source License (MIT License)</li>
 
+### 3.3 Usability Requirements
+The following section lists the usability requirements used for measuring and evaluation the final usability of the application. Furthermore, those requirements were used to evaluate the usability testing tasks. For a full analysis, please see the Usability Report in the "documentation" folder. The requirements can be grouped according to ISO Standard 9241 to the following: 
+1. Rating Scale: overall evaluation of satisfaction level and recommendation
+2. Efficiency: Time to task fullfillment
+3. Effectivity: Task success ratio and recoverability 
+
+Each Usability requirement defines different fullfillment degrees. The following levels are defined: 
+<li>Worst: The worst outcome that could happen </li>
+<li>Acceptable: The level the application must at lest fullfill</li>
+<li>Planned: The level the application should fullfill</li>
+<li>Best Case: Best possible outcome</li>
+
+The usability evaluation i.e. whether the application fullfills the usability requirements can be found in the final [usability report](https://github.com/eonum/medcodelogic-frontend/tree/master/documentation). 
+
+#### 3.3.1 Rating Scale Usability Requirement
+| #12                             | Overall Satisfaction                      |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Evaluates the overall satisfaction level with the application in average of all usability testing probes. |
+|**Measuring Method** | 10 point scale with 10 = very satisfied and 0 = very unsatisfied |
+| **Worst Case**| Score 0-6:  very unsatisfied to mildly satisfied with applicaton|
+| **Acceptable** | Score 7: satisfied with application|
+| **Planned**| Score 8: quite satisfied with application|
+| **Best** | Score 9-10: very satisfied |
+
+| #13                             | Recommendation                      |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | How likely is it, that the test persons would recommend the application to other people (coders). Also used as a base for measuring the NPS (Net Promoter Score) |
+|**Measuring Method** | 10 point scale with 10 = definitely recommend and 0 = definitly not recommendable |
+| **Worst Case**| Score 0-6:  unlikely to recommend|
+| **Acceptable** | Score 7: likely to recommend|
+| **Planned**| Score 8: quite likely to recommend|
+| **Best** | Score 9-10: definitely recommend |
+
+#### 3.3.2 Efficiency Usability Requirement
+| #14                             | Time for Search using Search Term                   |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Time (mm:ss) it takes to search for a DRG using the search entry field and input of a search term |
+|**Measuring Method** | 9 Point scale from 00:00 min up to 03:30 min with intervals of 00:30s |
+| **Worst Case**| Score +03:30 to 01:30 min:  Takes too long to find the Code|
+| **Acceptable** | Score 01:00 to 01:30 min: Time it takes to find the Code is acceptable.|
+| **Planned**| Score 00:30 min to 01:00 min: good structure and highlighting of the searchterm in the results list allows to find the code fast. |
+| **Best** | Score 00:00 min to 00:30 min: The code can be found very fast.  |
+
+
+| #15                           | Time to remember code                |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Time (mm:ss) it takes to find the remember code feature and add a code to the remember list.  |
+|**Measuring Method** | 9 Point scale from 00:00 min up to 03:30 min with intervals of 00:30s |
+| **Worst Case**| Score +03:30 to 01:30 min:  Takes too long to find the feature/add the code|
+| **Acceptable** | Score 01:00 to 01:30 min: Time it takes to find the feature/code are within limits and might improve as soon as you know where the feature is|
+| **Planned**| Score 00:30 min to 01:00 min: Correct labels and visible positioning of the feature allows the user to find it fast |
+| **Best** | Score 00:00 min to 00:30 min: The feature can be found very easily and fast. Elements can be added within seconds.  |
+
+| #16                           | Time to find code details           |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Time (mm:ss) it takes to find a specific code, click on it and open the detail page. On the detail page the requested information e.g. symptoms should be found easily.  |
+|**Measuring Method** | 9 Point scale from 00:00 min up to 03:30 min with intervals of 00:30s |
+| **Worst Case**| Score +03:30 to 01:30 min:  Detail information about a code cannot be found fast or are not visible enough. The user will likely switch to another application.|
+| **Acceptable** | Score 01:00 to 01:30 min: it takes a bit of searching time, but the detail information can be found within a reasonable time. |
+| **Planned**| Score 00:30 min to 01:00 min: The detail page is found fast and the page is well structured to find specific information easily |
+| **Best** | Score 00:00 min to 00:30 min: Codes can be found very fast and detail informations are visible at first glance  |
+
+| #17                          | Time to search using navigational hierarchy          |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Time (mm:ss) it takes to find a specific code by only using the navigational hierarchy of the catalogue on the home screen i.e. without entering a search term.  |
+|**Measuring Method** | 9 Point scale from 00:00 min up to 07:00 min with intervals of 00:30s |
+| **Worst Case**| Score +07:00 to 02:00 min:  Detail information about a code cannot be found fast or are not visible enough. The user will likely switch to another application.|
+| **Acceptable** | Score 01:30 to 02:00 min: it takes a bit of searching time, but the code can be found. Also taken into account different levels of knowledge about the catalogue hierarchy and the reading time to go through the elements of the catalogue |
+| **Planned**| Score 01:00 min to 01:30 min: The hierarchy of the catalog is displayed nicely and browsing through it is easy. |
+| **Best** | Score 00:00 min to 01:00 min: The complex hiearchy is well structured so that codes can be found fast using it  |
+
+| #18                           | Time to find tooltip              |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Time (mm:ss) it takes to find the tooltip feature (hover text on code path describing hierarchy elements) |
+|**Measuring Method** | 9 Point scale from 00:00 min up to +02:30 min with intervals of 00:05s, 00:15s and 00:30s (increasing) |
+| **Worst Case**| Score +02:30 to 00:30 min:  Takes too long to find the feature |
+| **Acceptable** | Score 00:15 to 00:30 min: Time it takes to find the feature is acceptable. The time to find this feature has its peak at the initial search. Afterwards, it will improve |
+| **Planned**| Score 00:10 min to 00:15 min: Feature is intuitive and can be found easily |
+| **Best** | Score 00:00 min to 00:10 min: The feature can be found very easily and fast.|
+
+| #19                           | Time to open remembered code           |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Time (mm:ss) it takes to open a code from the rembered list. |
+|**Measuring Method** | 9 Point scale from 00:00 min up to +02:30 min with intervals of 00:05s, 00:15s and 00:30s (increasing) |
+| **Worst Case**| Score +02:30 to 00:30 min:  Takes too long to find the list of remembered codes and open the code from there |
+| **Acceptable** | Score 00:15 to 00:30 min: List can be found within reasonable time.  |
+| **Planned**| Score 00:10 min to 00:15 min: Remember list is clearly visible and can easily be accessesed |
+| **Best** | Score 00:00 min to 00:10 min: The list is super easy to access .|
+
+| #20                         | Time to access sibling code                |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Time (mm:ss) it takes to find the sibling code and easily switch to it. |
+|**Measuring Method** | 9 Point scale from 00:00 min up to 03:30 min with intervals of 00:30s |
+| **Worst Case**| Score +03:30 to 01:30 min:  Takes too long to find the feature/add the code|
+| **Acceptable** | Score 01:00 to 01:30 min: Time it takes to find the feature/sibling code are within limits and might improve as soon as you know where the feature is|
+| **Planned**| Score 00:30 min to 01:00 min: Correct labels, clear structure and visible positioning of the sibling elements allows the user to find them fast.  |
+| **Best** | Score 00:00 min to 00:30 min: The sibling codes are easily visible so coders can browse through them to further clarify search |
+
+| #21                         | Time to access catalogue in different language       |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Time (mm:ss) it takes for the user to select a catalogue whose version is not available in the selected language, to switch the langue and then access the catalogue.  |
+|**Measuring Method** | 9 Point scale from 00:00 min up to 03:30 min with intervals of 00:30s |
+| **Worst Case**| Score +03:30 to 01:30 min:  Multilingual usage is not properly supported. Catalogues are not available in all languages, so switching to other language version must be easy. |
+| **Acceptable** | Score 01:00 to 01:30 min: Time it takes to access other catalogue language version is still reasonable|
+| **Planned**| Score 00:30 min to 01:00 min: Correct signaling of unavailable catalogue verison (in selected language) and user guidance to switch it ensures efficient switching  |
+| **Best** | Score 00:00 min to 00:30 min: Switching to other catalogue language versions is easy and fast |
+
+#### 3.3.3 Effectivity Usability Requirement
+| #22                             | Task success ratio                  |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Percentage of successfully completed tasks |
+|**Measuring Method** | Scale from 0-100%  |
+| **Worst Case**| Score 0% - 75%:  Features are not intuitiv, application is hard to use. |
+| **Acceptable** | Score 75% to 80% : Most features are intuitiv and can be used.|
+| **Planned**| Score 80% to 90%: The features are easy to use with only a few exceptions.  |
+| **Best** | Score 90% to 100%: All features are easy to use and intuitiv.   |
+
+| #23                             | Intuitivity                 |
+|-----------------------------------|---------------------------------|
+|**Measuring Concept** | Average number of times the user had to select the back button, because he was misguided by the application.   |
+|**Measuring Method** | Measured in average times on a scale form 0x to +6x  |
+| **Worst Case**| Score 4 to 6 times:  Application is misguiding the user which harms the efficiency. |
+| **Acceptable** | Score 2 to 3 times : Application mostly supporting the user flow. Nearly no misguidances.|
+| **Planned**| Score 1 time: Intuitiv user guidance.  |
+| **Best** | Score 0 times: No misguidances, very intuitiv   |
 
 
 # 4. Questions
