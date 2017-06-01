@@ -54,6 +54,7 @@ Das Python script `generateVersions.py`, generiert dieses File bei Bedarf neu.
  Um einen neuen build der App zu erstellen, einfach folgenden Befehl ausführen.
     
     npm install && npm run-script build
+    npm cache clean
     
  Der Output befindet sich dann, mit neuen `assets/versions.json` file, 
  im `dist` Ordner. 
