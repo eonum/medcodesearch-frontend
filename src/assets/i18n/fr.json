@@ -15,12 +15,12 @@
   "LBL_SELECT_LANGUAGE": "Choisissez la langue",
   "LBL_CATALOG_LANGUAGE_NOT_AVAILABLE": "Le catalogue sélectionné n'est pas disponible dans la langue actuelle.",
   "LBL_BACK": "Retour",
-  "LBL_FAVORITE_TITLE": "Eléments marqués",
-  "LBL_FAVORITE_NOELEMENTS": "Vous n'avez marqué aucun élément.",
-  "LBL_ELEMENT_ADDED": "L'élément a été mémorisé.",
-  "LBL_ELEMENT_REMOVED": "L'élément a été retiré de la liste.",
+  "LBL_FAVORITE_TITLE": "Codes marqués",
+  "LBL_FAVORITE_NOELEMENTS": "Vous n'avez marqué aucun code.",
+  "LBL_ELEMENT_ADDED": "Le code a été mémorisé.",
+  "LBL_ELEMENT_REMOVED": "Le code a été retiré de la liste.",
   "LBL_FAVORITE_ELEMENT": "Mémoriser",
   "LBL_IS_FAVORITE": "Mémorisé",
-  "LBL_SIBLINGS": "Eléments similaires"
+  "LBL_SIBLINGS": "Codes similaires"
 }
 
