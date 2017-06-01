@@ -17,7 +17,7 @@
         <ng-template [ngIf]="result.highlight.text == undefined">
           <dd [innerHtml]="result.text"></dd>
           <div class='small top-buffer' *ngFor="let alternativeField of ['synonyms', 'inclusions', 'descriptions', 'relevant_codes']">
-	    <ng-template [ngIf]="result.highlight[alternativeField] != undefined">
+            <ng-template [ngIf]="result.highlight[alternativeField] != undefined">
               <dd>{{('LBL_' + alternativeField.toUpperCase()) | translate}}</dd>
               <ul>
                 <div *ngFor="let field of result.highlight[alternativeField]">
