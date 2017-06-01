@@ -6,6 +6,8 @@
   "LBL_SEARCH_PLACEHOLDER": "Inserisci la parola chiave o il codice...",
   "LBL_EXCLUSIONS": "Esclusioni",
   "LBL_INCLUSIONS": "Inclusioni",
+  "LBL_DESCRIPTIONS": "Descrizioni",
+  "LBL_RELEVANT_CODES": "Codes pertinent pour le regroupement",
   "LBL_NOTE": "Osservazione",
   "LBL_NOTES": "Osservazioni",
   "LBL_CODE_NOTE": "Osservare alla codifica",
