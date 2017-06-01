@@ -6,6 +6,8 @@
   "LBL_SEARCH_PLACEHOLDER": "Enter search query or code...",
   "LBL_EXCLUSIONS": "Exclusions",
   "LBL_INCLUSIONS": "Inclusions",
+  "LBL_DESCRIPTIONS": "Descriptions",
+  "LBL_RELEVANT_CODES": "Codes relevant for grouping",
   "LBL_NOTE": "Note",
   "LBL_NOTES": "Notes",
   "LBL_CODE_NOTE": "Coding note",

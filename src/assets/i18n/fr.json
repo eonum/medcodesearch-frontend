@@ -6,6 +6,8 @@
   "LBL_SEARCH_PLACEHOLDER": "Insérer mots clés ou un code...",
   "LBL_EXCLUSIONS": "Exclusions",
   "LBL_INCLUSIONS": "Inclusions",
+  "LBL_DESCRIPTIONS": "Descriptions",
+  "LBL_RELEVANT_CODES": "Codes pertinent pour le regroupement",
   "LBL_NOTE": "Remarque",
   "LBL_NOTES": "Remarques",
   "LBL_CODE_NOTE": "Remarque concernant le codage",
