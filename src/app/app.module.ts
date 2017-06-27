@@ -30,6 +30,7 @@ import { BsDropdownModule, CollapseModule, ModalModule, PopoverModule, TooltipMo
 import { CatalogSearchService } from './service/routing/catalog-search.service';
 import { MobileService } from './service/mobile.service';
 import { CatalogVersionService } from './service/catalog-version.service';
+import { GoogleAnalyticsEventsService } from './service/google-analytics-events.service';
 
 /**
  * Factory function to initialize the TranslateModule.
@@ -99,6 +100,7 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     MobileService,
     SortHelper,
     CatalogVersionService,
+    GoogleAnalyticsEventsService,
     {
       provide: APP_INITIALIZER,
       useFactory: VersionLoaderFactory,
