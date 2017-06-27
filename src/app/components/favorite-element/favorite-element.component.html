@@ -20,7 +20,8 @@
         </a>
       </li>
       <div>
-        <a (click)="openLink()">{{this.url}}</a>
+        <a (click)="openSwissDRGLink()">{{this.urlSwissDRGGrouper}}</a>
+        <a (click)="openSwissDRGLink()">{{this.urlCasematch}}</a>
       </div>
     </ng-template>
     <li *ngIf="favoriteElements?.length === 0" class="disabled">

@@ -32,7 +32,8 @@ export class FavoriteElementComponent implements OnInit {
    */
   private tooltipTimer: any;
 
-  public url: string;
+  public urlSwissDRGGrouper: string;
+  public urlCasematch: string;
 
   @ViewChild('tooltip') public tooltip;
 
@@ -122,11 +123,16 @@ export class FavoriteElementComponent implements OnInit {
     }
   }
 
-  public openLink(): void {
-    window.open(this.favoriteService.getUrl(), '_blank')
+  public openSwissDRGLink(): void {
+    window.open(this.favoriteService.getSwissDRGUrl(), '_blank')
+  }
+
+  public openCasematchLink(): void {
+    window.open(this.favoriteService.getCasematchUrl(), '_blank')
   }
 
   public setUrl() {
-    this.url = this.favoriteService.getUrl();
+    this.urlSwissDRGGrouper = this.favoriteService.getSwissDRGUrl();
+    this.urlCasematch = this.favoriteService.getCasematchUrl();
   }
 }

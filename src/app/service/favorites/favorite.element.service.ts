@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { IFavoritePersister } from './persisters/i.favorite.persister';
 import { ICatalogService } from '../i.catalog.service';
-import {cat} from "shelljs";
 
 /**
  * Provides functions to mark/unmark an element as favorite.
@@ -33,7 +32,12 @@ export class FavoriteElementService implements IFavoriteElementService {
   /*
    * URL for redirecting to grouper.swissdrg.org
    */
-  private url = 'https://grouper.swissdrg.org/swissdrg/single?version=7.0&pc=_40_0__M_99_99_10_0_';
+  private urlSwissDRGGrouper = 'https://grouper.swissdrg.org/swissdrg/single?version=7.0&pc=_40_0__M_99_99_10_0_';
+
+  /*
+   * URL for redirecting to casematch
+   */
+  private urlCasematch = 'https://casematch2016.eonum.ch/patient_cases/analyzenew?locale=de&pc=_40_0_0_W_01_00_10_0_';
 
   private _favoriteElements: BehaviorSubject<FavoriteElement[]>;
 
@@ -159,30 +163,49 @@ export class FavoriteElementService implements IFavoriteElementService {
 
   private addElementToURL(element: CatalogElement)  {
     if (!element.children) {
-      this.url += element.code + '_';
+      this.urlSwissDRGGrouper += element.code + '_';
+      this.urlCasematch += element.code + '_'
     }
 
   }
 
   private removeCatalogElementFromUrl(element: CatalogElement)  {
-    if (this.url.includes(element.code)) {
-      this.url = this.url.substr(0, this.url.indexOf(element.code)) +
-        this.url.substr(this.url.indexOf(element.code) + element.code.length + 1);
+    if (this.urlSwissDRGGrouper.includes(element.code)) {
+      this.urlSwissDRGGrouper = this.urlSwissDRGGrouper.substr(0, this.urlSwissDRGGrouper.indexOf(element.code)) +
+        this.urlSwissDRGGrouper.substr(this.urlSwissDRGGrouper.indexOf(element.code) + element.code.length + 1);
+    }
+
+    if (this.urlCasematch.includes(element.code)) {
+      this.urlCasematch = this.urlCasematch.substr(0, this.urlCasematch.indexOf(element.code)) +
+        this.urlCasematch.substr(this.urlCasematch.indexOf(element.code) + element.code.length + 1);
     }
   }
 
   private removeFavouriteElementFromUrl(element: FavoriteElement)  {
-    if (this.url.includes(element.code)) {
-      this.url = this.url.substr(0, this.url.indexOf(element.code)) +
-        this.url.substr(this.url.indexOf(element.code) + element.code.length + 1);
+    if (this.urlSwissDRGGrouper.includes(element.code)) {
+      this.urlSwissDRGGrouper = this.urlSwissDRGGrouper.substr(0, this.urlSwissDRGGrouper.indexOf(element.code)) +
+        this.urlSwissDRGGrouper.substr(this.urlSwissDRGGrouper.indexOf(element.code) + element.code.length + 1);
+    }
+
+    if (this.urlCasematch.includes(element.code)) {
+      this.urlCasematch = this.urlCasematch.substr(0, this.urlCasematch.indexOf(element.code)) +
+        this.urlCasematch.substr(this.urlCasematch.indexOf(element.code) + element.code.length + 1);
     }
   }
 
-  public getUrl(): string {
-    if (this.url.length <= 80) {
+  public getSwissDRGUrl(): string {
+    if (this.urlSwissDRGGrouper.length <= 80) {
       return '';
     } else {
-      return this.url + '-&provider=acute&locale=' + this.catalogService.getLocale();
+      return this.urlSwissDRGGrouper + '-&provider=acute&locale=' + this.catalogService.getLocale();
+    }
+  }
+  public getCasematchUrl(): string {
+    if (this.urlCasematch.length <= 90) {
+      return '';
+    } else {
+        return this.urlCasematch = this.urlCasematch.substr(0, this.urlCasematch.indexOf('locale'))
+          + 'locale=' + this.catalogService.getLocale() + this.urlCasematch.substr(this.urlCasematch.indexOf('locale') + 9)
     }
   }
 }
