@@ -23,5 +23,7 @@
   "LBL_ELEMENT_REMOVED": "L'elemento è stato rimosso dalla lista",
   "LBL_FAVORITE_ELEMENT": "Segna nella lista",
   "LBL_IS_FAVORITE": "Aggiunto",
-  "LBL_SIBLINGS": "Elementi simili"
+  "LBL_SIBLINGS": "Elementi simili",
+  "LBL_REDIRECT_CASEMATCH": "Reggruppare il caso con Casematch ",
+  "LBL_REDIRECT_SWISSDRG": "Reggruppare il caso con SwissDRG Webgrouper"
 }

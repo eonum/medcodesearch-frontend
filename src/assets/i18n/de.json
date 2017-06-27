@@ -23,6 +23,8 @@
   "LBL_ELEMENT_REMOVED": "Der Code wurde aus der Merkliste entfernt.",
   "LBL_FAVORITE_ELEMENT": "Merken",
   "LBL_IS_FAVORITE": "Gemerkt",
-  "LBL_SIBLINGS": "Ähnliche Codes"
+  "LBL_SIBLINGS": "Ähnliche Codes",
+  "LBL_REDIRECT_CASEMATCH": "Fall gruppieren mit dem SwissDRG-Webgrouper",
+  "LBL_REDIRECT_SWISSDRG": "Fall gruppieren mit Casematch"
 }
 
