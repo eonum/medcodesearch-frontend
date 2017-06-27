@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { IFavoritePersister } from './persisters/i.favorite.persister';
 import { ICatalogService } from '../i.catalog.service';
+import {cat} from "shelljs";
 
 /**
  * Provides functions to mark/unmark an element as favorite.
@@ -76,7 +77,9 @@ export class FavoriteElementService implements IFavoriteElementService {
       this.favoriteElements[FavoriteElement.keyForFavoriteElement(elementToStore)] = elementToStore;
       this.notify();
       this.persister.persist(this.favoriteElements);
-      this.addElementToURL(element);
+      if (catalog !== 'SwissDRG') {
+        this.addElementToURL(element);
+      }
     }
   }
 
