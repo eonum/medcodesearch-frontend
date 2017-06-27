@@ -32,6 +32,8 @@ export class FavoriteElementComponent implements OnInit {
    */
   private tooltipTimer: any;
 
+  public url: string;
+
   @ViewChild('tooltip') public tooltip;
 
   constructor(private router: Router,
@@ -75,6 +77,7 @@ export class FavoriteElementComponent implements OnInit {
    */
   private removeElement(event: any, element: FavoriteElement): void {
     this.favoriteService.removeByFavoriteElement(element);
+    this.setUrl();
     // Prevent dropdown from closing
     event.stopPropagation();
   }
@@ -117,5 +120,13 @@ export class FavoriteElementComponent implements OnInit {
       clearTimeout(this.tooltipTimer);
       this.tooltipTimer = null;
     }
+  }
+
+  public openLink(): void {
+    window.open(this.favoriteService.getUrl(), '_blank')
+  }
+
+  public setUrl() {
+    this.url = this.favoriteService.getUrl();
   }
 }

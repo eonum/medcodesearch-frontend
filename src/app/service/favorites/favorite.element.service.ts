@@ -5,11 +5,12 @@ import { Injectable, Inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { IFavoritePersister } from './persisters/i.favorite.persister';
+import { ICatalogService } from '../i.catalog.service';
 
 /**
  * Provides functions to mark/unmark an element as favorite.
  * Clients can subscribe to changes of the element collection.
- * 
+ *
  * The elements are stored within an in-memory dicitionary
  * and are lost as soon as the user closes or refreshes the
  * page (and therefore causes the app to restart).
@@ -27,9 +28,17 @@ export class FavoriteElementService implements IFavoriteElementService {
    * BehaviorSubject to publish changes on favorite elements
    * collection.
    */
+
+  /*
+   * URL for redirecting to grouper.swissdrg.org
+   */
+  private url = 'https://grouper.swissdrg.org/swissdrg/single?version=7.0&pc=_40_0__M_99_99_10_0_';
+
   private _favoriteElements: BehaviorSubject<FavoriteElement[]>;
 
-  public constructor( @Inject('IFavoritePersister') private persister: IFavoritePersister) {
+  public constructor(
+    @Inject('IFavoritePersister') private persister: IFavoritePersister,
+    @Inject('ICatalogService') private catalogService: ICatalogService) {
     this._favoriteElements = new BehaviorSubject([]);
 
     const restored = this.persister.restore();
@@ -51,11 +60,11 @@ export class FavoriteElementService implements IFavoriteElementService {
 
   /**
    * Marks an element as favorite.
-   * 
-   * Additional information about language, version and 
+   *
+   * Additional information about language, version and
    * catalog is required for being able to display the
    * element afterwards.
-   * 
+   *
    * @param element the element to mark
    * @param version the current version of the catalog
    * @param catalog the current catalog
@@ -67,23 +76,26 @@ export class FavoriteElementService implements IFavoriteElementService {
       this.favoriteElements[FavoriteElement.keyForFavoriteElement(elementToStore)] = elementToStore;
       this.notify();
       this.persister.persist(this.favoriteElements);
+      this.addElementToURL(element);
     }
   }
 
   /**
    * Remove a specific favorite
-   * 
+   *
    * @param element the element to remove from favorites
    */
   public removeByFavoriteElement(element: FavoriteElement): void {
     const id = FavoriteElement.keyForFavoriteElement(element);
+    this.removeFavouriteElementFromUrl(element);
     this.removeById(id);
+
   }
 
   /**
    * Remove the matching favorite of the specified element
    * from the favorite list.
-   * 
+   *
    * @param element the element to remove
    * @param version the version of the element to remove
    * @param catalog the catalog of the element to remove
@@ -91,12 +103,13 @@ export class FavoriteElementService implements IFavoriteElementService {
    */
   public removeByCatalogElement(element: CatalogElement, version: string, catalog: string, language: string): void {
     const id = FavoriteElement.keyForCatalogElement(element, version, catalog, language);
+    this.removeCatalogElementFromUrl(element);
     this.removeById(id);
   }
 
   /**
    * Remove the favorite with the specified id.
-   * 
+   *
    * @param id the id of the favorite to remove
    */
   private removeById(id: string): void {
@@ -110,7 +123,7 @@ export class FavoriteElementService implements IFavoriteElementService {
   /**
    * Returns a value whether the specified element has already been
    * added to the favorite elements.
-   * 
+   *
    * @param element the element to check for being marked
    * @param version the version of the element
    * @param catalog the catalog of the element
@@ -139,5 +152,34 @@ export class FavoriteElementService implements IFavoriteElementService {
       elements.push(this.favoriteElements[key]);
     });
     this._favoriteElements.next(elements);
+  }
+
+  private addElementToURL(element: CatalogElement)  {
+    if (!element.children) {
+      this.url += element.code + '_';
+    }
+
+  }
+
+  private removeCatalogElementFromUrl(element: CatalogElement)  {
+    if (this.url.includes(element.code)) {
+      this.url = this.url.substr(0, this.url.indexOf(element.code)) +
+        this.url.substr(this.url.indexOf(element.code) + element.code.length + 1);
+    }
+  }
+
+  private removeFavouriteElementFromUrl(element: FavoriteElement)  {
+    if (this.url.includes(element.code)) {
+      this.url = this.url.substr(0, this.url.indexOf(element.code)) +
+        this.url.substr(this.url.indexOf(element.code) + element.code.length + 1);
+    }
+  }
+
+  public getUrl(): string {
+    if (this.url.length <= 80) {
+      return '';
+    } else {
+      return this.url + '-&provider=acute&locale=' + this.catalogService.getLocale();
+    }
   }
 }
