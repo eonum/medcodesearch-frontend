@@ -22,4 +22,10 @@ export class FavoriteElementServiceMock implements IFavoriteElementService {
   public removeByCatalogElement(element: CatalogElement, version: string, catalog: string, language: string): void {
 
   }
+  public getSwissDRGUrl(): string {
+    return '';
+  }
+  public getCasematchUrl(): string {
+    return '';
+  }
 }

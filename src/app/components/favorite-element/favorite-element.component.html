@@ -1,6 +1,6 @@
 <div class="btn-group pull-right" dropdown (click)="onDropdownShown()">
-  <button type="button" class="btn btn-default dropdown-toggle" dropdownToggle [tooltip]="tooltipTemplate" triggers="" #tooltip="bs-tooltip" placement="bottom">
-    <span class="badge">{{favoriteElements.length}}</span>    
+  <button type="button" class="btn btn-default dropdown-toggle" dropdownToggle [tooltip]="tooltipTemplate" triggers="" #tooltip="bs-tooltip" placement="bottom" (click)="setUrl()">
+    <span class="badge">{{favoriteElements.length}}</span>
     <span class="glyphicon glyphicon-star med-blue"></span>
   </button>
   <ng-template #tooltipTemplate>{{ toolTipMessage }}</ng-template>
@@ -19,6 +19,10 @@
           <div class="clearfix"></div>
         </a>
       </li>
+      <div>
+        <button class="catalog btn btn-default" style="width: 100%" (click)="openCasematchLink()">{{'LBL_REDIRECT_CASEMATCH' | translate}}</button>
+        <button class="catalog btn btn-default" style="width: 100%" (click)="openSwissDRGLink()">{{'LBL_REDIRECT_SWISSDRG' | translate}}</button>
+      </div>
     </ng-template>
     <li *ngIf="favoriteElements?.length === 0" class="disabled">
       <a>{{'LBL_FAVORITE_NOELEMENTS' | translate}}</a>

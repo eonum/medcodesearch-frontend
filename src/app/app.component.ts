@@ -1,11 +1,13 @@
 import { ILoggerService } from './service/logging/i.logger.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Settings } from './settings';
+import { GoogleAnalyticsEventsService } from './service/google-analytics-events.service'
 
 declare var window: any;
+declare var ga: any;
 
 @Component({
   selector: 'app-root',
@@ -20,8 +22,18 @@ export class AppComponent {
               @Inject('ILoggerService') private logger: ILoggerService,
               private catalogResolver: CatalogResolver,
               private router: Router,
+              public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
               private route: ActivatedRoute) {
-    translate.addLangs(this.languages);
+                  router.events.distinctUntilChanged((previous: any, current: any) => {
+                      if(current instanceof NavigationEnd) {
+                        return previous.url === current.url;
+                      }
+                    return true;
+                  }).subscribe((x: any) => {
+                      console.log('router.change', x);
+                      ga('send', 'pageview', x.url);
+                  });
+                  translate.addLangs(this.languages);
   }
 
 

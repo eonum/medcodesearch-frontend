@@ -9,4 +9,7 @@ export interface IFavoriteElementService {
   removeByCatalogElement(element: CatalogElement, version: string, catalog: string, language: string): void;
   isFavorite(element: CatalogElement, version: string, catalog: string, language: string): boolean;
   getFavoriteElements(): Observable<FavoriteElement[]>;
+  getSwissDRGUrl(): string;
+  getCasematchUrl(): string;
+
 }

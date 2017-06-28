@@ -32,13 +32,16 @@ export class FavoriteElementComponent implements OnInit {
    */
   private tooltipTimer: any;
 
+  public urlSwissDRGGrouper: string;
+  public urlCasematch: string;
+
   @ViewChild('tooltip') public tooltip;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
     @Inject('ILoggerService') private logger: ILoggerService,
-    @Inject('IFavoriteService') private favoriteService: IFavoriteElementService, ) { }
+    @Inject('IFavoriteService') private favoriteService: IFavoriteElementService) { }
 
   public ngOnInit(): void {
     this.favoriteService.getFavoriteElements()
@@ -75,6 +78,7 @@ export class FavoriteElementComponent implements OnInit {
    */
   private removeElement(event: any, element: FavoriteElement): void {
     this.favoriteService.removeByFavoriteElement(element);
+    this.setUrl();
     // Prevent dropdown from closing
     event.stopPropagation();
   }
@@ -117,5 +121,18 @@ export class FavoriteElementComponent implements OnInit {
       clearTimeout(this.tooltipTimer);
       this.tooltipTimer = null;
     }
+  }
+
+  public openSwissDRGLink(): void {
+    window.open(this.favoriteService.getSwissDRGUrl(), '_blank')
+  }
+
+  public openCasematchLink(): void {
+    window.open(this.favoriteService.getCasematchUrl(), '_blank')
+  }
+
+  public setUrl() {
+    this.urlSwissDRGGrouper = this.favoriteService.getSwissDRGUrl();
+    this.urlCasematch = this.favoriteService.getCasematchUrl();
   }
 }
