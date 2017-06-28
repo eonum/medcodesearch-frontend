@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Settings } from './settings';
 import { GoogleAnalyticsEventsService } from './service/google-analytics-events.service'
 
+
 declare var window: any;
 declare var ga: any;
 
@@ -24,15 +25,17 @@ export class AppComponent {
               private router: Router,
               public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
               private route: ActivatedRoute) {
-                  router.events.distinctUntilChanged((previous: any, current: any) => {
-                      if(current instanceof NavigationEnd) {
+                  if (document.location.hostname !== 'localhost') {
+                      router.events.distinctUntilChanged((previous: any, current: any) => {
+                      if (current instanceof NavigationEnd) {
                         return previous.url === current.url;
                       }
-                    return true;
-                  }).subscribe((x: any) => {
+                      return true;
+                      }).subscribe((x: any) => {
                       console.log('router.change', x);
                       ga('send', 'pageview', x.url);
-                  });
+                    });
+                  }
                   translate.addLangs(this.languages);
   }
 
