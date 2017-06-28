@@ -41,6 +41,7 @@ export class MobileService {
   public setQuery(query: string): void {
     this.query = query;
     this.mobileCheck(window.innerWidth);
+    this.focus('results');
   }
 
   /**
