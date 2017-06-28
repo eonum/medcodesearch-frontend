@@ -24,15 +24,17 @@ export class AppComponent {
               private router: Router,
               public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
               private route: ActivatedRoute) {
-                  router.events.distinctUntilChanged((previous: any, current: any) => {
-                      if(current instanceof NavigationEnd) {
+                  if (document.location.hostname === 'medcodesearch.ch') {
+                      router.events.distinctUntilChanged((previous: any, current: any) => {
+                      if (current instanceof NavigationEnd) {
                         return previous.url === current.url;
                       }
-                    return true;
-                  }).subscribe((x: any) => {
+                      return true;
+                      }).subscribe((x: any) => {
                       console.log('router.change', x);
                       ga('send', 'pageview', x.url);
-                  });
+                    });
+                  }
                   translate.addLangs(this.languages);
   }
 
