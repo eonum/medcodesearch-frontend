@@ -37,7 +37,7 @@ export class FavoriteElementService implements IFavoriteElementService {
   /*
    * URL for redirecting to casematch
    */
-  private urlCasematch = 'https://casematch2016.eonum.ch/patient_cases/analyzenew?locale=de&pc=_40_0_0_W_01_00_10_0_';
+  private urlCasematch = 'https://casematch2017.eonum.ch/patient_cases/analyzenew?locale=de&pc=_40_0_0_W_01_00_10_0_';
 
   /*
    * URL for diagnoses and procedures
