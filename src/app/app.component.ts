@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Settings } from './settings';
 import { GoogleAnalyticsEventsService } from './service/google-analytics-events.service'
 
+
 declare var window: any;
 declare var ga: any;
 
@@ -24,7 +25,7 @@ export class AppComponent {
               private router: Router,
               public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
               private route: ActivatedRoute) {
-                  if (document.location.hostname === 'medcodesearch.ch') {
+                  if (document.location.hostname !== 'localhost') {
                       router.events.distinctUntilChanged((previous: any, current: any) => {
                       if (current instanceof NavigationEnd) {
                         return previous.url === current.url;
