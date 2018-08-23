@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Settings } from '../settings';
 
 /**
@@ -11,12 +11,12 @@ export class CatalogVersionService {
 
   private versions;
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   public loadVersions(): Promise<any> {
     return this.http.get('assets/versions.json').toPromise().then(versions => {
-      this.versions = versions.json();
+      this.versions = versions;
     });
   }
 

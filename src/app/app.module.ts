@@ -22,7 +22,7 @@ import { FavoriteElementService } from './service/favorites/favorite.element.ser
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Http, HttpModule } from '@angular/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -35,8 +35,8 @@ import { GoogleAnalyticsEventsService } from './service/google-analytics-events.
 /**
  * Factory function to initialize the TranslateModule.
  */
-export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, 'assets/i18n/');
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
 
 /**
@@ -68,13 +68,13 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [Http]
+        deps: [HttpClient]
       }
     }),
     ModalModule.forRoot(),

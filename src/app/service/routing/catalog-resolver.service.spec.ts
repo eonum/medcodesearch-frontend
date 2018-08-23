@@ -9,7 +9,7 @@ import { async, inject, TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import * as TypeMoq from 'typemoq';
 import { CatalogVersionService } from '../catalog-version.service';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ILoggerService } from '../logging/i.logger.service';
 
 describe('CatalogResolver', () => {
@@ -39,7 +39,7 @@ describe('CatalogResolver', () => {
         SwissDrgCatalog, CHOPCatalog, ICDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
       ],
-      imports: [HttpModule],
+      imports: [HttpClientModule],
 
     });
 
