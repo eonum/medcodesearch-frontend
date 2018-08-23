@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "module": "es2016",
+    "module": "es6",
     "types": []
   },
   "exclude": [
