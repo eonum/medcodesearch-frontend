@@ -1,6 +1,6 @@
 import { CatalogElement } from '../../model/catalog.element';
 import { FavoriteElement } from '../../model/favorite.element';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export interface IFavoriteElementService {
   count(): number;
