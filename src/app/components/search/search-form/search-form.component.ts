@@ -7,7 +7,7 @@ import { ILoggerService } from '../../../service/logging/i.logger.service';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Data, Params, Router } from '@angular/router';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 import { CatalogDisplayInfo, CatalogResolver } from '../../../service/routing/catalog-resolver.service';
 import { MobileService } from '../../../service/mobile.service';
 import { CatalogVersionService } from '../../../service/catalog-version.service';

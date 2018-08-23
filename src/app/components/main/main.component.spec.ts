@@ -19,7 +19,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { ModalModule, TooltipModule } from 'ng2-bootstrap';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 import * as TypeMoq from 'typemoq';
 import { CatalogSearchService } from '../../service/routing/catalog-search.service';
 import { RouterTestingModule } from '@angular/router/testing';

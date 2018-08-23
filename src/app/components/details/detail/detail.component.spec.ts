@@ -18,7 +18,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { ModalModule, TooltipModule } from 'ng2-bootstrap';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 import * as TypeMoq from 'typemoq';
 
 describe('DetailComponent', () => {

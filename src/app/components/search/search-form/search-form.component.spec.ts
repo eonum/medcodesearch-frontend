@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { ModalModule } from 'ng2-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
 import { CatalogResolver } from '../../../service/routing/catalog-resolver.service';
 import { CatalogVersionService } from '../../../service/catalog-version.service';
 import { HttpModule } from '@angular/http';

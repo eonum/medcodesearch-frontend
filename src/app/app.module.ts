@@ -26,7 +26,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { BsDropdownModule, CollapseModule, ModalModule, PopoverModule, TooltipModule } from 'ng2-bootstrap';
+import { BsDropdownModule, CollapseModule, ModalModule, PopoverModule, TooltipModule } from 'ngx-bootstrap';
 import { CatalogSearchService } from './service/routing/catalog-search.service';
 import { MobileService } from './service/mobile.service';
 import { CatalogVersionService } from './service/catalog-version.service';
