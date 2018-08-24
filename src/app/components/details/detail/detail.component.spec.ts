@@ -83,7 +83,7 @@ describe('DetailComponent', () => {
     mock.setup(x => x.search(version, query)).returns(() => Promise.resolve(searchResults));
 
     // Set up the activated route stub
-    route = fixture.debugElement.injector.get(ActivatedRoute);
+    route = new ActivatedRouteStub();
     route.setCatalog(mock.object);
     route.setTestParams({ 'query': query });
 

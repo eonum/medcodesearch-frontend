@@ -9,23 +9,24 @@ import { CatalogServiceMock } from './service/catalog.service.mock';
 import { NullLoggerService } from './service/logging/null.logger.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { async, TestBed } from '@angular/core/testing';
-import { Http, HttpModule } from '@angular/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { PopoverModule, TooltipModule } from 'ngx-bootstrap';
 import { CatalogVersionService } from './service/catalog-version.service';
+import {GoogleAnalyticsEventsService} from "./service/google-analytics-events.service";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpModule,
+        HttpClientModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
-            deps: [Http]
+            deps: [HttpClient]
           }
         }),
         PopoverModule.forRoot(),
@@ -39,6 +40,7 @@ describe('AppComponent', () => {
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
         { provide: 'IFavoriteService', useClass: FavoriteElementServiceMock },
+        GoogleAnalyticsEventsService,
         SwissDrgCatalog,
         CHOPCatalog,
         ICDCatalog,

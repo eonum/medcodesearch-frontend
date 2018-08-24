@@ -2,7 +2,7 @@ import { NullLoggerService } from '../service/logging/null.logger.service';
 import { ConvertCodePipe } from './convert-code.pipe';
 import * as TypeMoq from 'typemoq';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
-import { SecurityContext } from '@angular/core/src/security';
+import { SecurityContext } from '@angular/core';
 
 describe('ConvertCodePipe', () => {
 

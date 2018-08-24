@@ -53,7 +53,7 @@ export class SearchFormComponent implements OnInit {
 
     this.searchForm.valueChanges.pipe(
       debounceTime(500),
-      distinctUntilChanged(),)
+      distinctUntilChanged())
       .subscribe((value: string) => {
         this.query = value;
         this.search(this.query);

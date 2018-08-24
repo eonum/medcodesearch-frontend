@@ -21,7 +21,7 @@ describe('SortHelper', () => {
     });
 
     it(`${testCase[0]} should be converted to ${testCase[1]}`, () => {
-      expect(sortHelper.convertRomanToNumber(testCase[0] as string)).toBe(testCase[1]);
+      expect(sortHelper.convertRomanToNumber(testCase[0] as string)).toBe(testCase[1] as number);
     });
   });
 
@@ -108,7 +108,7 @@ describe('SortHelper', () => {
 
   numberWithLeadingLetterTestData.forEach(testCase => {
     it(`Test on number with leading letter of '${testCase[0]}' should return ${testCase[1]}`, () => {
-      expect(sortHelper.isNumberWithLeadingLetter(testCase[0] as string)).toBe(testCase[1]);
+      expect(sortHelper.isNumberWithLeadingLetter(testCase[0] as string)).toBe(testCase[1] as boolean);
     });
   });
 
@@ -120,7 +120,7 @@ describe('SortHelper', () => {
 
   normalLiteralsTestData.forEach(testCase => {
     it(`Comparison of '${testCase[0]}' with '${testCase[1]}' should return ${testCase[2]}`, () => {
-      expect(sortHelper.compareAsLiteral(testCase[0] as string, testCase[1] as string)).toBe(testCase[2]);
+      expect(sortHelper.compareAsLiteral(testCase[0] as string, testCase[1] as string)).toBe(testCase[2] as number);
     });
   });
 
