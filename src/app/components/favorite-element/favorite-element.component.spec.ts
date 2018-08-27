@@ -5,7 +5,7 @@ import { FavoriteElementComponent } from './favorite-element.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { TooltipModule } from 'ng2-bootstrap';
+import { TooltipModule } from 'ngx-bootstrap';
 
 describe('FavoriteElementComponent', () => {
   let component: FavoriteElementComponent;

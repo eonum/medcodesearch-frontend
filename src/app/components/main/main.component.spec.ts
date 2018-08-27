@@ -19,14 +19,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { ModalModule, TooltipModule } from 'ng2-bootstrap';
-import * as TypeMoq from 'typemoq';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 import { CatalogSearchService } from '../../service/routing/catalog-search.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { CatalogResolver } from '../../service/routing/catalog-resolver.service';
 import { CatalogVersionService } from '../../service/catalog-version.service';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('MainComponent', () => {
 
@@ -73,7 +72,7 @@ describe('MainComponent', () => {
         ReactiveFormsModule,
         TooltipModule.forRoot(),
         RouterTestingModule,
-        HttpModule,
+        HttpClientModule,
       ],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },

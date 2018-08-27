@@ -7,7 +7,7 @@ import { CatalogElement } from '../model/catalog.element';
 export interface ICatalogService {
   init(config: CatalogConfiguration): void;
   search(version: string, query: string): Promise<CatalogElement[]>;
-  getVersions(lang: string): Promise<string[]>;
+  getVersions(lang: string): Promise<void | string[]>;
   getByCode(version: string, type: string, code: string, language?: string): Promise<CatalogElement>;
   getLocale(): string;
   getLangs(): string[];

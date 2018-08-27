@@ -2,8 +2,7 @@ import { IFavoriteElementService } from './i.favorite.element.service';
 import { CatalogElement } from '../../model/catalog.element';
 import { FavoriteElement } from '../../model/favorite.element';
 import { Injectable, Inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject ,  Observable } from 'rxjs';
 import { IFavoritePersister } from './persisters/i.favorite.persister';
 import { ICatalogService } from '../i.catalog.service';
 

@@ -2,6 +2,7 @@ import { NullFavoritePersister } from './persisters/null.favorite.persister';
 import { CatalogElement } from '../../model/catalog.element';
 import { FavoriteElement } from '../../model/favorite.element';
 import { FavoriteElementService } from './favorite.element.service';
+import {CatalogServiceMock} from "../catalog.service.mock";
 
 describe('FavoriteElementService', () => {
 
@@ -14,21 +15,22 @@ describe('FavoriteElementService', () => {
   };
 
   const persister = new NullFavoritePersister();
+  const catalogService = new CatalogServiceMock();
 
   it('Should have no favorite elements initially', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     expect(favoriteService.count()).toBe(0);
   });
 
   it('Should increase number of elements when adding new element', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     const element = this.createElement('1234');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
     expect(favoriteService.count()).toBe(1);
   });
 
   it('Should not increase number of elements when adding already added element', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     const element = this.createElement('1234');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
@@ -36,19 +38,19 @@ describe('FavoriteElementService', () => {
   });
 
   it('Should return false if the element is not in list', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     expect(favoriteService.isFavorite(this.createElement('1234'), 'V1.0', 'icd', 'de')).toBeFalsy();
   });
 
   it('Should return true if the element is in the list', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     const element = this.createElement('1234');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
     expect(favoriteService.isFavorite(element, 'V1.0', 'icd', 'de')).toBeTruthy();
   });
 
   it('Should return false after element is removed from the list', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     const element = this.createElement('1234');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
     const createdElement = FavoriteElement.from(element, 'V1.0', 'icd', 'de');
@@ -57,7 +59,7 @@ describe('FavoriteElementService', () => {
   });
 
   it('Should increase number of elements accordingly when adding multiple elements', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     for (let i = 0; i < 50; i++) {
       const element = this.createElement(i.toString());
       favoriteService.add(element, 'V1.0', 'icd', 'de');
@@ -66,7 +68,7 @@ describe('FavoriteElementService', () => {
   });
 
   it('Should decrease number of elements when removing an element', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     const element = this.createElement('1234');
     const createdElement = FavoriteElement.from(element, 'V1.0', 'icd', 'de');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
@@ -77,7 +79,7 @@ describe('FavoriteElementService', () => {
   });
 
   it('Should not decrease number of elements when removing an element not in list', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     const element = this.createElement('1234');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
 
@@ -87,13 +89,13 @@ describe('FavoriteElementService', () => {
   });
 
   it('Should not decrease number of elements when removing an element from empty list', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     favoriteService.removeByFavoriteElement(new FavoriteElement());
     expect(favoriteService.count()).toBe(0);
   });
 
   it('Should decrease number of elements when removing a catalog element', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
     const element = this.createElement('1234');
     favoriteService.add(element, 'V1.0', 'icd', 'de');
 
@@ -103,7 +105,7 @@ describe('FavoriteElementService', () => {
   });
 
   it('Should return a list of all favorite codes', () => {
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
 
     let numberOfElements: number;
     let codeOfFirstElement: string;
@@ -129,7 +131,7 @@ describe('FavoriteElementService', () => {
       callBackCalled = true;
     };
 
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
 
     favoriteService.getFavoriteElements().subscribe(element => {
       callback();
@@ -148,7 +150,7 @@ describe('FavoriteElementService', () => {
       callBackCalled = true;
     };
 
-    const favoriteService = new FavoriteElementService(persister);
+    const favoriteService = new FavoriteElementService(persister, catalogService);
 
     const element = this.createElement('1234');
     const createdElement = FavoriteElement.from(element, 'V1.0', 'icd', 'de');

@@ -1,10 +1,10 @@
-import 'rxjs/add/operator/toPromise';
+
 import { CatalogConfiguration } from '../catalog/catalog.configuration';
 import { CatalogElement } from '../model/catalog.element';
 import { ICatalogService } from './i.catalog.service';
 import { ILoggerService } from './logging/i.logger.service';
 import { Inject, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class CatalogService implements ICatalogService {
 
   private config: CatalogConfiguration;
 
-  public constructor(private http: Http,
+  public constructor(private http: HttpClient,
                      private translate: TranslateService,
                      @Inject('ILoggerService') private logger: ILoggerService) {
   }
@@ -93,12 +93,12 @@ export class CatalogService implements ICatalogService {
    *
    * @param lang the language to get the supported versions for
    */
-  public getVersions(lang: string): Promise<string[]> {
+  public getVersions(lang: string): Promise<void | string[]> {
     const url = `${this.baseUrl}${lang}/${this.config.versionParam}/versions`;
 
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json() as string[])
+      .then(response => response as string[])
       .catch(reason => this.logger.error(reason.toString()));
   }
 
@@ -141,7 +141,7 @@ export class CatalogService implements ICatalogService {
 
     return this.http.get(url).toPromise()
       .then(result => {
-        const resultObject: CatalogElement = result.json() as CatalogElement;
+        const resultObject: CatalogElement = result as CatalogElement;
 
         // Assign the type because eonum API doesn't use
         // the concept of types.
@@ -171,7 +171,7 @@ export class CatalogService implements ICatalogService {
 
     return this.http.get(url).toPromise()
       .then(result => {
-        const data: CatalogElement[] = result.json() as CatalogElement[];
+        const data: CatalogElement[] = result as CatalogElement[];
         data.forEach(element => {
           element.type = elementType;
         });

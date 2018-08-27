@@ -1,3 +1,5 @@
+
+import {distinctUntilChanged} from 'rxjs/operators';
 import { ILoggerService } from './service/logging/i.logger.service';
 import { CatalogResolver } from './service/routing/catalog-resolver.service';
 import { Component, Inject, OnInit } from '@angular/core';
@@ -26,12 +28,12 @@ export class AppComponent {
               public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
               private route: ActivatedRoute) {
                   if (document.location.hostname !== 'localhost') {
-                      router.events.distinctUntilChanged((previous: any, current: any) => {
+                      router.events.pipe(distinctUntilChanged((previous: any, current: any) => {
                       if (current instanceof NavigationEnd) {
                         return previous.url === current.url;
                       }
                       return true;
-                      }).subscribe((x: any) => {
+                      })).subscribe((x: any) => {
                       console.log('router.change', x);
                       ga('send', 'pageview', x.url);
                     });

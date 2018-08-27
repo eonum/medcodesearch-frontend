@@ -18,7 +18,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { ModalModule, TooltipModule } from 'ng2-bootstrap';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 import * as TypeMoq from 'typemoq';
 
 describe('DetailComponent', () => {
@@ -83,7 +83,7 @@ describe('DetailComponent', () => {
     mock.setup(x => x.search(version, query)).returns(() => Promise.resolve(searchResults));
 
     // Set up the activated route stub
-    route = fixture.debugElement.injector.get(ActivatedRoute);
+    route = new ActivatedRouteStub();
     route.setCatalog(mock.object);
     route.setTestParams({ 'query': query });
 

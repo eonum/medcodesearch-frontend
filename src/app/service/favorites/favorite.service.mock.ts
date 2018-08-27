@@ -1,7 +1,8 @@
+
+import {from as observableFrom,  Observable } from 'rxjs';
 import { IFavoriteElementService } from './i.favorite.element.service';
 import { CatalogElement } from '../../model/catalog.element';
 import { FavoriteElement } from '../../model/favorite.element';
-import { Observable } from 'rxjs/Observable';
 
 export class FavoriteElementServiceMock implements IFavoriteElementService {
   public count(): number {
@@ -14,7 +15,7 @@ export class FavoriteElementServiceMock implements IFavoriteElementService {
     return false;
   }
   public getFavoriteElements(): Observable<FavoriteElement[]> {
-    return Observable.from([]);
+    return observableFrom([]);
   }
   public removeByFavoriteElement(element: FavoriteElement): void {
 

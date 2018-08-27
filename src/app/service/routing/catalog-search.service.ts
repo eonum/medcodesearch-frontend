@@ -1,3 +1,5 @@
+
+import {switchMap, distinctUntilChanged} from 'rxjs/operators';
 import { Catalog } from '../../catalog/catalog';
 import { CHOPCatalog } from '../../catalog/chop.catalog';
 import { ICDCatalog } from '../../catalog/icd.catalog';
@@ -6,11 +8,10 @@ import { ILoggerService } from '../logging/i.logger.service';
 import { Inject, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogElement } from '../../model/catalog.element';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject ,  Subject } from 'rxjs';
 
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
+
+
 
 export class SearchRequest {
   public catalog: string;
@@ -56,9 +57,9 @@ export class CatalogSearchService {
 
     /*Perform search when a new (distinct) search request is fired, and
      * use switch map to push always only the newest result to the search results.*/
-    this.requests.asObservable()
-      .distinctUntilChanged(this.requestsEqual)
-      .switchMap((request: SearchRequest) => this.doSearch(request))
+    this.requests.asObservable().pipe(
+      distinctUntilChanged(this.requestsEqual),
+      switchMap((request: SearchRequest) => this.doSearch(request)),)
       .subscribe(
         (results: CatalogElement[]) => this.searchResults.next(results),
         error => this.logger.error('[CatalogSearchService]', error)
