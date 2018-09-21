@@ -21,4 +21,8 @@
             <li *ngFor="let supplement of selectedElement.supplement_codes" [innerHTML]="supplement | convertCode"></li>
         </ul>
   </ng-template>
+  <ng-template [ngIf]="selectedElement.analogous_code_text">
+    <h4>{{'LBL_ANALOGOUS_CODE_TEXTS' | translate}}</h4>
+    <p [innerHTML]="selectedElement.analogous_code_text | convertCode"></p>
+  </ng-template>
 </ng-template>
