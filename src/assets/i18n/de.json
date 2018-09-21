@@ -25,6 +25,7 @@
   "LBL_IS_FAVORITE": "Gemerkt",
   "LBL_SIBLINGS": "Ähnliche Codes",
   "LBL_REDIRECT_CASEMATCH": "Fall  analysieren mit Casematch",
-  "LBL_REDIRECT_SWISSDRG": "Fall gruppieren mit dem SwissDRG-Webgrouper"
+  "LBL_REDIRECT_SWISSDRG": "Fall gruppieren mit dem SwissDRG-Webgrouper",
+  "LBL_ANALOGOUS_CODE_TEXTS": "Analogiekodierung"
 }
 

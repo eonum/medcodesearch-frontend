@@ -25,5 +25,6 @@
   "LBL_IS_FAVORITE": "Aggiunto",
   "LBL_SIBLINGS": "Elementi simili",
   "LBL_REDIRECT_CASEMATCH": "Reggruppare il caso con Casematch ",
-  "LBL_REDIRECT_SWISSDRG": "Reggruppare il caso con SwissDRG Webgrouper"
+  "LBL_REDIRECT_SWISSDRG": "Reggruppare il caso con SwissDRG Webgrouper",
+  "LBL_ANALOGOUS_CODE_TEXTS": "Codifica per analogia"
 }

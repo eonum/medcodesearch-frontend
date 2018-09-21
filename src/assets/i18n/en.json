@@ -25,5 +25,6 @@
   "LBL_IS_FAVORITE": "Added",
   "LBL_SIBLINGS": "Similar codes",
   "LBL_REDIRECT_CASEMATCH": "Analyze this case with Casematch",
-  "LBL_REDIRECT_SWISSDRG": "Group this case with the SwissDRG Webgrouper"
+  "LBL_REDIRECT_SWISSDRG": "Group this case with the SwissDRG Webgrouper",
+  "LBL_ANALOGOUS_CODE_TEXTS": "Analogous codes"
 }
