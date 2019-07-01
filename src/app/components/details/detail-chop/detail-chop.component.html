@@ -11,6 +11,12 @@
             <li *ngFor="let inclusion of selectedElement.inclusions" [innerHTML]="inclusion | convertCode"></li>
         </ul>
   </ng-template>
+  <ng-template [ngIf]="selectedElement.descriptions?.length > 0">
+        <h4>{{'LBL_DESCRIPTIONS' | translate}}</h4>
+        <ul>
+            <li *ngFor="let description of selectedElement.descriptions" [innerHTML]="description | convertCode"></li>
+        </ul>
+  </ng-template>
   <ng-template [ngIf]="selectedElement.notes">
     <h4>{{'LBL_NOTES' | translate}}</h4>
     <p [innerHTML]="selectedElement.notes | convertCode"></p>
