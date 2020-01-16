@@ -26,5 +26,8 @@
   "LBL_SIBLINGS": "Elementi simili",
   "LBL_REDIRECT_CASEMATCH": "Reggruppare il caso con Casematch ",
   "LBL_REDIRECT_SWISSDRG": "Reggruppare il caso con SwissDRG Webgrouper",
-  "LBL_ANALOGOUS_CODE_TEXT": "Codifica per analogia"
+  "LBL_ANALOGOUS_CODE_TEXT": "Codifica per analogia",
+  "LBL_PREDECESSORS": "Vorgängercodes in Vorversion",
+  "LBL_SUCCESSORS": "Nachfolgercodes in Nachversion",
+  "LBL_NEW_CODE": "Dies ist ein Neukode, der keine Vorgängercodes in Vorversionen hat."
 }
