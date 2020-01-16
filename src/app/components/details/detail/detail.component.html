@@ -34,6 +34,28 @@
         <app-detail-chop *ngIf="catalog === 'CHOP'" [selectedElement]="selectedElement"></app-detail-chop>
         <app-detail-icd *ngIf="catalog === 'ICD'" [selectedElement]="selectedElement"></app-detail-icd>
 
+        <ng-template [ngIf]="selectedElement.predecessors?.length > 0 && !(selectedElement.predecessors?.length == 1 && selectedElement.predecessors[0].code == selectedElement.code && selectedElement.predecessors[0].text == selectedElement.text)">
+          <h4>{{'LBL_PREDECESSORS' | translate}}</h4>
+          <ul>
+            <li *ngFor="let predecessor of selectedElement.predecessors">
+              <span>{{predecessor.code}}</span>: {{predecessor.text}}
+            </li>
+          </ul>
+        </ng-template>
+
+        <ng-template [ngIf]="selectedElement.predecessors?.length == 0">
+          <h4>{{'LBL_NEW_CODE' | translate}}</h4>
+        </ng-template>
+
+        <ng-template [ngIf]="selectedElement.successors?.length > 0 && !(selectedElement.successors?.length == 1 && selectedElement.successors[0].code == selectedElement.code && selectedElement.successors[0].text == selectedElement.text)">
+          <h4>{{'LBL_SUCCESSORS' | translate}}</h4>
+          <ul>
+            <li *ngFor="let successor of selectedElement.successors">
+              <span>{{successor.code}}</span>: {{successor.text}}
+            </li>
+          </ul>
+        </ng-template>
+
         <ng-template [ngIf]="children?.length > 0">
           <h4>{{'LBL_CHILDREN' | translate}}</h4>
           <ul>

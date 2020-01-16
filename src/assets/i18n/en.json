@@ -26,5 +26,8 @@
   "LBL_SIBLINGS": "Similar codes",
   "LBL_REDIRECT_CASEMATCH": "Analyze this case with Casematch",
   "LBL_REDIRECT_SWISSDRG": "Group this case with the SwissDRG Webgrouper",
-  "LBL_ANALOGOUS_CODE_TEXT": "Analogous codes"
+  "LBL_ANALOGOUS_CODE_TEXT": "Analogous codes",
+  "LBL_PREDECESSORS": "Predecessor codes in previous version",
+  "LBL_SUCCESSORS": "Successor codes in next version",
+  "LBL_NEW_CODE": "This is a new code without any corresponding code in the previous version."
 }
