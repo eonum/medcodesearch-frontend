@@ -17,9 +17,11 @@
             <li *ngFor="let description of selectedElement.descriptions" [innerHTML]="description | convertCode"></li>
         </ul>
   </ng-template>
-  <ng-template [ngIf]="selectedElement.notes">
-    <h4>{{'LBL_NOTES' | translate}}</h4>
-    <p [innerHTML]="selectedElement.notes | convertCode"></p>
+  <ng-template [ngIf]="selectedElement.notes?.length > 0">
+        <h4>{{'LBL_NOTES' | translate}}</h4>
+        <ul>
+            <li *ngFor="let note of selectedElement.notes" [innerHTML]="note | convertCode"></li>
+        </ul>
   </ng-template>
   <ng-template [ngIf]="selectedElement.supplement_codes">
     <h4>{{'LBL_SUPPLEMENT_CODES' | translate}}</h4>
