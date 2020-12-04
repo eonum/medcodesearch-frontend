@@ -2,6 +2,7 @@ import { MobileService } from '../../service/mobile.service';
 import { CHOPCatalog } from '../../catalog/chop.catalog';
 import { ICDCatalog } from '../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { TARMEDCatalog } from '../../catalog/tarmed.catalog';
 import { CatalogElement } from '../../model/catalog.element';
 import { ConvertCodePipe } from '../../pipes/convert-code.pipe';
 import { CorrectVersionPipe } from '../../pipes/correct-version.pipe';
@@ -26,6 +27,7 @@ import { By } from '@angular/platform-browser';
 import { CatalogResolver } from '../../service/routing/catalog-resolver.service';
 import { CatalogVersionService } from '../../service/catalog-version.service';
 import { HttpClientModule } from '@angular/common/http';
+import {DetailTarmedComponent} from '../details/detail-tarmed/detail-tarmed.component';
 
 describe('MainComponent', () => {
 
@@ -63,6 +65,7 @@ describe('MainComponent', () => {
         DetailSwissDrgComponent,
         DetailChopComponent,
         DetailIcdComponent,
+        DetailTarmedComponent,
         ConvertCodePipe,
         CorrectVersionPipe,
       ],
@@ -77,7 +80,7 @@ describe('MainComponent', () => {
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
-        SwissDrgCatalog, CHOPCatalog, ICDCatalog,
+        SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
         CatalogSearchService,

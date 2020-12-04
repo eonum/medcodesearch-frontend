@@ -9,6 +9,7 @@ import { CatalogSearchService } from '../../../service/routing/catalog-search.se
 import { SwissDrgCatalog } from '../../../catalog/swissdrg.catalog';
 import { CHOPCatalog } from '../../../catalog/chop.catalog';
 import { ICDCatalog } from '../../../catalog/icd.catalog';
+import { TARMEDCatalog } from '../../../catalog/tarmed.catalog';
 import { CatalogServiceMock } from '../../../service/catalog.service.mock';
 
 describe('SearchResultsComponent', () => {
@@ -23,7 +24,7 @@ describe('SearchResultsComponent', () => {
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
         { provide: 'ILoggerService', useClass: NullLoggerService },
-        CatalogSearchService, SwissDrgCatalog, CHOPCatalog, ICDCatalog,
+        CatalogSearchService, SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         MobileService
       ]
