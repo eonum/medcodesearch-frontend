@@ -7,7 +7,7 @@ export class CorrectVersionPipe implements PipeTransform {
 
   public transform(s: string): string {
     if (s && typeof s === 'string') {
-      s = s.replace(/^ICD|^CHOP_/, '');
+      s = s.replace(/^ICD|^CHOP_|^TARMED_/, '');
     }
     return s;
   }
