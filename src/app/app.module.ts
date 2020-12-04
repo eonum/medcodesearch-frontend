@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { CHOPCatalog } from './catalog/chop.catalog';
 import { ICDCatalog } from './catalog/icd.catalog';
 import { SwissDrgCatalog } from './catalog/swissdrg.catalog';
+import { TARMEDCatalog } from './catalog/tarmed.catalog';
 import { DetailChopComponent } from './components/details/detail-chop/detail-chop.component';
 import { DetailIcdComponent } from './components/details/detail-icd/detail-icd.component';
 import { DetailSwissDrgComponent } from './components/details/detail-swiss-drg/detail-swiss-drg.component';
+import { DetailTarmedComponent } from './components/details/detail-tarmed/detail-tarmed.component';
 import { DetailComponent } from './components/details/detail/detail.component';
 import { MainComponent } from './components/main/main.component';
 import { FavoriteElementComponent } from './components/favorite-element/favorite-element.component';
@@ -60,6 +62,7 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     DetailSwissDrgComponent,
     DetailChopComponent,
     DetailIcdComponent,
+    DetailTarmedComponent,
     ConvertCodePipe,
     CorrectVersionPipe,
     FavoriteElementComponent
@@ -95,6 +98,7 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     SwissDrgCatalog,
     CHOPCatalog,
     ICDCatalog,
+    TARMEDCatalog,
     CatalogResolver,
     CatalogSearchService,
     MobileService,

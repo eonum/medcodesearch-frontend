@@ -4,6 +4,7 @@ import { HttpLoaderFactory } from './app.module';
 import { CHOPCatalog } from './catalog/chop.catalog';
 import { ICDCatalog } from './catalog/icd.catalog';
 import { SwissDrgCatalog } from './catalog/swissdrg.catalog';
+import { TARMEDCatalog } from './catalog/tarmed.catalog';
 import { FavoriteElementComponent } from './components/favorite-element/favorite-element.component';
 import { CatalogServiceMock } from './service/catalog.service.mock';
 import { NullLoggerService } from './service/logging/null.logger.service';
@@ -44,6 +45,7 @@ describe('AppComponent', () => {
         SwissDrgCatalog,
         CHOPCatalog,
         ICDCatalog,
+        TARMEDCatalog,
         CatalogResolver,
         CatalogVersionService,
       ]
