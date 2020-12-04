@@ -3,6 +3,7 @@ import { Catalog } from '../../catalog/catalog';
 import { CHOPCatalog } from '../../catalog/chop.catalog';
 import { ICDCatalog } from '../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { TARMEDCatalog} from '../../catalog/tarmed.catalog';
 import { ILoggerService } from '../logging/i.logger.service';
 import { Inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
@@ -22,11 +23,13 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
    * @param swissDrgCatalog
    * @param chopCatalog
    * @param icdCatalog
+   * @param tarmedCatalog
    */
   constructor(private router: Router,
     private swissDrgCatalog: SwissDrgCatalog,
     private chopCatalog: CHOPCatalog,
     private icdCatalog: ICDCatalog,
+    private tarmedCatalog: TARMEDCatalog,
     private sortHelper: SortHelper,
     @Inject('ILoggerService') private logger: ILoggerService,
     @Inject('ICatalogElementCache') private elementCache: ICatalogElementCache) {
@@ -39,10 +42,11 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
     this.catalogs[this.swissDrgCatalog.getName()] = this.swissDrgCatalog;
     this.catalogs[this.chopCatalog.getName()] = this.chopCatalog;
     this.catalogs[this.icdCatalog.getName()] = this.icdCatalog;
+    this.catalogs[this.tarmedCatalog.getName()] = this.tarmedCatalog;
   }
 
   private initElementCache(): void {
-    const catalogList = [this.swissDrgCatalog, this.chopCatalog, this.icdCatalog];
+    const catalogList = [this.swissDrgCatalog, this.chopCatalog, this.icdCatalog, this.tarmedCatalog];
     const languages = ['de', 'fr', 'it', 'en'];
 
     languages.forEach(language => {

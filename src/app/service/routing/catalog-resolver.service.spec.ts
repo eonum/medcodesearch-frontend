@@ -1,6 +1,7 @@
 import { CHOPCatalog } from '../../catalog/chop.catalog';
 import { ICDCatalog } from '../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import { TARMEDCatalog } from '../../catalog/tarmed.catalog';
 import { RouterStub } from '../../router-stub';
 import { CatalogServiceMock } from '../catalog.service.mock';
 import { NullLoggerService } from '../logging/null.logger.service';
@@ -36,7 +37,7 @@ describe('CatalogResolver', () => {
           useFactory: serviceFactory,
           deps: ['ILoggerService']
         },
-        SwissDrgCatalog, CHOPCatalog, ICDCatalog,
+        SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
       ],
       imports: [HttpClientModule],

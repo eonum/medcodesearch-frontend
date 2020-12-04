@@ -50,6 +50,11 @@ export const catalogConfigurations: { [name: string]: CatalogConfiguration } = {
     searchableTypes: ['drgs'],
     versionParam: 'drgs',
     rootElement: { type: 'mdcs', code: 'ALL' }
+  },
+  'TARMED': {
+    searchableTypes: ['tarmeds'],
+    versionParam: 'tarmeds',
+    rootElement: { type: 'tarmed_chapters' }
   }
 
 };

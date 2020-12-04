@@ -4,13 +4,12 @@ import { Catalog } from '../../catalog/catalog';
 import { CHOPCatalog } from '../../catalog/chop.catalog';
 import { ICDCatalog } from '../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
+import {TARMEDCatalog} from '../../catalog/tarmed.catalog';
 import { ILoggerService } from '../logging/i.logger.service';
 import { Inject, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogElement } from '../../model/catalog.element';
 import { BehaviorSubject ,  Subject } from 'rxjs';
-
-
 
 
 export class SearchRequest {
@@ -44,12 +43,14 @@ export class CatalogSearchService {
               private swissDrgCatalog: SwissDrgCatalog,
               private chopCatalog: CHOPCatalog,
               private icdCatalog: ICDCatalog,
+              private tarmedCatalog: TARMEDCatalog,
               @Inject('ILoggerService') private logger: ILoggerService) {
 
     this.catalogs = {};
     this.catalogs[swissDrgCatalog.getName()] = swissDrgCatalog;
     this.catalogs[chopCatalog.getName()] = chopCatalog;
     this.catalogs[icdCatalog.getName()] = icdCatalog;
+    this.catalogs[tarmedCatalog.getName()] = tarmedCatalog;
 
     this.searchResults = new BehaviorSubject(null); // fires always latest value on new subscription
 
