@@ -29,6 +29,10 @@
   "LBL_ANALOGOUS_CODE_TEXT": "Analogiekodierung",
   "LBL_PREDECESSORS": "Vorgängercodes in Vorversion",
   "LBL_SUCCESSORS": "Nachfolgercodes in Nachversion",
-  "LBL_NEW_CODE": "Dies ist ein Neukode, der keine Vorgängercodes in Vorversionen hat."
+  "LBL_NEW_CODE": "Dies ist ein Neukode, der keine Vorgängercodes in Vorversionen hat.",
+  "LBL_TP_AL": "Taxpunkt der ärztlichen Leistung",
+  "LBL_TP_TL": "Taxpunkt der technischen Leistung",
+  "LBL_TARMED_GROUPS": "TARMED-Gruppen",
+  "LBL_TARMED_BLOCKS": "TARMED-Blöcke"
 }
 

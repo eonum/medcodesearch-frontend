@@ -1,0 +1,26 @@
+<ng-template [ngIf]="selectedElement">
+  <ng-template [ngIf]="selectedElement.med_interpret">
+    <p [innerHTML]="selectedElement.med_interpret"></p>
+  </ng-template>
+  <ng-template [ngIf]="selectedElement.tech_interpret">
+    <p [innerHTML]="selectedElement.tech_interpret"></p>
+  </ng-template>
+  <ng-template [ngIf]="selectedElement.tp_al">
+    <h5>{{'LBL_TP_AL' | translate}}: {{selectedElement.tp_al}}</h5>
+  </ng-template>
+  <ng-template [ngIf]="selectedElement.tp_tl">
+    <h5>{{'LBL_TP_TL' | translate}}: {{selectedElement.tp_tl}}</h5>
+  </ng-template>
+  <ng-template [ngIf]="selectedElement.groups && selectedElement.groups?.length > 0">
+    <h4>{{'LBL_TARMED_GROUPS' | translate}}</h4>
+    <ul>
+      <li *ngFor="let group of selectedElement.groups" [innerHTML]="group.code + ': ' + group.text"></li>
+    </ul>
+  </ng-template>
+  <ng-template [ngIf]="selectedElement.blocks && selectedElement.blocks?.length > 0">
+    <h4>{{'LBL_TARMED_BLOCKS' | translate}}</h4>
+    <ul>
+      <li *ngFor="let block of selectedElement.blocks" [innerHTML]="block.code + ': ' + block.text"></li>
+    </ul>
+  </ng-template>
+</ng-template>

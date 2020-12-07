@@ -33,6 +33,7 @@
         </app-detail-swiss-drg>
         <app-detail-chop *ngIf="catalog === 'CHOP'" [selectedElement]="selectedElement"></app-detail-chop>
         <app-detail-icd *ngIf="catalog === 'ICD'" [selectedElement]="selectedElement"></app-detail-icd>
+        <app-detail-tarmed *ngIf="catalog === 'TARMED'" [selectedElement]="selectedElement"></app-detail-tarmed>
 
         <ng-template [ngIf]="selectedElement.predecessors?.length > 0 && !(selectedElement.predecessors?.length == 1 && selectedElement.predecessors[0].code == selectedElement.code && selectedElement.predecessors[0].text == selectedElement.text)">
           <h4>{{'LBL_PREDECESSORS' | translate}}</h4>
