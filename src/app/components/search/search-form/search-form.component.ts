@@ -11,6 +11,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { CatalogDisplayInfo, CatalogResolver } from '../../../service/routing/catalog-resolver.service';
 import { MobileService } from '../../../service/mobile.service';
 import { CatalogVersionService } from '../../../service/catalog-version.service';
+import {CatalogElement} from '../../../model/catalog.element';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -35,12 +36,16 @@ export class SearchFormComponent implements OnInit {
 
   public query: string;
   public catalog: string;
+  public checked: boolean;
 
   public languages: string[];
   public selectedVersion: string;
   public searchForm = new FormControl();
 
   public catalogDisplayInfos: CatalogDisplayInfo[];
+  public filterDisplayInfos: CatalogDisplayInfo[];
+  public displayFilter = false;
+
 
   @ViewChild('childModal') public childModal: ModalDirective;
 
@@ -75,10 +80,13 @@ export class SearchFormComponent implements OnInit {
     });
     this.route.data.subscribe((data: Data) => {
       // catalog versions to populate the drop-downs, according to the route param
-      this.catalogDisplayInfos = data.displayInfos;
-    });
-  }
 
+      // tslint:disable-next-line:max-line-length
+      this.catalogDisplayInfos = data.displayInfos.filter(obj => obj.catalog === 'CHOP' || obj.catalog === 'SwissDRG' || obj.catalog === 'TARMED' || obj.catalog === 'ICD' || obj.catalog === 'Gesetze und Reglemente');
+      this.filterDisplayInfos = data.displayInfos.filter(obj => obj.catalog === 'KLV1');
+    });
+
+  }
   public showChildModal(): void {
     this.childModal.show();
   }
@@ -104,14 +112,83 @@ export class SearchFormComponent implements OnInit {
 
     // get the CatalogDisplayInfo to check the version
     const info = this.catalogDisplayInfos.find((inf: CatalogDisplayInfo) => inf.catalog === catalog);
-
     version = version || info.displayVersion;
-
     if (info.languageVersions.indexOf(version) === -1) {
       this.showLanguageSelector(catalog, version);
     } else {
-      this.redirect(catalog, version);
+      if (info.catalog === 'Gesetze und Reglemente') {
+        this.checked = false;
+        this.redirect(catalog, version);
+
+        /* not ideal solution */
+        // check if filter are available for the updated version of the catalog Gesetze und Reglemente
+        /*if (info.catalog === 'Gesetze und Reglemente') {
+          this.checkFilter(info.catalog, info.displayVersion);
+          /*this.updateFilterVersion(info);
+        } else {*/
+      } else {
+        this.redirect(catalog, version);
+      }
     }
+  }
+
+  /* ToDo check if filter is available in version of catalog and update or disable filter */
+  /*
+  public updateFilterVersion(info) {
+    console.log(this.filterDisplayInfos);
+    for (const obj of this.filterDisplayInfos){
+     if (obj.displayVersions.indexOf(info.displayVersion) !== -1) {
+       for (let i = 0; i < obj.displayVersions.length; i++) {
+         const ver = obj.displayVersions[i];
+         if (ver.includes(info.displayVersion)) {
+           console.log(obj.displayVersion);
+           this.filterDisplayInfos.splice(obj, 1);
+           return obj.displayVersion === ver;
+           console.log(obj.displayVersion);
+         } else {
+
+         }
+       }
+     }
+      for (const obj of this.filterDisplayInfos){
+        if (!obj.displayVersion.includes(info.displayVersion)) {
+          if (!obj.displayVersions.includes(info.displayVersion)) {
+            this.filterDisplayInfos = this.filterDisplayInfos.filter( temp => temp.catalog !== obj.catalog)
+            console.log(this.filterDisplayInfos);
+          } else {
+          for (let i = 0; i < obj.displayVersions.length; i++) {
+            const ver = obj.displayVersions[i];
+            if (ver.includes(info.displayVersion)) {
+              console.log(obj.displayVersion);
+              this.filterDisplayInfos.splice(obj, 1);
+              return obj.displayVersion === ver;
+              console.log(obj.displayVersion);
+              break;
+            }
+          }
+        }
+      }
+
+     this.filterDisplayInfos.push(obj);
+    }
+    this.displayFilter = this.filterDisplayInfos.length > 0;
+    console.log(this.displayFilter);
+    console.log(this.filterDisplayInfos);
+    return this.filterDisplayInfos;
+  }*/
+
+
+  public checkFilter(catalog: string, version?: string): void {
+    const element = <HTMLInputElement> document.getElementById('defaultCheck');
+
+    if (element.checked) {
+          this.redirect(catalog, version);
+      } else {
+      /* only temporary solution -> should not be hardcoded */
+          catalog = 'Gesetze und Reglemente';
+          version = '2021';
+          this.updateCatalog(catalog, version);
+        }
   }
 
   /**
@@ -138,7 +215,6 @@ export class SearchFormComponent implements OnInit {
       relativeTo: this.route,
       queryParams: query.length > 0 ? { query: query } : null
     }).catch(error => this.logger.error(error));
-
     this.mobileService.setQuery(query);
   }
 

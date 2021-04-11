@@ -1,0 +1,23 @@
+<div class="table" *ngFor="let element of selectedElement">
+  <h3>{{element.parent.code}}</h3>
+  <h4>{{element.parent.text}}</h4>
+  <br>
+<table class="table-bordered">
+  <thead>
+  <tr class="tbl-default">
+    <th>{{'LBL_KLV1_col1' | translate}}</th>
+    <th>{{'LBL_KLV1_col2' | translate}}</th>
+    <th>{{'LBL_KLV1_col3' | translate}}</th>
+    <th>{{'LBL_KLV1_col4' | translate}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="tbl-default">
+    <td>{{element.parent.text}}</td>
+    <td>{{element.obligation}}</td>
+    <td>{{element.text}}</td>
+    <td>{{element.valid_from}}</td>
+  </tr>
+  </tbody>
+</table>
+</div>

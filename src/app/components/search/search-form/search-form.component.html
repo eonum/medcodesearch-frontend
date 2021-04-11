@@ -41,13 +41,20 @@
               <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
             </li>
           </ul>
-
+        </div>
+        <!-- temporary solution, in future condition ngIf should be displayed with displayFilter boolean-->
+        <div *ngIf="catalog === 'Gesetze und Reglemente' || catalog === 'KLV1'">
+        <div class="form-check" *ngFor="let filterDisplay of filterDisplayInfos">
+          <button class="form-check-button">
+            <input class="form-check-input" type="checkbox" id="defaultCheck" [(ngModel)]="checked" (change)="checkFilter(filterDisplay.catalog, filterDisplay.displayVersion)">
+            <label class="form-check-label" for="defaultCheck">
+              {{filterDisplay.catalog}}</label>
+          </button>
+        </div>
         </div>
       </div>
-
     </div>
   </div>
-
 
   <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
        aria-hidden="true">

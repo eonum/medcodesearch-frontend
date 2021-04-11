@@ -20,6 +20,7 @@ export class MainComponent implements OnInit {
 
   public query;
   public mobile;
+  public catalog;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -40,10 +41,12 @@ export class MainComponent implements OnInit {
       return;
     }
 
-    // Subscribe to the search query, to now if SearchResult component must be displayed.
+    // Subscribe to route params, to know which catalog is being displayed
+    this.route.params.subscribe((params: Params) => this.catalog = params['catalog']);
+
+    // Subscribe to the search query, to know if SearchResult component must be displayed.
     this.route.queryParams.subscribe((params: Params) => this.query = params['query']);
     this.mobileService.setQuery(this.query);
-
     // Subscribe to route params, to check  if childroute :type/:code exists.
     this.route.params.subscribe((params: Params) => {
 

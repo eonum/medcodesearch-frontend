@@ -1,8 +1,32 @@
+.form-check {
+  margin-top: 15px;
+}
+
+.form-check-button {
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.form-check-label {
+  padding-top: 2px;
+  margin-left: 10px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
 .row {
   margin-bottom: 10px;
 }
 .search-center {
-    max-width: 640px;
+    max-width: 896px;
     margin: auto;
     text-align: center;
 }

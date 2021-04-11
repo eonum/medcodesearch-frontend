@@ -33,6 +33,10 @@
   "LBL_TP_AL": "Taxpunkt der ärztlichen Leistung",
   "LBL_TP_TL": "Taxpunkt der technischen Leistung",
   "LBL_TARMED_GROUPS": "TARMED-Gruppen",
-  "LBL_TARMED_BLOCKS": "TARMED-Blöcke"
+  "LBL_TARMED_BLOCKS": "TARMED-Blöcke",
+  "LBL_KLV1_col1": "Massnahmen",
+  "LBL_KLV1_col2": "Leistungs-\npflicht",
+  "LBL_KLV1_col3": "Voraussetzungen",
+  "LBL_KLV1_col4": "gültig ab"
 }
 

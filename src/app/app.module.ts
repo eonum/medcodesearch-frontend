@@ -7,6 +7,7 @@ import { CHOPCatalog } from './catalog/chop.catalog';
 import { ICDCatalog } from './catalog/icd.catalog';
 import { SwissDrgCatalog } from './catalog/swissdrg.catalog';
 import { TARMEDCatalog } from './catalog/tarmed.catalog';
+import { KlV1Catalog } from './catalog/klv1.catalog';
 import { DetailChopComponent } from './components/details/detail-chop/detail-chop.component';
 import { DetailIcdComponent } from './components/details/detail-icd/detail-icd.component';
 import { DetailSwissDrgComponent } from './components/details/detail-swiss-drg/detail-swiss-drg.component';
@@ -33,6 +34,8 @@ import { CatalogSearchService } from './service/routing/catalog-search.service';
 import { MobileService } from './service/mobile.service';
 import { CatalogVersionService } from './service/catalog-version.service';
 import { GoogleAnalyticsEventsService } from './service/google-analytics-events.service';
+import { DetailKlv1Component } from './components/details/detail-klv1/detail-klv1.component';
+import {RegCatalog} from './catalog/reg.catalog';
 
 /**
  * Factory function to initialize the TranslateModule.
@@ -65,7 +68,8 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     DetailTarmedComponent,
     ConvertCodePipe,
     CorrectVersionPipe,
-    FavoriteElementComponent
+    FavoriteElementComponent,
+    DetailKlv1Component
   ],
   imports: [
     BrowserModule,
@@ -99,6 +103,8 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     CHOPCatalog,
     ICDCatalog,
     TARMEDCatalog,
+    KlV1Catalog,
+    RegCatalog,
     CatalogResolver,
     CatalogSearchService,
     MobileService,

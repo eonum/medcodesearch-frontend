@@ -1,16 +1,17 @@
 
-import { CatalogConfiguration } from '../catalog/catalog.configuration';
+import {CatalogConfiguration, catalogConfigurations} from '../catalog/catalog.configuration';
 import { CatalogElement } from '../model/catalog.element';
 import { ICatalogService } from './i.catalog.service';
 import { ILoggerService } from './logging/i.logger.service';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import {version} from 'punycode';
 
 @Injectable()
 export class CatalogService implements ICatalogService {
 
-  private baseUrl = 'https://search.eonum.ch/';
+  private baseUrl = 'http://0.0.0.0:3000/';
 
   private config: CatalogConfiguration;
 
@@ -130,43 +131,49 @@ export class CatalogService implements ICatalogService {
                                               code: string,
                                               query?: string,
                                               language?: string): Promise<CatalogElement> {
+
     const locale: string = language || this.getLocale();
     let url = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
 
-    if (query) {
-      url += `&query=${query}`;
-    }
 
-    this.logger.http(url);
+      if (query) {
+        url += `&query=${query}`;
+      }
 
-    return this.http.get(url).toPromise()
-      .then(result => {
-        const resultObject: CatalogElement = result as CatalogElement;
+      this.logger.http(url);
 
-        // Assign the type because eonum API doesn't use
-        // the concept of types.
-        resultObject.type = elementType;
+      return this.http.get(url).toPromise()
+        .then(result => {
+          const resultObject: CatalogElement = result as CatalogElement;
 
-        // Assign the url manually because eonum API doesn't
-        // return the url when details are loaded
-        resultObject.url = `/${locale}/${elementType}/${version}/${code}`;
+          // Assign the type because eonum API doesn't use
+          // the concept of types.
+          resultObject.type = elementType;
 
-        // The code of the element and the code to retrieve the element
-        // don't always match (e.g. for partitions in SwissDRG).
-        // Therefore store the code to display in name property
-        // and store the code to retrieve the element into the code property
-        resultObject.name = resultObject.code;
-        resultObject.code = code;
+          // Assign the url manually because eonum API doesn't
+          // return the url when details are loaded
+          resultObject.url = `/${locale}/${elementType}/${version}/${code}`;
 
-        return resultObject;
-      })
-      .catch(reason => {
-        throw new Error(reason);
-      });
+          // The code of the element and the code to retrieve the element
+          // don't always match (e.g. for partitions in SwissDRG).
+          // Therefore store the code to display in name property
+          // and store the code to retrieve the element into the code property
+          resultObject.name = resultObject.code;
+          resultObject.code = code;
+
+          return resultObject;
+        })
+        .catch(reason => {
+          throw new Error(reason);
+        });
   }
 
   private async getSearchForType(elementType: string, version: string, query: string): Promise<CatalogElement[]> {
-    const url = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
+    console.log(elementType);
+    const url = elementType === 'klv1s'
+      ? `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?search=${query}`
+      : `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
+
     this.logger.http(url);
 
     return this.http.get(url).toPromise()
