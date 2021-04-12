@@ -133,8 +133,8 @@ export class CatalogService implements ICatalogService {
                                               language?: string): Promise<CatalogElement> {
 
     const locale: string = language || this.getLocale();
-    let url = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
 
+    let url = `${this.baseUrl}${locale}/${elementType}/${version}/${code}?show_detail=1`;
 
       if (query) {
         url += `&query=${query}`;

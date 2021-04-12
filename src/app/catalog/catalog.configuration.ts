@@ -64,6 +64,6 @@ export const catalogConfigurations: { [name: string]: CatalogConfiguration } = {
   'KLV1': {
     searchableTypes: ['klv1s'],
     versionParam: 'klv1s',
-    rootElement: { type: 'klv1s' }
+    rootElement: { type: 'klv1_chapters' }
   },
 };

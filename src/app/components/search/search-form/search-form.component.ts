@@ -187,7 +187,7 @@ export class SearchFormComponent implements OnInit {
       /* only temporary solution -> should not be hardcoded */
           catalog = 'Gesetze und Reglemente';
           version = '2021';
-          this.updateCatalog(catalog, version);
+          this.redirect(catalog, version);
         }
   }
 

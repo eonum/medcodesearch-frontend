@@ -34,7 +34,7 @@
         <app-detail-chop *ngIf="catalog === 'CHOP'" [selectedElement]="selectedElement"></app-detail-chop>
         <app-detail-icd *ngIf="catalog === 'ICD'" [selectedElement]="selectedElement"></app-detail-icd>
         <app-detail-tarmed *ngIf="catalog === 'TARMED'" [selectedElement]="selectedElement"></app-detail-tarmed>
-        <app-detail-klv1 *ngIf="catalog === 'KLV1'" [selectedElement]="selectedElement"></app-detail-klv1>
+        <app-detail-klv1 *ngIf="catalog === 'KLV1' && selectedElement.url !== '/de/klv1_chapters/KLV1-V1-2021/KLV1-V1-2021'" [selectedElement]="selectedElement"></app-detail-klv1>
 
         <ng-template [ngIf]="selectedElement.predecessors?.length > 0 && !(selectedElement.predecessors?.length == 1 && selectedElement.predecessors[0].code == selectedElement.code && selectedElement.predecessors[0].text == selectedElement.text)">
           <h4>{{'LBL_PREDECESSORS' | translate}}</h4>
@@ -58,8 +58,16 @@
           </ul>
         </ng-template>
 
-        <ng-template [ngIf]="children?.length > 0">
+        <ng-template [ngIf]="children?.length > 0 && catalog !=='KLV1'">
           <h4>{{'LBL_CHILDREN' | translate}}</h4>
+          <ul>
+            <li *ngFor="let child of children">
+              <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
+            </li>
+          </ul>
+        </ng-template>
+        <!-- only for demo purpose, will be deleted -->
+        <ng-template [ngIf]="children?.length > 0 && catalog ==='KLV1'">
           <ul>
             <li *ngFor="let child of children">
               <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
