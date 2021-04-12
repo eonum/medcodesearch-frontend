@@ -16,9 +16,12 @@ export class DetailKlv1Component implements OnInit {
 
   @Input() public selectedElement: CatalogElement [];
 
+  public element: CatalogElement;
+
   constructor() { }
 
   public ngOnInit(): void {
+    this.element = this.selectedElement[0];
   }
 
 }
