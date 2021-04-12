@@ -237,5 +237,4 @@ export class SearchFormComponent implements OnInit {
       queryParamsHandling: 'merge'
     });
   }
-
 }
