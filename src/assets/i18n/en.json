@@ -29,5 +29,7 @@
   "LBL_ANALOGOUS_CODE_TEXT": "Analogous codes",
   "LBL_PREDECESSORS": "Predecessor codes in previous version",
   "LBL_SUCCESSORS": "Successor codes in next version",
-  "LBL_NEW_CODE": "This is a new code without any corresponding code in the previous version."
+  "LBL_NEW_CODE": "This is a new code without any corresponding code in the previous version.",
+  "LBL_REG_op": "Options",
+  "LBL_REG": "Laws and Regulations"
 }

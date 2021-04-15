@@ -145,7 +145,6 @@ export class CatalogService implements ICatalogService {
       return this.http.get(url).toPromise()
         .then(result => {
           const resultObject: CatalogElement = result as CatalogElement;
-
           // Assign the type because eonum API doesn't use
           // the concept of types.
           resultObject.type = elementType;
@@ -160,7 +159,6 @@ export class CatalogService implements ICatalogService {
           // and store the code to retrieve the element into the code property
           resultObject.name = resultObject.code;
           resultObject.code = code;
-
           return resultObject;
         })
         .catch(reason => {
@@ -170,6 +168,7 @@ export class CatalogService implements ICatalogService {
 
   private async getSearchForType(elementType: string, version: string, query: string): Promise<CatalogElement[]> {
     console.log(elementType);
+    // will be changed when highlight function is implemented in backend
     const url = elementType === 'klv1s'
       ? `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?search=${query}`
       : `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;

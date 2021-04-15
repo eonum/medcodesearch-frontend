@@ -12,6 +12,8 @@ import { CatalogDisplayInfo, CatalogResolver } from '../../../service/routing/ca
 import { MobileService } from '../../../service/mobile.service';
 import { CatalogVersionService } from '../../../service/catalog-version.service';
 import {CatalogElement} from '../../../model/catalog.element';
+import {computeStyle} from '@angular/animations/browser/src/util';
+import {element} from '@angular/core/src/render3/instructions';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -37,6 +39,7 @@ export class SearchFormComponent implements OnInit {
   public query: string;
   public catalog: string;
   public checked: boolean;
+  public disabled = false;
 
   public languages: string[];
   public selectedVersion: string;
@@ -44,7 +47,13 @@ export class SearchFormComponent implements OnInit {
 
   public catalogDisplayInfos: CatalogDisplayInfo[];
   public filterDisplayInfos: CatalogDisplayInfo[];
-  public displayFilter = false;
+  public tempFilterDisplayInfos = new Array<{ catalog: string; version: string; isChecked: boolean}>();
+  public tempFilterIsChecked = new Array <{ catalog: string; version: string; isChecked: boolean}>();
+  public tempVersions: string[];
+
+  public displayFilter  = false;
+  public regVersion: string;
+  public regCatalog: string;
 
 
   @ViewChild('childModal') public childModal: ModalDirective;
@@ -80,10 +89,9 @@ export class SearchFormComponent implements OnInit {
     });
     this.route.data.subscribe((data: Data) => {
       // catalog versions to populate the drop-downs, according to the route param
-
-      // tslint:disable-next-line:max-line-length
-      this.catalogDisplayInfos = data.displayInfos.filter(obj => obj.catalog === 'CHOP' || obj.catalog === 'SwissDRG' || obj.catalog === 'TARMED' || obj.catalog === 'ICD' || obj.catalog === 'Gesetze und Reglemente');
-      this.filterDisplayInfos = data.displayInfos.filter(obj => obj.catalog === 'KLV1');
+      this.catalogDisplayInfos = data.displayInfos;
+      // get all catalogs that will be displayed as filters
+      this.filterDisplayInfos = this.catalogDisplayInfos.filter((obj, index) => { return index > 4 })
     });
 
   }
@@ -113,82 +121,54 @@ export class SearchFormComponent implements OnInit {
     // get the CatalogDisplayInfo to check the version
     const info = this.catalogDisplayInfos.find((inf: CatalogDisplayInfo) => inf.catalog === catalog);
     version = version || info.displayVersion;
+
     if (info.languageVersions.indexOf(version) === -1) {
       this.showLanguageSelector(catalog, version);
-    } else {
-      if (info.catalog === 'Gesetze und Reglemente') {
-        this.checked = false;
-        this.redirect(catalog, version);
 
-        /* not ideal solution */
-        // check if filter are available for the updated version of the catalog Gesetze und Reglemente
-        /*if (info.catalog === 'Gesetze und Reglemente') {
-          this.checkFilter(info.catalog, info.displayVersion);
-          /*this.updateFilterVersion(info);
-        } else {*/
-      } else {
+    } else {
+      // fill array tempFilterDisplayInfos with all catalogs that have a valid version
+      if (info.catalog === 'REG') {
+        this.displayFilter = true;
+        this.regVersion = version || info.displayVersion;
+        this.regCatalog = info.catalog;
+        this.tempFilterDisplayInfos = [];
+
+        for (const obj of this.filterDisplayInfos) {
+          if (obj.languageVersions.indexOf(obj.displayVersion) !== -1) {
+            this.tempVersions = obj.displayVersions;
+            for (const ver of this.tempVersions) {
+              if (!ver.includes(this.regVersion)) {
+                this.tempVersions = this.tempVersions.filter(el => el !== ver);
+              } else {
+                this.tempFilterDisplayInfos.push({catalog: obj.catalog, version: ver, isChecked: true});
+              }
+            }
+          }
+        }
+      this.checkFilter();
+    } else {
+        this.displayFilter = false;
         this.redirect(catalog, version);
       }
     }
   }
 
-  /* ToDo check if filter is available in version of catalog and update or disable filter */
-  /*
-  public updateFilterVersion(info) {
-    console.log(this.filterDisplayInfos);
-    for (const obj of this.filterDisplayInfos){
-     if (obj.displayVersions.indexOf(info.displayVersion) !== -1) {
-       for (let i = 0; i < obj.displayVersions.length; i++) {
-         const ver = obj.displayVersions[i];
-         if (ver.includes(info.displayVersion)) {
-           console.log(obj.displayVersion);
-           this.filterDisplayInfos.splice(obj, 1);
-           return obj.displayVersion === ver;
-           console.log(obj.displayVersion);
-         } else {
-
-         }
-       }
-     }
-      for (const obj of this.filterDisplayInfos){
-        if (!obj.displayVersion.includes(info.displayVersion)) {
-          if (!obj.displayVersions.includes(info.displayVersion)) {
-            this.filterDisplayInfos = this.filterDisplayInfos.filter( temp => temp.catalog !== obj.catalog)
-            console.log(this.filterDisplayInfos);
-          } else {
-          for (let i = 0; i < obj.displayVersions.length; i++) {
-            const ver = obj.displayVersions[i];
-            if (ver.includes(info.displayVersion)) {
-              console.log(obj.displayVersion);
-              this.filterDisplayInfos.splice(obj, 1);
-              return obj.displayVersion === ver;
-              console.log(obj.displayVersion);
-              break;
-            }
-          }
-        }
+  /**
+   *  check if checkbox of catalog filters are checked
+   */
+  public checkFilter(): void {
+    // fill array tempFilterIsChecked with all checked catalog filters
+    this.tempFilterIsChecked = this.tempFilterDisplayInfos.filter((value, index) => {
+      return value.isChecked
+    });
+    if (this.tempFilterIsChecked.length > 0) {
+      for (const obj of this.tempFilterIsChecked) {
+        this.redirect(obj.catalog, obj.version);
       }
-
-     this.filterDisplayInfos.push(obj);
-    }
-    this.displayFilter = this.filterDisplayInfos.length > 0;
-    console.log(this.displayFilter);
-    console.log(this.filterDisplayInfos);
-    return this.filterDisplayInfos;
-  }*/
-
-
-  public checkFilter(catalog: string, version?: string): void {
-    const element = <HTMLInputElement> document.getElementById('defaultCheck');
-
-    if (element.checked) {
-          this.redirect(catalog, version);
-      } else {
-      /* only temporary solution -> should not be hardcoded */
-          catalog = 'Gesetze und Reglemente';
-          version = '2021';
-          this.redirect(catalog, version);
-        }
+    } else {
+        // only temporary until endpoint 'Gesetze und Reglemente' exists
+        this.redirect(this.regCatalog, this.regVersion);
+      }
   }
 
   /**

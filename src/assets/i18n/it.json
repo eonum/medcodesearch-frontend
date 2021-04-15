@@ -33,5 +33,7 @@
   "LBL_KLV1_col1": "Provvedimento",
   "LBL_KLV1_col2": "Rimunerazione\nobbligatoria",
   "LBL_KLV1_col3": "Condizioni",
-  "LBL_KLV1_col4": "Decisione\nvalida a\npartire dal"
+  "LBL_KLV1_col4": "Decisione\nvalida a\npartire dal",
+  "LBL_REG_op": "Opzioni",
+  "LBL_REG": "Leggi e Regolamenti"
 }

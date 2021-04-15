@@ -37,6 +37,8 @@
   "LBL_KLV1_col1": "Massnahmen",
   "LBL_KLV1_col2": "Leistungs-\npflicht",
   "LBL_KLV1_col3": "Voraussetzungen",
-  "LBL_KLV1_col4": "gültig ab"
+  "LBL_KLV1_col4": "gültig ab",
+  "LBL_REG_op": "Optionen",
+  "LBL_REG": "Gesetze und Reglemente"
 }
 

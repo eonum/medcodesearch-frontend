@@ -19,10 +19,13 @@
     <div class="col-xs-12">
       <div class="search-center">
 
-        <div class="btn-group" dropdown *ngFor="let catDisplay of catalogDisplayInfos">
+        <div class="btn-group" dropdown *ngFor="let catDisplay of catalogDisplayInfos; let i = index">
+          <ng-template [ngIf]="i < 5">
           <button type="button" class="catalog btn btn-default"
                   [ngClass]="{'active': catDisplay.catalog === catalog}"
-                  (click)="updateCatalog(catDisplay.catalog)">{{catDisplay.catalog}}
+                  (click)="updateCatalog(catDisplay.catalog, catDisplay.displayVersion)">
+            <div *ngIf="catDisplay.catalog === 'REG'; else elseBlock">{{'LBL_REG' | translate}}</div>
+            <ng-template #elseBlock>{{catDisplay.catalog}}</ng-template>
           </button>
 
           <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
@@ -41,18 +44,23 @@
               <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
             </li>
           </ul>
+        </ng-template>
         </div>
-        <!-- temporary solution, in future condition ngIf should be displayed with displayFilter boolean-->
-        <div *ngIf="catalog === 'Gesetze und Reglemente' || catalog === 'KLV1'">
-        <div class="form-check" *ngFor="let filterDisplay of filterDisplayInfos">
-          <button class="form-check-button">
-            <input class="form-check-input" type="checkbox" id="defaultCheck" [(ngModel)]="checked" (change)="checkFilter(filterDisplay.catalog, filterDisplay.displayVersion)">
-            <label class="form-check-label" for="defaultCheck">
-              {{filterDisplay.catalog}}</label>
+
+
+        <div class="btn-group" dropdown *ngIf="this.displayFilter">
+          <button type="button" class="version btn btn-filter dropdown-toggle-split" dropdownToggle>
+            <span>{{"LBL_REG_op" | translate}}</span>
+            <span class="caret"></span>
+            <span class="sr-only">{{"LBL_REG_op" | translate}}</span>
           </button>
+          <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button" data-control="checkbox-dropdown">
+            <li *ngFor="let element of tempFilterDisplayInfos; let j = index" role="menuitem">
+                <input class="form-check-input" type="checkbox" id="defaultCheck" [(ngModel)]="element.isChecked" (change)="checkFilter()">{{element.catalog}}
+            </li>
+          </ul>
         </div>
         </div>
-      </div>
     </div>
   </div>
 

@@ -43,12 +43,13 @@
         "TARMED": [
           "TARMED_01.09"
         ],
-        "Gesetze und Reglemente": [
-          "2021"
+        "REG": [
+          "2021",
+          "2020"
         ],
         "KLV1": [
           "KLV1-V1-2021",
-          "KLV1-V1-2020"
+          "KLV1-V2-2020"
         ]
     },
     "fr": {
@@ -90,12 +91,13 @@
         "TARMED": [
           "TARMED_01.09"
         ],
-        "Gesetze und Reglemente": [
-          "2021"
+        "REG": [
+          "2021",
+          "2020"
         ],
         "KLV1": [
           "KLV1-V1-2021",
-          "KLV1-V1-2020"
+          "KLV1-V2-2020"
         ]
     },
   "it": {
@@ -137,12 +139,13 @@
         "TARMED": [
           "TARMED_01.09"
         ],
-        "Gesetze und Reglemente": [
-          "2021"
+        "REG": [
+          "2021",
+          "2020"
         ],
         "KLV1": [
           "KLV1-V1-2021",
-          "KLV1-V1-2020"
+          "KLV1-V2-2020"
         ]
     },
     "en": {
@@ -164,7 +167,7 @@
         "CHOP": [],
         "SwissDRG": [],
         "TARMED": [],
-        "Gesetze und Reglemente": [],
+        "REG": [],
         "KLV1": []
     }
 }

@@ -12,6 +12,7 @@ export class CatalogElement {
   public type: string;
   public highlight?: Highlight;
   public version?: string;
+  public chapter?: string;
   public url: string;
   public parent?: CatalogElement;
   public children?: CatalogElement[];

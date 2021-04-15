@@ -77,9 +77,7 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
 
     const type = route.params['type'];
     const code = route.params['code'];
-
     const currentCatalog = this.catalogs[catalog];
-
     return await this.getElement(language, catalog, version, type, code);
   }
 
@@ -92,19 +90,15 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
   public async getElement(language: string, catalog: string, version: string, type: string, code: string): Promise<CatalogElement> {
 
     const currentCatalog: Catalog = this.catalogs[catalog];
-
     let element: CatalogElement = this.elementCache.getElement(language, catalog, version, type, code);
-
     if (element === null) {
       element = await currentCatalog.getByCode(type, code, version, language);
       this.elementCache.addElement(language, catalog, version, type, code, element);
 
       await this.loadParents(language, catalog, version, element);
       this.processChildren(element);
-
       return Promise.resolve(element);
     }
-
     return Promise.resolve(element);
   }
 
@@ -148,7 +142,7 @@ export class CatalogElementResolver implements Resolve<CatalogElement> {
    * @param url the url of a {@link CatalogElement}
    */
   private extractTypeFromUrl(url: string): string {
-    const regex: RegExp = new RegExp('^\/[a-z]{2}\/([a-z_]+)\/.*$');
+    const regex: RegExp = new RegExp('^\/[a-z]{2}\/([a-z_1]+)\/.*$');
     const match = regex.exec(url);
     return match[1];
   }

@@ -1,5 +1,6 @@
 import { CatalogElement } from '../../../model/catalog.element';
 import { Component, OnInit, Input } from '@angular/core';
+import {map} from 'rxjs/operators';
 
 /**
  * Component to display custom details of an element

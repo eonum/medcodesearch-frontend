@@ -2,11 +2,12 @@
   margin-top: 15px;
 }
 
-.form-check-button {
+.btn-filter {
   border: 1px solid #ccc;
   border-radius: 0px;
   background-color: white;
-  padding-left: 10px;
+  padding-left: 0px;
+  margin-left: 0px;
   padding-right: 10px;
 }
 
@@ -26,7 +27,7 @@
   margin-bottom: 10px;
 }
 .search-center {
-    max-width: 896px;
+    max-width: 1500px;
     margin: auto;
     text-align: center;
 }

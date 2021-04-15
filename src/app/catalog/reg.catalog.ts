@@ -11,6 +11,6 @@ import { catalogConfigurations } from './catalog.configuration';
 export class RegCatalog extends Catalog {
 
   constructor( @Inject('ICatalogService') service: ICatalogService, @Inject('ILoggerService') logger: ILoggerService) {
-    super(service, logger, 'Gesetze und Reglemente', catalogConfigurations['Gesetze und Reglemente']);
+    super(service, logger, 'REG', catalogConfigurations['REG']);
   }
 }

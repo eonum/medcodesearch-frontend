@@ -148,7 +148,6 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
    */
   public getRootElement(catalog: string, version: string): { type, code: string } {
     const root = catalogConfigurations[catalog].rootElement;
-
     /* The code of the root element is the same as the current
      version for ICD and CHOP.
      For SwissDRG, the code of the root element is 'ALL'.
