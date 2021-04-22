@@ -20,6 +20,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 import * as TypeMoq from 'typemoq';
+import { DetailKlv1Component } from '../detail-klv1/detail-klv1.component';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -58,6 +59,7 @@ describe('DetailComponent', () => {
         DetailSwissDrgComponent,
         DetailChopComponent,
         DetailIcdComponent,
+        DetailKlv1Component,
         ConvertCodePipe,
         CorrectVersionPipe
       ],

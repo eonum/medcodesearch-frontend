@@ -4,6 +4,8 @@ import { Component, Inject, OnInit, EventEmitter, Output, ViewChild } from '@ang
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { MobileService } from '../../../service/mobile.service';
 import { IFavoriteElementService } from '../../../service/favorites/i.favorite.element.service';
+import {unwrapFirst} from 'codelyzer/util/function';
+import {selectValueAccessor} from '@angular/forms/src/directives/shared';
 
 /**
  * Component for displaying of detail information of a specific
@@ -53,9 +55,26 @@ export class DetailComponent implements OnInit {
   public ngOnInit(): void {
     this.route.data.subscribe((data: Data) => {
       this.selectedElement = data.catalogElement;
+
+      // check if children of klv1_chapters valid
+     /*  if (this.selectedElement.children !== undefined && this.selectedElement.children.length !== null && this.selectedElement.type === 'klv_chapters') {
+          this.selectedElement.children = this.selectedElement.children.filter(val => {return val.text !== null});
+          if (this.selectedElement.children.length > 1) {
+            console.log(this.selectedElement.children)
+            this.selectedElement.children = this.selectedElement.children.sort((a, b) => {
+              if (a.code < b.code) {
+                return -1;
+              } else if (a.code > b.code) {
+                return 1;
+              } else {
+                return 0;
+              }
+            });
+            console.log(this.selectedElement.children)
+          }
+        }*/
       this.updateView();
-    }
-    );
+    });
   }
 
   /**

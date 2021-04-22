@@ -8,14 +8,10 @@
          (click)="openCode(result.type, result.code)"
          class="search-result" [class.active]="result.code===selectedCode">
         <dt>
-          <span class="link" >{{result.code}}</span>
+          <span class="link" >{{result.type === 'klv1s' ? result.code+': '+result.parent.text : result.code}}</span>
           <!--<a [routerLink]="['./', result.type, result.code]">{{result.code}}</a>-->
           <!-- ToDO better solution -->
-          <span style="font-weight: normal" *ngIf="result.type === 'klv1s'"><br>{{result.parent.text}}</span>
         </dt>
-        <!-- ngIf will be deleted when highlight is implemented for klv1 in the backend -->
-        <ng-template *ngIf="result.type === 'klv1s'; else elseBlock"></ng-template>
-        <ng-template #elseBlock>
           <ng-template [ngIf]="result.highlight.text != undefined">
             <dd [innerHtml]="result.highlight.text[0]"></dd>
           </ng-template>
@@ -32,7 +28,6 @@
               </ng-template>
             </div>
           </ng-template>
-        </ng-template>
       </p>
       <p *ngIf="searchResults.length==0">
         {{ 'LBL_NO_RESULTS' | translate }}

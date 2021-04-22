@@ -30,10 +30,10 @@
   "LBL_PREDECESSORS": "Vorgängercodes in Vorversion",
   "LBL_SUCCESSORS": "Nachfolgercodes in Nachversion",
   "LBL_NEW_CODE": "Dies ist ein Neukode, der keine Vorgängercodes in Vorversionen hat.",
-  "LBL_KLV1_col1": "Mesures",
-  "LBL_KLV1_col2": "Obligatoirement à la\ncharge de\nl’assurance",
+  "LBL_KLV1_col1": "Mesure",
+  "LBL_KLV1_col2": "Obliga-\ntoirement\nà la\ncharge de \nl’assurance",
   "LBL_KLV1_col3": "Conditions",
-  "LBL_KLV1_col4": "Décision\nvalable à\npartir du",
-  "LBL_REG_op": "Options",
+  "LBL_KLV1_col4": "Décision\nvalable\nà partir\ndu",
+  "LBL_REG_op": "Sources",
   "LBL_REG": "Lois et Règlements"
 }

@@ -22,43 +22,44 @@
         <div class="btn-group" dropdown *ngFor="let catDisplay of catalogDisplayInfos; let i = index">
           <ng-template [ngIf]="i < 5">
           <button type="button" class="catalog btn btn-default"
-                  [ngClass]="{'active': catDisplay.catalog === catalog}"
+                  [ngClass]="{'active': catDisplay.catalog === catalog || (regActive && catDisplay.catalog === catalog)}"
                   (click)="updateCatalog(catDisplay.catalog, catDisplay.displayVersion)">
-            <div *ngIf="catDisplay.catalog === 'REG'; else elseBlock">{{'LBL_REG' | translate}}</div>
-            <ng-template #elseBlock>{{catDisplay.catalog}}</ng-template>
+            <div>{{catDisplay.catalog === 'REG' ? ('LBL_REG' | translate) : catDisplay.catalog}}</div>
           </button>
 
+            <span *ngIf="catDisplay.catalog === 'REG'" dropdown>
+              <button type="button" class="filter btn btn-default dropdown-toggle-split" dropdownToggle>
+                <span>{{"LBL_REG_op" | translate}}</span>
+                <span class="caret"></span>
+                <span class="sr-only">{{"LBL_REG_op" | translate}}</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button" data-control="checkbox-dropdown">
+                <li *ngFor="let element of tempFilterDisplayInfos"
+                    [ngClass]="{
+                    'disabled': catalog !== element.catalog
+                    }" role="menuitem">
+                  <input class="form-check-input" type="checkbox" id="defaultCheck" (change)="checkFilter()" disabled checked>{{element.catalog}}
+                </li>
+              </ul>
+              </span>
+
           <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
-            <span *ngIf="catDisplay.languageVersions.indexOf(catDisplay.displayVersion) != -1; else placeholder">{{catDisplay.displayVersion | correctVersion}}</span>
+            <span *ngIf="catDisplay.languageVersions.indexOf(catDisplay.displayVersion) != -1; else placeholder">{{catDisplay.catalog === regCatalog ? regVersion : catDisplay.displayVersion | correctVersion}}</span>
             <ng-template #placeholder><span class="text-hide">select Version</span></ng-template>
             <span class="caret"></span>
-            <span class="sr-only">{{catDisplay.displayVersion}}</span>
+            <span class="sr-only">{{catDisplay.catalog === regCatalog ? regVersion : catDisplay.displayVersion | correctVersion}}</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
             <li *ngFor="let version of catDisplay.displayVersions"
                 [ngClass]="{
-                'active': catDisplay.displayVersion === version,
                 'disabled': catDisplay.languageVersions.indexOf(version) === -1
                  }" role="menuitem"
                 (click)="updateCatalog(catDisplay.catalog, version)">
+              <!--'active': catDisplay.displayVersion === version,-->
               <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
             </li>
           </ul>
         </ng-template>
-        </div>
-
-
-        <div class="btn-group" dropdown *ngIf="this.displayFilter">
-          <button type="button" class="version btn btn-filter dropdown-toggle-split" dropdownToggle>
-            <span>{{"LBL_REG_op" | translate}}</span>
-            <span class="caret"></span>
-            <span class="sr-only">{{"LBL_REG_op" | translate}}</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button" data-control="checkbox-dropdown">
-            <li *ngFor="let element of tempFilterDisplayInfos; let j = index" role="menuitem">
-                <input class="form-check-input" type="checkbox" id="defaultCheck" [(ngModel)]="element.isChecked" (change)="checkFilter()">{{element.catalog}}
-            </li>
-          </ul>
         </div>
         </div>
     </div>

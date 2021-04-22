@@ -1,21 +1,31 @@
-<ng-template class="table" [ngIf]="selectedElement.length >= 0">
-  <table class="table-bordered">
-    <thead>
-      <tr class="tbl-default">
-        <th>{{'LBL_KLV1_col1' | translate}}</th>
-        <th>{{'LBL_KLV1_col2' | translate}}</th>
-        <th>{{'LBL_KLV1_col3' | translate}}</th>
-        <th>{{'LBL_KLV1_col4' | translate}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="tbl-default"  *ngFor="let element of selectedElement">
-        <td>{{element.parent.text}}</td>
-        <td>{{element.obligation}}</td>
-        <td>{{element.text}}</td>
-        <td>{{element.valid_from}}</td>
-      </tr>
-    </tbody>
-  </table>
-</ng-template>
-
+<div style="overflow-x: auto">
+  <ng-template [ngIf]="selectedElement.length >= 0">
+    <div *ngFor="let measure of selectedElement; first as isFirst">
+      <span *ngIf="isFirst">
+        <h3>{{measure.code}}</h3>
+        <h4><b>{{'LBL_KLV1_col1' | translate}}</b></h4>
+        <p>{{measure.parent.text}}</p>
+      </span>
+    </div>
+    <div class="table" style="white-space: pre-line">
+    <table class="table-bordered">
+      <thead>
+        <tr class="tbl-default">
+          <!--<th>{{'LBL_KLV1_col1' | translate}}</th>-->
+          <th>{{'LBL_KLV1_col2' | translate}}</th>
+          <th>{{'LBL_KLV1_col3' | translate}}</th>
+          <th>{{'LBL_KLV1_col4' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tbl-default"  *ngFor="let element of selectedElement">
+          <!--<td>{{element.parent.text}}</td>-->
+          <td>{{element.obligation}}</td>
+          <td>{{element.text}}</td>
+          <td>{{element.valid_from}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </ng-template>
+</div>

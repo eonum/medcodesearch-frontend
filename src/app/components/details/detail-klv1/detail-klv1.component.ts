@@ -1,6 +1,7 @@
 import { CatalogElement } from '../../../model/catalog.element';
 import { Component, OnInit, Input } from '@angular/core';
 import {map} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 /**
  * Component to display custom details of an element
@@ -20,6 +21,7 @@ export class DetailKlv1Component implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
+
   }
 
 }

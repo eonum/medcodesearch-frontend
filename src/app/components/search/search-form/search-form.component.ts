@@ -14,6 +14,7 @@ import { CatalogVersionService } from '../../../service/catalog-version.service'
 import {CatalogElement} from '../../../model/catalog.element';
 import {computeStyle} from '@angular/animations/browser/src/util';
 import {element} from '@angular/core/src/render3/instructions';
+import {BehaviorSubject} from 'rxjs';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -50,10 +51,11 @@ export class SearchFormComponent implements OnInit {
   public tempFilterDisplayInfos = new Array<{ catalog: string; version: string; isChecked: boolean}>();
   public tempFilterIsChecked = new Array <{ catalog: string; version: string; isChecked: boolean}>();
   public tempVersions: string[];
+  public sourceFilter = new BehaviorSubject<boolean>(false);
 
-  public displayFilter  = false;
   public regVersion: string;
   public regCatalog: string;
+  public regActive = false;
 
 
   @ViewChild('childModal') public childModal: ModalDirective;
@@ -93,7 +95,6 @@ export class SearchFormComponent implements OnInit {
       // get all catalogs that will be displayed as filters
       this.filterDisplayInfos = this.catalogDisplayInfos.filter((obj, index) => { return index > 4 })
     });
-
   }
   public showChildModal(): void {
     this.childModal.show();
@@ -124,13 +125,14 @@ export class SearchFormComponent implements OnInit {
 
     if (info.languageVersions.indexOf(version) === -1) {
       this.showLanguageSelector(catalog, version);
-
     } else {
       // fill array tempFilterDisplayInfos with all catalogs that have a valid version
       if (info.catalog === 'REG') {
-        this.displayFilter = true;
+
+        // set version and cata
         this.regVersion = version || info.displayVersion;
         this.regCatalog = info.catalog;
+        this.regActive = true;
         this.tempFilterDisplayInfos = [];
 
         for (const obj of this.filterDisplayInfos) {
@@ -145,13 +147,14 @@ export class SearchFormComponent implements OnInit {
             }
           }
         }
-      this.checkFilter();
-    } else {
-        this.displayFilter = false;
+        this.checkFilter();
+      } else {
+        this.regActive = false;
         this.redirect(catalog, version);
       }
     }
   }
+
 
   /**
    *  check if checkbox of catalog filters are checked
@@ -165,10 +168,7 @@ export class SearchFormComponent implements OnInit {
       for (const obj of this.tempFilterIsChecked) {
         this.redirect(obj.catalog, obj.version);
       }
-    } else {
-        // only temporary until endpoint 'Gesetze und Reglemente' exists
-        this.redirect(this.regCatalog, this.regVersion);
-      }
+    }
   }
 
   /**
