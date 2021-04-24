@@ -80,13 +80,6 @@ export class SearchFormComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       // for the button styles
       this.catalog = params['catalog'];
-
-      // to disable source button
-      this.lang = params['language'];
-      if (this.lang === 'en' && this.catalog !== 'REG') {
-        this.tempFilterDisplayInfos = [];
-      }
-      // for the source button disable
     });
     this.route.queryParams.subscribe((params: Params) => {
       // for the search field
@@ -190,6 +183,10 @@ export class SearchFormComponent implements OnInit {
 
     this.catalog = catalog;
     this.selectedVersion = version;
+    if (catalog === 'REG'){
+      this.catalog = 'KLV1'
+      this.selectedVersion = 'KLV1-V1-2021'
+    }
     this.childModal.show();
   }
 
