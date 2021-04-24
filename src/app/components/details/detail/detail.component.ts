@@ -43,6 +43,12 @@ export class DetailComponent implements OnInit {
    */
   public children: CatalogElement[] = [];
 
+  public reg;
+  public reg4;
+  public temp1: CatalogElement[] = [];
+  public temp2: CatalogElement[] = [];
+  public temp3: CatalogElement[] = [];
+
   @ViewChild('buttonFavorite') public buttonFavorite;
 
   constructor(private route: ActivatedRoute,
@@ -56,23 +62,11 @@ export class DetailComponent implements OnInit {
     this.route.data.subscribe((data: Data) => {
       this.selectedElement = data.catalogElement;
 
-      // check if children of klv1_chapters valid
-     /*  if (this.selectedElement.children !== undefined && this.selectedElement.children.length !== null && this.selectedElement.type === 'klv_chapters') {
-          this.selectedElement.children = this.selectedElement.children.filter(val => {return val.text !== null});
-          if (this.selectedElement.children.length > 1) {
-            console.log(this.selectedElement.children)
-            this.selectedElement.children = this.selectedElement.children.sort((a, b) => {
-              if (a.code < b.code) {
-                return -1;
-              } else if (a.code > b.code) {
-                return 1;
-              } else {
-                return 0;
-              }
-            });
-            console.log(this.selectedElement.children)
-          }
-        }*/
+      // check if children of klv1_chapters are valid, filter valid children and sort in ascending order
+     if (this.selectedElement.children !== undefined && this.selectedElement.children.length !== 0 && this.selectedElement.type === 'klv1_chapters') {
+          this.selectedElement.children = this.selectedElement.children.filter(val => {return val.text !== null})
+            .sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }));
+        }
       this.updateView();
     });
   }

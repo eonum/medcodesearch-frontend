@@ -39,8 +39,7 @@ export class SearchFormComponent implements OnInit {
 
   public query: string;
   public catalog: string;
-  public checked: boolean;
-  public disabled = false;
+  public lang: string;
 
   public languages: string[];
   public selectedVersion: string;
@@ -51,11 +50,9 @@ export class SearchFormComponent implements OnInit {
   public tempFilterDisplayInfos = new Array<{ catalog: string; version: string; isChecked: boolean}>();
   public tempFilterIsChecked = new Array <{ catalog: string; version: string; isChecked: boolean}>();
   public tempVersions: string[];
-  public sourceFilter = new BehaviorSubject<boolean>(false);
 
   public regVersion: string;
   public regCatalog: string;
-  public regActive = false;
 
 
   @ViewChild('childModal') public childModal: ModalDirective;
@@ -80,10 +77,16 @@ export class SearchFormComponent implements OnInit {
    * Subscribe to route parameters.
    */
   public ngOnInit(): void {
-
     this.route.params.subscribe((params: Params) => {
       // for the button styles
       this.catalog = params['catalog'];
+
+      // to disable source button
+      this.lang = params['language'];
+      if (this.lang === 'en' && this.catalog !== 'REG') {
+        this.tempFilterDisplayInfos = [];
+      }
+      // for the source button disable
     });
     this.route.queryParams.subscribe((params: Params) => {
       // for the search field
@@ -116,6 +119,7 @@ export class SearchFormComponent implements OnInit {
   /**
    * Check if the catalog and version exist, and either navigate to the selection, or
    * display the language selector pop-up.
+   * If the catalog is reg, fill tmp array to display correct versions inside ths source button.
    */
   public updateCatalog(catalog: string, version?: string): void {
 
@@ -126,15 +130,15 @@ export class SearchFormComponent implements OnInit {
     if (info.languageVersions.indexOf(version) === -1) {
       this.showLanguageSelector(catalog, version);
     } else {
-      // fill array tempFilterDisplayInfos with all catalogs that have a valid version
       if (info.catalog === 'REG') {
 
-        // set version and cata
+        // set current reg version and catalog
         this.regVersion = version || info.displayVersion;
         this.regCatalog = info.catalog;
-        this.regActive = true;
+        // initiate tmp array
         this.tempFilterDisplayInfos = [];
 
+        // fill tmp array with catalog versions which match current reg version
         for (const obj of this.filterDisplayInfos) {
           if (obj.languageVersions.indexOf(obj.displayVersion) !== -1) {
             this.tempVersions = obj.displayVersions;
@@ -149,7 +153,8 @@ export class SearchFormComponent implements OnInit {
         }
         this.checkFilter();
       } else {
-        this.regActive = false;
+        // to disable source button
+        this.tempFilterDisplayInfos = [];
         this.redirect(catalog, version);
       }
     }
@@ -157,13 +162,15 @@ export class SearchFormComponent implements OnInit {
 
 
   /**
-   *  check if checkbox of catalog filters are checked
+   *  Check state of checkboxes inside button source
    */
   public checkFilter(): void {
-    // fill array tempFilterIsChecked with all checked catalog filters
+    // fill array tempFilterIsChecked with all checked catalog inside source button
     this.tempFilterIsChecked = this.tempFilterDisplayInfos.filter((value, index) => {
       return value.isChecked
     });
+
+    /* ToDo else condition if endpoint reg exists */
     if (this.tempFilterIsChecked.length > 0) {
       for (const obj of this.tempFilterIsChecked) {
         this.redirect(obj.catalog, obj.version);

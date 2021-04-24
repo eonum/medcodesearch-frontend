@@ -22,25 +22,25 @@
         <div class="btn-group" dropdown *ngFor="let catDisplay of catalogDisplayInfos; let i = index">
           <ng-template [ngIf]="i < 5">
           <button type="button" class="catalog btn btn-default"
-                  [ngClass]="{'active': catDisplay.catalog === catalog || (regActive && catDisplay.catalog === catalog)}"
+                  [ngClass]="{'active': catDisplay.catalog === catalog}"
                   (click)="updateCatalog(catDisplay.catalog, catDisplay.displayVersion)">
             <div>{{catDisplay.catalog === 'REG' ? ('LBL_REG' | translate) : catDisplay.catalog}}</div>
           </button>
 
-            <span *ngIf="catDisplay.catalog === 'REG'" dropdown>
+            <span dropdown>
+            <ng-template [ngIf]="catDisplay.catalog === 'REG'">
               <button type="button" class="filter btn btn-default dropdown-toggle-split" dropdownToggle>
-                <span>{{"LBL_REG_op" | translate}}</span>
+                <span *ngIf="catDisplay.languageVersions.indexOf(catDisplay.displayVersion) != -1; else placeholder">{{"LBL_REG_op" | translate}}</span>
                 <span class="caret"></span>
                 <span class="sr-only">{{"LBL_REG_op" | translate}}</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button" data-control="checkbox-dropdown">
                 <li *ngFor="let element of tempFilterDisplayInfos"
-                    [ngClass]="{
-                    'disabled': catalog !== element.catalog
-                    }" role="menuitem">
-                  <input class="form-check-input" type="checkbox" id="defaultCheck" (change)="checkFilter()" disabled checked>{{element.catalog}}
+                    [ngClass]="{'disabled': tempFilterDisplayInfos.length === 0}" role="menuitem" class="input-item">
+                  <input type="checkbox" id="defaultCheck" [(ngModel)]="element.isChecked" (change)="checkFilter()">{{element.catalog}}
                 </li>
               </ul>
+              </ng-template>
               </span>
 
           <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
@@ -59,7 +59,7 @@
               <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
             </li>
           </ul>
-        </ng-template>
+          </ng-template>
         </div>
         </div>
     </div>

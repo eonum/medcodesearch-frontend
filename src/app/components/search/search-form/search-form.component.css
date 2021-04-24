@@ -1,25 +1,13 @@
-.form-check {
-  margin-top: 15px;
-}
-
-.btn-filter {
-  border: 1px solid #ccc;
-  border-radius: 0px;
-  background-color: white;
-  padding-left: 0px;
-  margin-left: 0px;
-  padding-right: 10px;
-}
-
-.form-check-label {
-  padding-top: 2px;
+.input-item {
   margin-left: 10px;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
+  margin-right: 10px;
+  text-align: left;
+}
+
+input[type="checkbox"]:not(:checked),
+input[type="checkbox"]:checked {
+  margin-right: 10px;
+  margin-bottom: 8px;
   vertical-align: middle;
 }
 
