@@ -15,6 +15,7 @@ FILE_PATH = DIR + "/src/assets/versions.json"
 
 URL = "https://search.eonum.ch/{}/{}/versions"
 LANGUAGES = ["de", "fr", "it", "en" ]
+
 CATALOGS = ["icds", "chops", "drgs", "tarmeds", "klv1s"]
 CATALOG_NAMES = {"icds": "ICD", "chops":"CHOP", "drgs": "SwissDRG", "tarmeds": "TARMED","klv1s": "KLV1"}
 
@@ -26,7 +27,11 @@ for lang in LANGUAGES:
         url = URL.format(lang, cat)
         print('GET: ' + url)
         # request url and save in reversed order
-        versions[lang][CATALOG_NAMES[cat]] = json.loads(urlopen(url).read())[::-1]
+        response = urlopen(url).read()
+        if cat == 'klv1s':
+          years = [ver[-4:] for ver in json.loads(response)]
+          versions[lang]["REG"] = years[::-1]
+        versions[lang][CATALOG_NAMES[cat]] = json.loads(response)[::-1]
 
 #content = json
 
