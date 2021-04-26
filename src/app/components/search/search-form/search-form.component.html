@@ -19,7 +19,6 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="search-center">
-
         <div class="btn-group" dropdown *ngFor="let catDisplay of catalogDisplayInfos; let i = index">
           <ng-template [ngIf]="i < 5">
             <button type="button" class="catalog btn btn-default"
@@ -29,7 +28,7 @@
             </button>
 
             <span dropdown>
-              <button *ngIf="catDisplay.catalog === 'REG'" type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
+              <button *ngIf="catDisplay.catalog === 'REG'" type="button" class="source btn btn-default dropdown-toggle-split" dropdownToggle>
                 <span *ngIf="catDisplay.languageVersions.indexOf(catDisplay.displayVersion) != -1; else placeholder">{{"LBL_REG_op" | translate}}</span>
                 <ng-template #placeholder><span class="text-hide">select Version</span></ng-template>
                 <span class="caret"></span>
@@ -37,7 +36,8 @@
               </button>
               <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
                 <li class="input-item" *ngFor="let element of tmpSourceDisplayInfos"  role="menuitem">
-                  <input type="checkbox" id="checkId" [disabled]="catalog !== 'KLV1'" [checked]="element.isChecked === true" (change)="element.isChecked = !element.isChecked" (click)="checkSource()">{{element.catalog}}
+                  <!--[disabled]="catalog !== 'KLV1'"-->
+                  <input type="checkbox" id="checkId" [checked]="element.isChecked === true" (change)="element.isChecked = !element.isChecked" (click)="checkSource()" disabled>{{element.catalog}}
                 </li>
               </ul>
             </span>

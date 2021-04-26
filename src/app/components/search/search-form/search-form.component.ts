@@ -161,7 +161,6 @@ export class SearchFormComponent implements OnInit {
     this.tmpSourceIsChecked = this.tmpSourceDisplayInfos.filter((value, index) => {
       return value.isChecked
     });
-    console.log(this.tmpSourceIsChecked);
     /* ToDo else condition if endpoint reg exists */
     if (this.tmpSourceIsChecked.length > 0) {
       for (const obj of this.tmpSourceIsChecked) {
@@ -182,6 +181,10 @@ export class SearchFormComponent implements OnInit {
 
     this.catalog = catalog;
     this.selectedVersion = version;
+    if(this.catalog === 'REG') {
+      this.catalog = 'KLV1';
+      this.selectedVersion = 'KLV1-V1-2021';
+    }
     this.childModal.show();
   }
 

@@ -55,7 +55,6 @@ export class DetailComponent implements OnInit {
   public ngOnInit(): void {
     this.route.data.subscribe((data: Data) => {
       this.selectedElement = data.catalogElement;
-      console.log(this.selectedElement)
 
       // check if children of klv1_chapters are valid and filter valid children
      if (this.selectedElement.children !== null && this.selectedElement.children !== undefined && this.selectedElement.children.length !== 0 && this.selectedElement.type === 'klv1_chapters') {

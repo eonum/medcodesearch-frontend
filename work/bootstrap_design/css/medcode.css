@@ -24,6 +24,9 @@
 .button .version {
   cursor: pointer;
 }
+.button .source {
+  cursor: pointer;
+}
 .button ul {
   position: absolute;
   display: none;

@@ -55,12 +55,16 @@ background-color: #24add3;
     .btn-group .version {
         width: 50%;
     }
-    .btn-group .filter {
+    .btn-group .source {
         width: 50%;
+
     }
     .btn-group .btn .caret {
         position: absolute;
         right: 15px;
         top: 15px;
+    }
+    .dropdown-menu-right {
+
     }
 }
