@@ -15,8 +15,8 @@ FILE_PATH = DIR + "/src/assets/versions.json"
 
 URL = "https://search.eonum.ch/{}/{}/versions"
 LANGUAGES = ["de", "fr", "it", "en" ]
-CATALOGS = ["icds", "chops", "drgs"]
-CATALOG_NAMES = {"icds": "ICD", "chops":"CHOP", "drgs": "SwissDRG"}
+CATALOGS = ["icds", "chops", "drgs", "tarmeds", "klv1s"]
+CATALOG_NAMES = {"icds": "ICD", "chops":"CHOP", "drgs": "SwissDRG", "tarmeds": "TARMED","klv1s": "KLV1"}
 
 versions = {}
 

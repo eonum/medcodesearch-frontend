@@ -14,7 +14,7 @@ import { CatalogVersionService } from '../../../service/catalog-version.service'
 import {CatalogElement} from '../../../model/catalog.element';
 import {computeStyle} from '@angular/animations/browser/src/util';
 import {element} from '@angular/core/src/render3/instructions';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable, Observer} from 'rxjs';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -47,8 +47,8 @@ export class SearchFormComponent implements OnInit {
 
   public catalogDisplayInfos: CatalogDisplayInfo[];
   public sourceDisplayInfos: CatalogDisplayInfo[];
-  public tmpSourceDisplayInfos = new Array<{ catalog: string; version: string; isChecked: boolean}>();
-  public tmpSourceIsChecked = new Array <{ catalog: string; version: string; isChecked: boolean}>();
+  public validSourceDisplayInfos = new Array<{ catalog: string; version: string; isChecked: boolean }>();
+  public sourceIsChecked = new Array<{ catalog: string; version: string; isChecked: boolean }>();
   public tmpVersions: string[];
 
   public regVersion: string;
@@ -58,11 +58,11 @@ export class SearchFormComponent implements OnInit {
   @ViewChild('childModal') public childModal: ModalDirective;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private catalogResolver: CatalogResolver,
-    private versionService: CatalogVersionService,
-    private mobileService: MobileService) {
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private catalogResolver: CatalogResolver,
+              private versionService: CatalogVersionService,
+              private mobileService: MobileService) {
 
     this.searchForm.valueChanges.pipe(
       debounceTime(500),
@@ -89,9 +89,12 @@ export class SearchFormComponent implements OnInit {
       // catalog versions to populate the drop-downs, according to the route param
       this.catalogDisplayInfos = data.displayInfos;
       // get all catalogs that will be displayed as filters
-      this.sourceDisplayInfos = this.catalogDisplayInfos.filter((obj, index) => { return index > 4 })
+      this.sourceDisplayInfos = this.catalogDisplayInfos.filter((obj, index) => {
+        return index > 4
+      });
     });
   }
+
   public showChildModal(): void {
     this.childModal.show();
   }
@@ -130,7 +133,7 @@ export class SearchFormComponent implements OnInit {
         this.regCatalog = info.catalog;
 
         // initiate tmp array
-        this.tmpSourceDisplayInfos = [];
+        this.validSourceDisplayInfos = [];
 
         // fill tmp array with catalog versions which match current reg version
         for (const obj of this.sourceDisplayInfos) {
@@ -140,30 +143,29 @@ export class SearchFormComponent implements OnInit {
               if (!ver.includes(version)) {
                 this.tmpVersions = this.tmpVersions.filter(el => el !== ver);
               } else {
-                this.tmpSourceDisplayInfos.push({catalog: obj.catalog, version: ver, isChecked: true});
+                this.validSourceDisplayInfos.push({catalog: obj.catalog, version: ver, isChecked: true});
               }
             }
           }
         }
         this.checkSource();
       } else {
-       /* // to disable source button
-        this.tempFilterDisplayInfos = [];*/
         this.redirect(catalog, version);
       }
     }
   }
+
   /**
    *  Check state of checkboxes inside button source
    */
   public checkSource(): void {
     // fill array tempFilterIsChecked with all checked catalog inside source button
-    this.tmpSourceIsChecked = this.tmpSourceDisplayInfos.filter((value, index) => {
+    this.sourceIsChecked = this.validSourceDisplayInfos.filter((value) => {
       return value.isChecked
     });
     /* ToDo else condition if endpoint reg exists */
-    if (this.tmpSourceIsChecked.length > 0) {
-      for (const obj of this.tmpSourceIsChecked) {
+    if (this.sourceIsChecked.length > 0) {
+      for (const obj of this.sourceIsChecked) {
         this.redirect(obj.catalog, obj.version);
       }
     }
@@ -181,7 +183,9 @@ export class SearchFormComponent implements OnInit {
 
     this.catalog = catalog;
     this.selectedVersion = version;
-    if(this.catalog === 'REG') {
+
+    /* ToDo delete if endpoint reg exists */
+    if (this.catalog === 'REG') {
       this.catalog = 'KLV1';
       this.selectedVersion = 'KLV1-V1-2021';
     }

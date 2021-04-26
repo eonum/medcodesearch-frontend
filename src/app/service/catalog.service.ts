@@ -11,6 +11,7 @@ import {version} from 'punycode';
 @Injectable()
 export class CatalogService implements ICatalogService {
 
+
   private baseUrl = 'http://0.0.0.0:3000/';
 
   private config: CatalogConfiguration;

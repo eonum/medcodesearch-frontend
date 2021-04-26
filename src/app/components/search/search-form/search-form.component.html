@@ -35,9 +35,8 @@
                 <span class="sr-only">{{"LBL_REG_op" | translate}}</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
-                <li class="input-item" *ngFor="let element of tmpSourceDisplayInfos"  role="menuitem">
-                  <!--[disabled]="catalog !== 'KLV1'"-->
-                  <input type="checkbox" id="checkId" [checked]="element.isChecked" (change)="element.isChecked = !element.isChecked" (click)="checkSource()" disabled>{{element.catalog}}
+                <li class="input-item" *ngFor="let source of validSourceDisplayInfos"  role="menuitem">
+                  <input type="checkbox" id="checkId" [checked]="source.isChecked" (change)="source.isChecked = !source.isChecked" (click)="checkSource()" disabled>{{source.catalog}}
                 </li>
               </ul>
             </span>
