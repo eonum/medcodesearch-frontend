@@ -167,8 +167,7 @@ export class CatalogService implements ICatalogService {
   }
 
   private async getSearchForType(elementType: string, version: string, query: string): Promise<CatalogElement[]> {
-    console.log(elementType);
-    // will be changed when highlight function is implemented in backend
+
     const url = `${this.baseUrl}${this.getLocale()}/${elementType}/${version}/search?highlight=1&search=${query}`;
 
     this.logger.http(url);

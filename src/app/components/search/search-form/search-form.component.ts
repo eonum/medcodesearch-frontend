@@ -46,10 +46,10 @@ export class SearchFormComponent implements OnInit {
   public searchForm = new FormControl();
 
   public catalogDisplayInfos: CatalogDisplayInfo[];
-  public filterDisplayInfos: CatalogDisplayInfo[];
-  public tempFilterDisplayInfos = new Array<{ catalog: string; version: string; isChecked: boolean}>();
-  public tempFilterIsChecked = new Array <{ catalog: string; version: string; isChecked: boolean}>();
-  public tempVersions: string[];
+  public sourceDisplayInfos: CatalogDisplayInfo[];
+  public tmpSourceDisplayInfos = new Array<{ catalog: string; version: string; isChecked: boolean}>();
+  public tmpSourceIsChecked = new Array <{ catalog: string; version: string; isChecked: boolean}>();
+  public tmpVersions: string[];
 
   public regVersion: string;
   public regCatalog: string;
@@ -89,7 +89,7 @@ export class SearchFormComponent implements OnInit {
       // catalog versions to populate the drop-downs, according to the route param
       this.catalogDisplayInfos = data.displayInfos;
       // get all catalogs that will be displayed as filters
-      this.filterDisplayInfos = this.catalogDisplayInfos.filter((obj, index) => { return index > 4 })
+      this.sourceDisplayInfos = this.catalogDisplayInfos.filter((obj, index) => { return index > 4 })
     });
   }
   public showChildModal(): void {
@@ -128,44 +128,43 @@ export class SearchFormComponent implements OnInit {
         // set current reg version and catalog
         this.regVersion = version || info.displayVersion;
         this.regCatalog = info.catalog;
+
         // initiate tmp array
-        this.tempFilterDisplayInfos = [];
+        this.tmpSourceDisplayInfos = [];
 
         // fill tmp array with catalog versions which match current reg version
-        for (const obj of this.filterDisplayInfos) {
+        for (const obj of this.sourceDisplayInfos) {
           if (obj.languageVersions.indexOf(obj.displayVersion) !== -1) {
-            this.tempVersions = obj.displayVersions;
-            for (const ver of this.tempVersions) {
-              if (!ver.includes(this.regVersion)) {
-                this.tempVersions = this.tempVersions.filter(el => el !== ver);
+            this.tmpVersions = obj.displayVersions;
+            for (const ver of this.tmpVersions) {
+              if (!ver.includes(version)) {
+                this.tmpVersions = this.tmpVersions.filter(el => el !== ver);
               } else {
-                this.tempFilterDisplayInfos.push({catalog: obj.catalog, version: ver, isChecked: true});
+                this.tmpSourceDisplayInfos.push({catalog: obj.catalog, version: ver, isChecked: true});
               }
             }
           }
         }
-        this.checkFilter();
+        this.checkSource();
       } else {
-        // to disable source button
-        this.tempFilterDisplayInfos = [];
+       /* // to disable source button
+        this.tempFilterDisplayInfos = [];*/
         this.redirect(catalog, version);
       }
     }
   }
-
-
   /**
    *  Check state of checkboxes inside button source
    */
-  public checkFilter(): void {
+  public checkSource(): void {
     // fill array tempFilterIsChecked with all checked catalog inside source button
-    this.tempFilterIsChecked = this.tempFilterDisplayInfos.filter((value, index) => {
+    this.tmpSourceIsChecked = this.tmpSourceDisplayInfos.filter((value, index) => {
       return value.isChecked
     });
-
+    console.log(this.tmpSourceIsChecked);
     /* ToDo else condition if endpoint reg exists */
-    if (this.tempFilterIsChecked.length > 0) {
-      for (const obj of this.tempFilterIsChecked) {
+    if (this.tmpSourceIsChecked.length > 0) {
+      for (const obj of this.tmpSourceIsChecked) {
         this.redirect(obj.catalog, obj.version);
       }
     }
@@ -183,10 +182,6 @@ export class SearchFormComponent implements OnInit {
 
     this.catalog = catalog;
     this.selectedVersion = version;
-    if (catalog === 'REG'){
-      this.catalog = 'KLV1'
-      this.selectedVersion = 'KLV1-V1-2021'
-    }
     this.childModal.show();
   }
 

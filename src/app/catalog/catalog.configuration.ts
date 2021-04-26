@@ -59,7 +59,7 @@ export const catalogConfigurations: { [name: string]: CatalogConfiguration } = {
   'REG': {
     searchableTypes: ['klv1s'],
     versionParam: 'klv1s',
-    rootElement: { type: 'klv1s' }
+    rootElement: { type: 'klv1_chapters' }
   },
   'KLV1': {
     searchableTypes: ['klv1s'],

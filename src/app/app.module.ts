@@ -35,7 +35,7 @@ import { MobileService } from './service/mobile.service';
 import { CatalogVersionService } from './service/catalog-version.service';
 import { GoogleAnalyticsEventsService } from './service/google-analytics-events.service';
 import { DetailKlv1Component } from './components/details/detail-klv1/detail-klv1.component';
-import {RegCatalog} from './catalog/reg.catalog';
+import { RegCatalog } from './catalog/reg.catalog';
 
 /**
  * Factory function to initialize the TranslateModule.

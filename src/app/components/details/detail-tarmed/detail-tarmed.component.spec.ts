@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MobileService } from '../../../service/mobile.service';
 import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
 import { NullLoggerService } from '../../../service/logging/null.logger.service';
+import { ConvertCodePipe } from '../../../pipes/convert-code.pipe';
 
 describe('DetailTarmedComponent', () => {
   let component: DetailTarmedComponent;
@@ -12,7 +13,7 @@ describe('DetailTarmedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DetailTarmedComponent],
+      declarations: [DetailTarmedComponent, ConvertCodePipe],
       imports: [RouterModule, TranslateModule.forRoot(), TranslateModule.forRoot()],
       providers: [
         MobileService,

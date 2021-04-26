@@ -16,7 +16,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class DetailKlv1Component implements OnInit {
 
-  @Input() public selectedElement: CatalogElement [];
+  @Input() public selectedElement: CatalogElement;
 
   constructor() { }
 

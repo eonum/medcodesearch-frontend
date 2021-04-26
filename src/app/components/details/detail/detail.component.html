@@ -27,6 +27,9 @@
       <div class="box">
 
         <h3>{{selectedElement.name}}</h3>
+        <ng-template [ngIf]="selectedElement.groups?.length > 0">
+          <h4><b>{{('LBL_KLV1_col1' | translate) + ':'}}</b></h4>
+        </ng-template>
         <p>{{selectedElement.text}}</p>
 
         <app-detail-swiss-drg *ngIf="catalog === 'SwissDRG'" [selectedElement]="selectedElement">
@@ -63,11 +66,11 @@
           <h4>{{'LBL_CHILDREN' | translate}}</h4>
           <ul>
             <li *ngFor="let child of children">
-              <div *ngIf="child?.chapter !== undefined; else elseBlock">
-              <span class="link" (click)="openCode(child)">{{child.code}}: {{child.chapter}}{{child.text === '' ? '' : ' - ' + child.text}}</span>
+              <div *ngIf="child?.parent !== undefined; else elseBlock">
+              <span class="link" (click)="openCode(child)">{{child.code}}: {{child.parent}}{{child.text === '' ? '' : ' - ' + child.text}}</span>
               </div>
               <ng-template #elseBlock>
-                <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child?.valid_from !== undefinde ? child.parent.text : child.text}}
+                <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child?.valid_from !== undefinde ? child.text : child.text}}
               </ng-template>
             </li>
           </ul>

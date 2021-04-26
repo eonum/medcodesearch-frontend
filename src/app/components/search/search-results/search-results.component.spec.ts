@@ -12,6 +12,7 @@ import { ICDCatalog } from '../../../catalog/icd.catalog';
 import { TARMEDCatalog } from '../../../catalog/tarmed.catalog';
 import { CatalogServiceMock } from '../../../service/catalog.service.mock';
 import { KlV1Catalog } from '../../../catalog/klv1.catalog';
+import {RegCatalog} from '../../../catalog/reg.catalog';
 
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
@@ -25,7 +26,7 @@ describe('SearchResultsComponent', () => {
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
         { provide: 'ILoggerService', useClass: NullLoggerService },
-        CatalogSearchService, SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog, KlV1Catalog,
+        CatalogSearchService, SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog, KlV1Catalog, RegCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         MobileService
       ]

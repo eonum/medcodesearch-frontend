@@ -43,12 +43,6 @@ export class DetailComponent implements OnInit {
    */
   public children: CatalogElement[] = [];
 
-  public reg;
-  public reg4;
-  public temp1: CatalogElement[] = [];
-  public temp2: CatalogElement[] = [];
-  public temp3: CatalogElement[] = [];
-
   @ViewChild('buttonFavorite') public buttonFavorite;
 
   constructor(private route: ActivatedRoute,
@@ -61,13 +55,13 @@ export class DetailComponent implements OnInit {
   public ngOnInit(): void {
     this.route.data.subscribe((data: Data) => {
       this.selectedElement = data.catalogElement;
+      console.log(this.selectedElement)
 
-      // check if children of klv1_chapters are valid, filter valid children and sort in ascending order
-     if (this.selectedElement.children !== undefined && this.selectedElement.children.length !== 0 && this.selectedElement.type === 'klv1_chapters') {
-          this.selectedElement.children = this.selectedElement.children.filter(val => {return val.text !== null})
-            .sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }));
-        }
-      this.updateView();
+      // check if children of klv1_chapters are valid and filter valid children
+     if (this.selectedElement.children !== null && this.selectedElement.children !== undefined && this.selectedElement.children.length !== 0 && this.selectedElement.type === 'klv1_chapters') {
+          this.selectedElement.children = this.selectedElement.children.filter(val => {return val.text !== null});
+     }
+     this.updateView();
     });
   }
 
