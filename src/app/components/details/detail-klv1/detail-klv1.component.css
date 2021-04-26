@@ -8,3 +8,8 @@ table {
   width: 100%;
   table-layout: auto;
 }
+
+.tbl {
+  overflow: auto;
+  white-space: pre-line;
+}

@@ -66,11 +66,11 @@
           <h4>{{'LBL_CHILDREN' | translate}}</h4>
           <ul>
             <li *ngFor="let child of children">
-              <div *ngIf="child?.parent !== undefined; else elseBlock">
+              <div *ngIf="child?.parent !== undefined; else codeLink">
               <span class="link" (click)="openCode(child)">{{child.code}}: {{child.parent}}{{child.text === '' ? '' : ' - ' + child.text}}</span>
               </div>
-              <ng-template #elseBlock>
-                <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child?.valid_from !== undefinde ? child.text : child.text}}
+              <ng-template #codeLink>
+                <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
               </ng-template>
             </li>
           </ul>

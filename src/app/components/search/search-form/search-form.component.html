@@ -22,7 +22,7 @@
         <div class="btn-group" dropdown *ngFor="let catDisplay of catalogDisplayInfos; let i = index">
           <ng-template [ngIf]="i < 5">
             <button type="button" class="catalog btn btn-default"
-                    [ngClass]="{'active': catDisplay.catalog === catalog || catDisplay.catalog === 'REG' && catalog === 'KLV1'}"
+                    [ngClass]="{'active': (catDisplay.catalog === catalog) || (catDisplay.catalog === 'REG') && (catalog === 'KLV1')}"
                     (click)="updateCatalog(catDisplay.catalog, catDisplay.displayVersion)">
               <div>{{catDisplay.catalog === 'REG' ? ('LBL_REG' | translate) : catDisplay.catalog}}</div>
             </button>
@@ -37,7 +37,7 @@
               <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
                 <li class="input-item" *ngFor="let element of tmpSourceDisplayInfos"  role="menuitem">
                   <!--[disabled]="catalog !== 'KLV1'"-->
-                  <input type="checkbox" id="checkId" [checked]="element.isChecked === true" (change)="element.isChecked = !element.isChecked" (click)="checkSource()" disabled>{{element.catalog}}
+                  <input type="checkbox" id="checkId" [checked]="element.isChecked" (change)="element.isChecked = !element.isChecked" (click)="checkSource()" disabled>{{element.catalog}}
                 </li>
               </ul>
             </span>

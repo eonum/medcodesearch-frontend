@@ -1,6 +1,6 @@
 <ng-template [ngIf]="selectedElement">
-  <ng-template [ngIf]="selectedElement.groups">
-    <div class="table" style="white-space: pre-line; overflow-x: auto ">
+  <ng-template [ngIf]="selectedElement.groups?.length > 0">
+    <div class="tbl">
       <table class="table-bordered">
         <thead>
           <tr class="tbl-default">
