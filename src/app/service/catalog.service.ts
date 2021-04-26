@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod';
 
 import {CatalogConfiguration, catalogConfigurations} from '../catalog/catalog.configuration';
 import { CatalogElement } from '../model/catalog.element';
@@ -11,7 +12,7 @@ import {version} from 'punycode';
 @Injectable()
 export class CatalogService implements ICatalogService {
 
-  private baseUrl = 'http://0.0.0.0:3000/';
+  private baseUrl = environment.production ? 'https://search.eonum.ch/' : 'http://0.0.0.0:3000/';
 
   private config: CatalogConfiguration;
 
