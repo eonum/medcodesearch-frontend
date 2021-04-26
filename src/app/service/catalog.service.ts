@@ -12,7 +12,7 @@ import {version} from 'punycode';
 @Injectable()
 export class CatalogService implements ICatalogService {
 
-  private baseUrl = environment.production ? 'https://search.eonum.ch/' : 'http://0.0.0.0:3000/';
+  private baseUrl = 'https://search.eonum.ch/';
 
   private config: CatalogConfiguration;
 
