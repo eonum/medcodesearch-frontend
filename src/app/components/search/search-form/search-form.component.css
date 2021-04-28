@@ -21,6 +21,9 @@ input[type="checkbox"]{
 .btn-group:not(:first-child) {
     margin-left: 10px;
 }
+.btn-group{
+  margin-bottom: 2px;
+}
 
 .form-control {
 border-radius: 0px;
@@ -62,8 +65,5 @@ background-color: #24add3;
         position: absolute;
         right: 15px;
         top: 15px;
-    }
-    .dropdown-menu-right {
-
     }
 }
