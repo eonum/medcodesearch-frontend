@@ -1,15 +1,10 @@
-th,td {
-  padding: 10px;
-  text-align: left;
-  vertical-align: top;
-}
-
-table {
+.dtl {
   width: 100%;
-  table-layout: auto;
+  /*
+  white-space: pre-line;
+   */
 }
 
-.tbl {
-  overflow: auto;
-  white-space: pre-line;
+hr {
+  border: 1px solid #2aabd2;
 }

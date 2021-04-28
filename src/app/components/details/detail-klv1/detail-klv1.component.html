@@ -1,27 +1,30 @@
 <ng-template [ngIf]="selectedElement">
-  <ng-template [ngIf]="selectedElement.groups?.length > 0">
-    <div class="tbl">
-      <table class="table-bordered">
-        <thead>
-          <tr class="tbl-default">
-            <!--<th>{{'LBL_KLV1_col1' | translate}}</th>-->
-            <th>{{'LBL_KLV1_col2' | translate}}</th>
-            <th>{{'LBL_KLV1_col3' | translate}}</th>
-            <th>{{'LBL_KLV1_col4' | translate}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="tbl-default"  *ngFor="let group of selectedElement.groups">
-            <ng-template [ngIf]="group.text !== null || group.obligation !== null">
-              <!--<td>{{element.parent.text}}</td>-->
-              <td>{{group.obligation}}</td>
-              <td>{{group.text}}</td>
-              <td>{{group.valid_from}}</td>
-            </ng-template>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </ng-template>
-</ng-template>
+  <div class="dtl" *ngFor="let group of selectedElement.groups; let i = index">
+    <div *ngIf="group.text !== null || group.obligation !== null">
 
+      <hr>
+      <div *ngIf="group.obligation !== ''; else noObl">
+        <h4 style="display: inline">{{'LBL_KLV1_col2' | translate}}{{': '}}<a style="color: #2aabd2"><b>{{group.obligation}}</b></a></h4>
+      </div>
+      <ng-template #noObl>
+        <h4>{{'LBL_KLV1_col2' | translate}}{{': '}}</h4>{{'LBL_KLV1_null' | translate}}
+      </ng-template>
+      <br>
+
+      <div *ngIf="group.text !== ''; else noText">
+        <h4>{{'LBL_KLV1_col3' | translate}}{{': '}}</h4>{{group.text}}
+      </div>
+      <ng-template #noText>
+        <h4>{{'LBL_KLV1_col3' | translate}}{{': '}}</h4>{{'LBL_KLV1_null' | translate}}
+      </ng-template>
+      <br>
+
+      <div *ngIf="group.valid_from !== ''; else noValid">
+        <h4>{{'LBL_KLV1_col4' | translate}}{{': '}}</h4>{{group.valid_from}}
+      </div>
+      <ng-template #noValid>
+        <h4>{{'LBL_KLV1_col4' | translate}}{{': '}}</h4>{{'LBL_KLV1_null' | translate}}
+      </ng-template>
+    </div>
+  </div>
+</ng-template>
