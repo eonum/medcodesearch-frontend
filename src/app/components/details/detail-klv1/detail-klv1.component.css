@@ -4,6 +4,9 @@
   white-space: pre-line;
    */
 }
+.noContent {
+  display: inline;
+}
 
 hr {
   border: 1px solid #2aabd2;

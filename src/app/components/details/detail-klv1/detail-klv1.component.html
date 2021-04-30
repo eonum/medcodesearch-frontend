@@ -4,7 +4,7 @@
 
       <hr>
       <div *ngIf="group.obligation !== ''; else noObl">
-        <h4 style="display: inline">{{'LBL_KLV1_col2' | translate}}{{': '}}<a style="color: #2aabd2"><b>{{group.obligation}}</b></a></h4>
+        <h4 class="noContent">{{'LBL_KLV1_col2' | translate}}{{': '}}<a style="color: #2aabd2"><b>{{group.obligation}}</b></a></h4>
       </div>
       <ng-template #noObl>
         <h4>{{'LBL_KLV1_col2' | translate}}{{': '}}</h4>{{'LBL_KLV1_null' | translate}}
