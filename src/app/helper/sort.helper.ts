@@ -23,7 +23,7 @@ export class SortHelper {
       } else if (this.isRomanNumber(a.code)) {
         return this.compareAsRomanNumber(a.code, b.code);
       } else if (this.isNumberWithMultipleSections(a.code)) {
-        return this.compareAsNUmberWithMultipleSections(a.code, b.code)
+        return this.compareAsNumberWithMultipleSections(a.code, b.code)
       } else {
         return this.compareAsLiteral(a.code, b.code);
       }
@@ -170,7 +170,7 @@ export class SortHelper {
    * @param a the first argument to compare
    * @param b the second argument to compare
    */
-  public compareAsNUmberWithMultipleSections(a: string, b: string): number {
+  public compareAsNumberWithMultipleSections(a: string, b: string): number {
     return a.localeCompare(b, undefined, { numeric: true })
   }
 }

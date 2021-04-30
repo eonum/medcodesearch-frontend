@@ -1,6 +1,6 @@
 import { SortHelper } from './sort.helper';
 
-describe('SortHelper', () => {
+fdescribe('SortHelper', () => {
 
   const sortHelper = new SortHelper();
 
@@ -57,6 +57,26 @@ describe('SortHelper', () => {
     expect(sortHelper.compareAsNumberWithLeadingLetter('A2', 'B10')).toBeLessThan(0);
   });
 
+  it(`'1.1' should be smaller than '10.0.1'`, () => {
+    expect(sortHelper.compareAsNumberWithMultipleSections('1.1', '10.0.1')).toBeLessThan(0);
+  });
+
+  it(`'10.1' should be greater than '1.11.1'`, () => {
+    expect(sortHelper.compareAsNumberWithMultipleSections('10.1', '1.11.1')).toBeGreaterThan(0);
+  });
+
+  it(`'2.1' should be smaller than '10.2'`, () => {
+    expect(sortHelper.compareAsNumberWithMultipleSections('2.1', '10.2')).toBeLessThan(0);
+  });
+
+  it(`'3.1.1' should be smaller than '3.1.2'`, () => {
+    expect(sortHelper.compareAsNumberWithMultipleSections('3.1.1', '3.1.2')).toBeLessThan(0);
+  });
+
+  it(`'3.1.2' should be greater than '3.0.3'`, () => {
+    expect(sortHelper.compareAsNumberWithMultipleSections('3.1.2', '3.0.3')).toBeGreaterThan(0);
+  });
+
   it('Should treat elements with roman numbers as codes accordingly', () => {
     const toSort = [
       { code: 'XI', text: 'second', type: 'drg', url: 'http:/path/second' },
@@ -67,6 +87,20 @@ describe('SortHelper', () => {
 
     expect(result[0].text).toBe('first');
     expect(result[1].text).toBe('second');
+  });
+
+  it('Should treat elements with numbers with multiple sections as codes accordingly', () => {
+    const toSort = [
+      { code: '2.0.3', text: 'second', type: 'klv1s', url: 'http:/path/second' },
+      { code: '1.1', text: 'first', type: 'klv1s', url: 'http:/path/first' },
+      { code: '10', text: 'third', type: 'klv1s', url: 'http:/path/third' }
+    ];
+
+    const result = sortHelper.sort(toSort);
+
+    expect(result[0].text).toBe('first');
+    expect(result[1].text).toBe('second');
+    expect(result[2].text).toBe('third');
   });
 
   it('Should treat elements with leading letters as codes accordingly', () => {
