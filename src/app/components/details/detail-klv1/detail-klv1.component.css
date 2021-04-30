@@ -1,11 +1,9 @@
 .dtl {
   width: 100%;
-  /*
-  white-space: pre-line;
-   */
 }
-.noContent {
+.obligation {
   display: inline;
+  color: #2aabd2;
 }
 
 hr {

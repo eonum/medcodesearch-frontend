@@ -1,6 +1,6 @@
 import { SortHelper } from './sort.helper';
 
-fdescribe('SortHelper', () => {
+describe('SortHelper', () => {
 
   const sortHelper = new SortHelper();
 

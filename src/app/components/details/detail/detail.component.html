@@ -26,11 +26,15 @@
 
       <div class="box">
 
-        <h3>{{selectedElement.name}}</h3>
-        <p>{{selectedElement.text}}</p>
+        <div *ngIf="selectedElement.type === 'klv1_chapters' && selectedElement.text !== null; else elseTitle">
+          <h3>{{selectedElement.name + ': ' + selectedElement.text}}</h3>
+        </div>
+        <ng-template #elseTitle>
+          <h3>{{selectedElement.name}}</h3>
+          <p>{{selectedElement.text}}</p>
+        </ng-template>
 
-        <app-detail-swiss-drg *ngIf="catalog === 'SwissDRG'" [selectedElement]="selectedElement">
-        </app-detail-swiss-drg>
+        <app-detail-swiss-drg *ngIf="catalog === 'SwissDRG'" [selectedElement]="selectedElement"></app-detail-swiss-drg>
         <app-detail-chop *ngIf="catalog === 'CHOP'" [selectedElement]="selectedElement"></app-detail-chop>
         <app-detail-icd *ngIf="catalog === 'ICD'" [selectedElement]="selectedElement"></app-detail-icd>
         <app-detail-tarmed *ngIf="catalog === 'TARMED'" [selectedElement]="selectedElement"></app-detail-tarmed>
@@ -58,13 +62,12 @@
           </ul>
         </ng-template>
 
-
         <ng-template [ngIf]="children?.length > 0">
           <h4>{{'LBL_CHILDREN' | translate}}</h4>
           <ul>
             <li *ngFor="let child of children">
-              <div *ngIf="child?.parent !== undefined; else codeLink">
-              <span class="link" (click)="openCode(child)">{{child.code}}: {{child.parent}}{{child.text === '' ? '- '+ child.parent : ' - ' + child.text}}</span>
+              <div *ngIf="selectedElement.type === 'klv1_chapters'; else codeLink">
+                <span class="link" (click)="openCode(child)">{{child.code}}: {{child.text}}</span>
               </div>
               <ng-template #codeLink>
                 <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
@@ -77,7 +80,7 @@
           <h4>{{'LBL_SIBLINGS' | translate}}</h4>
           <ul>
             <ng-container *ngFor="let sibling of selectedElement.parent.children">
-              <li *ngIf="sibling.code !== selectedElement.code">
+              <li *ngIf="sibling.code !== selectedElement.code && sibling.text !== null">
                 <span class="link" (click)="openCode(sibling)">{{sibling.code}}</span>: {{sibling.text}}
               </li>
             </ng-container>
