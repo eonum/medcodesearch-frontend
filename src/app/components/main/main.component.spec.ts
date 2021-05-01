@@ -124,7 +124,7 @@ describe('MainComponent', () => {
   });
 
 
-  xit('should NOT display SearchResultComponent when NO query is given.', () => {
+  it('should NOT display SearchResultComponent when NO query is given.', () => {
     route.setTestParams({ 'catalog': 'CATALOG', 'version': 'VERSION' });
 
     fixture.detectChanges();
@@ -132,7 +132,7 @@ describe('MainComponent', () => {
   });
 
 
-  xit('should navigate to the catalogs root element when no catalog element is selected.', () => {
+  it('should navigate to the catalogs root element when no catalog element is selected.', () => {
     route.setTestParams({ 'catalog': catalog, 'version': 'VERSION' });
 
     fixture.detectChanges();
@@ -142,7 +142,7 @@ describe('MainComponent', () => {
   });
 
 
-  xit('should NOT redirect when an element is selected.', () => {
+  it('should NOT redirect when an element is selected.', () => {
     route.setTestParams({ 'catalog': catalog, 'version': 'VERSION' });
 
     const child = new ActivatedRouteStub();

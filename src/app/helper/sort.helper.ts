@@ -22,8 +22,8 @@ export class SortHelper {
         return this.compareAsNumberWithLeadingLetter(a.code, b.code);
       } else if (this.isRomanNumber(a.code)) {
         return this.compareAsRomanNumber(a.code, b.code);
-      } else if (this.isNumberWithMultipleSections(a.code)) {
-        return this.compareAsNumberWithMultipleSections(a.code, b.code)
+      } else if (this.isNumber(a.code)) {
+        return this.compareAsNumber(a.code, b.code);
       } else {
         return this.compareAsLiteral(a.code, b.code);
       }
@@ -149,15 +149,15 @@ export class SortHelper {
   }
 
   /**
-   * Returns true if the literal has one or two numbers before a dot.
+   * Returns true if the literal starts with number.
    * Otherwise returns false.
    *
    * Example: '10.3.10' -> true, 'A.2' -> false
    *
    * @param literal the literal to check
    */
-  public isNumberWithMultipleSections(literal: string): boolean {
-    const regex = new RegExp('[0-9]?[0-9]+\\.');
+  public isNumber(literal: string): boolean {
+    const regex = new RegExp('^[0-9]+');
     return regex.test(literal);
   }
 
@@ -170,7 +170,7 @@ export class SortHelper {
    * @param a the first argument to compare
    * @param b the second argument to compare
    */
-  public compareAsNumberWithMultipleSections(a: string, b: string): number {
-    return a.localeCompare(b, undefined, { numeric: true })
+  public compareAsNumber(a: string, b: string): number {
+    return a.localeCompare(b, undefined, { numeric: true });
   }
 }
