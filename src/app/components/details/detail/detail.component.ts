@@ -58,7 +58,7 @@ export class DetailComponent implements OnInit {
 
       // check if children of klv1_chapters are valid and filter valid children
      if (this.selectedElement) {
-       if (this.selectedElement.children.length !== 0 && this.selectedElement.type === 'klv1_chapters') {
+       if (this.selectedElement.children && this.selectedElement.children.length !== 0 && this.selectedElement.type === 'klv1_chapters') {
          this.selectedElement.children = this.selectedElement.children.filter(val => {return val.text !== null});
        }
      }
