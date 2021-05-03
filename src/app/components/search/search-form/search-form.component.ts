@@ -89,9 +89,11 @@ export class SearchFormComponent implements OnInit {
       // catalog versions to populate the drop-downs, according to the route param
       this.catalogDisplayInfos = data.displayInfos;
       // get all catalogs that will be displayed as filters
-      this.sourceDisplayInfos = this.catalogDisplayInfos.filter((obj, index) => {
-        return index > 4
-      });
+      if (this.catalogDisplayInfos) {
+        this.sourceDisplayInfos = this.catalogDisplayInfos.filter((obj, index) => {
+          return index > 4
+        });
+      }
     });
   }
 
