@@ -66,12 +66,7 @@
           <h4>{{'LBL_CHILDREN' | translate}}</h4>
           <ul>
             <li *ngFor="let child of children">
-              <div *ngIf="selectedElement.type === 'klv1_chapters'; else codeLink">
-                <span class="link" (click)="openCode(child)">{{child.code}}: {{child.text}}</span>
-              </div>
-              <ng-template #codeLink>
-                <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
-              </ng-template>
+              <span class="link" (click)="openCode(child)">{{child.code}}</span>: {{child.text}}
             </li>
           </ul>
         </ng-template>
