@@ -25,6 +25,8 @@ import * as TypeMoq from 'typemoq';
 import { TARMEDCatalog } from '../../../catalog/tarmed.catalog';
 import { KlV1Catalog } from '../../../catalog/klv1.catalog';
 import {RegCatalog} from '../../../catalog/reg.catalog';
+import {CorrectCatalogPipe} from '../../../pipes/correct-catalog.pipe';
+import {ConvertTextPipe} from '../../../pipes/convert-text.pipe';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -66,7 +68,9 @@ describe('DetailComponent', () => {
         DetailTarmedComponent,
         DetailKlv1Component,
         ConvertCodePipe,
-        CorrectVersionPipe
+        CorrectVersionPipe,
+        CorrectCatalogPipe,
+        ConvertTextPipe,
       ],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },

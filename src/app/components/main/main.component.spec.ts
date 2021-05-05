@@ -31,6 +31,8 @@ import { DetailTarmedComponent } from '../details/detail-tarmed/detail-tarmed.co
 import { DetailKlv1Component } from '../details/detail-klv1/detail-klv1.component';
 import { KlV1Catalog } from '../../catalog/klv1.catalog';
 import {RegCatalog} from '../../catalog/reg.catalog';
+import {CorrectCatalogPipe} from '../../pipes/correct-catalog.pipe';
+import {ConvertTextPipe} from '../../pipes/convert-text.pipe';
 
 describe('MainComponent', () => {
 
@@ -69,9 +71,11 @@ describe('MainComponent', () => {
         DetailChopComponent,
         DetailIcdComponent,
         DetailTarmedComponent,
+        DetailKlv1Component,
         ConvertCodePipe,
         CorrectVersionPipe,
-        DetailKlv1Component,
+        CorrectCatalogPipe,
+        ConvertTextPipe,
       ],
       imports: [
         TranslateModule.forRoot(),

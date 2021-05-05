@@ -30,7 +30,7 @@
           <h3>{{selectedElement.name + ': ' + selectedElement.text}}</h3>
         </div>
         <ng-template #elseTitle>
-          <h3>{{selectedElement.name}}</h3>
+          <h3>{{selectedElement.name | correctCatalog}}</h3>
           <p>{{selectedElement.text}}</p>
         </ng-template>
 

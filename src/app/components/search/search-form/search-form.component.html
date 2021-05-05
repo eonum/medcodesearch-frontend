@@ -36,7 +36,7 @@
               </button>
               <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
                 <li class="input-item" *ngFor="let source of validSourceDisplayInfos"  role="menuitem">
-                  <input type="checkbox" id="checkId" [checked]="source.isChecked" (change)="source.isChecked = !source.isChecked" (click)="checkSource()" disabled>{{source.catalog}}
+                  <input type="checkbox" id="checkId" [checked]="source.isChecked" (change)="source.isChecked = !source.isChecked" (click)="checkSource()" disabled>{{source.version | correctVersion}}
                 </li>
               </ul>
             </span>

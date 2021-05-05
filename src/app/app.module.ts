@@ -36,6 +36,8 @@ import { CatalogVersionService } from './service/catalog-version.service';
 import { GoogleAnalyticsEventsService } from './service/google-analytics-events.service';
 import { DetailKlv1Component } from './components/details/detail-klv1/detail-klv1.component';
 import { RegCatalog } from './catalog/reg.catalog';
+import { ConvertTextPipe } from './pipes/convert-text.pipe';
+import { CorrectCatalogPipe } from './pipes/correct-catalog.pipe';
 
 /**
  * Factory function to initialize the TranslateModule.
@@ -66,10 +68,12 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     DetailChopComponent,
     DetailIcdComponent,
     DetailTarmedComponent,
+    DetailKlv1Component,
     ConvertCodePipe,
     CorrectVersionPipe,
+    ConvertTextPipe,
+    CorrectCatalogPipe,
     FavoriteElementComponent,
-    DetailKlv1Component
   ],
   imports: [
     BrowserModule,
@@ -91,7 +95,9 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     PopoverModule.forRoot()
   ],
   exports: [
-    ConvertCodePipe
+    ConvertCodePipe,
+    CorrectCatalogPipe,
+    ConvertTextPipe,
   ],
   providers: [
     { provide: 'ICatalogService', useClass: CatalogService },

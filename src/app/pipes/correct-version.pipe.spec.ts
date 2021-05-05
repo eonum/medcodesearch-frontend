@@ -19,6 +19,41 @@ describe('CorrectVersionPipe', () => {
     expect(res).toBe('CHOPS_Test');
   });
 
+  it('Should not remove "1-V2-2\d"', () => {
+    const res = pipe.transform('KLV-V2');
+    expect(res).toBe('KLV-V2');
+  });
+
+  it('Should not remove "1-V2-2\d" or "1-V2-2\d', () => {
+    const res = pipe.transform('KLV1-V3');
+    expect(res).toBe('KLV1-V3');
+  });
+
+  it('Should not remove "1-V2-2\d" or "1-V2-2\d', () => {
+    const res = pipe.transform('KLV1-VA');
+    expect(res).toBe('KLV1-VA');
+  });
+
+  it('Should not remove "1-V2-2\d"', () => {
+    const res = pipe.transform('KLV1-V2-2');
+    expect(res).toBe('KLV1-V2-2');
+  });
+
+  it('Should not remove "1-V1-2\d"', () => {
+    const res = pipe.transform('KLV1-V1-19');
+    expect(res).toBe('KLV1-V1-19');
+  });
+
+  it('Should remove "1-V2-2\d"', () => {
+    const res = pipe.transform('KLV1-V2-2020');
+    expect(res).toBe('KLV 1 (1/7/20)');
+  });
+
+  it('Should remove "1-V1-2\d"', () => {
+    const res = pipe.transform('KLV1-V1-2022');
+    expect(res).toBe('KLV 1 (1/1/22)');
+  });
+
   it('Should return null', () => {
     const res = pipe.transform(null);
     expect(res).toBe(null);
