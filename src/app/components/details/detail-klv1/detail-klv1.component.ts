@@ -1,9 +1,10 @@
 import { CatalogElement } from '../../../model/catalog.element';
 import { Component, OnInit, Input } from '@angular/core';
-import {map} from 'rxjs/operators';
+import {last, map, publish} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {group} from '@angular/animations';
 import {b} from '@angular/core/src/render3';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 /**
  * Component to display custom details of an element
@@ -20,18 +21,10 @@ export class DetailKlv1Component implements OnInit {
 
   @Input() public selectedElement: CatalogElement;
 
-  public t: string;
-  constructor() { }
+  constructor() {
+  }
 
   public ngOnInit(): void {
 
   }
-
-  /*
-  public l (t: string): boolean {
-    const regex = new RegExp('\\[n]\–')
-    console.log(regex.test(t));
-    return regex.test(t);
-  }*/
-
 }

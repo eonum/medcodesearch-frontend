@@ -5,14 +5,16 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MobileService } from '../../../service/mobile.service';
 import { ActivatedRouteStub, RouterStub } from '../../../router-stub';
 import { NullLoggerService } from '../../../service/logging/null.logger.service';
+import {ConvertTextPipe} from '../../../pipes/convert-text.pipe';
 
 describe('DetailKlv1Component', () => {
   let component: DetailKlv1Component;
   let fixture: ComponentFixture<DetailKlv1Component>;
+  const  detailKlv1Component = new DetailKlv1Component();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailKlv1Component ],
+      declarations: [ DetailKlv1Component, ConvertTextPipe ],
       imports: [RouterModule, TranslateModule.forRoot(), TranslateModule.forRoot()],
       providers: [
         MobileService,
