@@ -2,7 +2,7 @@
   <div *ngIf="selectedElement.groups">
     <hr>
     <div class="dtl" *ngFor="let group of selectedElement.groups">
-      <div *ngIf="group.text !== null && group.obligation !== null && group.valid_from !== null; else ex">
+      <div *ngIf="group.text !== null && group.obligation !== null && group.valid_from !== null">
 
         <div *ngIf="group.obligation === '' || group.obligation === null; else hasObligation">
           <h4>{{'LBL_KLV1_col2' | translate}}{{': '}}<b class="obligation">{{'LBL_KLV1_null' | translate}}</b></h4><br>
@@ -33,9 +33,6 @@
 
         <hr>
       </div>
-      <ng-template #ex>
-        <h4><b>{{'nullllllll'}}</b></h4>
-      </ng-template>
     </div>
   </div>
 </ng-template>
