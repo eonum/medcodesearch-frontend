@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {last} from 'rxjs/operators';
 
 @Pipe({
   name: 'convertText'
@@ -24,14 +23,10 @@ export class ConvertTextPipe implements PipeTransform {
 
     if (regexListStartsWithLetter.test(str) || regexListLetterWithBracket.test(str)) {
       str =  str.replace(regexListLetterWithBracket, '<br>');
-      if (regexListStartsWithNumber.test(str) || regexListWithNumber.test(str)) {
+      if (regexListWithNumber.test(str)) {
         str =  str.replace(regexListWithNumber, '<br>');
         if (regexList.test(str)) {
-          const lastElement = str.split(regexList);
-          const el = lastElement[lastElement.length - 1]
-          if (el.length < 130) {
             str =  str.replace(/\n(?=–\s)/g, '<br>');
-          }
         }
       } else if (regexList.test(str)) {
         const lastElement = str.split(regexList);
@@ -42,7 +37,7 @@ export class ConvertTextPipe implements PipeTransform {
         }
       }
     } else if (regexListStartsWithNumber.test(str) || regexListWithNumber.test(str)) {
-      if (regexListStartsWithNumber.test(str)) {
+      if (regexListWithNumber.test(str)) {
         str =  str.replace(regexListWithNumber, '<br>');
       } else {
         str =  str.replace(/\n\d\.\s/, '<ol><li>').replace(/\n\d\.\s/g, '</li><li>');
@@ -51,13 +46,9 @@ export class ConvertTextPipe implements PipeTransform {
      if (regexListStartsWithLetter.test(str) || regexListWithLetterDot.test(str)) {
        str =  str.replace(regexListWithLetterDot, '<br>');
        if (regexList.test(str)) {
-         const lastElement = str.split(regexList);
-         const el = lastElement[lastElement.length - 1]
-         if (el.length < 130) {
-           str =  str.replace(/\n(?=–\s)/g, '<br>');
-         }
+         str =  str.replace(/\n(?=–\s)/g, '<br>');
        }
-     } if (regexList.test(str)) {
+     } else if (regexList.test(str)) {
        const lastElement = str.split(regexList);
        const el = lastElement[lastElement.length - 1]
        if (el.length < 130) {
