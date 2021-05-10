@@ -26,7 +26,7 @@
 
       <div class="box">
 
-        <div *ngIf="selectedElement.type === 'klv1_chapters' && selectedElement.text !== null; else elseTitle">
+        <div *ngIf="(selectedElement.type === 'klv1_chapters' ||  selectedElement.type === 'klv1s') && selectedElement.text !== null; else elseTitle">
           <h3>{{selectedElement.name + ': ' + selectedElement.text}}</h3>
         </div>
         <ng-template #elseTitle>
