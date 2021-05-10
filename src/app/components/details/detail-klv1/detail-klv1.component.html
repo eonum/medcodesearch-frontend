@@ -8,7 +8,7 @@
           <h4>{{'LBL_KLV1_col2' | translate}}{{': '}}<b class="obligation">{{'LBL_KLV1_null' | translate}}</b></h4><br>
         </div>
         <ng-template #hasObligation>
-          <h4>{{'LBL_KLV1_col2' | translate}}{{': '}}<b class="obligation">{{group.obligation}}</b></h4><br>
+          <h4>{{'LBL_KLV1_col2' | translate}}{{': '}}<b [ngStyle]="{'color': testColor(group.obligation) ? '#A9D08E' : '#DE8280'}">{{group.obligation}}</b></h4><br>
         </ng-template>
 
         <div *ngIf="group.text === '' || group.text === null; else hasText">

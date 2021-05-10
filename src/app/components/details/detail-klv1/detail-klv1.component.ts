@@ -1,10 +1,5 @@
 import { CatalogElement } from '../../../model/catalog.element';
 import { Component, OnInit, Input } from '@angular/core';
-import {last, map, publish} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
-import {group} from '@angular/animations';
-import {b} from '@angular/core/src/render3';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 /**
  * Component to display custom details of an element
@@ -25,6 +20,13 @@ export class DetailKlv1Component implements OnInit {
   }
 
   public ngOnInit(): void {
+  }
 
+  /**
+   * Checks if the obligation is true or false and returns the appropriate boolean value.
+   * */
+  public testColor(str: string): boolean {
+    const reg = /^Ja$|^Oui$|^Sì$/;
+    return reg.test(str);
   }
 }

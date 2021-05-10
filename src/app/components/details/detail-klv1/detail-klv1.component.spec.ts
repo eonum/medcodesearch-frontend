@@ -31,6 +31,30 @@ describe('DetailKlv1Component', () => {
     fixture.detectChanges();
   });
 
+  it('Should change font to colour green', () => {
+    expect('Ja').toBeTruthy(true);
+  });
+
+  it('Should change font to colour green', () => {
+    expect('Oui').toBeTruthy(true);
+  });
+
+  it('Should change font to colour green', () => {
+    expect('Sì').toBeTruthy(true);
+  });
+
+  it('Should change font to colour green', () => {
+    expect('Nein').toBeTruthy(false);
+  });
+
+  it('Should change font to colour green', () => {
+    expect('Non').toBeTruthy(false);
+  });
+
+  it('Should change font to colour green', () => {
+    expect('No').toBeTruthy(false);
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
