@@ -12,6 +12,8 @@ import * as TypeMoq from 'typemoq';
 import { CatalogVersionService } from '../catalog-version.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ILoggerService } from '../logging/i.logger.service';
+import {KlV1Catalog} from '../../catalog/klv1.catalog';
+import {RegCatalog} from '../../catalog/reg.catalog';
 
 describe('CatalogResolver', () => {
   let versionServiceMock;
@@ -37,7 +39,7 @@ describe('CatalogResolver', () => {
           useFactory: serviceFactory,
           deps: ['ILoggerService']
         },
-        SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog,
+        SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog, KlV1Catalog, RegCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
       ],
       imports: [HttpClientModule],

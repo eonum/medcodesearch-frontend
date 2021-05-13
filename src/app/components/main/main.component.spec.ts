@@ -27,7 +27,12 @@ import { By } from '@angular/platform-browser';
 import { CatalogResolver } from '../../service/routing/catalog-resolver.service';
 import { CatalogVersionService } from '../../service/catalog-version.service';
 import { HttpClientModule } from '@angular/common/http';
-import {DetailTarmedComponent} from '../details/detail-tarmed/detail-tarmed.component';
+import { DetailTarmedComponent } from '../details/detail-tarmed/detail-tarmed.component';
+import { DetailKlv1Component } from '../details/detail-klv1/detail-klv1.component';
+import { KlV1Catalog } from '../../catalog/klv1.catalog';
+import {RegCatalog} from '../../catalog/reg.catalog';
+import {CorrectCatalogPipe} from '../../pipes/correct-catalog.pipe';
+import {ConvertTextPipe} from '../../pipes/convert-text.pipe';
 
 describe('MainComponent', () => {
 
@@ -66,8 +71,11 @@ describe('MainComponent', () => {
         DetailChopComponent,
         DetailIcdComponent,
         DetailTarmedComponent,
+        DetailKlv1Component,
         ConvertCodePipe,
         CorrectVersionPipe,
+        CorrectCatalogPipe,
+        ConvertTextPipe,
       ],
       imports: [
         TranslateModule.forRoot(),
@@ -80,7 +88,7 @@ describe('MainComponent', () => {
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
-        SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog,
+        SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog, KlV1Catalog, RegCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
         CatalogSearchService,

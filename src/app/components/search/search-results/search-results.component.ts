@@ -6,6 +6,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogSearchService, SearchRequest } from '../../../service/routing/catalog-search.service';
 import { MobileService } from '../../../service/mobile.service';
+import {variable} from '@angular/compiler/src/output/output_ast';
 
 
 /**
@@ -22,6 +23,7 @@ import { MobileService } from '../../../service/mobile.service';
 export class SearchResultsComponent implements OnInit {
 
   public searchResults: CatalogElement[];
+  public tempResults: CatalogElement[];
   public selectedCode: string;
 
   public constructor(private route: ActivatedRoute,
@@ -58,11 +60,10 @@ export class SearchResultsComponent implements OnInit {
    */
   public openCode(type: string, code: string): void {
     this.selectedCode = code;
-
     this.sendAnalytics(type, code);
     this.redirectToCode(type, code);
   }
-	
+
 	/**
 	* Sends an analytics message to the eonum server
 	* @param type the type of the CatalogElement that was being clicked on

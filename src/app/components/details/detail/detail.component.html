@@ -26,14 +26,19 @@
 
       <div class="box">
 
-        <h3>{{selectedElement.name}}</h3>
-        <p>{{selectedElement.text}}</p>
+        <div *ngIf="(selectedElement.type === 'klv1_chapters' ||  selectedElement.type === 'klv1s') && selectedElement.text !== null; else elseTitle">
+          <h3>{{selectedElement.name + ': ' + selectedElement.text}}</h3>
+        </div>
+        <ng-template #elseTitle>
+          <h3>{{selectedElement.name | correctCatalog}}</h3>
+          <p>{{selectedElement.text}}</p>
+        </ng-template>
 
-        <app-detail-swiss-drg *ngIf="catalog === 'SwissDRG'" [selectedElement]="selectedElement">
-        </app-detail-swiss-drg>
+        <app-detail-swiss-drg *ngIf="catalog === 'SwissDRG'" [selectedElement]="selectedElement"></app-detail-swiss-drg>
         <app-detail-chop *ngIf="catalog === 'CHOP'" [selectedElement]="selectedElement"></app-detail-chop>
         <app-detail-icd *ngIf="catalog === 'ICD'" [selectedElement]="selectedElement"></app-detail-icd>
         <app-detail-tarmed *ngIf="catalog === 'TARMED'" [selectedElement]="selectedElement"></app-detail-tarmed>
+        <app-detail-klv1 *ngIf="catalog === 'KLV1'" [selectedElement]="selectedElement"></app-detail-klv1>
 
         <ng-template [ngIf]="selectedElement.predecessors?.length > 0 && !(selectedElement.predecessors?.length == 1 && selectedElement.predecessors[0].code == selectedElement.code && selectedElement.predecessors[0].text == selectedElement.text)">
           <h4>{{'LBL_PREDECESSORS' | translate}}</h4>
@@ -70,7 +75,7 @@
           <h4>{{'LBL_SIBLINGS' | translate}}</h4>
           <ul>
             <ng-container *ngFor="let sibling of selectedElement.parent.children">
-              <li *ngIf="sibling.code !== selectedElement.code">
+              <li *ngIf="sibling.code !== selectedElement.code && sibling.text !== null">
                 <span class="link" (click)="openCode(sibling)">{{sibling.code}}</span>: {{sibling.text}}
               </li>
             </ng-container>

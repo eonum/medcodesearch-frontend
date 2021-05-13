@@ -81,7 +81,6 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
       const versions = this.versionService.getVersions(lang, catalog);
       this.activeVersions[lang][catalog] = versions.length > 0 ? versions[0] : null;
     }
-
     return this.activeVersions[lang][catalog];
   }
 
@@ -149,7 +148,6 @@ export class CatalogResolver implements Resolve<CatalogDisplayInfo[]> {
    */
   public getRootElement(catalog: string, version: string): { type, code: string } {
     const root = catalogConfigurations[catalog].rootElement;
-
     /* The code of the root element is the same as the current
      version for ICD and CHOP.
      For SwissDRG, the code of the root element is 'ALL'.

@@ -11,6 +11,10 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { CatalogDisplayInfo, CatalogResolver } from '../../../service/routing/catalog-resolver.service';
 import { MobileService } from '../../../service/mobile.service';
 import { CatalogVersionService } from '../../../service/catalog-version.service';
+import {CatalogElement} from '../../../model/catalog.element';
+import {computeStyle} from '@angular/animations/browser/src/util';
+import {element} from '@angular/core/src/render3/instructions';
+import {BehaviorSubject, Observable, Observer} from 'rxjs';
 
 /**
  * Component that allows a user to select a {@link Catalog} and version,
@@ -35,21 +39,30 @@ export class SearchFormComponent implements OnInit {
 
   public query: string;
   public catalog: string;
+  public lang: string;
 
   public languages: string[];
   public selectedVersion: string;
   public searchForm = new FormControl();
 
   public catalogDisplayInfos: CatalogDisplayInfo[];
+  public sourceDisplayInfos: CatalogDisplayInfo[];
+  public validSourceDisplayInfos = new Array<{ catalog: string; version: string; isChecked: boolean }>();
+  public sourceIsChecked = new Array<{ catalog: string; version: string; isChecked: boolean }>();
+  public tmpVersions: string[];
+
+  public regVersion: string;
+  public regCatalog: string;
+
 
   @ViewChild('childModal') public childModal: ModalDirective;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    @Inject('ILoggerService') private logger: ILoggerService,
-    private catalogResolver: CatalogResolver,
-    private versionService: CatalogVersionService,
-    private mobileService: MobileService) {
+              private router: Router,
+              @Inject('ILoggerService') private logger: ILoggerService,
+              private catalogResolver: CatalogResolver,
+              private versionService: CatalogVersionService,
+              private mobileService: MobileService) {
 
     this.searchForm.valueChanges.pipe(
       debounceTime(500),
@@ -64,7 +77,6 @@ export class SearchFormComponent implements OnInit {
    * Subscribe to route parameters.
    */
   public ngOnInit(): void {
-
     this.route.params.subscribe((params: Params) => {
       // for the button styles
       this.catalog = params['catalog'];
@@ -76,6 +88,12 @@ export class SearchFormComponent implements OnInit {
     this.route.data.subscribe((data: Data) => {
       // catalog versions to populate the drop-downs, according to the route param
       this.catalogDisplayInfos = data.displayInfos;
+      // get all catalogs that will be displayed as filters
+      if (this.catalogDisplayInfos) {
+        this.sourceDisplayInfos = this.catalogDisplayInfos.filter((obj, index) => {
+          return index > 4
+        });
+      }
     });
   }
 
@@ -99,18 +117,59 @@ export class SearchFormComponent implements OnInit {
   /**
    * Check if the catalog and version exist, and either navigate to the selection, or
    * display the language selector pop-up.
+   * If the catalog is reg, fill tmp array to display correct versions inside ths source button.
    */
   public updateCatalog(catalog: string, version?: string): void {
 
     // get the CatalogDisplayInfo to check the version
     const info = this.catalogDisplayInfos.find((inf: CatalogDisplayInfo) => inf.catalog === catalog);
-
     version = version || info.displayVersion;
 
     if (info.languageVersions.indexOf(version) === -1) {
       this.showLanguageSelector(catalog, version);
     } else {
-      this.redirect(catalog, version);
+      if (info.catalog === 'REG') {
+
+        // set current reg version and catalog
+        this.regVersion = version || info.displayVersion;
+        this.regCatalog = info.catalog;
+
+        // initiate tmp array
+        this.validSourceDisplayInfos = [];
+
+        // fill tmp array with catalog versions which match current reg version
+        for (const obj of this.sourceDisplayInfos) {
+          if (obj.languageVersions.indexOf(obj.displayVersion) !== -1) {
+            this.tmpVersions = obj.displayVersions;
+            for (const ver of this.tmpVersions) {
+              if (!ver.includes(version)) {
+                this.tmpVersions = this.tmpVersions.filter(el => el !== ver);
+              } else {
+                this.validSourceDisplayInfos.push({catalog: obj.catalog, version: ver, isChecked: true});
+              }
+            }
+          }
+        }
+        this.checkSource();
+      } else {
+        this.redirect(catalog, version);
+      }
+    }
+  }
+
+  /**
+   *  Check state of checkboxes inside button source
+   */
+  public checkSource(): void {
+    // fill array tempFilterIsChecked with all checked catalog inside source button
+    this.sourceIsChecked = this.validSourceDisplayInfos.filter((value) => {
+      return value.isChecked
+    });
+    /* ToDo else condition if endpoint reg exists */
+    if (this.sourceIsChecked.length > 0) {
+      for (const obj of this.sourceIsChecked) {
+        this.redirect(obj.catalog, obj.version);
+      }
     }
   }
 
@@ -126,6 +185,12 @@ export class SearchFormComponent implements OnInit {
 
     this.catalog = catalog;
     this.selectedVersion = version;
+
+    /* ToDo delete if endpoint reg exists */
+    if (this.catalog === 'REG') {
+      this.catalog = 'KLV1';
+      this.selectedVersion = 'KLV1-V1-2021';
+    }
     this.childModal.show();
   }
 
@@ -138,7 +203,6 @@ export class SearchFormComponent implements OnInit {
       relativeTo: this.route,
       queryParams: query.length > 0 ? { query: query } : null
     }).catch(error => this.logger.error(error));
-
     this.mobileService.setQuery(query);
   }
 
@@ -161,5 +225,4 @@ export class SearchFormComponent implements OnInit {
       queryParamsHandling: 'merge'
     });
   }
-
 }

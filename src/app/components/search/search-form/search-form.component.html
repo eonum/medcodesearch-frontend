@@ -8,9 +8,10 @@
                (keyup.enter)="search(searchBox.value)" autofocus>
 
         <span class="input-group-btn">
-                  <button class="btn btn-default btn-go" type="button" (click)="search(searchBox.value);"><span
-                    class="glyphicon glyphicon-search white"></span></button>
-              </span>
+                  <button class="btn btn-default btn-go" type="button" (click)="search(searchBox.value);">
+                    <span class="glyphicon glyphicon-search white"></span>
+                  </button>
+        </span>
       </div>
     </div>
   </div>
@@ -18,36 +19,49 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="search-center">
+        <div class="btn-group" dropdown *ngFor="let catDisplay of catalogDisplayInfos; let i = index">
+          <ng-template [ngIf]="i < 5">
+            <button type="button" class="catalog btn btn-default"
+                    [ngClass]="{'active': (catDisplay.catalog === catalog) || (catDisplay.catalog === 'REG') && (catalog === 'KLV1')}"
+                    (click)="updateCatalog(catDisplay.catalog, catDisplay.displayVersion)">
+              <div>{{catDisplay.catalog === 'REG' ? ('LBL_REG' | translate) : catDisplay.catalog}}</div>
+            </button>
 
-        <div class="btn-group" dropdown *ngFor="let catDisplay of catalogDisplayInfos">
-          <button type="button" class="catalog btn btn-default"
-                  [ngClass]="{'active': catDisplay.catalog === catalog}"
-                  (click)="updateCatalog(catDisplay.catalog)">{{catDisplay.catalog}}
-          </button>
+            <span dropdown>
+              <button *ngIf="catDisplay.catalog === 'REG'" type="button" class="source btn btn-default dropdown-toggle-split" dropdownToggle>
+                <span *ngIf="catDisplay.languageVersions.indexOf(catDisplay.displayVersion) != -1; else placeholder">{{"LBL_REG_op" | translate}}</span>
+                <ng-template #placeholder><span class="text-hide">select Version</span></ng-template>
+                <span class="caret"></span>
+                <span class="sr-only">{{"LBL_REG_op" | translate}}</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
+                <li class="input-item" *ngFor="let source of validSourceDisplayInfos"  role="menuitem">
+                  <input type="checkbox" id="checkId" [checked]="source.isChecked" (change)="source.isChecked = !source.isChecked" (click)="checkSource()" disabled>{{source.version | correctVersion}}
+                </li>
+              </ul>
+            </span>
 
-          <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
-            <span *ngIf="catDisplay.languageVersions.indexOf(catDisplay.displayVersion) != -1; else placeholder">{{catDisplay.displayVersion | correctVersion}}</span>
-            <ng-template #placeholder><span class="text-hide">select Version</span></ng-template>
-            <span class="caret"></span>
-            <span class="sr-only">{{catDisplay.displayVersion}}</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
-            <li *ngFor="let version of catDisplay.displayVersions"
-                [ngClass]="{
-                'active': catDisplay.displayVersion === version,
-                'disabled': catDisplay.languageVersions.indexOf(version) === -1
-                 }" role="menuitem"
-                (click)="updateCatalog(catDisplay.catalog, version)">
-              <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
-            </li>
-          </ul>
-
+            <button type="button" class="version btn btn-default dropdown-toggle-split" dropdownToggle>
+              <span *ngIf="catDisplay.languageVersions.indexOf(catDisplay.displayVersion) != -1; else placeholder">{{catDisplay.catalog === regCatalog ? regVersion : catDisplay.displayVersion | correctVersion}}</span>
+              <ng-template #placeholder><span class="text-hide">select Version</span></ng-template>
+              <span class="caret"></span>
+              <span class="sr-only">{{catDisplay.catalog === regCatalog ? regVersion : catDisplay.displayVersion | correctVersion}}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu" aria-labelledby="split-button">
+              <li *ngFor="let version of catDisplay.displayVersions"
+                  [ngClass]="{
+                  'active': regVersion === version,
+                  'disabled': catDisplay.languageVersions.indexOf(version) === -1
+                   }" role="menuitem"
+                  (click)="updateCatalog(catDisplay.catalog, version)">
+                <a class="dropdown-item" href="javascript:void(0)">{{version | correctVersion}}</a>
+              </li>
+            </ul>
+          </ng-template>
         </div>
       </div>
-
     </div>
   </div>
-
 
   <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
        aria-hidden="true">

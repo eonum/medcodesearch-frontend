@@ -13,6 +13,8 @@ import { SearchFormComponent } from '../../search/search-form/search-form.compon
 import { DetailChopComponent } from '../detail-chop/detail-chop.component';
 import { DetailIcdComponent } from '../detail-icd/detail-icd.component';
 import { DetailSwissDrgComponent } from '../detail-swiss-drg/detail-swiss-drg.component';
+import { DetailTarmedComponent } from '../detail-tarmed/detail-tarmed.component';
+import { DetailKlv1Component } from '../detail-klv1/detail-klv1.component';
 import { DetailComponent } from './detail.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +22,11 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 import * as TypeMoq from 'typemoq';
+import { TARMEDCatalog } from '../../../catalog/tarmed.catalog';
+import { KlV1Catalog } from '../../../catalog/klv1.catalog';
+import {RegCatalog} from '../../../catalog/reg.catalog';
+import {CorrectCatalogPipe} from '../../../pipes/correct-catalog.pipe';
+import {ConvertTextPipe} from '../../../pipes/convert-text.pipe';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -58,13 +65,17 @@ describe('DetailComponent', () => {
         DetailSwissDrgComponent,
         DetailChopComponent,
         DetailIcdComponent,
+        DetailTarmedComponent,
+        DetailKlv1Component,
         ConvertCodePipe,
-        CorrectVersionPipe
+        CorrectVersionPipe,
+        CorrectCatalogPipe,
+        ConvertTextPipe,
       ],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
-        SwissDrgCatalog, CHOPCatalog, ICDCatalog,
+        SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog, KlV1Catalog, RegCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
         { provide: 'IFavoriteService', useClass: FavoriteElementServiceMock },

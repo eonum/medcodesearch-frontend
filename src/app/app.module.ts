@@ -7,6 +7,7 @@ import { CHOPCatalog } from './catalog/chop.catalog';
 import { ICDCatalog } from './catalog/icd.catalog';
 import { SwissDrgCatalog } from './catalog/swissdrg.catalog';
 import { TARMEDCatalog } from './catalog/tarmed.catalog';
+import { KlV1Catalog } from './catalog/klv1.catalog';
 import { DetailChopComponent } from './components/details/detail-chop/detail-chop.component';
 import { DetailIcdComponent } from './components/details/detail-icd/detail-icd.component';
 import { DetailSwissDrgComponent } from './components/details/detail-swiss-drg/detail-swiss-drg.component';
@@ -33,6 +34,10 @@ import { CatalogSearchService } from './service/routing/catalog-search.service';
 import { MobileService } from './service/mobile.service';
 import { CatalogVersionService } from './service/catalog-version.service';
 import { GoogleAnalyticsEventsService } from './service/google-analytics-events.service';
+import { DetailKlv1Component } from './components/details/detail-klv1/detail-klv1.component';
+import { RegCatalog } from './catalog/reg.catalog';
+import { ConvertTextPipe } from './pipes/convert-text.pipe';
+import { CorrectCatalogPipe } from './pipes/correct-catalog.pipe';
 
 /**
  * Factory function to initialize the TranslateModule.
@@ -63,9 +68,12 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     DetailChopComponent,
     DetailIcdComponent,
     DetailTarmedComponent,
+    DetailKlv1Component,
     ConvertCodePipe,
     CorrectVersionPipe,
-    FavoriteElementComponent
+    ConvertTextPipe,
+    CorrectCatalogPipe,
+    FavoriteElementComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +95,9 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     PopoverModule.forRoot()
   ],
   exports: [
-    ConvertCodePipe
+    ConvertCodePipe,
+    CorrectCatalogPipe,
+    ConvertTextPipe,
   ],
   providers: [
     { provide: 'ICatalogService', useClass: CatalogService },
@@ -99,6 +109,8 @@ export function VersionLoaderFactory(service: CatalogVersionService): () => Prom
     CHOPCatalog,
     ICDCatalog,
     TARMEDCatalog,
+    KlV1Catalog,
+    RegCatalog,
     CatalogResolver,
     CatalogSearchService,
     MobileService,

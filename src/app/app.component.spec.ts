@@ -15,7 +15,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { PopoverModule, TooltipModule } from 'ngx-bootstrap';
 import { CatalogVersionService } from './service/catalog-version.service';
-import {GoogleAnalyticsEventsService} from "./service/google-analytics-events.service";
+import { GoogleAnalyticsEventsService } from "./service/google-analytics-events.service";
+import { KlV1Catalog } from './catalog/klv1.catalog';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -46,6 +47,7 @@ describe('AppComponent', () => {
         CHOPCatalog,
         ICDCatalog,
         TARMEDCatalog,
+        KlV1Catalog,
         CatalogResolver,
         CatalogVersionService,
       ]

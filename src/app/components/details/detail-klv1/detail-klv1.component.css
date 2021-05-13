@@ -1,0 +1,15 @@
+.dtl {
+  width: 100%;
+}
+.obligation {
+  display: inline;
+  color: #2aabd2;
+}
+
+hr {
+  border: 1px solid #2aabd2;
+}
+
+.li {
+  white-space: pre-line;
+}

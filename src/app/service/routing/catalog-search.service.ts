@@ -4,12 +4,14 @@ import { Catalog } from '../../catalog/catalog';
 import { CHOPCatalog } from '../../catalog/chop.catalog';
 import { ICDCatalog } from '../../catalog/icd.catalog';
 import { SwissDrgCatalog } from '../../catalog/swissdrg.catalog';
-import {TARMEDCatalog} from '../../catalog/tarmed.catalog';
+import { TARMEDCatalog } from '../../catalog/tarmed.catalog';
+import { KlV1Catalog } from '../../catalog/klv1.catalog';
 import { ILoggerService } from '../logging/i.logger.service';
 import { Inject, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogElement } from '../../model/catalog.element';
 import { BehaviorSubject ,  Subject } from 'rxjs';
+import { RegCatalog } from '../../catalog/reg.catalog';
 
 
 export class SearchRequest {
@@ -44,6 +46,8 @@ export class CatalogSearchService {
               private chopCatalog: CHOPCatalog,
               private icdCatalog: ICDCatalog,
               private tarmedCatalog: TARMEDCatalog,
+              private klv1Catalog: KlV1Catalog,
+              private regCatalog: RegCatalog,
               @Inject('ILoggerService') private logger: ILoggerService) {
 
     this.catalogs = {};
@@ -51,6 +55,8 @@ export class CatalogSearchService {
     this.catalogs[chopCatalog.getName()] = chopCatalog;
     this.catalogs[icdCatalog.getName()] = icdCatalog;
     this.catalogs[tarmedCatalog.getName()] = tarmedCatalog;
+    this.catalogs[klv1Catalog.getName()] = klv1Catalog;
+    this.catalogs[regCatalog.getName()] = regCatalog;
 
     this.searchResults = new BehaviorSubject(null); // fires always latest value on new subscription
 

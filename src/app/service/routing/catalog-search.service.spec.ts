@@ -6,12 +6,16 @@ import { TARMEDCatalog } from '../../catalog/tarmed.catalog';
 import { CatalogSearchService } from './catalog-search.service';
 import * as TypeMoq from 'typemoq';
 import { CatalogElement } from '../../model/catalog.element';
+import {RegCatalog} from '../../catalog/reg.catalog';
+import {KlV1Catalog} from '../../catalog/klv1.catalog';
 
 describe('Catalog Search Service', () => {
   const swissDrgMock = TypeMoq.Mock.ofType<SwissDrgCatalog>();
   const icdMock = TypeMoq.Mock.ofType<ICDCatalog>();
   const chopMock = TypeMoq.Mock.ofType<CHOPCatalog>();
   const tarmedMock = TypeMoq.Mock.ofType<TARMEDCatalog>();
+  const regMock = TypeMoq.Mock.ofType<RegCatalog>();
+  const klv1Mock = TypeMoq.Mock.ofType<KlV1Catalog>();
 
   let notified: boolean;
   let results: CatalogElement[];
@@ -34,6 +38,8 @@ describe('Catalog Search Service', () => {
     icdMock.setup(x => x.getName()).returns(() => 'ICD');
     chopMock.setup(x => x.getName()).returns(() => 'CHOP');
     tarmedMock.setup(x => x.getName()).returns(() => 'TARMED');
+    regMock.setup(x => x.getName()).returns(() => 'REG');
+    klv1Mock.setup(x => x.getName()).returns(() => 'KLV1');
   });
 
   beforeEach(() => {
@@ -43,7 +49,7 @@ describe('Catalog Search Service', () => {
   });
 
   it('Should create', () => {
-    const service = new CatalogSearchService(null, swissDrgMock.object, chopMock.object, icdMock.object, tarmedMock.object, new NullLoggerService());
+    const service = new CatalogSearchService(null, swissDrgMock.object, chopMock.object, icdMock.object, tarmedMock.object, regMock.object, klv1Mock.object, new NullLoggerService());
     expect(service).toBeTruthy();
   });
 
@@ -55,7 +61,7 @@ describe('Catalog Search Service', () => {
       expect(results).toBeFalsy();
     });
 
-    const service = new CatalogSearchService(null, swissDrgMock.object, chopMock.object, icdMock.object, tarmedMock.object, new NullLoggerService());
+    const service = new CatalogSearchService(null, swissDrgMock.object, chopMock.object, icdMock.object, tarmedMock.object, regMock.object, klv1Mock.object, new NullLoggerService());
     service.subscribe(subscriber);
     service.search(null);
   });
@@ -76,14 +82,14 @@ describe('Catalog Search Service', () => {
 
     swissDrgMock.setup(x => x.search('V1.0', 'content')).returns(() => Promise.resolve(res));
 
-    const service = new CatalogSearchService(null, swissDrgMock.object, chopMock.object, icdMock.object, tarmedMock.object, new NullLoggerService());
+    const service = new CatalogSearchService(null, swissDrgMock.object, chopMock.object, icdMock.object, tarmedMock.object, regMock.object, klv1Mock.object, new NullLoggerService());
     service.subscribe(subscriber);
     service.search({ 'catalog': 'SwissDRG', 'version': 'V1.0', 'query': 'content' });
   });
 
   it('Should send analytics', () => {
     swissDrgMock.setup(x => x.sendAnalytics('drg', 'A12', 'content', 'V1.0')).verifiable(TypeMoq.Times.once());
-    const service = new CatalogSearchService(null, swissDrgMock.object, chopMock.object, icdMock.object, tarmedMock.object, new NullLoggerService());
+    const service = new CatalogSearchService(null, swissDrgMock.object, chopMock.object, icdMock.object, tarmedMock.object, regMock.object, klv1Mock.object, new NullLoggerService());
 
     service.sendAnalytics({ 'catalog': 'SwissDRG', 'version': 'V1.0', 'query': 'content' }, 'drg', 'A12');
     swissDrgMock.verifyAll();

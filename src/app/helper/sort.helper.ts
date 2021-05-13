@@ -9,7 +9,7 @@ export class SortHelper {
    * Sort elements based on the type of their codes.
    * Handles roman numbers, numbers with leading letters
    * and normal text literals.
-   * 
+   *
    * @param elements the elements to sort
    */
   public sort(elements: CatalogElement[]): CatalogElement[] {
@@ -22,6 +22,8 @@ export class SortHelper {
         return this.compareAsNumberWithLeadingLetter(a.code, b.code);
       } else if (this.isRomanNumber(a.code)) {
         return this.compareAsRomanNumber(a.code, b.code);
+      } else if (this.isNumber(a.code)) {
+        return this.compareAsNumber(a.code, b.code);
       } else {
         return this.compareAsLiteral(a.code, b.code);
       }
@@ -33,7 +35,7 @@ export class SortHelper {
    * Returns a positive number, if the first argument is lexicographically
    * larger than the second argument. Returns a negative number otherwise.
    * Returns 0 if they're equal.
-   * 
+   *
    * @param a the first argument to compare
    * @param b the second argument to compare
    */
@@ -46,9 +48,9 @@ export class SortHelper {
   /**
    * Returns true if the literal starts with letters and ends with a number.
    * Otherwise returns false.
-   * 
+   *
    * Example: 'AB1000' -> true, '8999' -> false
-   * 
+   *
    * @param literal the literal to check
    */
   public isNumberWithLeadingLetter(literal: string): boolean {
@@ -64,12 +66,12 @@ export class SortHelper {
    * Returns a negative number, if the first argument is smaller than
    * the second argument, a positive number if the first argument is
    * larger than the second argument and 0 if they're equal.
-   * 
+   *
    * Examples:
    * 'ab9', 'ab10' -> -1
    * 'z1', 'f1' -> -1
-   * 'zz10', 'ab10' -> 1 
-   * 
+   * 'zz10', 'ab10' -> 1
+   *
    * @param a the first argument to compare
    * @param b the second argument to compare
    */
@@ -91,7 +93,7 @@ export class SortHelper {
   /**
    * Checks whether the given literal is a roman number
    * (like 'MMXIV')
-   * @param literal the literal to check 
+   * @param literal the literal to check
    */
   public isRomanNumber(literal: string): boolean {
     const regex = new RegExp('^[MDCLXVI]+$');
@@ -144,5 +146,31 @@ export class SortHelper {
     });
 
     return num;
+  }
+
+  /**
+   * Returns true if the literal starts with number.
+   * Otherwise returns false.
+   *
+   * Example: '10.3.10' -> true, 'A.2' -> false
+   *
+   * @param literal the literal to check
+   */
+  public isNumber(literal: string): boolean {
+    const regex = new RegExp('^[0-9]+');
+    return regex.test(literal);
+  }
+
+  /**
+   * Compares two strings with the localCompare() method which compares two strings in the current locale.
+   * It returns a number indicating whether string a comes before, after or is equal as string b in sort order.
+   *
+   * return values:  a < b -> -1 ,  a = b -> 0, a > b -> 1
+   *
+   * @param a the first argument to compare
+   * @param b the second argument to compare
+   */
+  public compareAsNumber(a: string, b: string): number {
+    return a.localeCompare(b, undefined, { numeric: true });
   }
 }

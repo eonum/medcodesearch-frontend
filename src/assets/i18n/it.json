@@ -29,5 +29,12 @@
   "LBL_ANALOGOUS_CODE_TEXT": "Codifica per analogia",
   "LBL_PREDECESSORS": "Vorgängercodes in Vorversion",
   "LBL_SUCCESSORS": "Nachfolgercodes in Nachversion",
-  "LBL_NEW_CODE": "Dies ist ein Neukode, der keine Vorgängercodes in Vorversionen hat."
+  "LBL_NEW_CODE": "Dies ist ein Neukode, der keine Vorgängercodes in Vorversionen hat.",
+  "LBL_KLV1_col1": "Misurare",
+  "LBL_KLV1_col2": "Rimuneand razione obbligatoria",
+  "LBL_KLV1_col3": "Condizioni",
+  "LBL_KLV1_col4": "Decisione valida a partire dal",
+  "LBL_REG_op": "Fonti",
+  "LBL_REG": "Leggi e Regolamenti",
+  "LBL_KLV1_null": "Alcuno"
 }

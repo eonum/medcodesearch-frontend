@@ -18,6 +18,9 @@ import { ModalModule } from 'ngx-bootstrap';
 import { CatalogResolver } from '../../../service/routing/catalog-resolver.service';
 import { CatalogVersionService } from '../../../service/catalog-version.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TARMEDCatalog } from '../../../catalog/tarmed.catalog';
+import { KlV1Catalog } from '../../../catalog/klv1.catalog';
+import {RegCatalog} from '../../../catalog/reg.catalog';
 
 describe('SearchFormComponent', () => {
   let component: SearchFormComponent;
@@ -38,7 +41,7 @@ describe('SearchFormComponent', () => {
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: Router, useClass: RouterStub },
-        SwissDrgCatalog, CHOPCatalog, ICDCatalog,
+        SwissDrgCatalog, CHOPCatalog, ICDCatalog, TARMEDCatalog, KlV1Catalog, RegCatalog,
         { provide: 'ICatalogService', useClass: CatalogServiceMock },
         { provide: 'ILoggerService', useClass: NullLoggerService },
         CatalogResolver,

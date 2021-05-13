@@ -55,6 +55,15 @@ export const catalogConfigurations: { [name: string]: CatalogConfiguration } = {
     searchableTypes: ['tarmeds'],
     versionParam: 'tarmeds',
     rootElement: { type: 'tarmed_chapters' }
-  }
-
+  },
+  'REG': {
+    searchableTypes: ['klv1s'],
+    versionParam: 'klv1s',
+    rootElement: { type: 'klv1_chapters' }
+  },
+  'KLV1': {
+    searchableTypes: ['klv1s'],
+    versionParam: 'klv1s',
+    rootElement: { type: 'klv1_chapters' }
+  },
 };

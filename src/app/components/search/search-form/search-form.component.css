@@ -1,13 +1,28 @@
+.input-item {
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: left;
+}
+
+input[type="checkbox"]{
+  margin-right: 10px;
+  margin-bottom: 8px;
+  vertical-align: middle;
+}
+
 .row {
   margin-bottom: 10px;
 }
 .search-center {
-    max-width: 640px;
+    max-width: 983px;
     margin: auto;
     text-align: center;
 }
 .btn-group:not(:first-child) {
     margin-left: 10px;
+}
+.btn-group{
+  margin-bottom: 2px;
 }
 
 .form-control {
@@ -41,6 +56,10 @@ background-color: #24add3;
     }
     .btn-group .version {
         width: 50%;
+    }
+    .btn-group .source {
+        width: 50%;
+
     }
     .btn-group .btn .caret {
         position: absolute;
