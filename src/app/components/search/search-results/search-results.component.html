@@ -16,11 +16,11 @@
         </ng-template>
         <ng-template [ngIf]="result.highlight.text == undefined">
           <dd [innerHtml]="result.text"></dd>
-          <div class='small top-buffer' *ngFor="let alternativeField of ['synonyms', 'inclusions', 'descriptions', 'relevant_codes', 'analogous_code_text']">
-            <ng-template [ngIf]="result.highlight[alternativeField] != undefined">
-              <dd>{{('LBL_' + alternativeField.toUpperCase()) | translate}}</dd>
+          <div class='small top-buffer' *ngFor="let alternativeField of result.highlight | keyvalue">
+            <ng-template [ngIf]="result.highlight[alternativeField.key] != undefined">
+              <dd>{{('LBL_' + alternativeField.key.toUpperCase()) | translate}}</dd>
               <ul>
-                <div *ngFor="let field of result.highlight[alternativeField]">
+                <div *ngFor="let field of result.highlight[alternativeField.key]">
                   <li [innerHtml]="field"></li>
                 </div>
               </ul>
