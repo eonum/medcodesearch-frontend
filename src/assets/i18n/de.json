@@ -40,6 +40,16 @@
   "LBL_KLV1_col4": "gültig ab",
   "LBL_REG_op": "Quellen",
   "LBL_REG": "Gesetze und Reglemente",
-  "LBL_KLV1_null": "Keine"
+  "LBL_KLV1_null": "Keine",
+  "LBL_MED_INTERPRET": "Medizinische Interpretation",
+  "LBL_TECH_INTERPRET": "Technische Interpretation",
+  "LBL_SUBSTANCE_NAME": "Präparatename",
+  "LBL_FIELD_OF_APP": "Anwendungsgebiet",
+  "LBL_LIMITATION": "Limitation",
+  "LBL_FACULTY": "Fachbereich",
+  "LBL_ACTIVE_SUBSTANCES": "Wirkstoff",
+  "LBL_ATC_CODE": "ATC code",
+  "LBL_UNIT": "Einheit",
+  "LBL_COMMENT": "Kommentar"
 }
 

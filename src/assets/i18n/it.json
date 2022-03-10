@@ -36,5 +36,14 @@
   "LBL_KLV1_col4": "Decisione valida a partire dal",
   "LBL_REG_op": "Fonti",
   "LBL_REG": "Leggi e Regolamenti",
-  "LBL_KLV1_null": "Alcuno"
-}
+  "LBL_KLV1_null": "Alcuno",
+  "LBL_MED_INTERPRET": "Interpretazione medica",
+  "LBL_TECH_INTERPRET": "Interpretazione tecnica",
+  "LBL_SUBSTANCE_NAME": "Nome di preparazione",
+  "LBL_FIELD_OF_APP": "Campo di applicazione",
+  "LBL_LIMITATION": "Limitazione",
+  "LBL_FACULTY": "Disciplina di laboratorio",
+  "LBL_ACTIVE_SUBSTANCES": "Sostanza attiva",
+  "LBL_ATC_CODE": "ATC code",
+  "LBL_UNIT": "Unità",
+  "LBL_COMMENT": "Commento"}

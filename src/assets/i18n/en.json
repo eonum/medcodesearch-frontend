@@ -31,5 +31,15 @@
   "LBL_SUCCESSORS": "Successor codes in next version",
   "LBL_NEW_CODE": "This is a new code without any corresponding code in the previous version.",
   "LBL_REG_op": "Sources",
-  "LBL_REG": "Laws and Regulations"
+  "LBL_REG": "Laws and Regulations",
+  "LBL_MED_INTERPRET": "Medical Interpretation",
+  "LBL_TECH_INTERPRET": "Technical Interpretation",
+  "LBL_SUBSTANCE_NAME": "Substance name",
+  "LBL_FIELD_OF_APP": "Field of application",
+  "LBL_LIMITATION": "Limitation",
+  "LBL_FACULTY": "Faculty",
+  "LBL_ACTIVE_SUBSTANCES": "Active substance",
+  "LBL_ATC_CODE": "ATC code",
+  "LBL_UNIT": "Unit",
+  "LBL_COMMENT": "Comment"
 }
