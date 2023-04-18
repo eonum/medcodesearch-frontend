@@ -26,7 +26,7 @@
     "core-js": "2.4.1",
     "ngx-bootstrap": "^3.0.1",
     "rxjs": "^6.2.2",
-    "rxjs-tslint": "^0.1.5",
+    "rxjs-tslint": "^0.1.8",
     "typescript": "2.9.2",
     "zone.js": "0.8.26"
   },
@@ -40,14 +40,14 @@
     "codelyzer": "^4.4.4",
     "jasmine-core": "2.6.2",
     "jasmine-spec-reporter": "4.1.0",
-    "karma": "^3.0.0",
+    "karma": "^6.4.1",
     "karma-chrome-launcher": "2.1.1",
     "karma-cli": "~1.0.1",
     "karma-coverage-istanbul-reporter": "1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "0.2.2",
     "ts-node": "3.0.4",
-    "tslint": "5.2.0",
+    "tslint": "5.20.1",
     "typedoc": "^0.12.0",
     "typemoq": "1.6.0"
   }
